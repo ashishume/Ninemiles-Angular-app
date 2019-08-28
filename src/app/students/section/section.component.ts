@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/shared/services/api.service';
 export class SectionComponent implements OnInit {
 
   questions = [];
+  paragraphDetails;
   public firstSectionTest: FormGroup;
   constructor(private apiService: ApiService,
     private fb: FormBuilder,
@@ -31,6 +32,15 @@ export class SectionComponent implements OnInit {
       if (response.status == 200) {
         this.questions = response.body;
       }
+    })
+
+    this.apiService.getListOfParagraph().subscribe((response:any)=>{
+  if(response.status==200)
+  {
+    console.log(response.body);
+    
+    this.paragraphDetails=response.body;
+  }      
     })
   }
 

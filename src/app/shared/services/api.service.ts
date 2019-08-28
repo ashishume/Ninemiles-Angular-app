@@ -15,4 +15,12 @@ export class ApiService {
   insertQuestion(body) {
     return this.httpService.callApi('POST', body, 'questions/addQuestion', '')
   }
+  insertParagraph(body)
+  {
+    return this.httpService.callApi('POST',body,'contents/addParagraph','')
+  }
+  getListOfParagraph()
+  {
+    return this.httpService.callApi('GET','','contents/listParagraph','')
+  }
 }

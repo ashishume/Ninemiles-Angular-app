@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'over'"
+    [opened]="!(isHandset$ | async) ? 'false':'false' ">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a routerLink="/section" mat-list-item>Section</a>
+      <a routerLink="/add-questions" mat-list-item>Add Question</a>
+      <a routerLink="/add-paragraph" mat-list-item>Add Paragraph</a>
+      <span class="profile">
+        <button>Logout</button>
+      </span>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>NineMiles</span>
+      <span style="flex:1 1 auto;"></span>
+      <div class="buttons">
+        <span [matMenuTriggerFor]="menu" class="navigate">More</span>
+        <mat-menu #menu="matMenu">
+          <span mat-menu-item disabled>ashishume@gmail.com</span>
+          <span mat-menu-item (click)="authService.SignOut()">Logout</span>
+        </mat-menu>
+
+      </div>
+    </mat-toolbar>
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

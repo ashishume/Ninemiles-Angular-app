@@ -12,7 +12,7 @@ import { FormGroup, FormBuilder, FormControl, Validators, NgForm, FormArray, Val
 
 export class AddQuestionsComponent implements OnInit {
 
-  questionType = [
+  listOfQuestionTypes = [
     "MCQ",
     "Matching Questions",
     "Long Questions",
@@ -27,22 +27,30 @@ export class AddQuestionsComponent implements OnInit {
   ]
   public AddQuestion: FormGroup;
   countOfInput = []
+  listOfTests;
   index = 1;
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
   ) {
+    this.listOfTests = Array(30).fill(2).map((x,i)=>i+3);
+
     this.AddQuestion = this.fb.group(
       {
         questionTitle: new FormControl('', [Validators.required]),
         questionType: new FormControl('', [Validators.required]),
         section: new FormControl('', [Validators.required]),
+        testNumber: new FormControl('', [Validators.required]),
         questionUserType: new FormControl('', [Validators.required]),
         options: this.fb.array([this.addOtherSkillFormGroup()])
 
       },
     );
   }
+
+  get formData() { return <FormArray>this.AddQuestion.get('options'); }
+
+
   addButtonClick(): void {
     (<FormArray>this.AddQuestion.get('options')).push(this.addOtherSkillFormGroup());
   }
@@ -65,7 +73,7 @@ export class AddQuestionsComponent implements OnInit {
   ngOnInit() {
 
   }
-  onSubmitQuestion(AddQuestion: NgForm) {
+  onSubmitQuestion(AddQuestion) {
     console.log(AddQuestion.value);
     let tempArray: any = []
     tempArray = AddQuestion.value.options;
@@ -77,6 +85,8 @@ export class AddQuestionsComponent implements OnInit {
       }
 
       AddQuestion.value.author = "ashishume@gmail.com"
+      console.log(AddQuestion.value);
+      
       this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
         console.log(data);
       })

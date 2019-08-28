@@ -5,14 +5,14 @@
             <h3>Add Question</h3>
             <form class="form" [formGroup]="AddQuestion" autocomplete="off" novalidate #AddQuestionForm="ngForm"
                 (ngSubmit)="onSubmitQuestion(AddQuestion)">
-                <quill-editor formControlName="questionTitle" required name="questionTitle" [(ngModel)]="questionTitle">
+                <quill-editor formControlName="questionTitle" required name="questionTitle" ngModel>
                 </quill-editor>
                 <mat-error *ngIf="!AddQuestion.get('questionTitle').valid && AddQuestion.get('questionTitle').touched">
                     *Question is required
                 </mat-error>
                 <br>
                 <h5>Add Options</h5>
-                <span formArrayName="options" *ngFor="let other of AddQuestion.get('options').controls; let i = index">
+                <span formArrayName="options" *ngFor="let other of formData.controls; let i = index">
                     <span [formGroupName]="i">
                         &nbsp; <mat-form-field>
                             <textarea matInput name="option" formControlName="option" ngModel
@@ -31,7 +31,7 @@
                 <mat-form-field>
                     <mat-label>Select Question Type</mat-label>
                     <mat-select formControlName="questionType" required name="questionType" ngModel>
-                        <mat-option *ngFor="let list of questionType" [value]="list">{{list}}</mat-option>
+                        <mat-option *ngFor="let list of listOfQuestionTypes" [value]="list">{{list}}</mat-option>
                     </mat-select>
                     <mat-error
                         *ngIf="!AddQuestion.get('questionType').valid && AddQuestion.get('questionType').touched">
@@ -57,6 +57,17 @@
                         *ngIf="!AddQuestion.get('questionUserType').valid && AddQuestion.get('questionUserType').touched">
                         *required</mat-error>
                 </mat-form-field>
+                <mat-form-field>
+                        <mat-label>Select Test Number</mat-label>
+                        <mat-select formControlName="testNumber" name="testNumber" ngModel>
+                            <mat-option value="1">1 (free)</mat-option>
+                            <mat-option value="2">2 (free)</mat-option>
+                            <mat-option *ngFor="let list of listOfTests" [value]="list">{{list}} (paid)</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="!AddQuestion.get('testNumber').valid && AddQuestion.get('testNumber').touched">
+                            *required</mat-error>
+                    </mat-form-field>
+                   
                 <br>
                 <button [disabled]="!AddQuestion.valid" type="submit" mat-raised-button>Submit Question</button>
             </form>

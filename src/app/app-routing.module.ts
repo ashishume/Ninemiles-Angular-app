@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GeneralTestComponent } from './tests/general-test/general-test.component';
 import { StudentsComponent } from './students/students.component';
 import { SectionComponent } from './students/section/section.component';
+import { AddParagraphComponent } from './admin-panel/add-paragraph/add-paragraph.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'students', component: StudentsComponent },
   { path: 'add-questions', component: AddQuestionsComponent },
   { path: 'section', component: SectionComponent },
+  { path: 'add-paragraph', component: AddParagraphComponent },
 
   { path: '**', component: PageNotFoundComponent },
 

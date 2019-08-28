@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <br>
+            <h3>Add paragraph</h3>
+            <form class="form" [formGroup]="AddParagraph" autocomplete="off" novalidate #AddParagraphForm="ngForm"
+                (ngSubmit)="onSubmitParagraph(AddParagraph)">
+                <mat-form-field id="mat-form-field">
+                    <mat-label>Add Heading</mat-label>
+                    <input matInput name="paragraphHeading" formControlName="paragraphHeading" ngModel>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Select Section</mat-label>
+                    <mat-select formControlName="section" name="section" ngModel>
+                        <mat-option *ngFor="let list of section" [value]="list">{{list}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!AddParagraph.get('section').valid && AddParagraph.get('section').touched">
+                        *required</mat-error>
+                </mat-form-field>&nbsp;
+                <mat-form-field>
+                    <mat-label>Select Test Number</mat-label>
+                    <mat-select formControlName="testNumber" name="testNumber" ngModel>
+                        <mat-option value="1">1 (free)</mat-option>
+                        <mat-option value="2">2 (free)</mat-option>
+                        <mat-option *ngFor="let list of listOfTests" [value]="list">{{list}} (paid)</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!AddParagraph.get('testNumber').valid && AddParagraph.get('testNumber').touched">
+                        *required</mat-error>
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field>
+                    <mat-label>Select Student Category</mat-label>
+                    <mat-select formControlName="paragraphUserType" name="paragraphUserType" ngModel>
+                        <mat-option *ngFor="let list of paragraphUserType" [value]="list">{{list}}</mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="!AddParagraph.get('paragraphUserType').valid && AddParagraph.get('paragraphUserType').touched">
+                        *required</mat-error>
+                </mat-form-field>
+                <br>
+                <quill-editor formControlName="paragraphTitle" required name="paragraphTitle" ngModel>
+                </quill-editor>
+                <mat-error
+                    *ngIf="!AddParagraph.get('paragraphTitle').valid && AddParagraph.get('paragraphTitle').touched">
+                    *paragraph is required
+                </mat-error>
+              <br>
+                <button [disabled]="!AddParagraph.valid" type="submit" mat-raised-button>Submit paragraph</button>
+            </form>
+
+
+        </div>
+
+    </div>
+</div>

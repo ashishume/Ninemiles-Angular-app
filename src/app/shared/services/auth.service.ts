@@ -69,6 +69,7 @@ export class AuthService {
           this.getEmail.next(result.user.email)
           this.getName.next(result.user.photoURL)
           this.getPhotoURL.next(result.user.displayName)
+          this.router.navigate(['dashboard'])
 
         });
       })
@@ -77,9 +78,6 @@ export class AuthService {
       });
   }
 
-  /* Setting up user data when sign in with username/password,
-  sign up with username/password and sign in with social auth
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
 
   SetUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(

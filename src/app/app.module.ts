@@ -29,7 +29,9 @@ import { GeneralTestComponent } from './tests/general-test/general-test.componen
 import { AddQuestionsComponent } from './admin-panel/add-questions/add-questions.component';
 import { SectionComponent } from './students/section/section.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
+import { MainNavComponent } from './shared/components/main-nav/main-nav.component';
+import { AddParagraphComponent } from './admin-panel/add-paragraph/add-paragraph.component'
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { QuillModule } from 'ngx-quill'
     AcademicTestComponent,
     GeneralTestComponent,
     AddQuestionsComponent,
-    SectionComponent
+    SectionComponent,
+    MainNavComponent,
+    AddParagraphComponent
   ],
   imports: [
     QuillModule.forRoot(),
