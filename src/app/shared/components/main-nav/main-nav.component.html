@@ -4,11 +4,14 @@
     [opened]="!(isHandset$ | async) ? 'false':'false' ">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
+      <a routerLink="/dashboard" mat-list-item>Dashboard</a>
       <a routerLink="/section" mat-list-item>Section</a>
       <a routerLink="/add-questions" mat-list-item>Add Question</a>
       <a routerLink="/add-paragraph" mat-list-item>Add Paragraph</a>
+      <a routerLink="/profile" mat-list-item>Profile</a>
+      <a routerLink="/students" mat-list-item>Student</a>
       <span class="profile">
-        <button>Logout</button>
+        <button (click)="authService.SignOut()" >Logout</button>
       </span>
     </mat-nav-list>
   </mat-sidenav>
@@ -17,7 +20,7 @@
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>NineMiles</span>
+      <span routerLink="/">Nineleaps</span>
       <span style="flex:1 1 auto;"></span>
       <div class="buttons">
         <span [matMenuTriggerFor]="menu" class="navigate">More</span>

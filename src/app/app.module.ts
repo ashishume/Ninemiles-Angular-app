@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StudentsComponent } from './students/students.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './home/home.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
@@ -18,7 +17,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InterceptorService } from './shared/services/interceptor.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -27,11 +26,18 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { AcademicTestComponent } from './tests/academic-test/academic-test.component';
 import { GeneralTestComponent } from './tests/general-test/general-test.component';
 import { AddQuestionsComponent } from './admin-panel/add-questions/add-questions.component';
-import { SectionComponent } from './students/section/section.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { QuillModule } from 'ngx-quill';
 import { MainNavComponent } from './shared/components/main-nav/main-nav.component';
-import { AddParagraphComponent } from './admin-panel/add-paragraph/add-paragraph.component'
+import { AddParagraphComponent } from './admin-panel/add-paragraph/add-paragraph.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { InfoPageComponent } from './shared/components/info-page/info-page.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SpeakingComponent } from './section/speaking/speaking.component';
+import { ListeningComponent } from './section/listening/listening.component';
+import { WritingComponent } from './section/writing/writing.component';
+import { ReadingComponent } from './section/reading/reading.component'
+import { SectionComponent } from './section/section.component';
 
 
 @NgModule({
@@ -39,20 +45,27 @@ import { AddParagraphComponent } from './admin-panel/add-paragraph/add-paragraph
     AppComponent,
     StudentsComponent,
     DashboardComponent,
-    HomeComponent,
     AdminPanelComponent,
     LoaderComponent,
     PageNotFoundComponent,
     AcademicTestComponent,
     GeneralTestComponent,
     AddQuestionsComponent,
-    SectionComponent,
     MainNavComponent,
-    AddParagraphComponent
+    AddParagraphComponent,
+    SignInComponent,
+    InfoPageComponent,
+    ProfileComponent,
+    SpeakingComponent,
+    ListeningComponent,
+    WritingComponent,
+    ReadingComponent,
+    SectionComponent
+
   ],
   imports: [
     QuillModule.forRoot(),
-    BootstrapModule,    
+    BootstrapModule,
     BrowserModule,
     MaterialModule,
     CommonModule,
@@ -71,12 +84,13 @@ import { AddParagraphComponent } from './admin-panel/add-paragraph/add-paragraph
     MatIconModule,
     MatListModule,
   ],
+  entryComponents: [InfoPageComponent],
   providers: [
     AuthService,
     ApiService,
     HttpService,
     LoaderService,
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }  
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

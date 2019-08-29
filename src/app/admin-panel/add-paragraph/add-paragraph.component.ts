@@ -11,21 +11,19 @@ export class AddParagraphComponent implements OnInit {
 
 
 
-  section = [
-    1, 2, 3, 4
-  ]
+  
 
   listOfTests;
-  paragraphUserType = [
-    "Academic Students",
-    "General Students"
-  ]
+  section=[];
+  paragraphUserType = [ ]
   public AddParagraph: FormGroup;
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
   ) {
-    this.listOfTests = Array(30).fill(2).map((x,i)=>i+3);
+    this.section=this.apiService.getCountOfSection()
+    this.listOfTests = this.apiService.getCountOfTests()
+    this.paragraphUserType = this.apiService.getStudentTypes()
 
     this.AddParagraph = this.fb.group(
       {

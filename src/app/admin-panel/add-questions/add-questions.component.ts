@@ -12,19 +12,9 @@ import { FormGroup, FormBuilder, FormControl, Validators, NgForm, FormArray, Val
 
 export class AddQuestionsComponent implements OnInit {
 
-  listOfQuestionTypes = [
-    "MCQ",
-    "Matching Questions",
-    "Long Questions",
-    "Fill in the blanks"
-  ]
-  section = [
-    1, 2, 3, 4
-  ]
-  questionUserType = [
-    "Academic Students",
-    "General Students"
-  ]
+  listOfQuestionTypes = []
+  section = []
+  questionUserType = []
   public AddQuestion: FormGroup;
   countOfInput = []
   listOfTests;
@@ -33,7 +23,10 @@ export class AddQuestionsComponent implements OnInit {
     private apiService: ApiService,
     private fb: FormBuilder,
   ) {
-    this.listOfTests = Array(30).fill(2).map((x,i)=>i+3);
+    this.listOfTests = this.apiService.getCountOfTests();
+    this.section = this.apiService.getCountOfSection();
+    this.questionUserType = this.apiService.getStudentTypes();
+    this.listOfQuestionTypes = this.apiService.getQuestionTypes();
 
     this.AddQuestion = this.fb.group(
       {
@@ -86,7 +79,7 @@ export class AddQuestionsComponent implements OnInit {
 
       AddQuestion.value.author = "ashishume@gmail.com"
       console.log(AddQuestion.value);
-      
+
       this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
         console.log(data);
       })

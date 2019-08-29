@@ -1,3 +1,50 @@
-<p>
-  students works!
-</p>
+<div id="container">
+    <div class="row">
+  
+      <div class="col-sm-12">
+        <p class="heading"> Add Questions</p>
+      </div>
+  
+    </div>
+  
+    <div class="row">
+  
+  
+      <div class="col-sm-6">
+        <div class="reading-paragraph" *ngFor="let list of paragraphDetails">
+          <!-- <span *ngIf="list.section==='1'"> -->
+  
+          <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+          <p [innerHTML]="list.paragraphTitle"></p>
+          <!-- </span> -->
+        </div>
+  
+  
+      </div>
+  
+      <div class="col-sm-6">
+        <div class="questions-section">
+          <span *ngFor="let list of questions">
+            <!-- <span *ngIf="list.testNumber===2"> -->
+            <form class="form" [formGroup]="firstSectionTest" autocomplete="off" novalidate #SectionForm="ngForm">
+              <span class="question" [innerHTML]="list.questionTitle"></span>
+              <mat-checkbox *ngFor="let listOption of list.options" name="section" formControlName="section"
+                [value]="listOption.option" (change)="checkOptionStatus(listOption,$event)">
+                &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+              <br>
+            </form>
+  
+            <!-- </span> -->
+          </span>
+          <br>
+          <br>
+  
+          <button style="width:100%" class="btn btn-primary btn-md" (click)="onSubmitOfSection()">Submit Section</button>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- </div> -->

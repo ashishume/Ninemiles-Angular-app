@@ -1,3 +1,4 @@
+import { ApiService } from 'src/app/shared/services/api.service';
 import { Injectable, NgZone } from '@angular/core';
 import {
   AngularFirestore,
@@ -7,6 +8,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { auth } from 'firebase';
 import * as Rx from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { InfoPageComponent } from '../components/info-page/info-page.component';
 
 
 @Injectable({
@@ -22,7 +25,9 @@ export class AuthService {
     private afs: AngularFirestore, // Inject Firestore service
     private afAuth: AngularFireAuth, // Inject Firebase auth service
     private router: Router,
+    public matDialog: MatDialog,
     private ngZone: NgZone,
+    private apiService: ApiService
   ) { }
 
 
@@ -63,14 +68,36 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result: any) => {
         this.ngZone.run(() => {
-          localStorage.setItem('name', result.user.displayName)
-          localStorage.setItem('email', result.user.email)
-          localStorage.setItem('photoURL', result.user.photoURL)
-          this.getEmail.next(result.user.email)
-          this.getName.next(result.user.photoURL)
-          this.getPhotoURL.next(result.user.displayName)
-          this.router.navigate(['dashboard'])
 
+          // this.getEmail.next(result.user.email)
+          // this.getName.next(result.user.photoURL)
+          // this.getPhotoURL.next(result.user.displayName)
+
+
+          const dialogConfig = new MatDialogConfig();
+          dialogConfig.disableClose = true;
+          dialogConfig.width = '500px';
+          dialogConfig.height = '500px';
+
+          const body = {
+            "name": result.user.displayName,
+            "email": result.user.email,
+            "profileImageUrl": result.user.photoURL
+          }
+
+          this.apiService.login(body).subscribe((data: any) => {
+            if (data.status == 200) {
+              localStorage.setItem('name', result.user.displayName)
+              localStorage.setItem('email', result.user.email)
+              localStorage.setItem('photoURL', result.user.photoURL)
+              if (data.body.registrationStatus == 0) {
+                this.insertTestData(result.user.email);
+              } else {
+                this.router.navigate(['dashboard'])
+
+              }
+            }
+          })
         });
       })
       .catch(error => {
@@ -78,6 +105,17 @@ export class AuthService {
       });
   }
 
+
+  insertTestData(userEmail) {
+    const email = {
+      email: userEmail
+    }
+    this.apiService.addTestData(email).subscribe((data: any) => {
+      if (data.status == 200) {
+        this.router.navigate(['dashboard'])
+      }
+    })
+  }
 
   SetUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(

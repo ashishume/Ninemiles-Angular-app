@@ -1,3 +1,42 @@
-<p>
-  dashboard works!
-</p>
+<div class="container">
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      <app-profile></app-profile>
+      <hr>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Mock Tests</h4>
+      <div *ngFor="let testItem of countOfTests">
+
+
+        <!-- //PREMIUM TESTS -->
+        <mat-card id="mat-card">
+          Test {{testItem.testNumber}}
+
+          <span *ngIf="testItem.testAttemptStatus==false && testItem.testPricingStatus==false">
+            <button id="button" class="btn btn-outline-primary btn-sm" id="float-item" routerLink="/section">Take Test</button>
+          </span>
+          <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
+            (Already Attempted) <button id="button" class="btn btn-outline-info btn-sm">View Score</button>
+          </span>
+          <span id="float-item" *ngIf="testItem.testPricingStatus==true">
+            <img src="../../assets/lock.svg" class="icon" >
+          </span>
+        </mat-card>
+        <br>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="container">
+
+  <div class="row">
+    <mat-card id="matCard">
+    <div *ngIf="userDetails as list">
+      <div class="col-sm-12" class="profile">
+        <img src="{{list.profileImageUrl}}" style="width: 100px;height:100px;border-radius: 100px;">
+      </div>
+      <div class="col-sm-12">
+        <span class="name">{{list.name}}</span><br>
+        <span class="email">{{list.email}}</span><br>
+        <span class="test">Tests given: {{list.countOfTestsGiven}}</span><br>
+        <span class="test" *ngIf="list.paymentStatus==false">Free User</span>
+        <span class="test" *ngIf="list.paymentStatus==true"><img src="../../assets/tick.png"> Premium User</span>
+      </div>
+    </div>
+  </mat-card>
+</div>
+</div>
