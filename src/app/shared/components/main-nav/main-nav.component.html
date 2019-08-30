@@ -10,6 +10,7 @@
       <a routerLink="/add-paragraph" mat-list-item>Add Paragraph</a>
       <a routerLink="/profile" mat-list-item>Profile</a>
       <a routerLink="/students" mat-list-item>Student</a>
+      <a routerLink="/registered-users" mat-list-item>Registered Users</a>
       <span class="profile">
         <button (click)="authService.SignOut()" >Logout</button>
       </span>
@@ -20,7 +21,7 @@
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span routerLink="/">Nineleaps</span>
+      <span routerLink="/">Logo</span>
       <span style="flex:1 1 auto;"></span>
       <div class="buttons">
         <span [matMenuTriggerFor]="menu" class="navigate">More</span>

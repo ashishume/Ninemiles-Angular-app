@@ -1,5 +1,6 @@
 import { ApiService } from 'src/app/shared/services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,45 +9,50 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
-  countOfTests: any = [];
+  constructor(private apiService: ApiService, private route: Router) { }
   paymentStatus;
-  testDetails;
+  freeTestDetails;
+  paidTestDetails;
   testAttemptedArray = [];
+  countOfGivenTests=0;
   ngOnInit() {
-    this.countOfTests = this.apiService.getCountOfTests();
     const query = {
       email: localStorage.getItem('email')
     }
-    this.apiService.getProfileDetails(query).subscribe((data: any) => {
+    this.apiService.showTestData(query).subscribe((data: any) => {
+      let freeTestArray = []
+      let paidTestArray = []
+      var countOfGivenTests=0;       
       if (data.status == 200) {
-        this.paymentStatus = data.body.paymentStatus;
-      }
-    })
-
-    const param = {
-      email: localStorage.getItem('email')
-    }
-
-    this.apiService.showTestData(param).subscribe((data: any) => {
-      if (data.status == 200) {
-        this.testDetails = data.body;
-        let tempArray = []
-        if (this.testDetails.testDetails) {
-          this.testDetails.testDetails.forEach(function (value) {
-            tempArray.push(value.testNumber)
-          })
-        }
-
-        this.countOfTests.forEach(function (value) {
-
-          for (let i = 0; i < tempArray.length; i++) {
-            if (value.testNumber == tempArray[i]) {
-              value.testAttemptStatus = true;
-            }
+        this.getPaymentStatus(query);
+        data.body.testDetails.forEach(function (value) {          
+          if (value.testPricingStatus == false) {
+            freeTestArray.push(value);
+          } else {
+            paidTestArray.push(value);
+          } 
+          if(value.testAttemptStatus==true){
+            countOfGivenTests+=1;
           }
         })
+        this.countOfGivenTests=countOfGivenTests;
+        localStorage.setItem('countOfTests',this.countOfGivenTests.toString())
+        this.freeTestDetails = freeTestArray;
+        this.paidTestDetails = paidTestArray;
       }
     })
+  }
+
+  getPaymentStatus(query) {
+    this.apiService.getProfileDetails(query).subscribe((data: any) => {
+      if (data.status == 200) {
+        localStorage.setItem('paymentStatus', data.body.paymentStatus);
+      }
+      this.paymentStatus = localStorage.getItem('paymentStatus');
+    })
+  }
+
+  navigateToSection(testNumber) {
+    this.route.navigate(['section', testNumber])
   }
 }

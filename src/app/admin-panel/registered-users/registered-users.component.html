@@ -1,0 +1,40 @@
+<div id="container">
+  <div class="row">
+    <!-- <div class="col-sm-12"> -->
+
+    <div class="table-responsive">
+      <table class="table" style="text-align: center">
+
+        <tr>
+          <td></td>
+          <td>Name</td>
+          <td>Email</td>
+          <td>No.of tests given</td>
+          <td>Payment Status</td>
+          <td>Member since</td>
+          <td>Payment Status</td>
+        </tr>
+        <tr *ngFor="let list of registeredUsers">
+          <td><img src="{{list.profileImageUrl}}" class="profile-image">
+          </td>
+          <td>{{list.name}}</td>
+          <td>{{list.email}}</td>
+          <td>{{list.countOfTestsGiven}}</td>
+          <td *ngIf="list.paymentStatus">Premium User</td>
+          <td *ngIf="!list.paymentStatus">Free User</td>
+          <td>{{list.createdAt | date:'longDate'}}</td>
+          <td>
+            <mat-form-field>
+              <mat-select placeholder="Set Payment Status">
+                <mat-option  *ngFor="let item of paymentStatus" (click)="setPaymentStatus(item,list)">{{item}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+
+      <!-- </div> -->
+    </div>
+  </div>
+</div>

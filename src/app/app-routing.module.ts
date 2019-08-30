@@ -14,6 +14,7 @@ import { ListeningComponent } from './section/listening/listening.component';
 import { ReadingComponent } from './section/reading/reading.component';
 import { WritingComponent } from './section/writing/writing.component';
 import { SectionComponent } from './section/section.component';
+import { RegisteredUsersComponent } from './admin-panel/registered-users/registered-users.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -22,12 +23,14 @@ const routes: Routes = [
   { path: 'general-test', component: GeneralTestComponent },
   { path: 'students', component: StudentsComponent },
   { path: 'add-questions', component: AddQuestionsComponent },
+  { path: 'add-paragraph', component: AddParagraphComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'speaking', component: SpeakingComponent },
   { path: 'listening', component: ListeningComponent },
   { path: 'reading', component: ReadingComponent },
   { path: 'writing', component: WritingComponent },
-  { path: 'section', component: SectionComponent },
+  { path: 'registered-users', component: RegisteredUsersComponent },
+  { path: 'section/:id', component: SectionComponent },
   { path: '**', component: PageNotFoundComponent },
 
 ];

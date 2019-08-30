@@ -12,6 +12,7 @@ export class ReadingComponent implements OnInit {
 countOfTests;
   ngOnInit() {
     this.countOfTests = this.apiService.getCountOfTests();
+    console.log(localStorage.getItem('testNumber'))
 
   }
 

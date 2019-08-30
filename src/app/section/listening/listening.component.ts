@@ -8,22 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListeningComponent implements OnInit {
 
-  constructor(private apiService:ApiService) { }
-countOfTests;
+  constructor(private apiService: ApiService) { }
+  countOfTests;
   ngOnInit() {
-    this.countOfTests = this.apiService.getCountOfTests();
+
+    console.log(localStorage.getItem('testNumber'))
+
+
+    // this.countOfTests = this.apiService.getCountOfTests();
 
   }
-  onSubmitListening(){
-    const body={
-      email:localStorage.getItem('email'),
-      testDetails:[
-        {testNumber:2,testStatus:true}
+  onSubmitListening() {
+    const body = {
+      email: localStorage.getItem('email'),
+      testDetails: [
+        { testNumber: 1, testAttemptStatus: true, testPricingStatus: localStorage.getItem('paymentStatus') }
       ]
     }
-    this.apiService.updateTestData(body).subscribe((data:any)=>{
+    this.apiService.updateTestData(body).subscribe((data: any) => {
       console.log(data);
-      
+
     })
   }
 }

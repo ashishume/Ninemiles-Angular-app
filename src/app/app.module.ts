@@ -38,6 +38,7 @@ import { ListeningComponent } from './section/listening/listening.component';
 import { WritingComponent } from './section/writing/writing.component';
 import { ReadingComponent } from './section/reading/reading.component'
 import { SectionComponent } from './section/section.component';
+import { RegisteredUsersComponent } from './admin-panel/registered-users/registered-users.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { SectionComponent } from './section/section.component';
     ListeningComponent,
     WritingComponent,
     ReadingComponent,
-    SectionComponent
+    SectionComponent,
+    RegisteredUsersComponent
 
   ],
   imports: [

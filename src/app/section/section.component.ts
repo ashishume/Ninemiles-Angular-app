@@ -1,4 +1,6 @@
+import { ApiService } from './../shared/services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-section',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SectionComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private apisService:ApiService,private router: ActivatedRoute) { }
+  testNumber;
   ngOnInit() {
+  var number = this.router.snapshot.paramMap.get('id');
+
+  localStorage.setItem('testNumber',number)
   }
 
 }

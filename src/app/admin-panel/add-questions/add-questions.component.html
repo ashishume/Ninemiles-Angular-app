@@ -58,16 +58,21 @@
                         *required</mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                        <mat-label>Select Test Number</mat-label>
-                        <mat-select formControlName="testNumber" name="testNumber" ngModel>
-                            <mat-option value="1">1 (free)</mat-option>
-                            <mat-option value="2">2 (free)</mat-option>
-                            <mat-option *ngFor="let list of listOfTests" [value]="list">{{list}} (paid)</mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="!AddQuestion.get('testNumber').valid && AddQuestion.get('testNumber').touched">
-                            *required</mat-error>
-                    </mat-form-field>
-                   
+                    <mat-label>Select Test Number</mat-label>
+                    <mat-select formControlName="testNumber" name="testNumber" ngModel>
+                        <mat-option *ngFor="let list of listOfTests" [value]="list">
+                            <span *ngIf="list.testPricingStatus==false">
+                                {{list.testNumber}} (free)
+                            </span>
+                            <span *ngIf="list.testPricingStatus==true">
+                                {{list.testNumber}} (paid)
+                            </span>
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!AddQuestion.get('testNumber').valid && AddQuestion.get('testNumber').touched">
+                        *required</mat-error>
+                </mat-form-field>
+
                 <br>
                 <button [disabled]="!AddQuestion.valid" type="submit" mat-raised-button>Submit Question</button>
             </form>

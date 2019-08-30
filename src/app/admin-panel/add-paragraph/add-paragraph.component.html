@@ -21,9 +21,14 @@
                 <mat-form-field>
                     <mat-label>Select Test Number</mat-label>
                     <mat-select formControlName="testNumber" name="testNumber" ngModel>
-                        <mat-option value="1">1 (free)</mat-option>
-                        <mat-option value="2">2 (free)</mat-option>
-                        <mat-option *ngFor="let list of listOfTests" [value]="list">{{list}} (paid)</mat-option>
+                        <mat-option *ngFor="let list of listOfTests" [value]="list">
+                            <span *ngIf="list.testPricingStatus==false">
+                                {{list.testNumber}} (free)
+                            </span>
+                            <span *ngIf="list.testPricingStatus==true">
+                                {{list.testNumber}} (paid)
+                            </span>
+                        </mat-option>
                     </mat-select>
                     <mat-error *ngIf="!AddParagraph.get('testNumber').valid && AddParagraph.get('testNumber').touched">
                         *required</mat-error>
@@ -45,7 +50,7 @@
                     *ngIf="!AddParagraph.get('paragraphTitle').valid && AddParagraph.get('paragraphTitle').touched">
                     *paragraph is required
                 </mat-error>
-              <br>
+                <br>
                 <button [disabled]="!AddParagraph.valid" type="submit" mat-raised-button>Submit paragraph</button>
             </form>
 
