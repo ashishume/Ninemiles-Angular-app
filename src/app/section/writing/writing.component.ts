@@ -11,8 +11,6 @@ export class WritingComponent implements OnInit {
   constructor(private apiService: ApiService) { }
   countOfTests;
   ngOnInit() {
-    this.countOfTests = this.apiService.getCountOfTests();
-    console.log(localStorage.getItem('testNumber'))
 
   }
 

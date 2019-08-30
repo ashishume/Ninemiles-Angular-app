@@ -11,18 +11,17 @@ export class AddParagraphComponent implements OnInit {
 
 
 
-  
+
 
   listOfTests;
-  section=[];
-  paragraphUserType = [ ]
+  section = [];
+  paragraphUserType = []
   public AddParagraph: FormGroup;
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
   ) {
-    this.section=this.apiService.getCountOfSection()
-    this.listOfTests = this.apiService.getCountOfTests()
+    this.section = this.apiService.getCountOfSection()
     this.paragraphUserType = this.apiService.getStudentTypes()
 
     this.AddParagraph = this.fb.group(
@@ -41,7 +40,18 @@ export class AddParagraphComponent implements OnInit {
     return this.AddParagraph.controls[controlName].hasError(errorName);
   }
   ngOnInit() {
-
+    const query = {
+      email: localStorage.getItem('email')
+    }
+    this.apiService.showTestData(query).subscribe((data: any) => {
+      let tempArray = []
+      if (data.status == 200) {
+        data.body.testDetails.forEach(function (value) {
+          tempArray.push(value)
+        })
+        this.listOfTests = tempArray;
+      }
+    })
   }
   onSubmitParagraph(AddParagraph) {
     AddParagraph.value.author = "ashishume@gmail.com";

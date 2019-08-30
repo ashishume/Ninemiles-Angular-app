@@ -23,7 +23,8 @@ export class AddQuestionsComponent implements OnInit {
     private apiService: ApiService,
     private fb: FormBuilder,
   ) {
-    this.listOfTests = this.apiService.getCountOfTests();
+
+    // this.listOfTests = this.apiService.getCountOfTests();
     this.section = this.apiService.getCountOfSection();
     this.questionUserType = this.apiService.getStudentTypes();
     this.listOfQuestionTypes = this.apiService.getQuestionTypes();
@@ -64,10 +65,23 @@ export class AddQuestionsComponent implements OnInit {
     return this.AddQuestion.controls[controlName].hasError(errorName);
   }
   ngOnInit() {
+    const query = {
+      email: localStorage.getItem('email')
+    }
+
+    this.apiService.showTestData(query).subscribe((data: any) => {
+      let tempArray = []
+      if (data.status == 200) {
+        data.body.testDetails.forEach(function (value) {
+          tempArray.push(value)
+        })
+        this.listOfTests = tempArray;
+      }
+    })
+
 
   }
   onSubmitQuestion(AddQuestion) {
-    console.log(AddQuestion.value);
     let tempArray: any = []
     tempArray = AddQuestion.value.options;
     if (AddQuestion.value.options) {
@@ -77,9 +91,7 @@ export class AddQuestionsComponent implements OnInit {
         }
       }
 
-      AddQuestion.value.author = "ashishume@gmail.com"
-      console.log(AddQuestion.value);
-
+      AddQuestion.value.author = localStorage.getItem('email')
       this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
         console.log(data);
       })

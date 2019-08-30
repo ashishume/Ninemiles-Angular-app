@@ -47,38 +47,7 @@ export class ApiService {
     return this.httpService.callApi('PUT', body, 'user/paymentStatus', '');
   }
 
-
-
-
-  //COMMON DATA TO COMPONENTS
-  // getCountOfTests() {
-  //   const email = {
-  //     email: localStorage.getItem('email')
-  //   }
-  //   this.getProfileDetails(email).subscribe((data: any) => {
-  //     if (data.status == 200) {
-  //       this.paymentStatus = data.body.paymentStatus;
-  //       let tempArray = []
-  //       if (this.paymentStatus == false) {
-  //         for (let i = 1; i <= 32; i++) {
-  //           if (i == 1 || i == 2) {
-  //             tempArray.push({ testNumber: i, testAttemptStatus: false, testPricingStatus: false })
-  //           } else {
-  //             tempArray.push({ testNumber: i, testAttemptStatus: false, testPricingStatus: true })
-  //           }
-  //         }
-  //         this.listOfTestDetails = tempArray;
-  //       } else {
-  //         for (let i = 1; i <= 32; i++) {
-  //           tempArray.push({ testNumber: i, testAttemptStatus: false, testPricingStatus: true })
-  //         }
-  //         this.listOfTestDetails = tempArray;
-  //       }
-  //     }
-  //   })
-  //   return this.listOfTestDetails;
-  // }
-
+//common data for components
   getStudentTypes() {
     let paragraphUserType = [
       "Academic Students",
