@@ -1,6 +1,8 @@
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, NgForm, FormArray, ValidatorFn } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
 
 
 @Component({
@@ -15,6 +17,7 @@ export class AddQuestionsComponent implements OnInit {
   listOfQuestionTypes = []
   section = []
   questionUserType = []
+  sectionCategory=[];
   public AddQuestion: FormGroup;
   countOfInput = []
   listOfTests;
@@ -22,12 +25,15 @@ export class AddQuestionsComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
+    private snack:MatSnackBar
   ) {
 
     // this.listOfTests = this.apiService.getCountOfTests();
     this.section = this.apiService.getCountOfSection();
     this.questionUserType = this.apiService.getStudentTypes();
     this.listOfQuestionTypes = this.apiService.getQuestionTypes();
+    this.sectionCategory=this.apiService.getSectionCategory()
+
 
     this.AddQuestion = this.fb.group(
       {
@@ -36,6 +42,7 @@ export class AddQuestionsComponent implements OnInit {
         section: new FormControl('', [Validators.required]),
         testNumber: new FormControl('', [Validators.required]),
         questionUserType: new FormControl('', [Validators.required]),
+        sectionCategory: new FormControl('', [Validators.required]),
         options: this.fb.array([this.addOtherSkillFormGroup()])
 
       },
@@ -68,7 +75,6 @@ export class AddQuestionsComponent implements OnInit {
     const query = {
       email: localStorage.getItem('email')
     }
-
     this.apiService.showTestData(query).subscribe((data: any) => {
       let tempArray = []
       if (data.status == 200) {
@@ -82,7 +88,12 @@ export class AddQuestionsComponent implements OnInit {
 
   }
   onSubmitQuestion(AddQuestion) {
-    let tempArray: any = []
+ 
+
+
+
+
+  let tempArray: any = []
     tempArray = AddQuestion.value.options;
     if (AddQuestion.value.options) {
       for (var i = 0; i < tempArray.length; i++) {
@@ -91,9 +102,12 @@ export class AddQuestionsComponent implements OnInit {
         }
       }
 
-      AddQuestion.value.author = localStorage.getItem('email')
+      AddQuestion.value.author = localStorage.getItem('email')            
       this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
-        console.log(data);
+        this.snack.openFromComponent(SnackBarComponent, {
+          duration: 3 * 1000,
+          data:"Question Added Successfully"
+        });
       })
     }
 

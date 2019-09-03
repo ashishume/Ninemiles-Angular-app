@@ -9,16 +9,10 @@
   </div>
 
 
-
-
-
-
-
   <div class="row">
     <div class="col-sm-12">
       <h4>Free Mock Tests</h4>
       <div *ngFor="let testItem of freeTestDetails">
-        <!-- //Free TESTS -->
         <mat-card id="mat-card">
           Test {{testItem.testNumber}}
           <span *ngIf="testItem.testAttemptStatus==false && testItem.testPricingStatus==false">
@@ -38,7 +32,6 @@
 
       <h4>Paid Mock Tests</h4>
       <div *ngFor="let testItem of paidTestDetails">
-        <!-- //Free TESTS -->
         <mat-card id="mat-card">
           Test {{testItem.testNumber}}
           <span *ngIf="paymentStatus=='true'">
@@ -57,10 +50,6 @@
         </mat-card>
         <br>
       </div>
-
-
-
     </div>
   </div>
-
 </div>

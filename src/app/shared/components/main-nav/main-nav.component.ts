@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -16,6 +16,16 @@ export class MainNavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver,public authService:AuthService) {}
+  email;
+  constructor(private breakpointObserver: BreakpointObserver, public authService: AuthService) {
 
+
+    this.authService.getEmail.subscribe(emailData => {
+      this.email = emailData;
+    })
+    if (this.email == null) {
+      this.email = localStorage.getItem('email')
+    }
+
+  }
 }

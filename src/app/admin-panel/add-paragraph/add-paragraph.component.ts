@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/shared/services/api-service/api.service';
 
 @Component({
   selector: 'app-add-paragraph',
@@ -29,7 +29,7 @@ export class AddParagraphComponent implements OnInit {
         paragraphTitle: new FormControl('', [Validators.required]),
         section: new FormControl('', [Validators.required]),
         paragraphUserType: new FormControl('', [Validators.required]),
-        testNumber: new FormControl('', [Validators.required]),
+        testDetails: new FormControl('', [Validators.required]),
         paragraphHeading: new FormControl('', [Validators.required]),
       },
     );
@@ -54,8 +54,19 @@ export class AddParagraphComponent implements OnInit {
     })
   }
   onSubmitParagraph(AddParagraph) {
-    AddParagraph.value.author = "ashishume@gmail.com";
-    this.apiService.insertParagraph(AddParagraph.value).subscribe((data: any) => {
+
+    var formValue = AddParagraph.value;
+
+    const body = {
+      author: "ashishume@gmail.com",
+      paragraphTitle: formValue.paragraphTitle,
+      paragraphHeading: formValue.paragraphHeading,
+      paragraphUserType: formValue.paragraphUserType,
+      section: formValue.section,
+      testNumber: formValue.testDetails.testNumber
+    }
+
+    this.apiService.insertParagraph(body).subscribe((data: any) => {
       console.log(data);
     })
   }

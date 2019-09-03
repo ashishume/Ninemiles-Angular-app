@@ -1,4 +1,4 @@
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,4 +14,16 @@ export class WritingComponent implements OnInit {
 
   }
 
+
+  onSubmitWriting() {
+    const body = {
+      email: localStorage.getItem('email'),
+      testNumber: localStorage.getItem('testNumber'),
+      testStatusUpdate:"writing"
+    }
+    this.apiService.updateTestData(body).subscribe((data: any) => {
+      console.log(data);
+
+    })
+  }
 }

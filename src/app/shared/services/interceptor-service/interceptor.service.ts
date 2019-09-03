@@ -12,7 +12,7 @@ import { map, catchError, finalize, tap, retry } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as Rx from 'rxjs';
-import { LoaderService } from './loader.service';
+import { LoaderService } from '../loader-service/loader.service';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {

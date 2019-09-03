@@ -1,4 +1,4 @@
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  countOfGivenTests=0;
+  countOfGivenTests;
   constructor(private apiService: ApiService) { }
   userDetails: any;
   ngOnInit() {
-    this.countOfGivenTests=parseInt(localStorage.getItem('countOfTests'))
+    this.countOfGivenTests=localStorage.getItem('countOfTests')
     var query = {
       email: localStorage.getItem('email')
     }

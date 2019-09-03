@@ -1,4 +1,4 @@
-import { ApiService } from './../../shared/services/api.service';
+import { ApiService } from '../../shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,21 +13,17 @@ export class ListeningComponent implements OnInit {
   ngOnInit() {
 
     console.log(localStorage.getItem('testNumber'))
-
-
-    // this.countOfTests = this.apiService.getCountOfTests();
-
   }
   onSubmitListening() {
     const body = {
       email: localStorage.getItem('email'),
-      testDetails: [
-        { testNumber: 1, testAttemptStatus: true, testPricingStatus: localStorage.getItem('paymentStatus') }
-      ]
+      testNumber: localStorage.getItem('testNumber'),
+      testStatusUpdate:"listening"
     }
     this.apiService.updateTestData(body).subscribe((data: any) => {
       console.log(data);
 
     })
   }
+
 }

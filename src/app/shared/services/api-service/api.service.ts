@@ -1,4 +1,4 @@
-import { HttpService } from './http.service';
+import { HttpService } from '../http-service/http.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -54,6 +54,15 @@ export class ApiService {
       "General Students"
     ]
     return paragraphUserType;
+  }
+  getSectionCategory() {
+    let sectionCategory = [
+      "Reading",
+      "Writing",
+      "Listening",
+      "Speaking"
+    ]
+    return sectionCategory;
   }
   getQuestionTypes() {
     let listOfQuestionTypes = [

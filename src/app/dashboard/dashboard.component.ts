@@ -1,4 +1,4 @@
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   freeTestDetails;
   paidTestDetails;
   testAttemptedArray = [];
-  countOfGivenTests=0;
+  countOfGivenTests = 0;
   ngOnInit() {
     const query = {
       email: localStorage.getItem('email')
@@ -22,21 +22,23 @@ export class DashboardComponent implements OnInit {
     this.apiService.showTestData(query).subscribe((data: any) => {
       let freeTestArray = []
       let paidTestArray = []
-      var countOfGivenTests=0;       
+      var countOfGivenTests = 0;
       if (data.status == 200) {
         this.getPaymentStatus(query);
-        data.body.testDetails.forEach(function (value) {          
+        data.body.testDetails.forEach(function (value) {
+          value.testAttemptStatus = false;
           if (value.testPricingStatus == false) {
             freeTestArray.push(value);
           } else {
             paidTestArray.push(value);
-          } 
-          if(value.testAttemptStatus==true){
-            countOfGivenTests+=1;
+          }
+          if (value.listening == true && value.speaking == true && value.reading == true && value.writing == true) {
+            countOfGivenTests += 1;
+            value.testAttemptStatus = true;
           }
         })
-        this.countOfGivenTests=countOfGivenTests;
-        localStorage.setItem('countOfTests',this.countOfGivenTests.toString())
+        this.countOfGivenTests = countOfGivenTests;
+        localStorage.setItem('countOfTests', this.countOfGivenTests.toString())
         this.freeTestDetails = freeTestArray;
         this.paidTestDetails = paidTestArray;
       }

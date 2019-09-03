@@ -1,3 +1,4 @@
+import { AuthGuard } from './shared/guard/auth-guard.service';
 import { AddQuestionsComponent } from './admin-panel/add-questions/add-questions.component';
 import { AcademicTestComponent } from './tests/academic-test/academic-test.component';
 import { NgModule } from '@angular/core';
@@ -18,19 +19,19 @@ import { RegisteredUsersComponent } from './admin-panel/registered-users/registe
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'academic-test', component: AcademicTestComponent },
-  { path: 'general-test', component: GeneralTestComponent },
-  { path: 'students', component: StudentsComponent },
-  { path: 'add-questions', component: AddQuestionsComponent },
-  { path: 'add-paragraph', component: AddParagraphComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'speaking', component: SpeakingComponent },
-  { path: 'listening', component: ListeningComponent },
-  { path: 'reading', component: ReadingComponent },
-  { path: 'writing', component: WritingComponent },
-  { path: 'registered-users', component: RegisteredUsersComponent },
-  { path: 'section/:id', component: SectionComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'academic-test', component: AcademicTestComponent, canActivate: [AuthGuard] },
+  { path: 'general-test', component: GeneralTestComponent, canActivate: [AuthGuard] },
+  { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
+  { path: 'add-questions', component: AddQuestionsComponent, canActivate: [AuthGuard] },
+  { path: 'add-paragraph', component: AddParagraphComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'speaking', component: SpeakingComponent, canActivate: [AuthGuard] },
+  { path: 'listening', component: ListeningComponent, canActivate: [AuthGuard] },
+  { path: 'reading', component: ReadingComponent, canActivate: [AuthGuard] },
+  { path: 'writing', component: WritingComponent, canActivate: [AuthGuard] },
+  { path: 'registered-users', component: RegisteredUsersComponent, canActivate: [AuthGuard] },
+  { path: 'section/:id', component: SectionComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent },
 
 ];

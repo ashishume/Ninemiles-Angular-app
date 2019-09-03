@@ -49,6 +49,15 @@
                 </mat-form-field>
                 &nbsp;
                 <mat-form-field>
+                    <mat-label>Select Section Category</mat-label>
+                    <mat-select formControlName="sectionCategory" name="sectionCategory" ngModel>
+                        <mat-option *ngFor="let list of sectionCategory" [value]="list">{{list}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!AddQuestion.get('sectionCategory').valid && AddQuestion.get('sectionCategory').touched">
+                        *required</mat-error>
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field>
                     <mat-label>Select Student Category</mat-label>
                     <mat-select formControlName="questionUserType" name="questionUserType" ngModel>
                         <mat-option *ngFor="let list of questionUserType" [value]="list">{{list}}</mat-option>
@@ -60,7 +69,7 @@
                 <mat-form-field>
                     <mat-label>Select Test Number</mat-label>
                     <mat-select formControlName="testNumber" name="testNumber" ngModel>
-                        <mat-option *ngFor="let list of listOfTests">
+                        <mat-option *ngFor="let list of listOfTests" [value]="list.testNumber">
                             <span *ngIf="list.testPricingStatus==false">
                                 {{list.testNumber}} (free)
                             </span>

@@ -1,4 +1,4 @@
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Injectable, NgZone } from '@angular/core';
 import {
   AngularFirestore,
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { auth } from 'firebase';
 import * as Rx from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { InfoPageComponent } from '../components/info-page/info-page.component';
+import { InfoPageComponent } from '../../components/info-page/info-page.component';
 
 
 @Injectable({
@@ -20,6 +20,9 @@ export class AuthService {
   public getName = new Rx.Subject();
   public getEmail = new Rx.Subject();
   public getPhotoURL = new Rx.Subject();
+  // private checkEmailStatus = localStorage.getItem('email');
+  private checkEmailStatus = localStorage.getItem('email');
+
 
   constructor(
     private afs: AngularFirestore, // Inject Firestore service
@@ -28,33 +31,17 @@ export class AuthService {
     public matDialog: MatDialog,
     private ngZone: NgZone,
     private apiService: ApiService
-  ) { }
+  ) {
+  }
 
 
-  // get isLoggedIn(): boolean {
-  //   if (
-  //     this.designationStatus === 10 ||
-  //     this.designationStatus === 11 ||
-  //     this.designationStatus === 12 ||
-  //     this.designationStatus === 13
-  //   ) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-  // get authorization(): string {
-  //   if (this.designationStatus === 13) {
-  //     return 'isFM';
-  //   }
-  //   if (this.designationStatus === 11) {
-  //     return 'isHR';
-  //   }
-  //   if (this.designationStatus === 12) {
-  //     return 'isProjectManager';
-  //   }
-  // }
+  get isLoggedIn(): boolean {
+    if (this.checkEmailStatus) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   // Sign in with Googleuserlogin
   GoogleAuth() {
@@ -69,7 +56,7 @@ export class AuthService {
       .then((result: any) => {
         this.ngZone.run(() => {
 
-          // this.getEmail.next(result.user.email)
+          this.getEmail.next(result.user.email)
           // this.getName.next(result.user.photoURL)
           // this.getPhotoURL.next(result.user.displayName)
 
@@ -90,6 +77,8 @@ export class AuthService {
               localStorage.setItem('name', result.user.displayName)
               localStorage.setItem('email', result.user.email)
               localStorage.setItem('photoURL', result.user.photoURL)
+              localStorage.setItem('userType', "Academic Students")
+              this.checkEmailStatus = localStorage.getItem('email');
               if (data.body.registrationStatus == 0) {
                 this.insertTestData(result.user.email);
               } else {

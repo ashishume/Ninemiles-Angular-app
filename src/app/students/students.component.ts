@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ApiService } from '../shared/services/api.service';
 
 @Component({
   selector: 'app-students',
@@ -8,57 +6,42 @@ import { ApiService } from '../shared/services/api.service';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
-
-  questions = [];
-  paragraphDetails;
-  public firstSectionTest: FormGroup;
-  constructor(private apiService: ApiService,
-    private fb: FormBuilder,
-  ) {
-    this.firstSectionTest = this.fb.group(
-      {
-        section: new FormControl('', [Validators.required])
-      },
-    );
+  focusedSection1 = { "background-color": "red" };
+  focusedSection2 = {};
+  focusedSection3 = {};
+  constructor() {
   }
 
-  public hasError = (controlName: string, errorName: string) => {
-    return this.firstSectionTest.controls[controlName].hasError(errorName);
+  section1 = true;
+  section2 = false;
+  section3 = false;
+
+  showSection1() {
+    this.section1 = true;
+    this.section2 = false;
+    this.section3 = false;
+    this.focusedSection1 = { "background-color": "red" };
+    this.focusedSection2 = { "background-color": "" };
+    this.focusedSection3 = { "background-color": "" };
+  }
+  showSection2() {
+    this.section1 = false;
+    this.section2 = true;
+    this.section3 = false;
+    this.focusedSection1 = { "background-color": "" };
+    this.focusedSection2 = { "background-color": "red" };
+    this.focusedSection3 = { "background-color": "" };
+
+  }
+  showSection3() {
+    this.section1 = false;
+    this.section2 = false;
+    this.section3 = true;
+    this.focusedSection1 = { "background-color": "" };
+    this.focusedSection2 = { "background-color": "" };
+    this.focusedSection3 = { "background-color": "red" };
   }
 
+  ngOnInit() { }
 
-  ngOnInit() {
-    this.apiService.getListOfQuestions().subscribe((response: any) => {
-      if (response.status == 200) {
-        this.questions = response.body;
-      }
-    })
-
-    this.apiService.getListOfParagraph().subscribe((response:any)=>{
-  if(response.status==200)
-  {
-    console.log(response.body);
-    
-    this.paragraphDetails=response.body;
-  }      
-    })
-  }
-
-  tempArray = []
-  checkOptionStatus(optionValue, event) {
-    if (event.checked == true) {
-      this.tempArray.push(optionValue)
-    } else {
-
-      for (var i = 0; i < this.tempArray.length; i++) {
-        if (this.tempArray[i] === optionValue) {
-          this.tempArray.splice(i, 1);
-        }
-      }
-    }
-  }
-
-  onSubmitOfSection() {
-    console.log(this.tempArray);
-  }
 }

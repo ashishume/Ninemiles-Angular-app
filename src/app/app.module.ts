@@ -1,8 +1,8 @@
 import { BootstrapModule } from './bootstrap.module';
-import { LoaderService } from './shared/services/loader.service';
-import { HttpService } from './shared/services/http.service';
-import { ApiService } from './shared/services/api.service';
-import { AuthService } from './shared/services/auth.service';
+import { LoaderService } from './shared/services/loader-service/loader.service';
+import { HttpService } from './shared/services/http-service/http.service';
+import { ApiService } from './shared/services/api-service/api.service';
+import { AuthService } from './shared/services/auth-service/auth.service';
 import { MaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -18,7 +18,7 @@ import { environment } from '../environments/environment';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InterceptorService } from './shared/services/interceptor.service';
+import { InterceptorService } from './shared/services/interceptor-service/interceptor.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
@@ -39,6 +39,7 @@ import { WritingComponent } from './section/writing/writing.component';
 import { ReadingComponent } from './section/reading/reading.component'
 import { SectionComponent } from './section/section.component';
 import { RegisteredUsersComponent } from './admin-panel/registered-users/registered-users.component';
+import { SnackBarComponent } from './shared/components/snack-bar/snack-bar.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { RegisteredUsersComponent } from './admin-panel/registered-users/registe
     WritingComponent,
     ReadingComponent,
     SectionComponent,
-    RegisteredUsersComponent
+    RegisteredUsersComponent,
+    SnackBarComponent
 
   ],
   imports: [
@@ -86,7 +88,7 @@ import { RegisteredUsersComponent } from './admin-panel/registered-users/registe
     MatIconModule,
     MatListModule,
   ],
-  entryComponents: [InfoPageComponent],
+  entryComponents: [InfoPageComponent,SnackBarComponent],
   providers: [
     AuthService,
     ApiService,

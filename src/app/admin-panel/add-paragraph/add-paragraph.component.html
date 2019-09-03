@@ -20,7 +20,7 @@
                 </mat-form-field>&nbsp;
                 <mat-form-field>
                     <mat-label>Select Test Number</mat-label>
-                    <mat-select formControlName="testNumber" name="testNumber" ngModel>
+                    <mat-select formControlName="testDetails" name="testDetails" ngModel>
                         <mat-option *ngFor="let list of listOfTests" [value]="list">
                             <span *ngIf="list.testPricingStatus==false">
                                 {{list.testNumber}} (free)
@@ -30,7 +30,7 @@
                             </span>
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="!AddParagraph.get('testNumber').valid && AddParagraph.get('testNumber').touched">
+                    <mat-error *ngIf="!AddParagraph.get('testDetails').valid && AddParagraph.get('testDetails').touched">
                         *required</mat-error>
                 </mat-form-field>
                 &nbsp;
