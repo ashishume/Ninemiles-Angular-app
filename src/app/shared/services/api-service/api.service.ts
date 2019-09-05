@@ -47,7 +47,7 @@ export class ApiService {
     return this.httpService.callApi('PUT', body, 'user/paymentStatus', '');
   }
 
-//common data for components
+  //common data for components
   getStudentTypes() {
     let paragraphUserType = [
       "Academic Students",
@@ -66,10 +66,11 @@ export class ApiService {
   }
   getQuestionTypes() {
     let listOfQuestionTypes = [
-      "MCQ",
-      "Matching Questions",
-      "Long Questions",
-      "Fill in the blanks"
+      { questionType: "MCQ", questionTypeNumber: 1 },
+      { questionType: "Matching Questions", questionTypeNumber: 2 },
+      { questionType: "Short Questions", questionTypeNumber: 3 },
+      { questionType: "Type in the blanks", questionTypeNumber: 4 },
+      { questionType: "Select in the blanks", questionTypeNumber: 5 },
     ]
     return listOfQuestionTypes;
   }

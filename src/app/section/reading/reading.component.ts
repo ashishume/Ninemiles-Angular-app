@@ -1,6 +1,8 @@
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
+import { ReadingService } from '../shared/reading-shared/reading.service';
 
 @Component({
   selector: 'app-reading',
@@ -23,17 +25,18 @@ export class ReadingComponent implements OnInit {
   section4Questions = [];
 
 
-  public firstSectionTest: FormGroup;
+  public ReadingSection: FormGroup;
   constructor(private apiService: ApiService,
     private fb: FormBuilder,
+    private readingService: ReadingService,
+    private nav: NavbarService
   ) {
-    this.firstSectionTest = this.fb.group(
+    this.nav.hide()
+    this.ReadingSection = this.fb.group(
       {
-        section1: new FormControl('', [Validators.required]),
-        section2: new FormControl('', [Validators.required]),
-        section3: new FormControl('', [Validators.required]),
-        section4: new FormControl('', [Validators.required]),
-        
+        mcqAnswers: new FormControl('', []),
+        // selectAnswers:this.ReadingSection.FormArray()
+
       },
     );
   }
@@ -42,17 +45,25 @@ export class ReadingComponent implements OnInit {
 
 
   public hasError = (controlName: string, errorName: string) => {
-    return this.firstSectionTest.controls[controlName].hasError(errorName);
+    return this.ReadingSection.controls[controlName].hasError(errorName);
   }
 
-
+  section1SelectQuestionsLength = [];
+  section2SelectQuestionsLength = [];
+  section3SelectQuestionsLength = [];
+  section4SelectQuestionsLength = [];
   ngOnInit() {
     this.presentTestNumber = parseInt(localStorage.getItem('testNumber'));
 
+    let section1SelectQuestionsLength = [];
+    let section2SelectQuestionsLength = [];
+    let section3SelectQuestionsLength = [];
+    let section4SelectQuestionsLength = [];
     let section1Questions = [];
     let section2Questions = [];
     let section3Questions = [];
     let section4Questions = [];
+
     var userType = localStorage.getItem('userType');
     var testNumber = localStorage.getItem('testNumber');
     this.apiService.getListOfQuestions().subscribe((response: any) => {
@@ -62,14 +73,33 @@ export class ReadingComponent implements OnInit {
 
           if (value.section == "1" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
             section1Questions.push(value);
+            if (value.questionType == "Select in the blanks") {
+              section1SelectQuestionsLength.push(value.options.length);
+            }
+
           } else if (value.section == "2" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
+            if (value.questionType == "Select in the blanks") {
+              section2SelectQuestionsLength.push(value.options.length);
+            }
             section2Questions.push(value);
           } else if (value.section == "3" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
+            if (value.questionType == "Select in the blanks") {
+              section3SelectQuestionsLength.push(value.options.length);
+            }
             section3Questions.push(value);
           } else if (value.section == "4" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
+            if (value.questionType == "Select in the blanks") {
+              section4SelectQuestionsLength.push(value.options.length);
+            }
             section4Questions.push(value);
           }
+
         })
+
+        this.section1SelectQuestionsLength = section1SelectQuestionsLength;
+        this.section2SelectQuestionsLength = section2SelectQuestionsLength;
+        this.section3SelectQuestionsLength = section3SelectQuestionsLength;
+        this.section4SelectQuestionsLength = section4SelectQuestionsLength;
         this.section1Questions = section1Questions;
         this.section2Questions = section2Questions;
         this.section3Questions = section3Questions;
@@ -105,102 +135,32 @@ export class ReadingComponent implements OnInit {
     })
   }
 
-  tempArray :any= []
-  checkOptionStatus(optionValue, listSection,event) {
-    console.log(listSection);
-    
-    if (event.checked == true) {
-      this.tempArray.push({answer:optionValue,answerSection:parseInt(listSection)})
-    } else {
 
-      for (var i = 0; i < this.tempArray.length; i++) {
-        if (this.tempArray[i].answer === optionValue) {
-          this.tempArray.splice(i, 1);
-        }
-      }
-    }
-    console.log(this.tempArray);
+  onSubmitOfReadingSection(value) {
+    console.log(value.value);
 
   }
 
-  onSubmitOfSection() {
-    console.log(this.tempArray);
-
-    // console.log("onsubmit",this.tempArray);
+  checkSelectOptionStatus1(fullOption, selectedItem, section, length, selectedIndex) {
+    this.readingService.checkSelectOptionStatus1(fullOption, selectedItem, section, length, selectedIndex, this.section1SelectQuestionsLength)
+  }
+ 
+  checkSelectOptionStatus2(fullOption, selectedItem, section, length, selectedIndex) {
+    this.readingService.checkSelectOptionStatus2(fullOption, selectedItem, section, length, selectedIndex, this.section2SelectQuestionsLength)
+  }
+ 
+  checkSelectOptionStatus3(fullOption, selectedItem, section, length, selectedIndex) {
+    this.readingService.checkSelectOptionStatus3(fullOption, selectedItem, section, length, selectedIndex, this.section3SelectQuestionsLength)
+  }
+ 
+  checkSelectOptionStatus4(fullOption, selectedItem, section, length, selectedIndex) {
+    this.readingService.checkSelectOptionStatus4(fullOption, selectedItem, section, length, selectedIndex, this.section4SelectQuestionsLength)
+  }
+ 
+  checkOptionStatus(optionValue, section, event) {
+    this.readingService.checkOptionStatus(optionValue, section, event)
 
   }
-
-
-  // onSubmitReading() {
-  //   const body = {
-  //     email: localStorage.getItem('email'),
-  //     testNumber: localStorage.getItem('testNumber'),
-  //     testStatusUpdate: "reading"
-  //   }
-  //   this.apiService.updateTestData(body).subscribe((data: any) => {
-  //     console.log(data);
-
-  //   })
-  // }
-
-
-
-
-  // *******************************************************************
-
-  // focusedColor = "red"
-  // focusedSection1 = { "background-color": this.focusedColor };
-  // focusedSection2 = {};
-  // focusedSection3 = {};
-  // focusedSection4 = {};
-
-  // sectionTab1 = true;
-  // sectionTab2 = false;
-  // sectionTab3 = false;
-  // sectionTab4 = false;
-
-  // showSection1() {
-  //   this.sectionTab1 = true;
-  //   this.sectionTab2 = false;
-  //   this.sectionTab3 = false;
-  //   this.sectionTab4 = false;
-  //   this.focusedSection1 = { "background-color": this.focusedColor };
-  //   this.focusedSection2 = { "background-color": "" };
-  //   this.focusedSection3 = { "background-color": "" };
-  //   this.focusedSection4 = { "background-color": "" };
-  // }
-  // showSection2() {
-  //   this.sectionTab1 = false;
-  //   this.sectionTab2 = true;
-  //   this.sectionTab3 = false;
-  //   this.sectionTab4 = false;
-  //   this.focusedSection1 = { "background-color": "" };
-  //   this.focusedSection2 = { "background-color": this.focusedColor };
-  //   this.focusedSection3 = { "background-color": "" };
-  //   this.focusedSection4 = { "background-color": "" };
-
-  // }
-  // showSection3() {
-  //   this.sectionTab1 = false;
-  //   this.sectionTab2 = false;
-  //   this.sectionTab3 = true;
-  //   this.sectionTab4 = false;
-  //   this.focusedSection1 = { "background-color": "" };
-  //   this.focusedSection2 = { "background-color": "" };
-  //   this.focusedSection3 = { "background-color": this.focusedColor };
-  //   this.focusedSection4 = { "background-color": "" };
-  // }
-  // showSection4() {
-  //   this.sectionTab1 = false;
-  //   this.sectionTab2 = false;
-  //   this.sectionTab3 = false;
-  //   this.sectionTab4 = true;
-  //   this.focusedSection1 = { "background-color": "" };
-  //   this.focusedSection2 = { "background-color": "" };
-  //   this.focusedSection3 = { "background-color": "" };
-  //   this.focusedSection4 = { "background-color": this.focusedColor };
-  // }
-
 
 
 }

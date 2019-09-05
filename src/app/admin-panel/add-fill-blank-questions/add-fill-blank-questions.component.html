@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <br>
+      <h3>Add Fill-Blanks Question</h3>
+      <form class="form" [formGroup]="AddQuestion" autocomplete="off" novalidate #AddQuestionForm="ngForm"
+        (ngSubmit)="onSubmitQuestion(AddQuestion)">
+        <quill-editor formControlName="questionTitle" required name="questionTitle" ngModel>
+        </quill-editor>
+        <mat-error *ngIf="!AddQuestion.get('questionTitle').valid && AddQuestion.get('questionTitle').touched">
+          *Question is required
+        </mat-error>
+
+
+
+
+        <mat-form-field>
+          <mat-label>Select Question Type</mat-label>
+          <mat-select formControlName="questionType" required name="questionType" ngModel>
+            <mat-option *ngFor="let list of listOfQuestionTypes" [value]="list.questionTypeNumber">{{list.questionType}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="!AddQuestion.get('questionType').valid && AddQuestion.get('questionType').touched">
+            *required</mat-error>
+        </mat-form-field>
+        &nbsp;
+        
+        <mat-form-field>
+          <mat-label>Select Section</mat-label>
+          <mat-select formControlName="section" name="section" ngModel>
+            <mat-option *ngFor="let list of section" [value]="list">{{list}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="!AddQuestion.get('section').valid && AddQuestion.get('section').touched">
+            *required</mat-error>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+          <mat-label>Select Section Category</mat-label>
+          <mat-select formControlName="sectionCategory" name="sectionCategory" ngModel>
+            <mat-option *ngFor="let list of sectionCategory" [value]="list">{{list}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="!AddQuestion.get('sectionCategory').valid && AddQuestion.get('sectionCategory').touched">
+            *required</mat-error>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+          <mat-label>Select Student Category</mat-label>
+          <mat-select formControlName="questionUserType" name="questionUserType" ngModel>
+            <mat-option *ngFor="let list of questionUserType" [value]="list">{{list}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="!AddQuestion.get('questionUserType').valid && AddQuestion.get('questionUserType').touched">
+            *required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Select Test Number</mat-label>
+          <mat-select formControlName="testNumber" name="testNumber" ngModel>
+            <mat-option *ngFor="let list of listOfTests" [value]="list.testNumber">
+              <span *ngIf="list.testPricingStatus==false">
+                {{list.testNumber}} (free)
+              </span>
+              <span *ngIf="list.testPricingStatus==true">
+                {{list.testNumber}} (paid)
+              </span>
+            </mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="!AddQuestion.get('testNumber').valid && AddQuestion.get('testNumber').touched">
+            *required</mat-error>
+        </mat-form-field>
+
+        <br>
+
+
+
+
+
+
+
+
+
+
+
+
+        <br>
+        <h5>Add Options</h5>
+
+
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input matInput name="optionsList" formControlName="optionsList" [(ngModel)]="optionsList"
+                placeholder="Enter Option">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <span *ngFor="let item of optionsListArray;let i=index">
+              {{i+1}}) {{item}}
+            </span>
+          </div>
+        </div>
+        <span class="btn btn-outline-primary btn-sm" (click)="addOptionList(optionsList)">Add</span>&nbsp;
+        <span class="btn btn-outline-danger btn-sm" (click)="removeOptionList()">Remove</span>
+
+        <br>
+
+        <span formArrayName="options" *ngFor="let other of formData.controls; let i = index">
+          <span [formGroupName]="i">
+            &nbsp; <mat-form-field class="listItems">
+              <input matInput name="option" cols="10" formControlName="option" ngModel placeholder="Enter Option">
+
+            </mat-form-field>&nbsp;
+
+            <mat-form-field>
+
+              <mat-select placeholder="Select an option" formControlName="optionStatus" name="optionStatus" ngModel>
+                <mat-option>Select an option</mat-option>
+                <mat-option *ngFor="let ans of optionsListArray" [value]="ans">{{ans}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </span>
+          <!-- <mat-error *ngIf="!AddQuestion.get('options').valid && AddQuestion.get('options').touched">
+            *required</mat-error> -->
+        </span>
+        <br>
+
+        <span class="btn btn-outline-primary btn-sm" (click)="addButtonClick()">Add</span>&nbsp;
+        <span class="btn btn-outline-danger btn-sm" (click)="removeButtonClick()">Remove</span>
+
+        <br>
+
+
+
+        <button [disabled]="!AddQuestion.valid" type="submit" mat-raised-button>Submit Question</button>
+      </form>
+
+
+    </div>
+
+  </div>
+</div>

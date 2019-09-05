@@ -1,3 +1,4 @@
+import { AddFillBlankQuestionsComponent } from './admin-panel/add-fill-blank-questions/add-fill-blank-questions.component';
 import { AuthGuard } from './shared/guard/auth-guard.service';
 import { AddQuestionsComponent } from './admin-panel/add-questions/add-questions.component';
 import { AcademicTestComponent } from './tests/academic-test/academic-test.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'general-test', component: GeneralTestComponent, canActivate: [AuthGuard] },
   { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
   { path: 'add-questions', component: AddQuestionsComponent, canActivate: [AuthGuard] },
+  { path: 'add-fill-blank-questions', component: AddFillBlankQuestionsComponent, canActivate: [AuthGuard] },
   { path: 'add-paragraph', component: AddParagraphComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'speaking', component: SpeakingComponent, canActivate: [AuthGuard] },

@@ -69,7 +69,7 @@ export class AuthService {
           const body = {
             "name": result.user.displayName,
             "email": result.user.email,
-            "profileImageUrl": result.user.photoURL
+            "profileImageUrl": result.user.photoURL,
           }
 
           this.apiService.login(body).subscribe((data: any) => {
@@ -78,7 +78,7 @@ export class AuthService {
               localStorage.setItem('email', result.user.email)
               localStorage.setItem('photoURL', result.user.photoURL)
               localStorage.setItem('userType', "Academic Students")
-              this.checkEmailStatus = localStorage.getItem('email');
+              this.checkEmailStatus = localStorage.getItem('email');              
               if (data.body.registrationStatus == 0) {
                 this.insertTestData(result.user.email);
               } else {

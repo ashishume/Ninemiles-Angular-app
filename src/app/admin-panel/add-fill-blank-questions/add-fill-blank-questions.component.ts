@@ -1,18 +1,16 @@
-import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, NgForm, FormArray, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { MatSnackBar } from '@angular/material';
 import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
 
-
 @Component({
-  selector: 'app-add-questions',
-  templateUrl: './add-questions.component.html',
-  styleUrls: ['./add-questions.component.css']
+  selector: 'app-add-fill-blank-questions',
+  templateUrl: './add-fill-blank-questions.component.html',
+  styleUrls: ['./add-fill-blank-questions.component.css']
 })
+export class AddFillBlankQuestionsComponent implements OnInit {
 
-
-export class AddQuestionsComponent implements OnInit {
 
   listOfQuestionTypes = []
   section = []
@@ -21,6 +19,7 @@ export class AddQuestionsComponent implements OnInit {
   public AddQuestion: FormGroup;
   countOfInput = []
   listOfTests;
+  optionsListArray = []
   index = 1;
   constructor(
     private apiService: ApiService,
@@ -43,11 +42,13 @@ export class AddQuestionsComponent implements OnInit {
         testNumber: new FormControl('', [Validators.required]),
         questionUserType: new FormControl('', [Validators.required]),
         sectionCategory: new FormControl('', [Validators.required]),
+        optionsList: new FormControl('', [Validators.required]),
         options: this.fb.array([this.addOtherSkillFormGroup()])
 
       },
     );
   }
+
 
   get formData() { return <FormArray>this.AddQuestion.get('options'); }
 
@@ -60,6 +61,7 @@ export class AddQuestionsComponent implements OnInit {
   }
 
 
+
   addOtherSkillFormGroup(): FormGroup {
     return this.fb.group({
       option: new FormControl('', [Validators.required]),
@@ -67,6 +69,13 @@ export class AddQuestionsComponent implements OnInit {
     });
   }
 
+
+  addOptionList(option) {
+    this.optionsListArray.push(option)    
+  }
+  removeOptionList() {
+    this.optionsListArray.pop()
+  }
 
   public hasError = (controlName: string, errorName: string) => {
     return this.AddQuestion.controls[controlName].hasError(errorName);
@@ -86,17 +95,6 @@ export class AddQuestionsComponent implements OnInit {
     })
 
 
-
-    // let tempQuestionArray = this.apiService.getQuestionTypes()
-    // let questionTypeArray = []
-    // tempQuestionArray.forEach(function (value) {
-    //   questionTypeArray.push(value);
-    // })
-
-    // this.
-
-
-
   }
   onSubmitQuestion(AddQuestion) {
 
@@ -108,22 +106,17 @@ export class AddQuestionsComponent implements OnInit {
           tempArray[i].optionStatus = false;
         }
       }
+    }
+    AddQuestion.value.optionsList=this.optionsListArray;
+        AddQuestion.value.author = localStorage.getItem('email')
+        this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
+          this.snack.openFromComponent(SnackBarComponent, {
+            duration: 3 * 1000,
+            data: "Question Added Successfully"
+          });
+        })
+      }
 
-      AddQuestion.value.author = localStorage.getItem('email')
-      this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
-        this.snack.openFromComponent(SnackBarComponent, {
-          duration: 3 * 1000,
-          data: "Question Added Successfully"
-        });
-      })
     }
 
-  }
-
-
-  addMoreInputs() {
-    this.countOfInput.push(this.index++);
-    console.log(this.countOfInput);
-
-  }
-}
+  

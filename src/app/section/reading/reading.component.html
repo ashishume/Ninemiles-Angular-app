@@ -1,103 +1,234 @@
 <div class="container">
     <div class="row">
+        <button mat-raised-button color="primary" id="submit-button">Submit</button>
+        <form class="form" [formGroup]="ReadingSection" autocomplete="off" novalidate #ReadingSectionForm="ngForm"
+            (ngSubmit)="onSubmitOfReadingSection(ReadingSectionForm)">
 
-        <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
+            <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
 
-            <div class="col-sm-12" id="question-section">
-                <div class="section1-content" *ngIf="section1Questions.length && section1paragraphDetails.length">
+                <div class="col-sm-12">
+                    <div class="section1-content" *ngIf="section1Questions.length && section1paragraphDetails.length">
 
-                    <mat-tab class="mat-tab1" label="Section 1">
+                        <mat-tab class="mat-tab1" label="Section 1">
 
-                        <div class="row">
-                            <div class="col-sm-6" id="paragraph-section">
-                                <span *ngFor="let list of section1paragraphDetails">
-                                    <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
-                                    <p [innerHTML]="list.paragraphTitle"></p>
-                                </span>
-                            </div>
-                            <div class="col-sm-6" id="question-section">
-                                <span *ngFor="let list of section1Questions">
-                                    <div [innerHTML]="list.questionTitle"></div>
-                                    <span *ngFor="let listOption of list.options">
-                                        <mat-checkbox ngModel [value]="listOption.option"
-                                            (change)="checkOptionStatus(listOption,list.section,$event)">
-                                            &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                        
+                        
+                            <div class="row">
+                                <div class="col-sm-6" id="paragraph-section">
+                                    <span *ngFor="let list of section1paragraphDetails">
+                                        <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                                        <p [innerHTML]="list.paragraphTitle"></p>
                                     </span>
-                                </span>
-                            </div>
-                        </div>
-                    </mat-tab>
-                </div>
-                <div class="section2-content" *ngIf="section2Questions.length && section2paragraphDetails.length">
-                    <mat-tab label="Section 2">
-                        <div class="row">
-                            <div class="col-sm-6" id="paragraph-section">
-                                <span *ngFor="let list of section2paragraphDetails">
-                                    <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
-                                    <p [innerHTML]="list.paragraphTitle"></p>
-                                </span>
-                            </div>
-                            <div class="col-sm-6" id="question-section">
-                                <span *ngFor="let list of section2Questions">
-                                    <div [innerHTML]="list.questionTitle"></div>
-                                    <mat-checkbox *ngFor="let listOption of list.options" [value]="listOption.option"
-                                        (change)="checkOptionStatus(listOption,list.section,$event)">
-                                        &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
-                                </span>
-                            </div>
-                        </div>
-                    </mat-tab>
-                </div>
-                <div class="section3-content" *ngIf="section3Questions.length && section3paragraphDetails.length">
-                    <mat-tab label="Section 3">
-                        <div class="row">
-                            <div class="col-sm-6" id="paragraph-section">
-                                <span *ngFor="let list of section3paragraphDetails">
-                                    <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
-                                    <p [innerHTML]="list.paragraphTitle"></p>
-                                </span>
-                            </div>
-                            <div class="col-sm-6" id="question-section">
-                                <span *ngFor="let list of section3Questions">
-                                    <div [innerHTML]="list.questionTitle"></div>
-                                    <mat-checkbox *ngFor="let listOption of list.options" [value]="listOption.option"
-                                        (change)="checkOptionStatus(listOption,list.section,$event)">
-                                        &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
-                                </span>
-                            </div>
-                        </div>
-                    </mat-tab>
-                </div>
-                <div class="section4-content" *ngIf="section4Questions.length && section4paragraphDetails.length">
-                    <mat-tab label="Section 4">
+                                </div>
+                                <div class="col-sm-6" id="question-section">
 
-                        <div class="row">
-                            <div class="col-sm-6" id="paragraph-section">
-                                <span *ngFor="let list of section4paragraphDetails">
-                                    <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
-                                    <p [innerHTML]="list.paragraphTitle"></p>
-                                </span>
+
+                                    <span *ngFor="let list of section1Questions;let questionIndex=index">
+
+                                        <!-- MCQ QUESTIONS  -->
+                                        <span *ngIf="list.questionType=='MCQ'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options">
+                                                <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
+                                                    [value]="listOption.option"
+                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                    &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                                            </span>
+                                        </span>
+
+
+
+                                        <!-- SELECT IN THE BLANKS QUESTIONS  -->
+                                        <Span *ngIf="list.questionType=='Select in the blanks'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options;let i=index">
+                                                <span>{{listOption.option}}</span>
+                                                <mat-form-field class="options-list">
+                                                    <mat-select>
+                                                        <mat-option *ngFor="let items of list.optionsList"
+                                                            (click)="checkSelectOptionStatus1(listOption,items,list.section,list.options.length,i)"
+                                                            [value]="items">{{items}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <br>
+                                            </span>
+                                        </Span>
+                                    </span>
+
+
+                                </div>
                             </div>
-                            <div class="col-sm-6" id="question-section">
-                                <span *ngFor="let list of section4Questions">
-                                    <div [innerHTML]="list.questionTitle"></div>
-                                    <mat-checkbox *ngFor="let listOption of list.options" [value]="listOption.option"
-                                        (change)="checkOptionStatus(listOption,list.section,$event)">
-                                        &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
-                                </span>
+
+
+
+
+                        </mat-tab>
+                    </div>
+                    <div class="section2-content" *ngIf="section2Questions.length && section2paragraphDetails.length">
+                        <mat-tab label="Section 2">
+                            <div class="row">
+                                <div class="col-sm-6" id="paragraph-section">
+                                    <span *ngFor="let list of section2paragraphDetails">
+                                        <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                                        <p [innerHTML]="list.paragraphTitle"></p>
+                                    </span>
+                                </div>
+                                <div class="col-sm-6" id="question-section">
+
+
+                                    <span *ngFor="let list of section2Questions;let questionIndex=index">
+
+                                        <!-- MCQ QUESTIONS  -->
+                                        <span *ngIf="list.questionType=='MCQ'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options">
+                                                <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
+                                                    [value]="listOption.option"
+                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                    &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                                            </span>
+                                        </span>
+
+
+
+                                        <!-- SELECT IN THE BLANKS QUESTIONS  -->
+                                        <Span *ngIf="list.questionType=='Select in the blanks'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options;let i=index">
+                                                <span>{{listOption.option}}</span>
+                                                <mat-form-field class="options-list">
+                                                    <mat-select>
+                                                        <mat-option *ngFor="let items of list.optionsList"
+                                                            (click)="checkSelectOptionStatus2(listOption,items,list.section,list.options.length,i)"
+                                                            [value]="items">{{items}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <br>
+                                            </span>
+                                        </Span>
+                                    </span>
+
+
+
+
+
+                                </div>
                             </div>
-                        </div>
-                    </mat-tab>
+                        </mat-tab>
+                    </div>
+                    <div class="section3-content" *ngIf="section3Questions.length && section3paragraphDetails.length">
+                        <mat-tab label="Section 3">
+                            <div class="row">
+                                <div class="col-sm-6" id="paragraph-section">
+                                    <span *ngFor="let list of section3paragraphDetails">
+                                        <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                                        <p [innerHTML]="list.paragraphTitle"></p>
+                                    </span>
+                                </div>
+                                <div class="col-sm-6" id="question-section">
+
+
+
+                                    <span *ngFor="let list of section3Questions;let questionIndex=index">
+
+                                        <!-- MCQ QUESTIONS  -->
+                                        <span *ngIf="list.questionType=='MCQ'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options">
+                                                <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
+                                                    [value]="listOption.option"
+                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                    &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                                            </span>
+                                        </span>
+
+
+
+                                        <!-- SELECT IN THE BLANKS QUESTIONS  -->
+                                        <Span *ngIf="list.questionType=='Select in the blanks'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options;let i=index">
+                                                <span>{{listOption.option}}</span>
+                                                <mat-form-field class="options-list">
+                                                    <mat-select>
+                                                        <mat-option *ngFor="let items of list.optionsList"
+                                                            (click)="checkSelectOptionStatus3(listOption,items,list.section,list.options.length,i)"
+                                                            [value]="items">{{items}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <br>
+                                            </span>
+                                        </Span>
+                                    </span>
+
+
+
+
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </div>
+                    <div class="section4-content" *ngIf="section4Questions.length && section4paragraphDetails.length">
+                        <mat-tab label="Section 4">
+
+                            <div class="row">
+                                <div class="col-sm-6" id="paragraph-section">
+                                    <span *ngFor="let list of section4paragraphDetails">
+                                        <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                                        <p [innerHTML]="list.paragraphTitle"></p>
+                                    </span>
+                                </div>
+                                <div class="col-sm-6" id="question-section">
+
+
+
+                                    <span *ngFor="let list of section4Questions;let questionIndex=index">
+
+                                        <!-- MCQ QUESTIONS  -->
+                                        <span *ngIf="list.questionType=='MCQ'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options">
+                                                <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
+                                                    [value]="listOption.option"
+                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                    &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                                            </span>
+                                        </span>
+
+
+
+                                        <!-- SELECT IN THE BLANKS QUESTIONS  -->
+                                        <Span *ngIf="list.questionType=='Select in the blanks'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options;let i=index">
+                                                <span>{{listOption.option}}</span>
+                                                <mat-form-field class="options-list">
+                                                    <mat-select>
+                                                        <mat-option *ngFor="let items of list.optionsList"
+                                                            (click)="checkSelectOptionStatus4(listOption,items,list.section,list.options.length,i)"
+                                                            [value]="items">{{items}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <br>
+                                            </span>
+                                        </Span>
+                                    </span>
+
+
+
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </div>
+
+                    <br>
+                    <br>
+                    <br>
                 </div>
-                <button style="width:100%" class="btn btn-primary btn-md" (click)="onSubmitOfSection()">Submit
-                    Section</button>
-                <br>
-                <br>
-                <br>
-            </div>
 
-        </mat-tab-group>
+            </mat-tab-group>
 
+        </form>
 
 
     </div>

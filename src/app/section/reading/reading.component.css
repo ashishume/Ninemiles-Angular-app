@@ -1,10 +1,12 @@
 #container {
   padding: 0 20px;
   margin: 0 20px;
+  text-align: justify;
 }
 #paragraph-section {
   max-height: 100vh;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 5px 40px;
   text-align: justify;
   
@@ -13,7 +15,8 @@
 #question-section {
   text-align: justify;
   max-height: 100vh;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   margin-bottom: 50px;
   padding-bottom: 15px;
 }
@@ -28,4 +31,14 @@
   width: 100%;
   overflow-y: auto;
   max-height: 100vh;
+}
+
+#submit-button{
+  position:fixed;
+  top: 5px;
+  right: 10px;
+  z-index: 9000;
+}
+.options-list{
+  width: 20%;
 }

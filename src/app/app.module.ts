@@ -1,3 +1,5 @@
+import { SpeakingService } from './section/shared/speaking-shared/speaking.service';
+import { CalculateMarksService } from './shared/services/calculate-marks/calculate-marks.service';
 import { BootstrapModule } from './bootstrap.module';
 import { LoaderService } from './shared/services/loader-service/loader.service';
 import { HttpService } from './shared/services/http-service/http.service';
@@ -40,6 +42,11 @@ import { ReadingComponent } from './section/reading/reading.component'
 import { SectionComponent } from './section/section.component';
 import { RegisteredUsersComponent } from './admin-panel/registered-users/registered-users.component';
 import { SnackBarComponent } from './shared/components/snack-bar/snack-bar.component';
+import { NavbarService } from './shared/services/navbar-service/navbar.service';
+import { AddFillBlankQuestionsComponent } from './admin-panel/add-fill-blank-questions/add-fill-blank-questions.component';
+import { ReadingService } from './section/shared/reading-shared/reading.service';
+import { ListeningService } from './section/shared/listening-shared/listening.service';
+import { WritingService } from './section/shared/writing-shared/writing.service';
 
 
 @NgModule({
@@ -64,7 +71,8 @@ import { SnackBarComponent } from './shared/components/snack-bar/snack-bar.compo
     ReadingComponent,
     SectionComponent,
     RegisteredUsersComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    AddFillBlankQuestionsComponent,
 
   ],
   imports: [
@@ -93,7 +101,13 @@ import { SnackBarComponent } from './shared/components/snack-bar/snack-bar.compo
     AuthService,
     ApiService,
     HttpService,
+    NavbarService,
+    ReadingService,
+    ListeningService,
+    SpeakingService,
+    WritingService,
     LoaderService,
+    CalculateMarksService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]

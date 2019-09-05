@@ -7,7 +7,7 @@
       <a routerLink="/dashboard" mat-list-item>Dashboard</a>
       <a routerLink="/add-questions" mat-list-item>Add Question</a>
       <a routerLink="/add-paragraph" mat-list-item>Add Paragraph</a>
-      <a routerLink="/students" mat-list-item>Student</a>
+      <a routerLink="/add-fill-blank-questions" mat-list-item>Add Fill Question</a>
       <a routerLink="/registered-users" mat-list-item>Registered Users</a>
       <span class="profile">
         <button (click)="authService.SignOut()">Logout</button>
@@ -15,31 +15,34 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="mat-sidenav-content">
+    <span *ngIf="nav.visible">
     <mat-toolbar color="primary">
 
-      <span *ngIf="email">
 
-        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
-        
-      </span>
-      
+        <span *ngIf="email">
+
+          <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+
+          
+        </span>
       <span routerLink="/">Logo</span>
       <span style="flex:1 1 auto;"></span>
       
+      <!-- <span *ngIf="nav.visible"> -->
+        <div class="buttons" *ngIf="email">
+          <span [matMenuTriggerFor]="menu" class="navigate">More</span>
+          <mat-menu #menu="matMenu">
+            <span mat-menu-item disabled>{{email}}</span>
+            <span mat-menu-item (click)="authService.SignOut()">Logout</span>
+          </mat-menu>
+        </div>
+      <!-- </span> -->
       
-      <div class="buttons" *ngIf="email">
-        <span [matMenuTriggerFor]="menu" class="navigate">More</span>
-        <mat-menu #menu="matMenu">
-          <span mat-menu-item disabled>{{email}}</span>
-          <span mat-menu-item (click)="authService.SignOut()">Logout</span>
-        </mat-menu>
-
-      </div>
-
-
+      
     </mat-toolbar>
+  </span>
 
     <ng-content></ng-content>
   </mat-sidenav-content>

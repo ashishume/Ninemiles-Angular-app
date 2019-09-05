@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { NavbarService } from '../../services/navbar-service/navbar.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -17,7 +18,7 @@ export class MainNavComponent {
     );
 
   email;
-  constructor(private breakpointObserver: BreakpointObserver, public authService: AuthService) {
+  constructor(private breakpointObserver: BreakpointObserver, public authService: AuthService,public nav: NavbarService) {
 
 
     this.authService.getEmail.subscribe(emailData => {
