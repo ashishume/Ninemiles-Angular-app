@@ -11,9 +11,6 @@
           *Question is required
         </mat-error>
 
-
-
-
         <mat-form-field>
           <mat-label>Select Question Type</mat-label>
           <mat-select formControlName="questionType" required name="questionType" ngModel>
@@ -24,7 +21,7 @@
             *required</mat-error>
         </mat-form-field>
         &nbsp;
-        
+
         <mat-form-field>
           <mat-label>Select Section</mat-label>
           <mat-select formControlName="section" name="section" ngModel>
@@ -70,17 +67,6 @@
 
         <br>
 
-
-
-
-
-
-
-
-
-
-
-
         <br>
         <h5>Add Options</h5>
 
@@ -88,7 +74,7 @@
         <div class="row">
           <div class="col-sm-6">
             <mat-form-field>
-              <input matInput name="optionsList" formControlName="optionsList" [(ngModel)]="optionsList"
+              <input matInput name="listOfOptions" formControlName="listOfOptions" [(ngModel)]="listOfOptions"
                 placeholder="Enter Option">
             </mat-form-field>
           </div>
@@ -98,11 +84,9 @@
             </span>
           </div>
         </div>
-        <span class="btn btn-outline-primary btn-sm" (click)="addOptionList(optionsList)">Add</span>&nbsp;
+        <span class="btn btn-outline-primary btn-sm" (click)="addOptionList(listOfOptions)">Add</span>&nbsp;
         <span class="btn btn-outline-danger btn-sm" (click)="removeOptionList()">Remove</span>
-
         <br>
-
         <span formArrayName="options" *ngFor="let other of formData.controls; let i = index">
           <span [formGroupName]="i">
             &nbsp; <mat-form-field class="listItems">
@@ -128,14 +112,25 @@
         <span class="btn btn-outline-danger btn-sm" (click)="removeButtonClick()">Remove</span>
 
         <br>
-
-
-
+        <br>
         <button [disabled]="!AddQuestion.valid" type="submit" mat-raised-button>Submit Question</button>
       </form>
 
 
     </div>
-
+    <!-- <div class="col-sm-2">
+      <mat-form-field>
+        <input matInput ngModel placeholder="Enter Option">
+      </mat-form-field>
+      <span class="btn btn-outline-primary btn-sm" (click)="addOptionList(listOfOptions)"><i class="material-icons">
+          exposure_plus_1
+        </i></span>&nbsp;
+      <span class="btn btn-outline-danger btn-sm" (click)="removeOptionList()"><i class="material-icons">
+          exposure_neg_1
+          </i></span>
+      <span *ngFor="let item of optionsListArray;let i=index">
+        {{i+1}}) {{item}}
+      </span>
+    </div> -->
   </div>
 </div>

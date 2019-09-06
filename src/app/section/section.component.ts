@@ -9,12 +9,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SectionComponent implements OnInit {
 
-  constructor(private apisService:ApiService,private router: ActivatedRoute) { }
+  constructor() { }
   testNumber;
   ngOnInit() {
-  var number = this.router.snapshot.paramMap.get('id');
 
-  localStorage.setItem('testNumber',number)
   }
 
 }

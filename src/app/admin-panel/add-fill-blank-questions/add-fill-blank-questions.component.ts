@@ -20,6 +20,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
   countOfInput = []
   listOfTests;
   optionsListArray = []
+  listOfOptions;
   index = 1;
   constructor(
     private apiService: ApiService,
@@ -42,7 +43,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
         testNumber: new FormControl('', [Validators.required]),
         questionUserType: new FormControl('', [Validators.required]),
         sectionCategory: new FormControl('', [Validators.required]),
-        optionsList: new FormControl('', [Validators.required]),
+        listOfOptions: new FormControl('', [Validators.required]),
         options: this.fb.array([this.addOtherSkillFormGroup()])
 
       },

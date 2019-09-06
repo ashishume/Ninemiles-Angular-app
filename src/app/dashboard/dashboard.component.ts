@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit {
   }
 
   navigateToSection(testNumber) {
-    this.route.navigate(['section', testNumber])
+    localStorage.setItem('testNumber',testNumber)
+    this.route.navigate(['section'])
   }
 }
