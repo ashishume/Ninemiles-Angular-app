@@ -67,10 +67,10 @@ export class ApiService {
   getQuestionTypes() {
     let listOfQuestionTypes = [
       { questionType: "MCQ", questionTypeNumber: 1 },
-      { questionType: "Matching Questions", questionTypeNumber: 2 },
-      { questionType: "Short Questions", questionTypeNumber: 3 },
-      { questionType: "Type in the blanks", questionTypeNumber: 4 },
-      { questionType: "Select in the blanks", questionTypeNumber: 5 },
+      // { questionType: "Matching Questions", questionTypeNumber: 2 },
+      // { questionType: "Short Questions", questionTypeNumber: 3 },
+      { questionType: "Type in the blanks", questionTypeNumber: 2 },
+      { questionType: "Select in the blanks", questionTypeNumber: 3 },
     ]
     return listOfQuestionTypes;
   }

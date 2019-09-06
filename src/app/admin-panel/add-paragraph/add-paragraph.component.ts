@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
+import { MatSnackBar } from '@angular/material';
+import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-add-paragraph',
@@ -20,6 +22,7 @@ export class AddParagraphComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
+    private snack: MatSnackBar
   ) {
     this.section = this.apiService.getCountOfSection()
     this.paragraphUserType = this.apiService.getStudentTypes()
@@ -67,7 +70,10 @@ export class AddParagraphComponent implements OnInit {
     }
 
     this.apiService.insertParagraph(body).subscribe((data: any) => {
-      console.log(data);
+      this.snack.openFromComponent(SnackBarComponent, {
+        duration: 3 * 1000,
+        data: "Question Added Successfully"
+      });
     })
   }
 }

@@ -72,7 +72,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
 
 
   addOptionList(option) {
-    this.optionsListArray.push(option)    
+    this.optionsListArray.push(option.toUpperCase())    
   }
   removeOptionList() {
     this.optionsListArray.pop()

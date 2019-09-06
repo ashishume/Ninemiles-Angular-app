@@ -43,6 +43,7 @@ import { SharedModule } from './shared/services/shared.module';
     InfoPageComponent,
     ProfileComponent,
     SnackBarComponent,
+    
 
   ],
   imports: [

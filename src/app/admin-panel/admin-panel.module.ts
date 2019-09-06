@@ -15,7 +15,8 @@ import { QuillModule } from 'ngx-quill';
     AddParagraphComponent,
     AddQuestionsComponent,
     AdminPanelComponent,
-    RegisteredUsersComponent
+    RegisteredUsersComponent,
+
   ],
   imports: [
     QuillModule.forRoot(),

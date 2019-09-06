@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12">
       <br>
-      <h3>Add Fill-Blanks Question</h3>
+      <h3>Add Select/Input-Blanks Question</h3>
       <form class="form" [formGroup]="AddQuestion" autocomplete="off" novalidate #AddQuestionForm="ngForm"
         (ngSubmit)="onSubmitQuestion(AddQuestion)">
         <quill-editor formControlName="questionTitle" required name="questionTitle" ngModel>

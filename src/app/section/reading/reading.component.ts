@@ -42,23 +42,38 @@ export class ReadingComponent implements OnInit {
   }
 
 
+  changeData(event, i) {
+    console.log(event.target.value);
+    console.log(i);
 
+  }
 
   public hasError = (controlName: string, errorName: string) => {
     return this.ReadingSection.controls[controlName].hasError(errorName);
   }
 
-  section1SelectQuestionsLength = [];
-  section2SelectQuestionsLength = [];
-  section3SelectQuestionsLength = [];
-  section4SelectQuestionsLength = [];
+  section1SelectQuestionsId = [];
+  section2SelectQuestionsId = [];
+  section3SelectQuestionsId = [];
+  section4SelectQuestionsId = [];
+
+  section1TypeQuestionsId = [];
+  section2TypeQuestionsId = [];
+  section3TypeQuestionsId = [];
+  section4TypeQuestionsId = [];
   ngOnInit() {
     this.presentTestNumber = parseInt(localStorage.getItem('testNumber'));
 
-    let section1SelectQuestionsLength = [];
-    let section2SelectQuestionsLength = [];
-    let section3SelectQuestionsLength = [];
-    let section4SelectQuestionsLength = [];
+    let section1SelectQuestionsId = [];
+    let section2SelectQuestionsId = [];
+    let section3SelectQuestionsId = [];
+    let section4SelectQuestionsId = [];
+
+    let section1TypeQuestionsId = [];
+    let section2TypeQuestionsId = [];
+    let section3TypeQuestionsId = [];
+    let section4TypeQuestionsId = [];
+
     let section1Questions = [];
     let section2Questions = [];
     let section3Questions = [];
@@ -74,32 +89,54 @@ export class ReadingComponent implements OnInit {
           if (value.section == "1" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
             section1Questions.push(value);
             if (value.questionType == "Select in the blanks") {
-              section1SelectQuestionsLength.push(value.options.length);
+              section1SelectQuestionsId.push(value._id);
+            }
+            if (value.questionType == "Type in the blanks") {
+              section1TypeQuestionsId.push(value._id)
             }
 
           } else if (value.section == "2" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
             if (value.questionType == "Select in the blanks") {
-              section2SelectQuestionsLength.push(value.options.length);
+              section2SelectQuestionsId.push(value._id);
+            }
+            if (value.questionType == "Type in the blanks") {
+              section2TypeQuestionsId.push(value._id)
             }
             section2Questions.push(value);
           } else if (value.section == "3" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
             if (value.questionType == "Select in the blanks") {
-              section3SelectQuestionsLength.push(value.options.length);
+              section3SelectQuestionsId.push(value._id);
+            }
+            if (value.questionType == "Type in the blanks") {
+              section3TypeQuestionsId.push(value._id)
             }
             section3Questions.push(value);
           } else if (value.section == "4" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
             if (value.questionType == "Select in the blanks") {
-              section4SelectQuestionsLength.push(value.options.length);
+              section4SelectQuestionsId.push(value._id);
+            }
+            if (value.questionType == "Type in the blanks") {
+              section4TypeQuestionsId.push(value._id)
             }
             section4Questions.push(value);
           }
 
         })
+        //SELECT OPTIONS
+        this.section1SelectQuestionsId = section1SelectQuestionsId;
+        this.section2SelectQuestionsId = section2SelectQuestionsId;
+        this.section3SelectQuestionsId = section3SelectQuestionsId;
+        this.section4SelectQuestionsId = section4SelectQuestionsId;
 
-        this.section1SelectQuestionsLength = section1SelectQuestionsLength;
-        this.section2SelectQuestionsLength = section2SelectQuestionsLength;
-        this.section3SelectQuestionsLength = section3SelectQuestionsLength;
-        this.section4SelectQuestionsLength = section4SelectQuestionsLength;
+
+        //TYPE THE OPTIONS
+        this.section1TypeQuestionsId = section1TypeQuestionsId;
+        this.section2TypeQuestionsId = section2TypeQuestionsId;
+        this.section3TypeQuestionsId = section3TypeQuestionsId;
+        this.section4TypeQuestionsId = section4TypeQuestionsId;
+
+
+        //QUESTIONS ADDED
         this.section1Questions = section1Questions;
         this.section2Questions = section2Questions;
         this.section3Questions = section3Questions;
@@ -141,26 +178,40 @@ export class ReadingComponent implements OnInit {
 
   }
 
-  checkSelectOptionStatus1(fullOption, selectedItem, section, length, selectedIndex) {
-    this.readingService.checkSelectOptionStatus1(fullOption, selectedItem, section, length, selectedIndex, this.section1SelectQuestionsLength)
+  //********************************************************************************************
+  //SELECT QUESTIONS
+  checkSelectOptionStatus1(fullOption, selectedItem, section, id, selectedIndex) {
+    this.readingService.checkSelectOptionStatus1(fullOption, selectedItem, section, id, selectedIndex, this.section1SelectQuestionsId)
   }
- 
-  checkSelectOptionStatus2(fullOption, selectedItem, section, length, selectedIndex) {
-    this.readingService.checkSelectOptionStatus2(fullOption, selectedItem, section, length, selectedIndex, this.section2SelectQuestionsLength)
+  checkSelectOptionStatus2(fullOption, selectedItem, section, id, selectedIndex) {
+    this.readingService.checkSelectOptionStatus2(fullOption, selectedItem, section, id, selectedIndex, this.section2SelectQuestionsId)
   }
- 
-  checkSelectOptionStatus3(fullOption, selectedItem, section, length, selectedIndex) {
-    this.readingService.checkSelectOptionStatus3(fullOption, selectedItem, section, length, selectedIndex, this.section3SelectQuestionsLength)
+  checkSelectOptionStatus3(fullOption, selectedItem, section, id, selectedIndex) {
+    this.readingService.checkSelectOptionStatus3(fullOption, selectedItem, section, id, selectedIndex, this.section3SelectQuestionsId)
   }
- 
-  checkSelectOptionStatus4(fullOption, selectedItem, section, length, selectedIndex) {
-    this.readingService.checkSelectOptionStatus4(fullOption, selectedItem, section, length, selectedIndex, this.section4SelectQuestionsLength)
+  checkSelectOptionStatus4(fullOption, selectedItem, section, id, selectedIndex) {
+    this.readingService.checkSelectOptionStatus4(fullOption, selectedItem, section, id, selectedIndex, this.section4SelectQuestionsId)
   }
- 
-  checkOptionStatus(optionValue, section, event) {
-    this.readingService.checkOptionStatus(optionValue, section, event)
 
+  // ******************************************************************************************
+  //TYPE QUESTIONS
+  checkTypeOptionStatus1(fullOption, selectedItem, section, id, selectedIndex) {
+    var selectedOption = selectedItem.target.value.toUpperCase();
+    this.readingService.checkTypeOptionStatus1(fullOption, selectedOption, section, id, selectedIndex, this.section1TypeQuestionsId)
   }
+  checkTypeOptionStatus2(fullOption, selectedItem, section, id, selectedIndex) {
+    var selectedOption = selectedItem.target.value.toUpperCase();
+    this.readingService.checkTypeOptionStatus2(fullOption, selectedOption, section, id, selectedIndex, this.section2TypeQuestionsId)
+  }
+  checkTypeOptionStatus3(fullOption, selectedItem, section, id, selectedIndex) {
+    var selectedOption = selectedItem.target.value.toUpperCase();
+    this.readingService.checkTypeOptionStatus3(fullOption, selectedOption, section, id, selectedIndex, this.section3TypeQuestionsId)
+  }
+  checkTypeOptionStatus4(fullOption, selectedItem, section, id, selectedIndex) {
+    var selectedOption = selectedItem.target.value.toUpperCase();
+    this.readingService.checkTypeOptionStatus4(fullOption, selectedOption, section, id, selectedIndex, this.section4TypeQuestionsId)
+  }
+
 
 
 }

@@ -7,12 +7,13 @@
             <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
 
                 <div class="col-sm-12">
+                    <!-- SECTION 1 -->
                     <div class="section1-content" *ngIf="section1Questions.length && section1paragraphDetails.length">
 
                         <mat-tab class="mat-tab1" label="Section 1">
 
-                        
-                        
+
+
                             <div class="row">
                                 <div class="col-sm-6" id="paragraph-section">
                                     <span *ngFor="let list of section1paragraphDetails">
@@ -46,13 +47,28 @@
                                                 <mat-form-field class="options-list">
                                                     <mat-select>
                                                         <mat-option *ngFor="let items of list.optionsList"
-                                                            (click)="checkSelectOptionStatus1(listOption,items,list.section,list.options.length,i)"
+                                                            (click)="checkSelectOptionStatus1(listOption,items,list.section,list._id,i)"
                                                             [value]="items">{{items}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
                                                 <br>
                                             </span>
                                         </Span>
+
+                                        <!-- TYPE IN THE BLANKS QUESTIONS  -->
+                                        <Span *ngIf="list.questionType=='Type in the blanks'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options;let i=index">
+                                                <span>{{listOption.option}}</span>&nbsp;
+                                                <mat-form-field class="option-input">
+                                                    <input matInput (change)="checkTypeOptionStatus1(listOption,$event,list.section,list._id,i)">
+                                                </mat-form-field>
+                                                <br>
+                                            </span>
+                                        </Span>
+
+
+
                                     </span>
 
 
@@ -64,6 +80,8 @@
 
                         </mat-tab>
                     </div>
+
+                    <!-- SECTION 2 -->
                     <div class="section2-content" *ngIf="section2Questions.length && section2paragraphDetails.length">
                         <mat-tab label="Section 2">
                             <div class="row">
@@ -99,13 +117,29 @@
                                                 <mat-form-field class="options-list">
                                                     <mat-select>
                                                         <mat-option *ngFor="let items of list.optionsList"
-                                                            (click)="checkSelectOptionStatus2(listOption,items,list.section,list.options.length,i)"
+                                                            (click)="checkSelectOptionStatus2(listOption,items,list.section,list._id,i)"
                                                             [value]="items">{{items}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
                                                 <br>
                                             </span>
                                         </Span>
+
+
+
+                                        <!-- TYPE IN THE BLANKS QUESTIONS  -->
+                                        <Span *ngIf="list.questionType=='Type in the blanks'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options;let i=index">
+                                                <span>{{listOption.option}}</span>&nbsp;
+                                                <mat-form-field class="option-input">
+                                                    <!-- <input matInput (change)="changeData($event,i)"> -->
+                                                    <input matInput (change)="checkTypeOptionStatus2(listOption,$event,list.section,list._id,i)">
+                                                </mat-form-field>
+                                                <br>
+                                            </span>
+                                        </Span>
+
                                     </span>
 
 
@@ -116,6 +150,7 @@
                             </div>
                         </mat-tab>
                     </div>
+                    <!-- SECTION 3 -->
                     <div class="section3-content" *ngIf="section3Questions.length && section3paragraphDetails.length">
                         <mat-tab label="Section 3">
                             <div class="row">
@@ -152,13 +187,28 @@
                                                 <mat-form-field class="options-list">
                                                     <mat-select>
                                                         <mat-option *ngFor="let items of list.optionsList"
-                                                            (click)="checkSelectOptionStatus3(listOption,items,list.section,list.options.length,i)"
+                                                            (click)="checkSelectOptionStatus3(listOption,items,list.section,list._id,i)"
                                                             [value]="items">{{items}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
                                                 <br>
                                             </span>
                                         </Span>
+
+
+                                        <!-- TYPE IN THE BLANKS QUESTIONS  -->
+                                        <Span *ngIf="list.questionType=='Type in the blanks'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options;let i=index">
+                                                <span>{{listOption.option}}</span>&nbsp;
+                                                <mat-form-field class="option-input">
+                                                    <!-- <input matInput (change)="changeData($event,i)"> -->
+                                                    <input matInput (change)="checkTypeOptionStatus3(listOption,$event,list.section,list._id,i)">
+                                                </mat-form-field>
+                                                <br>
+                                            </span>
+                                        </Span>
+
                                     </span>
 
 
@@ -168,6 +218,7 @@
                             </div>
                         </mat-tab>
                     </div>
+                    <!-- SECTION 4 -->
                     <div class="section4-content" *ngIf="section4Questions.length && section4paragraphDetails.length">
                         <mat-tab label="Section 4">
 
@@ -205,13 +256,27 @@
                                                 <mat-form-field class="options-list">
                                                     <mat-select>
                                                         <mat-option *ngFor="let items of list.optionsList"
-                                                            (click)="checkSelectOptionStatus4(listOption,items,list.section,list.options.length,i)"
+                                                            (click)="checkSelectOptionStatus4(listOption,items,list.section,list._id,i)"
                                                             [value]="items">{{items}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
                                                 <br>
                                             </span>
                                         </Span>
+
+
+                                        <!-- TYPE IN THE BLANKS QUESTIONS  -->
+                                        <Span *ngIf="list.questionType=='Type in the blanks'">
+                                            <div [innerHTML]="list.questionTitle"></div>
+                                            <span *ngFor="let listOption of list.options;let i=index">
+                                                <span>{{listOption.option}}</span>&nbsp;
+                                                <mat-form-field class="option-input">
+                                                        <input matInput (change)="checkTypeOptionStatus4(listOption,$event,list.section,list._id,i)">
+                                                </mat-form-field>
+                                                <br>
+                                            </span>
+                                        </Span>
+
                                     </span>
 
 
