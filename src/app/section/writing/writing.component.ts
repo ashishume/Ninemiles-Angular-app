@@ -22,7 +22,7 @@ export class WritingComponent implements OnInit {
       testStatusUpdate:"writing"
     }
     this.apiService.updateTestData(body).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
 
     })
   }

@@ -193,7 +193,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
         sectionCategory: sectionCategory,
 
       }
-      this.apiService.updateTestData(body).subscribe((data: any) => {
+      this.apiService.updateQuestion(body).subscribe((data: any) => {
         if (data.status == 200) {
           this.snack.openFromComponent(SnackBarComponent, {
             duration: 3 * 1000,

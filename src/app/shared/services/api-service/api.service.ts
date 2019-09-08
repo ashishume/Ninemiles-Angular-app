@@ -15,12 +15,21 @@ export class ApiService {
     return this.httpService.callApi('POST', body, 'user/signup', '');
   }
 
+  // ******************************************
+
   getListOfQuestions() {
     return this.httpService.callApi('GET', '', 'questions/listQuestions', '');
   }
   insertQuestion(body) {
     return this.httpService.callApi('POST', body, 'questions/addQuestion', '');
   }
+  updateQuestion(body) {
+    return this.httpService.callApi('PUT', body, 'questions/updateQuestion', '');
+  }
+
+  // ******************************************
+
+  // ******************************************
   insertParagraph(body) {
     return this.httpService.callApi('POST', body, 'contents/addParagraph', '');
   }
@@ -36,6 +45,9 @@ export class ApiService {
   deleteParagraph(param) {
     return this.httpService.callApi('DELETEBYPARAMS', '', 'contents/deleteParagraph', param);
   }
+
+  // ******************************************
+
   getProfileDetails(query) {
     return this.httpService.callApi('GETBYPARAMS', '', 'user', query);
   }
@@ -78,9 +90,7 @@ export class ApiService {
   }
   getQuestionTypes() {
     let listOfQuestionTypes = [
-      // { questionType: "MCQ", questionTypeNumber: 1 },
-      { questionType: "Type in the blanks", questionTypeNumber: 2 },
-      { questionType: "Select in the blanks", questionTypeNumber: 3 },
+      "Type in the blanks", "Select in the blanks"
     ]
     return listOfQuestionTypes;
   }

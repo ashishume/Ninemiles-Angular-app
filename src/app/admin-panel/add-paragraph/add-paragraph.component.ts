@@ -86,18 +86,36 @@ export class AddParagraphComponent implements OnInit {
         });
       })
     } else {
-
       var updateFormValue = AddParagraph.value;
+      var section;
+      var testNumber;
+      var paragraphUserType;
+
+      if (!updateFormValue.section) {
+        section = this.editObject.section;
+      } else {
+        section = updateFormValue.section;
+      }
+      if (!updateFormValue.testNumber) {
+        testNumber = this.editObject.testNumber;
+      } else {
+        testNumber = updateFormValue.testNumber;
+      }
+      if (!updateFormValue.paragraphUserType) {
+        paragraphUserType = this.editObject.paragraphUserType;
+      } else {
+        paragraphUserType = updateFormValue.paragraphUserType;
+      }
+
       const updateBody = {
         _id: this.editObject._id,
         author: localStorage.getItem('email'),
         paragraphTitle: updateFormValue.paragraphTitle,
         paragraphHeading: updateFormValue.paragraphHeading,
-        paragraphUserType: updateFormValue.paragraphUserType,
-        section: updateFormValue.section,
-        testNumber: updateFormValue.testDetails.testNumber
+        paragraphUserType: paragraphUserType,
+        section: section,
+        testNumber: testNumber
       }
-
       this.apiService.updateParagraph(updateBody).subscribe((data: any) => {
         if (data.status == 200) {
           this.snack.openFromComponent(SnackBarComponent, {

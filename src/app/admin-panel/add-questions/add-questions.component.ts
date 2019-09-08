@@ -51,10 +51,8 @@ export class AddQuestionsComponent implements OnInit {
     if (this.editObject) {
       this.questionTitle = this.editObject.questionTitle;
     }
-    // this.listOfTests = this.apiService.getCountOfTests();
     this.section = this.apiService.getCountOfSection();
     this.questionUserType = this.apiService.getStudentTypes();
-    this.listOfQuestionTypes = this.apiService.getQuestionTypes();
     this.sectionCategory = this.apiService.getSectionCategory()
 
 
@@ -76,9 +74,12 @@ export class AddQuestionsComponent implements OnInit {
 
   addButtonClick(): void {
     (<FormArray>this.AddQuestion.get('options')).push(this.addOtherSkillFormGroup());
+
   }
   removeButtonClick(): void {
-    (<FormArray>this.AddQuestion.get('options')).removeAt(0);
+    var length = (<FormArray>this.AddQuestion.get('options')).length;
+
+    (<FormArray>this.AddQuestion.get('options')).removeAt(length - 1);
   }
 
 
@@ -121,7 +122,7 @@ export class AddQuestionsComponent implements OnInit {
         }
       }
       AddQuestion.value.author = localStorage.getItem('email')
-      AddQuestion.value.questionType = 1;
+      AddQuestion.value.questionType = "MCQ";
 
       this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
         if (data.status == 200) {
@@ -176,7 +177,7 @@ export class AddQuestionsComponent implements OnInit {
         _id: this.editObject._id,
         questionTitle: Question.questionTitle,
         options: options,
-        questionType: 1,
+        questionType: "MCQ",
         author: localStorage.getItem('email'),
         section: parseInt(section),
         questionUserType: questionUserType,
@@ -184,7 +185,8 @@ export class AddQuestionsComponent implements OnInit {
         sectionCategory: sectionCategory,
 
       }
-      this.apiService.updateTestData(body).subscribe((data: any) => {
+
+      this.apiService.updateQuestion(body).subscribe((data: any) => {
         if (data.status == 200) {
           this.snack.openFromComponent(SnackBarComponent, {
             duration: 3 * 1000,

@@ -22,7 +22,7 @@ countOfTests;
       testStatusUpdate:"speaking"
     }
     this.apiService.updateTestData(body).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
 
     })
   }

@@ -37,16 +37,14 @@ export class ReadingComponent implements OnInit {
     this.ReadingSection = this.fb.group(
       {
         mcqAnswers: new FormControl('', []),
-        // selectAnswers:this.ReadingSection.FormArray()
-
       },
     );
   }
 
 
   changeData(event, i) {
-    console.log(event.target.value);
-    console.log(i);
+    // console.log(event.target.value);
+    // console.log(i);
 
   }
 
@@ -176,7 +174,7 @@ export class ReadingComponent implements OnInit {
 
 
   onSubmitOfReadingSection(value) {
-    console.log(value.value);
+    // console.log(value.value);
 
   }
 
@@ -216,7 +214,6 @@ export class ReadingComponent implements OnInit {
 
 
   editParagraph(list) {
-
     this.apiService.passDataValues(list);
     this.route.navigate(['admin-panel/add-paragraph'])
   }

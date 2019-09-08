@@ -3,7 +3,14 @@
         <div class="col-sm-12">
 
             <br>
-            <h3>Add paragraph</h3>
+            <h3>
+                <span *ngIf="!editObject">
+                    Add
+                </span>
+                <span *ngIf="editObject">
+                    Edit
+                </span>
+                paragraph</h3>
             <form class="form" [formGroup]="AddParagraph" autocomplete="off" novalidate #AddParagraphForm="ngForm"
                 (ngSubmit)="onSubmitParagraph(AddParagraph)">
                 <mat-form-field id="mat-form-field">
@@ -58,8 +65,8 @@
                     <button [disabled]="!AddParagraph.valid" type="submit" mat-raised-button>Submit paragraph</button>
                 </span>
                 <span *ngIf="editObject">
-                    <button [disabled]="!AddParagraph.valid" type="submit" mat-raised-button>Update paragraph</button>
-                  
+                    <button type="submit" mat-raised-button>Update paragraph</button>
+
                     <span class="delete-icon" (click)="deleteParagraph()" mat-raised-button>
                         <i class="material-icons">
                             delete
