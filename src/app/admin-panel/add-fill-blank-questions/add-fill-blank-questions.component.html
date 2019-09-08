@@ -21,7 +21,7 @@
         <mat-form-field>
           <mat-label>Select Question Type</mat-label>
           <mat-select formControlName="questionType" required name="questionType" ngModel>
-            <mat-option *ngFor="let list of listOfQuestionTypes" [value]="list">{{list.questionType}}
+            <mat-option *ngFor="let list of listOfQuestionTypes" [value]="list">{{list}}
             </mat-option>
           </mat-select>
           <mat-error *ngIf="!AddQuestion.get('questionType').valid && AddQuestion.get('questionType').touched">

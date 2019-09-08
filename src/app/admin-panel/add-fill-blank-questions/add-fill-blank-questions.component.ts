@@ -33,7 +33,6 @@ export class AddFillBlankQuestionsComponent implements OnInit {
 
     if (this.apiService.returnDataValues()) {
       this.editObject = this.apiService.returnDataValues()
-      console.log(this.editObject);
       this.questionTitle = this.editObject.questionTitle;
 
     }
@@ -120,12 +119,14 @@ export class AddFillBlankQuestionsComponent implements OnInit {
       }
       AddQuestion.value.optionsList = this.optionsListArray;
       AddQuestion.value.author = localStorage.getItem('email')
-      this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
-        this.snack.openFromComponent(SnackBarComponent, {
-          duration: 3 * 1000,
-          data: "Question Added Successfully"
-        });
-      })
+      console.log(AddQuestion.value);
+      
+      // this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
+      //   this.snack.openFromComponent(SnackBarComponent, {
+      //     duration: 3 * 1000,
+      //     data: "Question Added Successfully"
+      //   });
+      // })
     } else {
 
       var Question = AddQuestion.value;

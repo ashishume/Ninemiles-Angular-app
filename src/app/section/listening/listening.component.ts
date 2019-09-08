@@ -11,8 +11,6 @@ export class ListeningComponent implements OnInit {
   constructor(private apiService: ApiService) { }
   countOfTests;
   ngOnInit() {
-
-    console.log(localStorage.getItem('testNumber'))
   }
   onSubmitListening() {
     const body = {
@@ -21,7 +19,7 @@ export class ListeningComponent implements OnInit {
       testStatusUpdate:"listening"
     }
     this.apiService.updateTestData(body).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
 
     })
   }

@@ -44,8 +44,6 @@ export class AddQuestionsComponent implements OnInit {
     if (this.apiService.returnDataValues()) {
 
       this.editObject = this.apiService.returnDataValues();
-      console.log(this.editObject);
-
     }
 
     if (this.editObject) {
