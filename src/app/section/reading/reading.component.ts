@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 import { ReadingService } from '../shared/reading-shared/reading.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reading',
@@ -29,7 +30,8 @@ export class ReadingComponent implements OnInit {
   constructor(private apiService: ApiService,
     private fb: FormBuilder,
     private readingService: ReadingService,
-    private nav: NavbarService
+    private nav: NavbarService,
+    private route: Router
   ) {
     this.nav.hide()
     this.ReadingSection = this.fb.group(
@@ -211,6 +213,25 @@ export class ReadingComponent implements OnInit {
     var selectedOption = selectedItem.target.value.toUpperCase();
     this.readingService.checkTypeOptionStatus4(fullOption, selectedOption, section, id, selectedIndex, this.section4TypeQuestionsId)
   }
+
+
+  editParagraph(list) {
+
+    this.apiService.passDataValues(list);
+    this.route.navigate(['admin-panel/add-paragraph'])
+  }
+
+  editQuestion(list) {
+    if (list.questionType == "MCQ") {
+      this.apiService.passDataValues(list);
+      this.route.navigate(['admin-panel/add-questions'])
+    } else {
+      this.apiService.passDataValues(list);
+      this.route.navigate(['admin-panel/add-fill-blank-questions'])
+    }
+  }
+
+
 
 
 

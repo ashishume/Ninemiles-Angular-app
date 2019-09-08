@@ -78,6 +78,8 @@ export class AuthService {
               localStorage.setItem('email', result.user.email)
               localStorage.setItem('photoURL', result.user.photoURL)
               localStorage.setItem('userType', "Academic Students")
+              // localStorage.setItem('userType', "General Students")
+              // localStorage.setItem('userType', "Admin")
               this.checkEmailStatus = localStorage.getItem('email');              
               if (data.body.registrationStatus == 0) {
                 this.insertTestData(result.user.email);

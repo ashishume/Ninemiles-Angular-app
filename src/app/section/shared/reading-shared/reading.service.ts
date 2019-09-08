@@ -205,6 +205,10 @@ export class ReadingService {
         this.typeQuestionsSection1Array3[i] = "Empty"
     }
 
+    console.log(this.typeQuestionsSection1Array1);
+    console.log(this.typeQuestionsSection1Array2);
+    console.log(this.typeQuestionsSection1Array3);
+    
 
   }
 

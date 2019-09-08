@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { MatSnackBar } from '@angular/material';
 import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-paragraph',
@@ -13,17 +14,26 @@ export class AddParagraphComponent implements OnInit {
 
 
 
-
-
-  listOfTests;
+  paragraphTitle;
+  paragraphHeading;
   section = [];
-  paragraphUserType = []
+  testDetails;
+  paragraphUserType = [];
+  listOfTests;
+  editObject;
   public AddParagraph: FormGroup;
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private route: Router
   ) {
+    if (this.apiService.returnDataValues()) {
+      this.editObject = this.apiService.returnDataValues();
+      this.paragraphHeading = this.editObject.paragraphHeading;
+      this.paragraphTitle = this.editObject.paragraphTitle;
+    }
+
     this.section = this.apiService.getCountOfSection()
     this.paragraphUserType = this.apiService.getStudentTypes()
 
@@ -57,23 +67,57 @@ export class AddParagraphComponent implements OnInit {
     })
   }
   onSubmitParagraph(AddParagraph) {
+    if (!this.editObject) {
 
-    var formValue = AddParagraph.value;
+      var formValue = AddParagraph.value;
+      const body = {
+        author: localStorage.getItem('email'),
+        paragraphTitle: formValue.paragraphTitle,
+        paragraphHeading: formValue.paragraphHeading,
+        paragraphUserType: formValue.paragraphUserType,
+        section: formValue.section,
+        testNumber: formValue.testDetails.testNumber
+      }
 
-    const body = {
-      author: "ashishume@gmail.com",
-      paragraphTitle: formValue.paragraphTitle,
-      paragraphHeading: formValue.paragraphHeading,
-      paragraphUserType: formValue.paragraphUserType,
-      section: formValue.section,
-      testNumber: formValue.testDetails.testNumber
+      this.apiService.insertParagraph(body).subscribe((data: any) => {
+        this.snack.openFromComponent(SnackBarComponent, {
+          duration: 3 * 1000,
+          data: "Paragraph Added Successfully"
+        });
+      })
+    } else {
+
+      var updateFormValue = AddParagraph.value;
+      const updateBody = {
+        _id: this.editObject._id,
+        author: localStorage.getItem('email'),
+        paragraphTitle: updateFormValue.paragraphTitle,
+        paragraphHeading: updateFormValue.paragraphHeading,
+        paragraphUserType: updateFormValue.paragraphUserType,
+        section: updateFormValue.section,
+        testNumber: updateFormValue.testDetails.testNumber
+      }
+
+      this.apiService.updateParagraph(updateBody).subscribe((data: any) => {
+        if (data.status == 200) {
+          this.snack.openFromComponent(SnackBarComponent, {
+            duration: 3 * 1000,
+            data: "Paragraph Updated Successfully"
+          });
+        }
+      })
     }
+  }
 
-    this.apiService.insertParagraph(body).subscribe((data: any) => {
-      this.snack.openFromComponent(SnackBarComponent, {
-        duration: 3 * 1000,
-        data: "Question Added Successfully"
-      });
+  deleteParagraph() {
+    const params = {
+      _id: this.editObject._id
+    }
+    this.apiService.deleteParagraph(params).subscribe((data: any) => {
+      if (data.status == 200) {
+        this.route.navigate(['dashboard'])
+      }
+
     })
   }
 }

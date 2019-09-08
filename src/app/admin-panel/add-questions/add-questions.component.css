@@ -2,3 +2,8 @@
     background-color: white;
     color: black;
 }
+
+.delete-icon{
+    float: right;
+    cursor: pointer;
+}

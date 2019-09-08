@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@ang
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { MatSnackBar } from '@angular/material';
 import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-fill-blank-questions',
@@ -21,14 +22,22 @@ export class AddFillBlankQuestionsComponent implements OnInit {
   listOfTests;
   optionsListArray = []
   listOfOptions;
-  index = 1;
+  questionTitle;
+  editObject;
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private route: Router
   ) {
 
-    // this.listOfTests = this.apiService.getCountOfTests();
+    if (this.apiService.returnDataValues()) {
+      this.editObject = this.apiService.returnDataValues()
+      console.log(this.editObject);
+      this.questionTitle = this.editObject.questionTitle;
+
+    }
+
     this.section = this.apiService.getCountOfSection();
     this.questionUserType = this.apiService.getStudentTypes();
     this.listOfQuestionTypes = this.apiService.getQuestionTypes();
@@ -72,7 +81,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
 
 
   addOptionList(option) {
-    this.optionsListArray.push(option.toUpperCase())    
+    this.optionsListArray.push(option.toUpperCase())
   }
   removeOptionList() {
     this.optionsListArray.pop()
@@ -99,25 +108,118 @@ export class AddFillBlankQuestionsComponent implements OnInit {
   }
   onSubmitQuestion(AddQuestion) {
 
-    let tempArray: any = []
-    tempArray = AddQuestion.value.options;
-    if (AddQuestion.value.options) {
-      for (var i = 0; i < tempArray.length; i++) {
-        if (tempArray[i].optionStatus == false) {
-          tempArray[i].optionStatus = false;
+    if (!this.editObject) {
+      let tempArray: any = []
+      tempArray = AddQuestion.value.options;
+      if (AddQuestion.value.options) {
+        for (var i = 0; i < tempArray.length; i++) {
+          if (tempArray[i].optionStatus == false) {
+            tempArray[i].optionStatus = false;
+          }
         }
       }
-    }
-    AddQuestion.value.optionsList=this.optionsListArray;
-        AddQuestion.value.author = localStorage.getItem('email')
-        this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
-          this.snack.openFromComponent(SnackBarComponent, {
-            duration: 3 * 1000,
-            data: "Question Added Successfully"
-          });
-        })
+      AddQuestion.value.optionsList = this.optionsListArray;
+      AddQuestion.value.author = localStorage.getItem('email')
+      this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
+        this.snack.openFromComponent(SnackBarComponent, {
+          duration: 3 * 1000,
+          data: "Question Added Successfully"
+        });
+      })
+    } else {
+
+      var Question = AddQuestion.value;
+
+      var section;
+      var questionType;
+      var testNumber;
+      let options = [];
+      var questionUserType;
+      var sectionCategory;
+      let optionsList = []
+      if (!Question.section) {
+        section = this.editObject.section;
+      } else {
+        section = Question.section;
+      }
+      if (Question.options.length <= 1) {
+        options = this.editObject.options;
+      } else {
+
+        for (var i = 0; i < Question.options.length; i++) {
+          if (Question.options[i].optionStatus == false) {
+            Question.options[i].optionStatus = false;
+          }
+        }
+        options = Question.options;
       }
 
+      if (this.optionsListArray.length < 1) {
+        optionsList = this.editObject.optionsList;
+      } else {
+        optionsList = this.optionsListArray;
+      }
+      if (!Question.questionType) {
+        questionType = this.editObject.questionType;
+      } else {
+        questionType = Question.questionType;
+      }
+      if (!Question.questionUserType) {
+        questionUserType = this.editObject.questionUserType;
+      } else {
+        questionUserType = Question.questionUserType;
+      }
+      if (!Question.testNumber) {
+        testNumber = this.editObject.testNumber;
+      } else {
+        testNumber = Question.testNumber;
+      }
+      if (!Question.sectionCategory) {
+        sectionCategory = this.editObject.sectionCategory;
+      } else {
+        sectionCategory = Question.sectionCategory;
+      }
+
+      var body = {
+        _id: this.editObject._id,
+        questionTitle: Question.questionTitle,
+        options: options,
+        optionsList: optionsList,
+        questionType: questionType,
+        author: localStorage.getItem('email'),
+        section: parseInt(section),
+        questionUserType: questionUserType,
+        testNumber: parseInt(testNumber),
+        sectionCategory: sectionCategory,
+
+      }
+      this.apiService.updateTestData(body).subscribe((data: any) => {
+        if (data.status == 200) {
+          this.snack.openFromComponent(SnackBarComponent, {
+            duration: 3 * 1000,
+            data: "Question Updated Successfully"
+          });
+        }
+      })
     }
 
-  
+  }
+
+  deleteQuestion() {
+    const params = {
+      _id: this.editObject._id
+    }
+    this.apiService.deleteQuestion(params).subscribe((data: any) => {
+      if (data.status == 200) {
+        this.route.navigate(['dashboard'])
+      }
+    })
+  }
+
+
+
+
+
+}
+
+

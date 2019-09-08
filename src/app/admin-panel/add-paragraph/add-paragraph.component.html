@@ -8,7 +8,8 @@
                 (ngSubmit)="onSubmitParagraph(AddParagraph)">
                 <mat-form-field id="mat-form-field">
                     <mat-label>Add Heading</mat-label>
-                    <input matInput name="paragraphHeading" formControlName="paragraphHeading" ngModel>
+                    <input matInput name="paragraphHeading" formControlName="paragraphHeading"
+                        [(ngModel)]="paragraphHeading">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Select Section</mat-label>
@@ -30,7 +31,8 @@
                             </span>
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="!AddParagraph.get('testDetails').valid && AddParagraph.get('testDetails').touched">
+                    <mat-error
+                        *ngIf="!AddParagraph.get('testDetails').valid && AddParagraph.get('testDetails').touched">
                         *required</mat-error>
                 </mat-form-field>
                 &nbsp;
@@ -44,18 +46,34 @@
                         *required</mat-error>
                 </mat-form-field>
                 <br>
-                <quill-editor formControlName="paragraphTitle" required name="paragraphTitle" ngModel>
+                <quill-editor formControlName="paragraphTitle" required name="paragraphTitle"
+                    [(ngModel)]="paragraphTitle">
                 </quill-editor>
                 <mat-error
                     *ngIf="!AddParagraph.get('paragraphTitle').valid && AddParagraph.get('paragraphTitle').touched">
                     *paragraph is required
                 </mat-error>
                 <br>
-                <button [disabled]="!AddParagraph.valid" type="submit" mat-raised-button>Submit paragraph</button>
+                <span *ngIf="!editObject">
+                    <button [disabled]="!AddParagraph.valid" type="submit" mat-raised-button>Submit paragraph</button>
+                </span>
+                <span *ngIf="editObject">
+                    <button [disabled]="!AddParagraph.valid" type="submit" mat-raised-button>Update paragraph</button>
+                  
+                    <span class="delete-icon" (click)="deleteParagraph()" mat-raised-button>
+                        <i class="material-icons">
+                            delete
+                        </i>
+                    </span>
+                </span>
             </form>
-
-
         </div>
-
     </div>
+
+
 </div>
+
+<br>
+<br>
+<br>
+<br>

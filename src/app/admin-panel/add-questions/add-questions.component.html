@@ -2,10 +2,17 @@
     <div class="row">
         <div class="col-sm-12">
             <br>
-            <h3>Add MCQ Type Question</h3>
+            <h3>
+                <span *ngIf="editObject">
+                    Edit
+                </span>
+                <span *ngIf="!editObject">
+                    Add
+                </span>
+                MCQ Type Question</h3>
             <form class="form" [formGroup]="AddQuestion" autocomplete="off" novalidate #AddQuestionForm="ngForm"
                 (ngSubmit)="onSubmitQuestion(AddQuestion)">
-                <quill-editor formControlName="questionTitle" required name="questionTitle" ngModel>
+                <quill-editor formControlName="questionTitle" required name="questionTitle" [(ngModel)]="questionTitle">
                 </quill-editor>
                 <mat-error *ngIf="!AddQuestion.get('questionTitle').valid && AddQuestion.get('questionTitle').touched">
                     *Question is required
@@ -18,26 +25,17 @@
                             <textarea matInput name="option" formControlName="option" ngModel
                                 placeholder="Enter Option"></textarea>
                         </mat-form-field>&nbsp;
-                        <mat-checkbox formControlName="optionStatus" name="optionStatus" ngModel></mat-checkbox>
+                        <mat-checkbox formControlName="optionStatus" name="optionStatus" ngModel>
+                        </mat-checkbox>
                     </span>
-                    <mat-error *ngIf="!AddQuestion.get('options').valid && AddQuestion.get('options').touched">
-                        *required</mat-error>
+                    <!-- <mat-error *ngIf="!AddQuestion.get('options').valid && AddQuestion.get('options').touched">
+                        *required</mat-error> -->
                 </span>
                 <br>
                 <span class="btn btn-outline-primary btn-sm" (click)="addButtonClick()">Add</span>&nbsp;
                 <span class="btn btn-outline-danger btn-sm" (click)="removeButtonClick()">Remove</span>
                 <br>
                 <br>
-                <mat-form-field>
-                    <mat-label>Select Question Type</mat-label>
-                    <mat-select formControlName="questionType" required name="questionType" ngModel>
-                        <mat-option *ngFor="let list of listOfQuestionTypes" [value]="list.questionTypeNumber">{{list.questionType}}</mat-option>
-                    </mat-select>
-                    <mat-error
-                        *ngIf="!AddQuestion.get('questionType').valid && AddQuestion.get('questionType').touched">
-                        *required</mat-error>
-                </mat-form-field>
-                &nbsp;
 
                 <mat-form-field>
                     <mat-label>Select Section</mat-label>
@@ -53,7 +51,8 @@
                     <mat-select formControlName="sectionCategory" name="sectionCategory" ngModel>
                         <mat-option *ngFor="let list of sectionCategory" [value]="list">{{list}}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="!AddQuestion.get('sectionCategory').valid && AddQuestion.get('sectionCategory').touched">
+                    <mat-error
+                        *ngIf="!AddQuestion.get('sectionCategory').valid && AddQuestion.get('sectionCategory').touched">
                         *required</mat-error>
                 </mat-form-field>
                 &nbsp;
@@ -84,11 +83,59 @@
                 </mat-form-field>
 
                 <br>
-                <button [disabled]="!AddQuestion.valid" type="submit" mat-raised-button>Submit Question</button>
+                <span *ngIf="!editObject">
+                    <button [disabled]="!AddQuestion.valid" type="submit" mat-raised-button>Submit Question</button>
+                </span>
+                <span *ngIf="editObject">
+                    <button type="submit" mat-raised-button>Update Question</button>
+                    <span class="delete-icon" (click)="deleteQuestion(list)">
+
+                        <i class="material-icons">
+                            delete
+                        </i>
+                    </span>
+                </span>
             </form>
 
 
         </div>
 
+        <div class="col-sm-12">
+            <br>
+            <mat-divider></mat-divider>
+            <br>
+            <div *ngIf="editObject">
+                <p>Note: Choose only those fields which you want to edit</p>
+                <div class="table-responsive">
+                    <div class="table">
+                        <tr class="table-primary">
+                            <td>questionType</td>
+                            <td>Options</td>
+                            <td>questionUserType</td>
+                            <td>section</td>
+                            <td>sectionCategory</td>
+                            <td>testNumber</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span *ngFor="let list of editObject.options">
+                                    Option:- <b>{{list.option}}</b> |
+                                    Correct Answer:- <b>{{list.optionStatus}}</b>
+                                    <br>
+                                </span>
+                            </td>
+                            <td>{{editObject.questionType}}</td>
+                            <td>{{editObject.questionUserType}}</td>
+                            <td>{{editObject.section}}</td>
+                            <td>{{editObject.sectionCategory}}</td>
+                            <td>{{editObject.testNumber}}</td>
+                        </tr>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
     </div>
 </div>

@@ -24,8 +24,17 @@ export class ApiService {
   insertParagraph(body) {
     return this.httpService.callApi('POST', body, 'contents/addParagraph', '');
   }
+  deleteQuestion(params) {
+    return this.httpService.callApi('DELETEBYPARAMS', '', 'questions/deleteQuestion', params);
+  }
   getListOfParagraph() {
     return this.httpService.callApi('GET', '', 'contents/listParagraph', '');
+  }
+  updateParagraph(body) {
+    return this.httpService.callApi('PUT', body, 'contents/updateParagraph', '');
+  }
+  deleteParagraph(param) {
+    return this.httpService.callApi('DELETEBYPARAMS', '', 'contents/deleteParagraph', param);
   }
   getProfileDetails(query) {
     return this.httpService.callApi('GETBYPARAMS', '', 'user', query);
@@ -37,6 +46,7 @@ export class ApiService {
   updateTestData(body) {
     return this.httpService.callApi('PUT', body, 'tests/updateTests', '');
   }
+
   showTestData(query) {
     return this.httpService.callApi('GETBYPARAMS', '', 'tests/listTests', query);
   }
@@ -51,7 +61,9 @@ export class ApiService {
   getStudentTypes() {
     let paragraphUserType = [
       "Academic Students",
-      "General Students"
+      "General Students",
+      "Teacher",
+      "Admin"
     ]
     return paragraphUserType;
   }
@@ -66,9 +78,7 @@ export class ApiService {
   }
   getQuestionTypes() {
     let listOfQuestionTypes = [
-      { questionType: "MCQ", questionTypeNumber: 1 },
-      // { questionType: "Matching Questions", questionTypeNumber: 2 },
-      // { questionType: "Short Questions", questionTypeNumber: 3 },
+      // { questionType: "MCQ", questionTypeNumber: 1 },
       { questionType: "Type in the blanks", questionTypeNumber: 2 },
       { questionType: "Select in the blanks", questionTypeNumber: 3 },
     ]
@@ -79,6 +89,14 @@ export class ApiService {
       1, 2, 3, 4
     ]
     return section;
+  }
+
+  dataItemObject;
+  passDataValues(data) {
+    this.dataItemObject = data;
+  }
+  returnDataValues() {
+    return this.dataItemObject;
   }
 
 }

@@ -17,8 +17,17 @@
                             <div class="row">
                                 <div class="col-sm-6" id="paragraph-section">
                                     <span *ngFor="let list of section1paragraphDetails">
+                                        <span style="float: right" class="edit-question-icon"
+                                            (click)="editParagraph(list)">
+                                            <i class="material-icons">
+                                                edit
+                                            </i>
+                                        </span>
                                         <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
-                                        <p [innerHTML]="list.paragraphTitle"></p>
+                                        <p [innerHTML]="list.paragraphTitle">
+
+                                        </p>
+
                                     </span>
                                 </div>
                                 <div class="col-sm-6" id="question-section">
@@ -28,6 +37,7 @@
 
                                         <!-- MCQ QUESTIONS  -->
                                         <span *ngIf="list.questionType=='MCQ'">
+
                                             <div [innerHTML]="list.questionTitle"></div>
                                             <span *ngFor="let listOption of list.options">
                                                 <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
@@ -61,12 +71,19 @@
                                             <span *ngFor="let listOption of list.options;let i=index">
                                                 <span>{{listOption.option}}</span>&nbsp;
                                                 <mat-form-field class="option-input">
-                                                    <input matInput (change)="checkTypeOptionStatus1(listOption,$event,list.section,list._id,i)">
+                                                    <input matInput
+                                                        (change)="checkTypeOptionStatus1(listOption,$event,list.section,list._id,i)">
                                                 </mat-form-field>
                                                 <br>
                                             </span>
                                         </Span>
 
+                                        <span style="float: left" class="edit-question-icon"
+                                            (click)="editQuestion(list)">
+                                            <i class="material-icons">
+                                                edit
+                                            </i>
+                                        </span>
 
 
                                     </span>
@@ -87,6 +104,12 @@
                             <div class="row">
                                 <div class="col-sm-6" id="paragraph-section">
                                     <span *ngFor="let list of section2paragraphDetails">
+                                        <span style="float: right" class="edit-question-icon"
+                                            (click)="editParagraph(list)">
+                                            <i class="material-icons">
+                                                edit
+                                            </i>
+                                        </span>
                                         <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
                                         <p [innerHTML]="list.paragraphTitle"></p>
                                     </span>
@@ -134,11 +157,19 @@
                                                 <span>{{listOption.option}}</span>&nbsp;
                                                 <mat-form-field class="option-input">
                                                     <!-- <input matInput (change)="changeData($event,i)"> -->
-                                                    <input matInput (change)="checkTypeOptionStatus2(listOption,$event,list.section,list._id,i)">
+                                                    <input matInput
+                                                        (change)="checkTypeOptionStatus2(listOption,$event,list.section,list._id,i)">
                                                 </mat-form-field>
                                                 <br>
                                             </span>
                                         </Span>
+
+                                        <span style="float: left" class="edit-question-icon"
+                                            (click)="editQuestion(list)">
+                                            <i class="material-icons">
+                                                edit
+                                            </i>
+                                        </span>
 
                                     </span>
 
@@ -156,6 +187,15 @@
                             <div class="row">
                                 <div class="col-sm-6" id="paragraph-section">
                                     <span *ngFor="let list of section3paragraphDetails">
+
+
+                                        <span style="float: right" class="edit-question-icon"
+                                            (click)="editParagraph(list)">
+                                            <i class="material-icons">
+                                                edit
+                                            </i>
+                                        </span>
+
                                         <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
                                         <p [innerHTML]="list.paragraphTitle"></p>
                                     </span>
@@ -203,12 +243,20 @@
                                                 <span>{{listOption.option}}</span>&nbsp;
                                                 <mat-form-field class="option-input">
                                                     <!-- <input matInput (change)="changeData($event,i)"> -->
-                                                    <input matInput (change)="checkTypeOptionStatus3(listOption,$event,list.section,list._id,i)">
+                                                    <input matInput
+                                                        (change)="checkTypeOptionStatus3(listOption,$event,list.section,list._id,i)">
                                                 </mat-form-field>
                                                 <br>
                                             </span>
                                         </Span>
 
+
+                                        <span style="float: left" class="edit-question-icon"
+                                            (click)="editQuestion(list)">
+                                            <i class="material-icons">
+                                                edit
+                                            </i>
+                                        </span>
                                     </span>
 
 
@@ -225,6 +273,14 @@
                             <div class="row">
                                 <div class="col-sm-6" id="paragraph-section">
                                     <span *ngFor="let list of section4paragraphDetails">
+
+                                        <span style="float: right" class="edit-question-icon"
+                                            (click)="editParagraph(list)">
+                                            <i class="material-icons">
+                                                edit
+                                            </i>
+                                        </span>
+
                                         <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
                                         <p [innerHTML]="list.paragraphTitle"></p>
                                     </span>
@@ -271,12 +327,20 @@
                                             <span *ngFor="let listOption of list.options;let i=index">
                                                 <span>{{listOption.option}}</span>&nbsp;
                                                 <mat-form-field class="option-input">
-                                                        <input matInput (change)="checkTypeOptionStatus4(listOption,$event,list.section,list._id,i)">
+                                                    <input matInput
+                                                        (change)="checkTypeOptionStatus4(listOption,$event,list.section,list._id,i)">
                                                 </mat-form-field>
                                                 <br>
                                             </span>
                                         </Span>
 
+
+                                        <span style="float: left" class="edit-question-icon"
+                                            (click)="editQuestion(list)">
+                                            <i class="material-icons">
+                                                edit
+                                            </i>
+                                        </span>
                                     </span>
 
 

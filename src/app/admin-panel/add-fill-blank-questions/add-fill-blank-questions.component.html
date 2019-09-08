@@ -2,10 +2,17 @@
   <div class="row">
     <div class="col-sm-12">
       <br>
-      <h3>Add Select/Input-Blanks Question</h3>
+      <h3>
+        <span *ngIf="!editObject">
+          Add
+        </span>
+        <span *ngIf="editObject">
+          Edit
+        </span>
+        Select/Input-Blanks Question</h3>
       <form class="form" [formGroup]="AddQuestion" autocomplete="off" novalidate #AddQuestionForm="ngForm"
         (ngSubmit)="onSubmitQuestion(AddQuestion)">
-        <quill-editor formControlName="questionTitle" required name="questionTitle" ngModel>
+        <quill-editor formControlName="questionTitle" required name="questionTitle" [(ngModel)]="questionTitle">
         </quill-editor>
         <mat-error *ngIf="!AddQuestion.get('questionTitle').valid && AddQuestion.get('questionTitle').touched">
           *Question is required
@@ -113,24 +120,66 @@
 
         <br>
         <br>
-        <button [disabled]="!AddQuestion.valid" type="submit" mat-raised-button>Submit Question</button>
+        <span *ngIf="!editObject">
+          <button [disabled]="!AddQuestion.valid" type="submit" mat-raised-button>Submit Question</button>
+        </span>
+        <span *ngIf="editObject">
+
+          <button type="submit" mat-raised-button>Update Question</button>
+          <span class="delete-icon" (click)="deleteQuestion(list)">
+
+            <i class="material-icons">
+              delete
+            </i>
+          </span>
+        </span>
       </form>
 
 
     </div>
-    <!-- <div class="col-sm-2">
-      <mat-form-field>
-        <input matInput ngModel placeholder="Enter Option">
-      </mat-form-field>
-      <span class="btn btn-outline-primary btn-sm" (click)="addOptionList(listOfOptions)"><i class="material-icons">
-          exposure_plus_1
-        </i></span>&nbsp;
-      <span class="btn btn-outline-danger btn-sm" (click)="removeOptionList()"><i class="material-icons">
-          exposure_neg_1
-          </i></span>
-      <span *ngFor="let item of optionsListArray;let i=index">
-        {{i+1}}) {{item}}
-      </span>
-    </div> -->
+
+
+
+    <div class="col-sm-12">
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+      <div *ngIf="editObject">
+        <p>Note: Choose only those fields which you want to edit</p>
+        <div class="table-responsive">
+          <div class="table">
+            <tr class="table-primary">
+              <td>Options</td>
+              <td>Q Type</td>
+              <td>Q UserType</td>
+              <td>Section</td>
+              <td>Section Category</td>
+              <td>Test Number</td>
+              <td>Options List</td>
+            </tr>
+            <tr>
+              <td>
+                <span *ngFor="let list of editObject.options">
+                  Option:- <b>{{list.option}}</b> |
+                  Correct Answer:- <b>{{list.optionStatus}}</b>
+                  <br>
+                </span>
+              </td>
+              <td>{{editObject.questionType}}</td>
+              <td>{{editObject.questionUserType}}</td>
+              <td>{{editObject.section}}</td>
+              <td>{{editObject.sectionCategory}}</td>
+              <td>{{editObject.testNumber}}</td>
+              <td>
+                <span *ngFor="let item of editObject.optionsList;let i=index">{{i+1}}) {{item}}<br></span>
+              </td>
+            </tr>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
 </div>
