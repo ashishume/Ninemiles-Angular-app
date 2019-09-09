@@ -10,7 +10,8 @@ import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./writing.component.css']
 })
 export class WritingComponent implements OnInit {
-
+  timeLeft: number = 60;
+  interval;
   public WritingSection: FormGroup;
   constructor(
     private apiService: ApiService,
@@ -55,6 +56,17 @@ export class WritingComponent implements OnInit {
     })
 
   }
+
+
+  checkTimerStatus(event) {
+    console.log(event);
+    if (event.left == 0) {
+      this.route.navigate(['dashboard'])
+    }
+  }
+
+
+
 
   editParagraph(list) {
     this.apiService.passDataValues(list);

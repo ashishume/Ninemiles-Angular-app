@@ -44,3 +44,13 @@
 .edit-question-icon {
   cursor: pointer;
 }
+
+#timer {
+  position: fixed;
+  top: 10px;
+  right: 100px;
+  z-index: 9000;
+  background-color: lightblue;
+  padding: 0 15px;
+  font-size: 20px;
+}

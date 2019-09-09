@@ -8,6 +8,7 @@ import { SpeakingComponent } from './speaking/speaking.component';
 import { SharedModule } from '../shared/services/shared.module';
 import { SectionRoutingModule } from './section-routing.module';
 import { QuillModule } from 'ngx-quill';
+import { CountdownModule } from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { QuillModule } from 'ngx-quill';
     QuillModule.forRoot(),
     CommonModule,
     SharedModule,
-    SectionRoutingModule
+    SectionRoutingModule,
+    CountdownModule
   ],
   exports: [
     ReadingComponent,

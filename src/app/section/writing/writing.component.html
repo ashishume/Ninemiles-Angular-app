@@ -67,6 +67,7 @@
                 </div>
 
             </mat-tab-group>
+            <countdown id="timer" (event)="checkTimerStatus($event)" [config]="{ leftTime: 3600,format: 'm:s' }">$!m!:$!s!</countdown>
             <button mat-raised-button type="submit" color="primary" id="submit-button">Submit</button>
 
         </form>
