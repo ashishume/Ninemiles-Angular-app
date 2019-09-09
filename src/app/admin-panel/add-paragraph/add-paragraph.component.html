@@ -44,6 +44,13 @@
                 </mat-form-field>
                 &nbsp;
                 <mat-form-field>
+                    <mat-label>Category (optional)</mat-label>
+                    <mat-select formControlName="paragraphSectionCategory" name="paragraphSectionCategory" ngModel>
+                        <mat-option *ngFor="let list of getSectionCategory" [value]="list">{{list}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field>
                     <mat-label>Select Student Category</mat-label>
                     <mat-select formControlName="paragraphUserType" name="paragraphUserType" ngModel>
                         <mat-option *ngFor="let list of paragraphUserType" [value]="list">{{list}}</mat-option>
@@ -52,6 +59,7 @@
                         *ngIf="!AddParagraph.get('paragraphUserType').valid && AddParagraph.get('paragraphUserType').touched">
                         *required</mat-error>
                 </mat-form-field>
+                <p>Note: Select CATEGORY only when paragraph is for writing section</p>
                 <br>
                 <quill-editor formControlName="paragraphTitle" required name="paragraphTitle"
                     [(ngModel)]="paragraphTitle">
@@ -75,6 +83,32 @@
                 </span>
             </form>
         </div>
+
+
+        <div class="col-sm-12" *ngIf="editObject">
+            <div class="table-responsive">
+
+                <table class="table">
+
+                    <tr class="table-primary">
+                        <td>Section</td>
+                        <td>Test Number</td>
+                        <td>Student Category</td>
+                    </tr>
+                    <tr>
+                        <td>{{editObject.section}}</td>
+                        <td>{{editObject.testNumber}}</td>
+                        <td>{{editObject.paragraphUserType}}</td>
+                    </tr>
+
+
+                </table>
+            </div>
+        </div>
+
+
+
+
     </div>
 
 

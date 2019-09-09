@@ -30,6 +30,7 @@ export class AddQuestionsComponent implements OnInit {
   sectionCategory = [];
   questionUserType = [];
   testNumber;
+  questionNumber;
 
 
 
@@ -48,6 +49,7 @@ export class AddQuestionsComponent implements OnInit {
 
     if (this.editObject) {
       this.questionTitle = this.editObject.questionTitle;
+      this.questionNumber = this.editObject.questionNumber;
     }
     this.section = this.apiService.getCountOfSection();
     this.questionUserType = this.apiService.getStudentTypes();
@@ -61,6 +63,7 @@ export class AddQuestionsComponent implements OnInit {
         testNumber: new FormControl('', [Validators.required]),
         questionUserType: new FormControl('', [Validators.required]),
         sectionCategory: new FormControl('', [Validators.required]),
+        questionNumber: new FormControl('', [Validators.required]),
         options: this.fb.array([this.addOtherSkillFormGroup()])
 
       },
@@ -138,6 +141,7 @@ export class AddQuestionsComponent implements OnInit {
       let options = [];
       var questionUserType;
       var sectionCategory;
+      var questionNumber;
 
       if (!Question.section) {
         section = this.editObject.section;
@@ -170,6 +174,11 @@ export class AddQuestionsComponent implements OnInit {
       } else {
         sectionCategory = Question.sectionCategory;
       }
+      if (!Question.questionNumber) {
+        questionNumber = this.editObject.questionNumber;
+      } else {
+        questionNumber = Question.questionNumber;
+      }
 
       var body = {
         _id: this.editObject._id,
@@ -181,6 +190,7 @@ export class AddQuestionsComponent implements OnInit {
         questionUserType: questionUserType,
         testNumber: parseInt(testNumber),
         sectionCategory: sectionCategory,
+        questionNumber:questionNumber
 
       }
 

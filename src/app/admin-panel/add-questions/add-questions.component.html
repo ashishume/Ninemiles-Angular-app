@@ -12,6 +12,13 @@
                 MCQ Type Question</h3>
             <form class="form" [formGroup]="AddQuestion" autocomplete="off" novalidate #AddQuestionForm="ngForm"
                 (ngSubmit)="onSubmitQuestion(AddQuestion)">
+
+
+                <mat-form-field>
+                    <mat-label>Add Question Number</mat-label>
+                    <input matInput name="questionNumber" type="number" min="1" formControlName="questionNumber" required [(ngModel)]="questionNumber">
+                  </mat-form-field>
+
                 <quill-editor formControlName="questionTitle" required name="questionTitle" [(ngModel)]="questionTitle">
                 </quill-editor>
                 <mat-error *ngIf="!AddQuestion.get('questionTitle').valid && AddQuestion.get('questionTitle').touched">

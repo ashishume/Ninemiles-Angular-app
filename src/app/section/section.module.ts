@@ -7,6 +7,7 @@ import { ReadingComponent } from './reading/reading.component';
 import { SpeakingComponent } from './speaking/speaking.component';
 import { SharedModule } from '../shared/services/shared.module';
 import { SectionRoutingModule } from './section-routing.module';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SectionRoutingModule } from './section-routing.module';
     SectionComponent
   ],
   imports: [
+    QuillModule.forRoot(),
     CommonModule,
     SharedModule,
     SectionRoutingModule

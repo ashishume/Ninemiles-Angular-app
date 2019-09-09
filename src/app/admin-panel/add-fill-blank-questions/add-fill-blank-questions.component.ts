@@ -24,6 +24,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
   listOfOptions;
   questionTitle;
   editObject;
+  questionNumber;
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
@@ -34,6 +35,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
     if (this.apiService.returnDataValues()) {
       this.editObject = this.apiService.returnDataValues()
       this.questionTitle = this.editObject.questionTitle;
+      this.questionNumber = this.editObject.questionNumber;
 
     }
 
@@ -52,8 +54,8 @@ export class AddFillBlankQuestionsComponent implements OnInit {
         questionUserType: new FormControl('', [Validators.required]),
         sectionCategory: new FormControl('', [Validators.required]),
         listOfOptions: new FormControl('', [Validators.required]),
+        questionNumber: new FormControl('', [Validators.required]),
         options: this.fb.array([this.addOtherSkillFormGroup()])
-
       },
     );
   }
@@ -139,6 +141,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
       let options = [];
       var questionUserType;
       var sectionCategory;
+      var questionNumber;
       let optionsList = []
       if (!Question.section) {
         section = this.editObject.section;
@@ -182,6 +185,11 @@ export class AddFillBlankQuestionsComponent implements OnInit {
       } else {
         sectionCategory = Question.sectionCategory;
       }
+      if (!Question.questionNumber) {
+        questionNumber = this.editObject.questionNumber;
+      } else {
+        questionNumber = Question.questionNumber;
+      }
 
       var body = {
         _id: this.editObject._id,
@@ -194,7 +202,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
         questionUserType: questionUserType,
         testNumber: parseInt(testNumber),
         sectionCategory: sectionCategory,
-
+        questionNumber:questionNumber
       }
       this.apiService.updateQuestion(body).subscribe((data: any) => {
         if (data.status == 200) {

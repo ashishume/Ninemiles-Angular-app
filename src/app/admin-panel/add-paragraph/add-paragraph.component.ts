@@ -21,6 +21,7 @@ export class AddParagraphComponent implements OnInit {
   paragraphUserType = [];
   listOfTests;
   editObject;
+  getSectionCategory = [];
   public AddParagraph: FormGroup;
   constructor(
     private apiService: ApiService,
@@ -34,6 +35,7 @@ export class AddParagraphComponent implements OnInit {
       this.paragraphTitle = this.editObject.paragraphTitle;
     }
 
+    this.getSectionCategory = this.apiService.getSectionCategory()
     this.section = this.apiService.getCountOfSection()
     this.paragraphUserType = this.apiService.getStudentTypes()
 
@@ -44,6 +46,7 @@ export class AddParagraphComponent implements OnInit {
         paragraphUserType: new FormControl('', [Validators.required]),
         testDetails: new FormControl('', [Validators.required]),
         paragraphHeading: new FormControl('', [Validators.required]),
+        paragraphSectionCategory: new FormControl('', []),
       },
     );
   }
@@ -76,14 +79,16 @@ export class AddParagraphComponent implements OnInit {
         paragraphHeading: formValue.paragraphHeading,
         paragraphUserType: formValue.paragraphUserType,
         section: formValue.section,
-        testNumber: formValue.testDetails.testNumber
-      }
-
+        testNumber: formValue.testDetails.testNumber,
+        paragraphSectionCategory:formValue.paragraphSectionCategory
+      } 
       this.apiService.insertParagraph(body).subscribe((data: any) => {
-        this.snack.openFromComponent(SnackBarComponent, {
-          duration: 3 * 1000,
-          data: "Paragraph Added Successfully"
-        });
+        if (data.status == 200) {
+          this.snack.openFromComponent(SnackBarComponent, {
+            duration: 3 * 1000,
+            data: "Paragraph Added Successfully"
+          });
+        }
       })
     } else {
       var updateFormValue = AddParagraph.value;
@@ -114,7 +119,8 @@ export class AddParagraphComponent implements OnInit {
         paragraphHeading: updateFormValue.paragraphHeading,
         paragraphUserType: paragraphUserType,
         section: section,
-        testNumber: testNumber
+        testNumber: testNumber,
+        paragraphSectionCategory:updateFormValue.paragraphSectionCategory
       }
       this.apiService.updateParagraph(updateBody).subscribe((data: any) => {
         if (data.status == 200) {

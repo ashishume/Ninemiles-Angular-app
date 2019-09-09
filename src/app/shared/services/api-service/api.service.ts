@@ -69,6 +69,14 @@ export class ApiService {
     return this.httpService.callApi('PUT', body, 'user/paymentStatus', '');
   }
 
+
+  submitWritingAnswer(body)
+  {
+    return this.httpService.callApi('POST',body,'contents/writingAnswer','');
+  }
+
+
+
   //common data for components
   getStudentTypes() {
     let paragraphUserType = [

@@ -42,11 +42,7 @@ export class ReadingComponent implements OnInit {
   }
 
 
-  changeData(event, i) {
-    // console.log(event.target.value);
-    // console.log(i);
 
-  }
 
   public hasError = (controlName: string, errorName: string) => {
     return this.ReadingSection.controls[controlName].hasError(errorName);
@@ -63,7 +59,6 @@ export class ReadingComponent implements OnInit {
   section4TypeQuestionsId = [];
   ngOnInit() {
     this.presentTestNumber = parseInt(localStorage.getItem('testNumber'));
-
     let section1SelectQuestionsId = [];
     let section2SelectQuestionsId = [];
     let section3SelectQuestionsId = [];
@@ -172,6 +167,11 @@ export class ReadingComponent implements OnInit {
     })
   }
 
+
+
+  checkOptionStatus(listOption, section, $event) {
+    this.readingService.checkOptionStatus(listOption, section, $event);
+  }
 
   onSubmitOfReadingSection(value) {
     // console.log(value.value);

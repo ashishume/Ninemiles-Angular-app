@@ -348,6 +348,8 @@ export class ReadingService {
         }
       }
     }
+    console.log(this.arrayOfMCQQuestions);
+    
   }
 
 
