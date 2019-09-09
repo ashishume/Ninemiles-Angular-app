@@ -119,14 +119,16 @@ export class AddFillBlankQuestionsComponent implements OnInit {
       }
       AddQuestion.value.optionsList = this.optionsListArray;
       AddQuestion.value.author = localStorage.getItem('email')
-      console.log(AddQuestion.value);
-      
-      // this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
-      //   this.snack.openFromComponent(SnackBarComponent, {
-      //     duration: 3 * 1000,
-      //     data: "Question Added Successfully"
-      //   });
-      // })
+      delete AddQuestion.value.listOfOptions;
+
+      this.apiService.insertQuestion(AddQuestion.value).subscribe((data: any) => {
+        if (data.status == 200) {
+          this.snack.openFromComponent(SnackBarComponent, {
+            duration: 3 * 1000,
+            data: "Question Added Successfully"
+          });
+        }
+      })
     } else {
 
       var Question = AddQuestion.value;
