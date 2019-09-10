@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div style="text-align: center" class="col-sm-12">
+
+      <h4 cdkFocusInitial>Please choose the type of writing you want to attend</h4>
+      <mat-divider></mat-divider>
+      <br>
+      <div class="row">
+        <div (click)="uploadEvent()" id="upload-writing" class="col-sm-6">
+          <img class="writing" src="../../../../../assets/writing.png">
+          <p>Upload Document</p>
+        </div>
+
+        <div (click)="onlineEvent()" class="col-sm-6" id="online-attempt">
+          <img class="writing" src="../../../../../assets/website.png">
+          <p>Give online</p>
+
+        </div>
+      </div>
+      <br>
+      <br>
+      <button mat-raised-button mat-dialog-close>Cancel</button>
+    </div>
+  </div>
+</div>

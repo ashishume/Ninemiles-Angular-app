@@ -21,6 +21,11 @@ const routes: Routes = [
     loadChildren: './admin-panel/admin-panel.module#AdminPanelModule',
     canActivate: [AuthGuard]
   },
+  {
+    path: 'teacher',
+    loadChildren: './teacher/teacher.module#TeacherModule',
+    canActivate: [AuthGuard]
+  },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent },
 

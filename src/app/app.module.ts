@@ -12,7 +12,9 @@ import { StudentsComponent } from './students/students.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,21 +45,23 @@ import { SharedModule } from './shared/services/shared.module';
     InfoPageComponent,
     ProfileComponent,
     SnackBarComponent,
-    
+
 
   ],
   imports: [
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     SharedModule,
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
     BrowserAnimationsModule,
     HttpClientModule,
     LayoutModule,
-   
+
   ],
   entryComponents: [InfoPageComponent, SnackBarComponent],
   providers: [

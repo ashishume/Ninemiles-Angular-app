@@ -70,11 +70,26 @@ export class ApiService {
   }
 
 
-  submitWritingAnswer(body)
-  {
-    return this.httpService.callApi('POST',body,'contents/writingAnswer','');
+
+  // ***********************************************************************
+  submitWritingAnswer(body) {
+    return this.httpService.callApi('POST', body, 'contents/writingAnswer', '');
   }
 
+
+  //ONLINE TEST SECTION
+  insertOnlineTest(body) {
+    return this.httpService.callApi('POST', body, 'contents/onlineWriting', '');
+  }
+  displayOnlineTestDetails() {
+    return this.httpService.callApi('GET', '', 'contents/showOnline', '');
+  }
+
+
+
+
+
+  // ***********************************************************************
 
 
   //common data for components

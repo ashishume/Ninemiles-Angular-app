@@ -1,0 +1,93 @@
+<div id="container">
+  <div class="row">
+    <button mat-raised-button color="primary" id="submit-button">Submit</button>
+
+    <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
+
+      <div class="col-sm-12">
+        <!-- SECTION 1 -->
+        <div class="section1-content" *ngIf="section1paragraphDetails.length">
+          <mat-tab class="mat-tab1" label="Section 1">
+
+            <div class="row">
+              <div class="col-sm-6" id="paragraph-section">
+                <span *ngFor="let list of section1paragraphDetails">
+                  <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                    <i class="material-icons">
+                      edit
+                    </i>
+                  </span>
+                  <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                  <p [innerHTML]="list.paragraphTitle"></p>
+                </span>
+              </div>
+              <div class="col-sm-6" id="question-section">
+                <br>
+                <br>
+                <div style="text-align: center">
+
+
+                  <input type="file" accept="image/*" (change)="onFileSelected($event)">
+                  <button (click)="uploadImage()" mat-raised-button>Upload</button>
+                  <br>
+                  <br>
+                  <span *ngIf="imageSource">
+                    <img [src]="imageSource" style="height: 300px;width:200px">
+                  </span>
+
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </mat-tab>
+        </div>
+
+        <!-- SECTION 2 -->
+        <div class="section2-content" *ngIf="section2paragraphDetails.length">
+          <mat-tab label="Section 2">
+            <div class="row">
+              <div class="col-sm-6" id="paragraph-section">
+                <span *ngFor="let list of section2paragraphDetails">
+                  <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                    <i class="material-icons">
+                      edit
+                    </i>
+                  </span>
+                  <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                  <p [innerHTML]="list.paragraphTitle"></p>
+                </span>
+              </div>
+              <div class="col-sm-6" id="question-section">
+                <br>
+                <br>
+                <div style="text-align: center">
+
+
+                  <input type="file" accept="image/*" (change)="onFileSelected($event)">
+                  <button (click)="uploadImage()" mat-raised-button>Upload</button>
+                  <br>
+                  <br>
+                  <span *ngIf="imageSource">
+                    <img [src]="imageSource" style="height: 300px;width:200px">
+                  </span>
+
+
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </div>
+
+        <br>
+        <br>
+        <br>
+      </div>
+
+    </mat-tab-group>
+
+  </div>
+</div>

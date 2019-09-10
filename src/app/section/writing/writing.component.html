@@ -1,11 +1,11 @@
-<div class="container">
+<div id="container">
     <div class="row">
         <form class="form" [formGroup]="WritingSection" autocomplete="off" novalidate #WritingSectionForm="ngForm"
             (ngSubmit)="onSubmitOfWritingSection(WritingSectionForm)">
 
             <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
 
-                <div class="col-sm-12">
+                <!-- <div class="col-sm-12"> -->
                     <!-- SECTION 1 -->
                     <div class="section1-content" *ngIf="section1paragraphDetails.length">
 
@@ -35,7 +35,6 @@
                     </div>
 
 
-
                     <!-- SECTION 2 -->
                     <div class="section2-content" *ngIf="section2paragraphDetails.length">
                         <mat-tab label="Task 2">
@@ -60,18 +59,20 @@
                         </mat-tab>
                     </div>
 
+                    <br>
+                    <br>
+                    <br>
 
-                    <br>
-                    <br>
-                    <br>
-                </div>
-
+                <!-- </div> -->
             </mat-tab-group>
-            <countdown id="timer" (event)="checkTimerStatus($event)" [config]="{ leftTime: 3600,format: 'm:s' }">$!m!:$!s!</countdown>
-            <button mat-raised-button type="submit" color="primary" id="submit-button">Submit</button>
-
         </form>
 
 
     </div>
 </div>
+
+
+
+<countdown id="timer" (event)="checkTimerStatus($event)" [config]="{ leftTime: 3600,format: 'm:s' }">
+    $!m!:$!s!</countdown>
+<button mat-raised-button type="submit" color="primary" id="submit-button">Submit</button>

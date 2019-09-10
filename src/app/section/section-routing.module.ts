@@ -1,3 +1,4 @@
+import { UploadWritingComponent } from './shared/writing-shared/upload-writing/upload-writing.component';
 import { SectionComponent } from './section.component';
 import { WritingComponent } from './writing/writing.component';
 import { ListeningComponent } from './listening/listening.component';
@@ -28,6 +29,10 @@ const route: Routes = [
   {
     path: 'speaking',
     component: SpeakingComponent
+  },
+  {
+    path: 'upload-writing',
+    component: UploadWritingComponent
   },
   {
     path: '',

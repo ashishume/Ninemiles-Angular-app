@@ -9,6 +9,8 @@ import { SharedModule } from '../shared/services/shared.module';
 import { SectionRoutingModule } from './section-routing.module';
 import { QuillModule } from 'ngx-quill';
 import { CountdownModule } from 'ngx-countdown';
+import { WritingDialogComponent } from './shared/writing-shared/writing-dialog/writing-dialog.component';
+import { UploadWritingComponent } from './shared/writing-shared/upload-writing/upload-writing.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { CountdownModule } from 'ngx-countdown';
     WritingComponent,
     ListeningComponent,
     SpeakingComponent,
-    SectionComponent
+    SectionComponent,
+    WritingDialogComponent,
+    UploadWritingComponent
   ],
   imports: [
     QuillModule.forRoot(),
@@ -31,6 +35,9 @@ import { CountdownModule } from 'ngx-countdown';
     ListeningComponent,
     SpeakingComponent,
     SectionComponent
+  ],
+  entryComponents: [
+    WritingDialogComponent
   ]
 })
 export class SectionModule { }

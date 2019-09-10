@@ -1,0 +1,19 @@
+.writing {
+  cursor: pointer;
+}
+#online-attempt:hover {
+  border: solid 1px lightgray;
+  padding: 5px 0;
+}
+#upload-writing:hover {
+  border: solid 1px lightgray;
+  padding: 5px 0;
+}
+#online-attempt:active {
+  border: solid 1px gray;
+  padding: 5px 0;
+}
+#upload-writing:active {
+  border: solid 1px gray;
+  padding: 5px 0;
+}

@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="table">
+
+        <tr>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Test Number</td>
+          <td>User Type</td>
+          <td>Test Paper</td>
+          <td>Paper checked</td>
+        </tr>
+        <tr *ngFor="let list of StudentDetails">
+          <td>{{list.studentName}}</td>
+          <td>{{list.studentEmail}}</td>
+          <td>{{list.testNumber}}</td>
+          <td>{{list.userType}}</td>
+          <td><img src="{{list.onlineAnswer}}" style="width:200px;height:300px;"></td>
+          <td *ngIf="list.answerIsChecked==false">Not Checked</td>
+          <td *ngIf="list.answerIsChecked==true">Checked</td>
+        </tr>
+
+      </div>
+
+    </div>
+  </div>
+</div>
