@@ -1,3 +1,4 @@
+import { ErrorServiceService } from './../error-service/error-service.service';
 import { Injectable, Injector } from '@angular/core';
 import {
   HttpInterceptor,
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as Rx from 'rxjs';
 import { LoaderService } from '../loader-service/loader.service';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
@@ -23,6 +25,8 @@ export class InterceptorService implements HttpInterceptor {
     private route: Router,
     private location: Location,
     private loaderService: LoaderService,
+    private snack: MatSnackBar,
+    private errorService: ErrorServiceService
   ) {
 
   }
@@ -59,10 +63,8 @@ export class InterceptorService implements HttpInterceptor {
       }),
       retry(1),
       catchError((error: HttpErrorResponse) => {
-
-        if (error.status === 401) {
-          return throwError(error);
-        }
+        this.errorService.showError(error.error.message)
+        return throwError(error);
       }),
 
       finalize(() => {

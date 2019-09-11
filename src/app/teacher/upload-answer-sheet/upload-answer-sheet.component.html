@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="inside-container">
+        <br>
+        <br>
+        <br>
+        <form class="form" [formGroup]="UploadForm" autocomplete="off" novalidate #UploadFormData="ngForm"
+          (ngSubmit)="onSubmitUploadForm(UploadFormData)">
+
+          <ngx-select-dropdown required formControlName="studentDetails" name="studentDetails" [multiple]="false"
+            [(ngModel)]="dataModel" [config]="config" [options]="dropdownOptions">
+          </ngx-select-dropdown>
+          <mat-form-field>
+            <mat-label>Test Number</mat-label>
+            <input matInput type="number" min="1" formControlName="testNumber" required name="testNumber">
+          </mat-form-field> &nbsp;
+          <mat-form-field>
+            <mat-label>Sheet Number</mat-label>
+            <input matInput type="number" min="1" formControlName="sheetNumber" required name="sheetNumber">
+          </mat-form-field> &nbsp;
+          <mat-form-field>
+            <mat-label>Marks</mat-label>
+            <input matInput required type="number" formControlName="marks" name="marks">
+          </mat-form-field>
+          <br>
+          <br>
+          <input formControlName="upload" required name="upload" type="file" accept="image/*"
+            (change)="onFileSelected($event)">
+
+          <span *ngIf="imageSource">
+            <img [src]="imageSource" style="height: 300px;width:200px">
+          </span>
+          <br>
+          <br>
+
+          <button mat-raised-button style="width: 100%" color="primary" [disabled]="!UploadForm.valid"
+            type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

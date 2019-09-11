@@ -8,6 +8,8 @@
           <td>Name</td>
           <td>Email</td>
           <td>Test Number</td>
+          <td>Sheet Number</td>
+          <td>Marks Scored</td>
           <td>User Type</td>
           <td>Test Paper</td>
           <td>Paper checked</td>
@@ -16,10 +18,18 @@
           <td>{{list.studentName}}</td>
           <td>{{list.studentEmail}}</td>
           <td>{{list.testNumber}}</td>
+          <td>{{list.sheetNumber}}</td>
+          <td>{{list.marksScored}}</td>
           <td>{{list.userType}}</td>
-          <td><img src="{{list.onlineAnswer}}" style="width:200px;height:300px;"></td>
-          <td *ngIf="list.answerIsChecked==false">Not Checked</td>
-          <td *ngIf="list.answerIsChecked==true">Checked</td>
+          <td style="text-align: center;"><img [src]="list.onlineAnswer" style="width:200px;height:300px;">
+            <br>
+            <br>
+            <a href="{{list.onlineAnswer}}" target="_blank"><button mat-raised-button>Download</button></a>
+          </td>
+          <td style="text-align: center;" *ngIf="list.answerIsChecked==false"><img src="../../assets/wrong.png"><br>Not
+            Checked</td>
+          <td style="text-align: center;" *ngIf="list.answerIsChecked==true"><img
+              src="../../assets/checked.png"><br>Checked</td>
         </tr>
 
       </div>

@@ -32,6 +32,8 @@ import { ReadingService } from './section/shared/reading-shared/reading.service'
 import { ListeningService } from './section/shared/listening-shared/listening.service';
 import { WritingService } from './section/shared/writing-shared/writing.service';
 import { SharedModule } from './shared/services/shared.module';
+import { ErrorServiceService } from './shared/services/error-service/error-service.service';
+
 
 
 @NgModule({
@@ -74,6 +76,7 @@ import { SharedModule } from './shared/services/shared.module';
     SpeakingService,
     WritingService,
     LoaderService,
+    ErrorServiceService,
     CalculateMarksService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],

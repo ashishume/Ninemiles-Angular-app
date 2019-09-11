@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../shared/services/api-service/api.service';
+// import { saveAs } from 'file-saver';
+// var FileSaver = require('file-saver');
 
 @Component({
   selector: 'app-teacher',
@@ -18,9 +20,13 @@ export class TeacherComponent implements OnInit {
         this.StudentDetails = data.body;
       }
       console.log(this.StudentDetails);
-
     })
-
   }
 
+  // downloadImage(url) {
+
+  //   FileSaver.saveAs(url, "Image");
+  // }
+
 }
+

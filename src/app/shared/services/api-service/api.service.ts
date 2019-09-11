@@ -77,13 +77,18 @@ export class ApiService {
   }
 
 
-  //ONLINE TEST SECTION
+  //ONLINE UPLOAD TEST SECTION
   insertOnlineTest(body) {
     return this.httpService.callApi('POST', body, 'contents/onlineWriting', '');
   }
   displayOnlineTestDetails() {
     return this.httpService.callApi('GET', '', 'contents/showOnline', '');
   }
+  updateOnlineTest(body) {
+    return this.httpService.callApi('PUT', body, 'contents/updateAnswer', '');
+  }
+
+
 
 
 

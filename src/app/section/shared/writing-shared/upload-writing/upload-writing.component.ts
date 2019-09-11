@@ -1,3 +1,4 @@
+import { LoaderService } from './../../../../shared/services/loader-service/loader.service';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -5,9 +6,10 @@ import { HttpClient } from '@angular/common/http';
 import { WritingService } from './../writing.service';
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-writing',
@@ -20,6 +22,8 @@ export class UploadWritingComponent implements OnInit {
   actualDataSize;
   selectedImage;
   imageUrl;
+  public UploadForm: FormGroup;
+
   constructor(
     private nav: NavbarService,
     private writingService: WritingService,
@@ -27,9 +31,22 @@ export class UploadWritingComponent implements OnInit {
     private fb: FormBuilder,
     private storage: AngularFireStorage,
     private snack: MatSnackBar,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private route: Router,
+    private loader: LoaderService
   ) {
     this.nav.hide()
+
+
+
+    this.UploadForm = this.fb.group(
+      {
+        upload: new FormControl('', [Validators.required]),
+        sheetNumber: new FormControl('', [Validators.required]),
+      },
+    );
+
+
   }
 
   section1paragraphDetails = [];
@@ -62,9 +79,6 @@ export class UploadWritingComponent implements OnInit {
 
   }
 
-
-
-
   onFileSelected(event) {
     this.actualDataSize = event.target.files[0].size;
 
@@ -75,7 +89,8 @@ export class UploadWritingComponent implements OnInit {
   }
 
 
-  uploadImage() {
+  uploadImage(sheetNumber) {
+    this.loader.show()
     const name = localStorage.getItem('name')
     const email = localStorage.getItem('email')
     const date = new Date().getTime()
@@ -85,18 +100,38 @@ export class UploadWritingComponent implements OnInit {
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
           if (url) {
-            this.writingService.insertImageData(url);
-            this.snack.openFromComponent(SnackBarComponent, {
-              duration: 3 * 1000,
-              data: "Image Uploaded Successfully"
-            });
+            this.loader.hide()
+            const body = {
+              onlineAnswer: url,
+              studentEmail: localStorage.getItem('email'),
+              studentName: localStorage.getItem('name'),
+              testNumber: parseInt(localStorage.getItem('testNumber')),
+              userType: localStorage.getItem('userType'),
+              sheetNumber: sheetNumber
+            }
+            this.apiService.insertOnlineTest(body).subscribe((data: any) => {
+              if (data.status == 200) {
+                this.snack.openFromComponent(SnackBarComponent, {
+                  duration: 3 * 1000,
+                  data: "Sheet No. " + sheetNumber + " Uploaded Successfully"
+                });
+              }
+            })
+
           }
         })
       })
     ).subscribe();
   }
 
+  editParagraph(list) {
+    this.apiService.passDataValues(list);
+    this.route.navigate(['admin-panel/add-paragraph'])
+  }
 
+  onSubmitUploadForm(UploadFormData) {
+    this.uploadImage(UploadFormData.value.sheetNumber)
+  }
 
 
 }
