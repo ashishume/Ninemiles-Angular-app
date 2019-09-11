@@ -9,7 +9,7 @@
           (ngSubmit)="onSubmitUploadForm(UploadFormData)">
 
           <ngx-select-dropdown required formControlName="studentDetails" name="studentDetails" [multiple]="false"
-            [(ngModel)]="dataModel" [config]="config" [options]="dropdownOptions">
+            [config]="config" [options]="dropdownOptions">
           </ngx-select-dropdown>
           <mat-form-field>
             <mat-label>Test Number</mat-label>
@@ -21,7 +21,7 @@
           </mat-form-field> &nbsp;
           <mat-form-field>
             <mat-label>Marks</mat-label>
-            <input matInput required type="number" formControlName="marks" name="marks">
+            <input matInput  type="number" formControlName="marks" name="marks">
           </mat-form-field>
           <br>
           <br>
@@ -38,6 +38,7 @@
             type="submit">Submit</button>
         </form>
       </div>
+
     </div>
   </div>
 </div>

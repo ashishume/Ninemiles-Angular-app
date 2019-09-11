@@ -15,11 +15,11 @@ export class TeacherComponent implements OnInit {
   StudentDetails = [];
   ngOnInit() {
     this.apiService.displayOnlineTestDetails().subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if (data.status == 200) {
         this.StudentDetails = data.body;
       }
-      console.log(this.StudentDetails);
+      // console.log(this.StudentDetails);
     })
   }
 

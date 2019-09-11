@@ -88,7 +88,10 @@ export class ApiService {
     return this.httpService.callApi('PUT', body, 'contents/updateAnswer', '');
   }
 
-
+  //SEND MAIL
+  sendEmail(body) {
+    return this.httpService.callApi('POST', body, 'user/sendEmail', '')
+  }
 
 
 

@@ -7,12 +7,14 @@ import { TeacherRoutingModule } from './teacher-routing.module';
 import { UploadAnswerSheetComponent } from './upload-answer-sheet/upload-answer-sheet.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { SelectDropDownModule } from 'ngx-select-dropdown'
+import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { AudioTestComponent } from './audio-test/audio-test.component'
 
 @NgModule({
   declarations: [
     TeacherComponent,
-    UploadAnswerSheetComponent
+    UploadAnswerSheetComponent,
+    AudioTestComponent
   ],
   imports: [
     SelectDropDownModule,

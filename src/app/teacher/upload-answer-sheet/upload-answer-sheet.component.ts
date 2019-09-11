@@ -7,6 +7,7 @@ import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar
 import { finalize } from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
+import { EmailService } from 'src/app/shared/services/email/email.service';
 
 @Component({
   selector: 'app-upload-answer-sheet',
@@ -21,7 +22,8 @@ export class UploadAnswerSheetComponent implements OnInit {
     private fb: FormBuilder,
     private apiService: ApiService,
     private showSnack: ErrorServiceService,
-    private loader: LoaderService
+    private loader: LoaderService,
+    private emailService: EmailService
   ) {
 
     this.UploadForm = this.fb.group(
@@ -83,6 +85,7 @@ export class UploadAnswerSheetComponent implements OnInit {
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
           if (url) {
+
             const body = {
               email: studentData.studentDetails.email,
               testNumber: studentData.testNumber,
@@ -93,6 +96,13 @@ export class UploadAnswerSheetComponent implements OnInit {
             this.loader.hide()
             this.apiService.updateOnlineTest(body).subscribe((data: any) => {
               if (data.status == 200) {
+
+                const email = studentData.studentDetails.email;
+                const name = studentData.studentDetails.name;
+                const subject = "Answer Sheet checked,Please check your score";
+
+
+                this.emailService.sendEMailToStudent(name, email, subject);
                 this.showSnack.showError("Image Uploaded Successfully")
               }
             })
