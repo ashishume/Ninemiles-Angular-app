@@ -58,6 +58,12 @@ export class ReadingComponent implements OnInit {
   section3TypeQuestionsId = [];
   section4TypeQuestionsId = [];
   ngOnInit() {
+
+    // @HostListener('window:beforeunload')
+    // onBeforeUnload() {
+    //   return false;
+    // }
+
     this.presentTestNumber = parseInt(localStorage.getItem('testNumber'));
     let section1SelectQuestionsId = [];
     let section2SelectQuestionsId = [];
@@ -225,6 +231,16 @@ export class ReadingComponent implements OnInit {
     } else {
       this.apiService.passDataValues(list);
       this.route.navigate(['admin-panel/add-fill-blank-questions'])
+    }
+  }
+
+
+  timeLeft: number = 60;
+  interval;
+  checkTimerStatus(event) {
+    console.log(event);
+    if (event.left == 0) {
+      this.route.navigate(['dashboard'])
     }
   }
 

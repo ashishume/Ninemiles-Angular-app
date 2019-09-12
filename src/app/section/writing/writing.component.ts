@@ -32,6 +32,11 @@ export class WritingComponent implements OnInit {
   section2paragraphDetails = [];
 
   ngOnInit() {
+
+    // @HostListener('window:beforeunload')
+    // onBeforeUnload() {
+    //   return false;
+    // }
     var userType = localStorage.getItem('userType');
     var testNumber = localStorage.getItem('testNumber');
 

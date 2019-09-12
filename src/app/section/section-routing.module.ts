@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReadingComponent } from './reading/reading.component';
 import { SpeakingComponent } from './speaking/speaking.component';
+import { TestDescriptionComponent } from './test-description/test-description.component';
 
 
 
@@ -33,6 +34,10 @@ const route: Routes = [
   {
     path: 'upload-writing',
     component: UploadWritingComponent
+  },
+  {
+    path: 'test-description',
+    component: TestDescriptionComponent
   },
   {
     path: '',

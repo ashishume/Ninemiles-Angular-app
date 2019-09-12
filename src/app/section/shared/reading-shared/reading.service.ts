@@ -337,7 +337,7 @@ export class ReadingService {
         {
           answer: optionValue,
           selectedValue: optionValue.option,
-          isCorrect: Boolean(optionValue.optionStatus),
+          isCorrect: optionValue.optionStatus,
           section: parseInt(listSection)
         })
     } else {
@@ -349,7 +349,7 @@ export class ReadingService {
       }
     }
     console.log(this.arrayOfMCQQuestions);
-    
+
   }
 
 

@@ -59,7 +59,11 @@
                         *ngIf="!AddParagraph.get('paragraphUserType').valid && AddParagraph.get('paragraphUserType').touched">
                         *required</mat-error>
                 </mat-form-field>
-                <p>Note: Select CATEGORY only when paragraph is for writing section</p>
+                <p>Note:<br> 1) Select <b>CATEGORY</b> only when paragraph is for writing section <br>
+                    2) Paste the <b>LINK</b> of audio in the Question Adding box for listening category
+                </p>
+
+
                 <br>
                 <quill-editor formControlName="paragraphTitle" required name="paragraphTitle"
                     [(ngModel)]="paragraphTitle">

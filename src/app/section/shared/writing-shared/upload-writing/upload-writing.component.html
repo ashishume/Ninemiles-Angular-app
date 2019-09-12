@@ -85,14 +85,29 @@
                 <div style="text-align: center">
 
 
-                  <input type="file" accept="image/*" (change)="onFileSelected($event)">
-                  <button (click)="uploadImage()" mat-raised-button>Upload</button>
-                  <br>
-                  <br>
-                  <span *ngIf="imageSource">
-                    <img [src]="imageSource" style="height: 300px;width:200px">
-                  </span>
+                  <form class="form" [formGroup]="UploadForm" autocomplete="off" novalidate #UploadFormData="ngForm"
+                    (ngSubmit)="onSubmitUploadForm(UploadFormData)">
 
+                    <p style="text-align: center;" class="alert alert-warning">Note: If you have multiple sheets, please
+                      upload them in order</p>
+                    <mat-form-field>
+                      <mat-label>Sheet Number</mat-label>
+                      <input matInput formControlName="sheetNumber" required name="sheetNumber" type="number">
+                    </mat-form-field>&nbsp;
+
+                    <input type="file" formControlName="upload" name="upload" required accept="image/*"
+                      (change)="onFileSelected($event)">
+                    <br>
+                    <br>
+                    <span *ngIf="imageSource">
+                      <img [src]="imageSource" style="height: 300px;width:200px">
+                    </span>
+                    <br>
+                    <br>
+
+                    <button style="width:100%;" color="primary" mat-raised-button type="submit"
+                      [disabled]="!UploadForm.valid">Upload</button>
+                  </form>
 
                 </div>
               </div>

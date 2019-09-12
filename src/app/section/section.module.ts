@@ -11,6 +11,7 @@ import { QuillModule } from 'ngx-quill';
 import { CountdownModule } from 'ngx-countdown';
 import { WritingDialogComponent } from './shared/writing-shared/writing-dialog/writing-dialog.component';
 import { UploadWritingComponent } from './shared/writing-shared/upload-writing/upload-writing.component';
+import { TestDescriptionComponent } from './test-description/test-description.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UploadWritingComponent } from './shared/writing-shared/upload-writing/u
     SpeakingComponent,
     SectionComponent,
     WritingDialogComponent,
-    UploadWritingComponent
+    UploadWritingComponent,
+    TestDescriptionComponent
   ],
   imports: [
     QuillModule.forRoot(),

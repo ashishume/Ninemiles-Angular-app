@@ -8,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpeakingComponent implements OnInit {
 
-  constructor(private apiService:ApiService) { }
-countOfTests;
+  constructor(private apiService: ApiService) { }
+  countOfTests;
   ngOnInit() {
-
+    // @HostListener('window:beforeunload')
+    // onBeforeUnload() {
+    //   return false;
+    // }
   }
 
 
@@ -19,7 +22,7 @@ countOfTests;
     const body = {
       email: localStorage.getItem('email'),
       testNumber: localStorage.getItem('testNumber'),
-      testStatusUpdate:"speaking"
+      testStatusUpdate: "speaking"
     }
     this.apiService.updateTestData(body).subscribe((data: any) => {
       // console.log(data);

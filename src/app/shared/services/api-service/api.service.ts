@@ -68,6 +68,8 @@ export class ApiService {
   setPaymentStatus(body) {
     return this.httpService.callApi('PUT', body, 'user/paymentStatus', '');
   }
+  //**********************************************************************
+
 
 
 
@@ -92,12 +94,17 @@ export class ApiService {
   sendEmail(body) {
     return this.httpService.callApi('POST', body, 'user/sendEmail', '')
   }
-
-
-
-
-
   // ***********************************************************************
+
+
+
+
+
+
+
+
+
+
 
 
   //common data for components

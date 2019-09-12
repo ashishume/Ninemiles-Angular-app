@@ -1,41 +1,80 @@
-<br><div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-          <h4>Test Sections</h4>
-          <mat-card  id="mat-card" class="mat-card" routerLink="/section/listening">
-            <img src="../../assets/headphone.svg" class="icon">
-            Listening
-            <span id="float-item">
-              <img src="../../assets/arrow.svg" class="icon">
-            </span>
-          </mat-card>
-          <br>
-          <mat-card  id="mat-card" class="mat-card" (click)="selectWritingCategory()">
-              <img src="../../assets/writing.svg" class="icon">
-              Writing
-              <span id="float-item">
-              <img src="../../assets/arrow.svg" class="icon">
-            </span>
-          </mat-card>
-          <br>
-          <mat-card id="mat-card"  class="mat-card" routerLink="/section/reading">
-              <img src="../../assets/reading.svg" class="icon">
-              Reading
-              <span id="float-item">
-              <img src="../../assets/arrow.svg" class="icon">
-            </span>
-          </mat-card>
-          <br>
-          <mat-card  id="mat-card" class="mat-card" routerLink="/section/speaking">
-              <img src="../../assets/speaking.svg" class="icon">
-            Speaking
-            <span id="float-item">
-              <img src="../../assets/arrow.svg" class="icon">
-            </span>
-          </mat-card>
-          <br>
-    
-    
-        </div>
-      </div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" *ngFor="let list of testDetails">
+      <h4>Please choose the sections</h4>
+      <mat-card *ngIf="list.listening==false" id="mat-card" class="mat-card" (click)="handlingListening()">
+        <img src="../../assets/headphone.svg" class="icon">
+        Listening
+        <span id="float-item">
+          <img src="../../assets/arrow.svg" class="icon">
+        </span>
+      </mat-card>
+
+      <mat-card *ngIf="list.writing==false" id="mat-card" class="mat-card" (click)="handlingWriting()">
+        <img src="../../assets/writing.svg" class="icon">
+        Writing
+        <span id="float-item">
+          <img src="../../assets/arrow.svg" class="icon">
+        </span>
+      </mat-card>
+
+      <mat-card *ngIf="list.reading==false" id="mat-card" class="mat-card" (click)="handlingReading()">
+        <img src="../../assets/reading.svg" class="icon">
+        Reading
+        <span id="float-item">
+          <img src="../../assets/arrow.svg" class="icon">
+        </span>
+      </mat-card>
+
+      <mat-card *ngIf="list.speaking==false" id="mat-card" class="mat-card" (click)="handlingSpeaking()">
+        <img src="../../assets/speaking.svg" class="icon">
+        Speaking
+        <span id="float-item">
+          <img src="../../assets/arrow.svg" class="icon">
+        </span>
+      </mat-card>
+
+
+      <!-- LOCKED DATA -->
+      <mat-card *ngIf="list.listening==true" id="mat-card" (click)="showAttemptMessage()" class="mat-card">
+        <img src="../../assets/headphone.svg" class="icon">
+        Listening
+        <span id="float-item">
+          <img src="../../assets/lock.svg" class="icon">
+        </span>
+      </mat-card>
+
+      <mat-card *ngIf="list.writing==true" id="mat-card" (click)="showAttemptMessage()" class="mat-card">
+        <img src="../../assets/writing.svg" class="icon">
+        Writing
+        <span id="float-item">
+          <img src="../../assets/lock.svg" class="icon">
+        </span>
+      </mat-card>
+
+      <mat-card *ngIf="list.reading==true" id="mat-card" (click)="showAttemptMessage()" class="mat-card">
+        <img src="../../assets/reading.svg" class="icon">
+        Reading
+        <span id="float-item">
+          <img src="../../assets/lock.svg" class="icon">
+        </span>
+      </mat-card>
+
+      <mat-card *ngIf="list.speaking==true" id="mat-card" (click)="showAttemptMessage()" class="mat-card">
+        <img src="../../assets/speaking.svg" class="icon">
+        Speaking
+        <span id="float-item">
+          <img src="../../assets/lock.svg" class="icon">
+        </span>
+      </mat-card>
+      <!-- LOCKED DATA -->
+
+
+
+
+
+    </div>
+  </div>
 </div>
+<a  routerLink="/teacher/raised-issue" class="footer">Please raise any issue</a>

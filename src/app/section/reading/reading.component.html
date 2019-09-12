@@ -357,5 +357,7 @@
         </form>
 
 
+        <countdown id="timer" (event)="checkTimerStatus($event)" [config]="{ leftTime: 3600,format: 'm:s' }">
+                $!m!:$!s!</countdown>
     </div>
 </div>
