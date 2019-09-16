@@ -1,8 +1,7 @@
 <div id="container">
     <div class="row">
-        <button mat-raised-button color="primary" id="submit-button">Submit</button>
-        <form class="form" [formGroup]="ListeningSection" autocomplete="off" novalidate #ListeningSectionForm="ngForm"
-            (ngSubmit)="onSubmitOfListeningSection(ListeningSectionForm)">
+        <button mat-raised-button color="primary" id="submit-button" (click)="onSubmitOfListeningSection()">Submit</button>
+        <form class="form" [formGroup]="ListeningSection" autocomplete="off" novalidate #ListeningSectionForm="ngForm">
 
             <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
 
@@ -15,7 +14,7 @@
 
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <span *ngFor="let list of section1AudioDetails">
+                                    <span *ngFor="let list of section1AudioDetails" >
 
                                         <h4 class="heading-title" [innerHTML]="list.paragraphTitle"></h4>
 
@@ -472,6 +471,6 @@
 
 
         <countdown id="timer" (event)="checkTimerStatus($event)" [config]="{ leftTime: 3600,format: 'm:s' }">
-                $!m!:$!s!</countdown>
+            $!m!:$!s!</countdown>
     </div>
 </div>

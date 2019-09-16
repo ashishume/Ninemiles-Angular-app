@@ -46,7 +46,7 @@ export class AddParagraphComponent implements OnInit {
         paragraphUserType: new FormControl('', [Validators.required]),
         testDetails: new FormControl('', [Validators.required]),
         paragraphHeading: new FormControl('', [Validators.required]),
-        paragraphSectionCategory: new FormControl('', []),
+        paragraphSectionCategory: new FormControl('', [Validators.required]),
       },
     );
   }

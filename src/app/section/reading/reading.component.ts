@@ -33,7 +33,7 @@ export class ReadingComponent implements OnInit {
     private nav: NavbarService,
     private route: Router
   ) {
-    this.nav.hide()
+    this.nav.testActive()
     this.ReadingSection = this.fb.group(
       {
         mcqAnswers: new FormControl('', []),
@@ -152,16 +152,16 @@ export class ReadingComponent implements OnInit {
         let section3paragraphDetails = []
         let section4paragraphDetails = []
         response.body.forEach(function (value) {
-          if (value.section == '1' && userType == value.paragraphUserType && testNumber == value.testNumber) {
+          if (value.section == '1' && "Reading" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section1paragraphDetails.push(value);
           }
-          if (value.section == '2' && userType == value.paragraphUserType && testNumber == value.testNumber) {
+          if (value.section == '2' && "Reading" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section2paragraphDetails.push(value);
           }
-          if (value.section == '3' && userType == value.paragraphUserType && testNumber == value.testNumber) {
+          if (value.section == '3' && "Reading" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section3paragraphDetails.push(value);
           }
-          if (value.section == '4' && userType == value.paragraphUserType && testNumber == value.testNumber) {
+          if (value.section == '4' && "Reading" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section4paragraphDetails.push(value);
           }
         })
@@ -169,18 +169,21 @@ export class ReadingComponent implements OnInit {
         this.section2paragraphDetails = section2paragraphDetails;
         this.section3paragraphDetails = section3paragraphDetails;
         this.section4paragraphDetails = section4paragraphDetails;
+
+
       }
     })
   }
 
 
 
-  checkOptionStatus(listOption, section, $event) {
-    this.readingService.checkOptionStatus(listOption, section, $event);
+  checkOptionStatus(listOption, section, $event, questionNumber) {
+    this.readingService.checkOptionStatus(listOption, section, $event, questionNumber);
   }
 
-  onSubmitOfReadingSection(value) {
+  onSubmitOfReadingSection() {
     // console.log(value.value);
+    this.readingService.calculateSelectReadingSectionMarks();
 
   }
 
@@ -238,7 +241,7 @@ export class ReadingComponent implements OnInit {
   timeLeft: number = 60;
   interval;
   checkTimerStatus(event) {
-    console.log(event);
+    // console.log(event);
     if (event.left == 0) {
       this.route.navigate(['dashboard'])
     }

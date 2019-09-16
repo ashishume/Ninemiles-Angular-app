@@ -13,12 +13,10 @@ import { Router } from '@angular/router';
 
 
 export class ListeningComponent implements OnInit {
-
   // @HostListener('window:beforeunload')
   // onBeforeUnload() {
   //   return false;
   // }
-
   countOfTests;
   questions = [];
   presentTestNumber;
@@ -42,7 +40,7 @@ export class ListeningComponent implements OnInit {
     private nav: NavbarService,
     private route: Router
   ) {
-    this.nav.hide()
+    this.nav.testActive()
     this.ListeningSection = this.fb.group(
       {
         mcqAnswers: new FormControl('', []),
@@ -67,6 +65,9 @@ export class ListeningComponent implements OnInit {
   section3TypeQuestionsId = [];
   section4TypeQuestionsId = [];
   ngOnInit() {
+
+
+
     this.presentTestNumber = parseInt(localStorage.getItem('testNumber'));
     let section1SelectQuestionsId = [];
     let section2SelectQuestionsId = [];
@@ -154,17 +155,18 @@ export class ListeningComponent implements OnInit {
         let section2AudioDetails = []
         let section3AudioDetails = []
         let section4AudioDetails = []
+
         response.body.forEach(function (value) {
-          if (value.section == '1' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber) {
+          if (value.section == '1' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section1AudioDetails.push(value);
           }
-          if (value.section == '2' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber) {
+          if (value.section == '2' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section2AudioDetails.push(value);
           }
-          if (value.section == '3' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber) {
+          if (value.section == '3' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section3AudioDetails.push(value);
           }
-          if (value.section == '4' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber) {
+          if (value.section == '4' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section4AudioDetails.push(value);
           }
         })
@@ -172,6 +174,11 @@ export class ListeningComponent implements OnInit {
         this.section2AudioDetails = section2AudioDetails;
         this.section3AudioDetails = section3AudioDetails;
         this.section4AudioDetails = section4AudioDetails;
+        console.log(this.section1AudioDetails);
+        console.log(this.section2AudioDetails);
+        console.log(this.section3AudioDetails);
+        console.log(this.section4AudioDetails);
+
       }
     })
 
@@ -189,8 +196,9 @@ export class ListeningComponent implements OnInit {
     this.listeningService.checkOptionStatus(listOption, section, $event);
   }
 
-  onSubmitOfListeningSection(value) {
+  onSubmitOfListeningSection() {
     // console.log(value.value);
+    this.listeningService.calculateSelectListeningSectionMarks()
 
   }
 

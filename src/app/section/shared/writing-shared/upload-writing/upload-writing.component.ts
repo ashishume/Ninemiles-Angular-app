@@ -35,7 +35,7 @@ export class UploadWritingComponent implements OnInit {
     private route: Router,
     private loader: LoaderService
   ) {
-    this.nav.hide()
+    this.nav.testActive()
 
 
 
@@ -63,10 +63,10 @@ export class UploadWritingComponent implements OnInit {
         let section2paragraphDetails = []
 
         response.body.forEach(function (value) {
-          if (value.section == '1' && userType == value.paragraphUserType && testNumber == value.testNumber && value.paragraphSectionCategory == "Writing") {
+          if (value.section == '3' && userType == value.paragraphUserType && testNumber == value.testNumber && value.paragraphSectionCategory == "Writing") {
             section1paragraphDetails.push(value);
           }
-          if (value.section == '2' && userType == value.paragraphUserType && testNumber == value.testNumber && value.paragraphSectionCategory == "Writing") {
+          if (value.section == '4' && userType == value.paragraphUserType && testNumber == value.testNumber && value.paragraphSectionCategory == "Writing") {
             section2paragraphDetails.push(value);
           }
         })

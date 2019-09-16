@@ -28,8 +28,6 @@ export class SectionComponent implements OnInit {
         data.body.testDetails.forEach(value => {
           if (value.testNumber == testNumber) {
             this.testDetails.push(value);
-            console.log(this.testDetails);
-
           }
         });
       }

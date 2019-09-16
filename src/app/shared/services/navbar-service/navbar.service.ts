@@ -5,8 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class NavbarService {
   visible: boolean;
-
-  constructor() { this.visible = true; }
+  test: boolean;
+  constructor() {
+    this.visible = true;
+    this.test = true;
+  }
 
   hide() { this.visible = false; }
 
@@ -14,4 +17,5 @@ export class NavbarService {
 
   toggle() { this.visible = !this.visible; }
 
+  testActive() { this.test = false; }
 }

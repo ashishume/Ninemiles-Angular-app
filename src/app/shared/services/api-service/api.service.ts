@@ -15,6 +15,9 @@ export class ApiService {
     return this.httpService.callApi('POST', body, 'user/signup', '');
   }
 
+  updateUserType(body) {
+    return this.httpService.callApi('PUT', body, 'user/updateUserType', '')
+  }
   // ******************************************
 
   getListOfQuestions() {
@@ -96,8 +99,15 @@ export class ApiService {
   }
   // ***********************************************************************
 
+  //SUBMIT MARKSSHEET
+  insertMarkSheet(body) {
+    return this.httpService.callApi('POST', body, 'marks/addMarks', '')
+  }
 
-
+  // DISPLAY MARKSSHEET
+  displayMarksSheet(params) {
+    return this.httpService.callApi('GETBYPARAMS', '', 'marks/showMarks', params)
+  }
 
 
 
@@ -112,8 +122,8 @@ export class ApiService {
     let paragraphUserType = [
       "Academic Students",
       "General Students",
-      "Teacher",
-      "Admin"
+      // "Teacher",
+      // "Admin"
     ]
     return paragraphUserType;
   }

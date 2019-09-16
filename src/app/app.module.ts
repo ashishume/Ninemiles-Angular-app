@@ -33,6 +33,8 @@ import { ListeningService } from './section/shared/listening-shared/listening.se
 import { WritingService } from './section/shared/writing-shared/writing.service';
 import { SharedModule } from './shared/services/shared.module';
 import { ErrorServiceService } from './shared/services/error-service/error-service.service';
+import { ResultsComponent } from './results/results.component';
+import { MarksSheetComponent } from './marks-sheet/marks-sheet.component';
 
 
 
@@ -47,6 +49,8 @@ import { ErrorServiceService } from './shared/services/error-service/error-servi
     InfoPageComponent,
     ProfileComponent,
     SnackBarComponent,
+    ResultsComponent,
+    MarksSheetComponent,
 
 
   ],

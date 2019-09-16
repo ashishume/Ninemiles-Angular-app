@@ -1,1 +1,16 @@
-<button [mat-dialog-close]="true">Close</button>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Please choose the type of user</h4>
+            <mat-form-field style="width: 100%" appearance="outline">
+                <mat-label>Please choose the option</mat-label>
+                <mat-select [(ngModel)]="userType">
+                    <mat-option *ngFor="let list of studentTypes" [value]="list">{{list}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <button style="width: 100%" [mat-dialog-close]="userType" mat-raised-button>Done</button>
+
+        </div>
+    </div>
+</div>

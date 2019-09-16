@@ -1,3 +1,4 @@
+import { MarksSheetComponent } from './marks-sheet/marks-sheet.component';
 import { AuthGuard } from './shared/guard/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -6,11 +7,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { StudentsComponent } from './students/students.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ResultsComponent } from './results/results.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
+  { path: 'results', component: ResultsComponent, canActivate: [AuthGuard] },
+  { path: 'marks-sheet', component: MarksSheetComponent, canActivate: [AuthGuard] },
   {
     path: 'section',
     loadChildren: './section/section.module#SectionModule',

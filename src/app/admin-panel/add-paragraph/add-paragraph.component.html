@@ -10,11 +10,11 @@
                 <span *ngIf="editObject">
                     Edit
                 </span>
-                paragraph</h3>
+                Left Question Module</h3>
             <form class="form" [formGroup]="AddParagraph" autocomplete="off" novalidate #AddParagraphForm="ngForm"
                 (ngSubmit)="onSubmitParagraph(AddParagraph)">
                 <mat-form-field id="mat-form-field">
-                    <mat-label>Add Heading</mat-label>
+                    <mat-label>Add Heading OR (Paste Audio Link for Listening Section)</mat-label>
                     <input matInput name="paragraphHeading" formControlName="paragraphHeading"
                         [(ngModel)]="paragraphHeading">
                 </mat-form-field>
@@ -28,7 +28,7 @@
                 </mat-form-field>&nbsp;
                 <mat-form-field>
                     <mat-label>Select Test Number</mat-label>
-                    <mat-select formControlName="testDetails" name="testDetails" ngModel>
+                    <mat-select required formControlName="testDetails" name="testDetails" ngModel>
                         <mat-option *ngFor="let list of listOfTests" [value]="list">
                             <span *ngIf="list.testPricingStatus==false">
                                 {{list.testNumber}} (free)
@@ -44,10 +44,12 @@
                 </mat-form-field>
                 &nbsp;
                 <mat-form-field>
-                    <mat-label>Category (optional)</mat-label>
-                    <mat-select formControlName="paragraphSectionCategory" name="paragraphSectionCategory" ngModel>
+                    <mat-label>Category</mat-label>
+                    <mat-select required formControlName="paragraphSectionCategory" name="paragraphSectionCategory"
+                        ngModel>
                         <mat-option *ngFor="let list of getSectionCategory" [value]="list">{{list}}</mat-option>
                     </mat-select>
+
                 </mat-form-field>
                 &nbsp;
                 <mat-form-field>
@@ -59,8 +61,8 @@
                         *ngIf="!AddParagraph.get('paragraphUserType').valid && AddParagraph.get('paragraphUserType').touched">
                         *required</mat-error>
                 </mat-form-field>
-                <p>Note:<br> 1) Select <b>CATEGORY</b> only when paragraph is for writing section <br>
-                    2) Paste the <b>LINK</b> of audio in the Question Adding box for listening category
+                <p>Note:
+                    1) Paste the <b>LINK</b> of audio in the heading input field for listening category
                 </p>
 
 

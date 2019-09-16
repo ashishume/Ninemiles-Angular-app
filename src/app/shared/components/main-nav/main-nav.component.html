@@ -4,35 +4,36 @@
     [opened]="!(isHandset$ | async) ? 'false':'false' ">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
+
       <a routerLink="/dashboard" mat-list-item>Dashboard</a>
-      <a routerLink="/admin-panel/add-questions" mat-list-item>Add MCQ Question</a>
-      <a routerLink="/admin-panel/add-paragraph" mat-list-item>Add Paragraph</a>
-      <a routerLink="/admin-panel/add-fill-blank-questions" mat-list-item>Add Fill Question</a>
-      <a routerLink="/admin-panel/registered-users" mat-list-item>Registered Users</a>
-      <a routerLink="/teacher" mat-list-item>Teacher</a>
-      <a routerLink="/teacher/upload-answer-sheet" mat-list-item>Upload checked sheets</a>
+
+      <span *ngIf="nav.visible">
+        <a routerLink="/admin-panel/add-questions" mat-list-item>Add MCQ Question</a>
+        <a routerLink="/admin-panel/add-paragraph" mat-list-item>Add Paragraph</a>
+        <a routerLink="/admin-panel/add-fill-blank-questions" mat-list-item>Add Fill Question</a>
+        <a routerLink="/admin-panel/registered-users" mat-list-item>Registered Users</a>
+        <a routerLink="/teacher" mat-list-item>Teacher</a>
+        <a routerLink="/teacher/upload-answer-sheet" mat-list-item>Upload checked sheets</a>
+      </span>
+
+
       <span class="profile">
-        <button (click)="authService.SignOut()">Logout</button>
+        <button mat-raised-button style="width: 100%" (click)="authService.SignOut()">Logout</button>
       </span>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="mat-sidenav-content">
-    <span *ngIf="nav.visible">
+    <span *ngIf="nav.test">
+
       <mat-toolbar color="primary">
-
-
         <span *ngIf="email">
-
           <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
-
-
         </span>
         <span routerLink="/">Logo</span>
         <span style="flex:1 1 auto;"></span>
 
-        <!-- <span *ngIf="nav.visible"> -->
         <div class="buttons" *ngIf="email">
           <span [matMenuTriggerFor]="menu" class="navigate">More</span>
           <mat-menu #menu="matMenu">
@@ -40,9 +41,6 @@
             <span mat-menu-item (click)="authService.SignOut()">Logout</span>
           </mat-menu>
         </div>
-        <!-- </span> -->
-
-
       </mat-toolbar>
     </span>
 

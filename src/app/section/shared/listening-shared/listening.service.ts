@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { CalculateMarksService } from 'src/app/shared/services/calculate-marks/calculate-marks.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListeningService {
 
-  constructor() { }
+  constructor(private calculateService: CalculateMarksService, private route: Router) { }
 
 
   //SELECT QUESTIONS
@@ -384,6 +386,205 @@ export class ListeningService {
     }
     console.log(this.arrayOfMCQQuestions);
 
+  }
+
+
+
+  //CALCULATE MARKS
+
+  listeningSectionMarks = 0;
+  calculateSelectListeningSectionMarks() {
+
+    //section 1
+    if (this.selectQuestionsSection1Array1.length) {
+      for (let i = 0; i < this.selectQuestionsSection1Array1.length; i++) {
+        if (this.selectQuestionsSection1Array1[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.selectQuestionsSection1Array2.length) {
+      for (let i = 0; i < this.selectQuestionsSection1Array2.length; i++) {
+        if (this.selectQuestionsSection1Array2[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.selectQuestionsSection1Array3.length) {
+      for (let i = 0; i < this.selectQuestionsSection1Array3.length; i++) {
+        if (this.selectQuestionsSection1Array3[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+
+
+
+    //section 2
+    if (this.selectQuestionsSection2Array1.length) {
+      for (let i = 0; i < this.selectQuestionsSection2Array1.length; i++) {
+        if (this.selectQuestionsSection2Array1[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.selectQuestionsSection2Array2.length) {
+      for (let i = 0; i < this.selectQuestionsSection2Array2.length; i++) {
+        if (this.selectQuestionsSection2Array2[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.selectQuestionsSection2Array3.length) {
+      for (let i = 0; i < this.selectQuestionsSection2Array3.length; i++) {
+        if (this.selectQuestionsSection2Array3[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+
+
+
+    //section 3
+    if (this.selectQuestionsSection3Array1.length) {
+      for (let i = 0; i < this.selectQuestionsSection3Array1.length; i++) {
+        if (this.selectQuestionsSection3Array1[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.selectQuestionsSection3Array2.length) {
+      for (let i = 0; i < this.selectQuestionsSection3Array2.length; i++) {
+        if (this.selectQuestionsSection3Array2[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.selectQuestionsSection3Array3.length) {
+      for (let i = 0; i < this.selectQuestionsSection3Array3.length; i++) {
+        if (this.selectQuestionsSection3Array3[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+
+
+    //section 4
+    if (this.selectQuestionsSection4Array1.length) {
+      for (let i = 0; i < this.selectQuestionsSection4Array1.length; i++) {
+        if (this.selectQuestionsSection4Array1[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+
+      }
+    }
+    if (this.selectQuestionsSection4Array2.length) {
+      for (let i = 0; i < this.selectQuestionsSection4Array2.length; i++) {
+        if (this.selectQuestionsSection4Array2[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.selectQuestionsSection4Array3.length) {
+      for (let i = 0; i < this.selectQuestionsSection4Array3.length; i++) {
+        if (this.selectQuestionsSection4Array3[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+
+
+
+
+
+
+
+    //TYPE QUESTIONS
+
+    //section 1
+    if (this.typeQuestionsSection1Array1.length) {
+      for (let i = 0; i < this.typeQuestionsSection1Array1.length; i++) {
+        if (this.typeQuestionsSection1Array1[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.typeQuestionsSection1Array2.length) {
+      for (let i = 0; i < this.typeQuestionsSection1Array2.length; i++) {
+        if (this.typeQuestionsSection1Array2[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.typeQuestionsSection1Array3.length) {
+      for (let i = 0; i < this.typeQuestionsSection1Array3.length; i++) {
+        if (this.typeQuestionsSection1Array3[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+
+
+
+    //section 2
+    if (this.typeQuestionsSection2Array1.length) {
+      for (let i = 0; i < this.typeQuestionsSection2Array1.length; i++) {
+        if (this.typeQuestionsSection2Array1[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.typeQuestionsSection2Array2.length) {
+      for (let i = 0; i < this.typeQuestionsSection2Array2.length; i++) {
+        if (this.typeQuestionsSection2Array2[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.typeQuestionsSection2Array3.length) {
+      for (let i = 0; i < this.typeQuestionsSection2Array3.length; i++) {
+        if (this.typeQuestionsSection2Array3[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+
+
+
+    //section 3
+    if (this.typeQuestionsSection3Array1.length) {
+      for (let i = 0; i < this.typeQuestionsSection3Array1.length; i++) {
+        if (this.typeQuestionsSection3Array1[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.typeQuestionsSection3Array2.length) {
+      for (let i = 0; i < this.typeQuestionsSection3Array2.length; i++) {
+        if (this.typeQuestionsSection3Array2[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.typeQuestionsSection3Array3.length) {
+      for (let i = 0; i < this.typeQuestionsSection3Array3.length; i++) {
+        if (this.typeQuestionsSection3Array3[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+
+
+    //section 4
+    if (this.typeQuestionsSection4Array1.length) {
+      for (let i = 0; i < this.typeQuestionsSection4Array1.length; i++) {
+        if (this.typeQuestionsSection4Array1[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.typeQuestionsSection4Array2.length) {
+      for (let i = 0; i < this.typeQuestionsSection4Array2.length; i++) {
+        if (this.typeQuestionsSection4Array2[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+    if (this.typeQuestionsSection4Array3.length) {
+      for (let i = 0; i < this.typeQuestionsSection4Array3.length; i++) {
+        if (this.typeQuestionsSection4Array3[i].isCorrect == true)
+          this.listeningSectionMarks += 1;
+      }
+    }
+
+    var mcqScore = 0;
+    this.arrayOfMCQQuestions.forEach(function (value) {
+      if (value.isCorrect == "true")
+        mcqScore += 1;
+    })
+    this.listeningSectionMarks += mcqScore;
+
+
+    this.calculateService.calculateListeningSectionMarks(this.listeningSectionMarks)
+
+    this.route.navigate(['results'])
   }
 
 

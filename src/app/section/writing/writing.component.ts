@@ -19,7 +19,7 @@ export class WritingComponent implements OnInit {
     private route: Router,
     private fb: FormBuilder,
   ) {
-    this.nav.hide()
+    this.nav.testActive()
 
     this.WritingSection = this.fb.group(
       {
@@ -47,10 +47,10 @@ export class WritingComponent implements OnInit {
         let section2paragraphDetails = []
 
         response.body.forEach(function (value) {
-          if (value.section == '1' && userType == value.paragraphUserType && testNumber == value.testNumber && value.paragraphSectionCategory == "Writing") {
+          if (value.section == '1' && "Writing" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section1paragraphDetails.push(value);
           }
-          if (value.section == '2' && userType == value.paragraphUserType && testNumber == value.testNumber && value.paragraphSectionCategory == "Writing") {
+          if (value.section == '2' && "Writing" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section2paragraphDetails.push(value);
           }
         })

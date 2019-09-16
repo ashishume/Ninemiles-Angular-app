@@ -1,5 +1,6 @@
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 
 @Component({
   selector: 'app-speaking',
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpeakingComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private nav: NavbarService) {
+    this.nav.testActive()
+  }
   countOfTests;
   ngOnInit() {
     // @HostListener('window:beforeunload')

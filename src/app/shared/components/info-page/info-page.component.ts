@@ -1,3 +1,4 @@
+import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
+
+  studentTypes=[];
 
   ngOnInit() {
+    this.studentTypes = this.apiService.getStudentTypes()
   }
 
 }

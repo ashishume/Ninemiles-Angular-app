@@ -1,8 +1,8 @@
 <div id="container">
     <div class="row">
-        <button mat-raised-button color="primary" id="submit-button">Submit</button>
-        <form class="form" [formGroup]="ReadingSection" autocomplete="off" novalidate #ReadingSectionForm="ngForm"
-            (ngSubmit)="onSubmitOfReadingSection(ReadingSectionForm)">
+        <button mat-raised-button color="primary" (click)="onSubmitOfReadingSection()"
+            id="submit-button">Submit</button>
+        <form class="form" [formGroup]="ReadingSection" autocomplete="off" novalidate #ReadingSectionForm="ngForm">
 
             <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
 
@@ -39,7 +39,7 @@
                                             <span *ngFor="let listOption of list.options">
                                                 <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
                                                     [value]="listOption.option"
-                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                    (change)="checkOptionStatus(listOption,list.section,$event,list.questionNumber)">
                                                     &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
                                             </span>
                                         </span>
@@ -122,7 +122,7 @@
                                             <span *ngFor="let listOption of list.options">
                                                 <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
                                                     [value]="listOption.option"
-                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                    (change)="checkOptionStatus(listOption,list.section,$event,list.questionNumber)">
                                                     &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
                                             </span>
                                         </span>
@@ -209,7 +209,7 @@
                                             <span *ngFor="let listOption of list.options">
                                                 <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
                                                     [value]="listOption.option"
-                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                    (change)="checkOptionStatus(listOption,list.section,$event,list.questionNumber)">
                                                     &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
                                             </span>
                                         </span>
@@ -294,7 +294,7 @@
                                             <span *ngFor="let listOption of list.options">
                                                 <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
                                                     [value]="listOption.option"
-                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                    (change)="checkOptionStatus(listOption,list.section,$event,list.questionNumber)">
                                                     &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
                                             </span>
                                         </span>
@@ -358,6 +358,6 @@
 
 
         <countdown id="timer" (event)="checkTimerStatus($event)" [config]="{ leftTime: 3600,format: 'm:s' }">
-                $!m!:$!s!</countdown>
+            $!m!:$!s!</countdown>
     </div>
 </div>

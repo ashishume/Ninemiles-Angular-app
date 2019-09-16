@@ -10,6 +10,7 @@ import { auth } from 'firebase';
 import * as Rx from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { InfoPageComponent } from '../../components/info-page/info-page.component';
+import { ErrorServiceService } from '../error-service/error-service.service';
 
 
 @Injectable({
@@ -20,6 +21,7 @@ export class AuthService {
   public getName = new Rx.Subject();
   public getEmail = new Rx.Subject();
   public getPhotoURL = new Rx.Subject();
+  public userType = new Rx.Subject();
   // private checkEmailStatus = localStorage.getItem('email');
   private checkEmailStatus = localStorage.getItem('email');
 
@@ -30,7 +32,8 @@ export class AuthService {
     private router: Router,
     public matDialog: MatDialog,
     private ngZone: NgZone,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private snack: ErrorServiceService
   ) {
   }
 
@@ -74,18 +77,17 @@ export class AuthService {
 
           this.apiService.login(body).subscribe((data: any) => {
             if (data.status == 200) {
+
               localStorage.setItem('name', result.user.displayName)
               localStorage.setItem('email', result.user.email)
               localStorage.setItem('photoURL', result.user.photoURL)
-              localStorage.setItem('userType', "Academic Students")
-              // localStorage.setItem('userType', "General Students")
-              // localStorage.setItem('userType', "Admin")
-              this.checkEmailStatus = localStorage.getItem('email');              
+              this.checkEmailStatus = localStorage.getItem('email');
               if (data.body.registrationStatus == 0) {
                 this.insertTestData(result.user.email);
               } else {
+                localStorage.setItem('userType', data.body.userDetails.userType)
+                this.userType.next(data.body.userDetails.userType)
                 this.router.navigate(['dashboard'])
-
               }
             }
           })
@@ -95,7 +97,6 @@ export class AuthService {
         window.alert(error);
       });
   }
-
 
   insertTestData(userEmail) {
     const email = {

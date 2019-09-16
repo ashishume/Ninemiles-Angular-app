@@ -1,5 +1,7 @@
+import { ApiService } from './../../../../shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
 
 @Component({
   selector: 'app-writing-dialog',
@@ -8,10 +10,29 @@ import { MatDialogRef } from '@angular/material';
 })
 export class WritingDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<WritingDialogComponent>) { }
-
+  constructor(
+    private apiService: ApiService,
+    public dialogRef: MatDialogRef<WritingDialogComponent>,
+    private snack:ErrorServiceService
+  ) { }
+  testDetails = [];
 
   ngOnInit() {
+    const query = {
+      email: localStorage.getItem('email')
+    }
+    const testNumber = parseInt(localStorage.getItem('testNumber'))
+    this.apiService.showTestData(query).subscribe((data: any) => {
+      if (data.status == 200) {
+        data.body.testDetails.forEach(value => {
+          if (value.testNumber == testNumber) {
+            this.testDetails.push(value);
+            console.log(this.testDetails);
+            
+          }
+        });
+      }
+    })
   }
 
   uploadEvent() {
@@ -19,5 +40,8 @@ export class WritingDialogComponent implements OnInit {
   }
   onlineEvent() {
     this.dialogRef.close("online")
+  }
+  showAttemptMessage() {
+    this.snack.showError("You have already attempted the test")
   }
 }

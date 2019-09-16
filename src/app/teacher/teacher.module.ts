@@ -8,15 +8,13 @@ import { UploadAnswerSheetComponent } from './upload-answer-sheet/upload-answer-
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
-import { AudioTestComponent } from './audio-test/audio-test.component';
-import { RaisedIssueComponent } from './raised-issue/raised-issue.component'
+import { RaisedIssueComponent } from './raised-issue/raised-issue.component';
 
 @NgModule({
   declarations: [
     TeacherComponent,
     UploadAnswerSheetComponent,
-    AudioTestComponent,
-    RaisedIssueComponent
+    RaisedIssueComponent,
   ],
   imports: [
     SelectDropDownModule,
