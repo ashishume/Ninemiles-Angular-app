@@ -1,5 +1,6 @@
+import { AdminGuard } from './shared/guard/admin/admin.guard';
 import { MarksSheetComponent } from './marks-sheet/marks-sheet.component';
-import { AuthGuard } from './shared/guard/auth-guard.service';
+import { AuthGuard } from './shared/guard/auth/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
@@ -8,6 +9,7 @@ import { StudentsComponent } from './students/students.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ResultsComponent } from './results/results.component';
+import { TeacherGuard } from './shared/guard/teacher/teacher.guard';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -23,12 +25,12 @@ const routes: Routes = [
   {
     path: 'admin-panel',
     loadChildren: './admin-panel/admin-panel.module#AdminPanelModule',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'teacher',
     loadChildren: './teacher/teacher.module#TeacherModule',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, TeacherGuard]
   },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent },

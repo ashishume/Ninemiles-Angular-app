@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="table" style="margin: 0 auto;">
+
+        <tr class="table-primary">
+          <td>Name</td>
+          <td>Email</td>
+          <td>Test Number</td>
+          <td>User Type</td>
+          <td>Answers</td>
+          <td></td>
+        </tr>
+        <tr *ngFor="let list of studentDetails">
+          <td>{{list.studentName}}</td>
+          <td>{{list.studentEmail}}</td>
+          <td>{{list.testNumber}}</td>
+          <td>{{list.userType}}</td>
+
+          <td *ngFor="let item of list.submittedAnswer;let i=index">
+            <div>
+              Section {{item.section}}</div>
+            <a class="icon" (click)="downloadAnswer(item,list.studentName)">
+              <i class="material-icons">
+                cloud_download
+              </i>
+            </a>
+          </td>
+        </tr>
+      </div>
+    </div>
+  </div>
+</div>

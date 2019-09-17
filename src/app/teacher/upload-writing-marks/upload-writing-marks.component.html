@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <form class="form" [formGroup]="AnswerGroup" autocomplete="off" novalidate #MarksForm="ngForm"
+        (ngSubmit)="onSubmitAnswer(MarksForm)">
+
+        <ngx-select-dropdown required formControlName="studentDetails" name="studentDetails" [multiple]="false"
+          [config]="config" [options]="dropdownOptions">
+        </ngx-select-dropdown>
+
+        <mat-form-field>
+          <mat-label>Test Number</mat-label>
+          <mat-select required formControlName="testNumber" name="testNumber">
+            <mat-option *ngFor="let item of countOfTests" [value]="item">{{item}}</mat-option>
+          </mat-select>
+        </mat-form-field>&nbsp;
+
+        <mat-form-field>
+          <mat-label>Marks</mat-label>
+          <input matInput type="number" formControlName="marksBand" name="marksBand" required>
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button style="width: 100%" color="primary"
+          [disabled]="!AnswerGroup.valid">Submit</button>
+      </form>
+
+
+    </div>
+  </div>
+</div>

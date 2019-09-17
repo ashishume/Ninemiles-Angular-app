@@ -24,7 +24,6 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { LayoutModule } from '@angular/cdk/layout';
 import { MainNavComponent } from './shared/components/main-nav/main-nav.component';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { InfoPageComponent } from './shared/components/info-page/info-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SnackBarComponent } from './shared/components/snack-bar/snack-bar.component';
 import { NavbarService } from './shared/services/navbar-service/navbar.service';
@@ -35,6 +34,7 @@ import { SharedModule } from './shared/services/shared.module';
 import { ErrorServiceService } from './shared/services/error-service/error-service.service';
 import { ResultsComponent } from './results/results.component';
 import { MarksSheetComponent } from './marks-sheet/marks-sheet.component';
+import { RaiseIssueFormComponent } from './raise-issue-form/raise-issue-form.component';
 
 
 
@@ -46,11 +46,11 @@ import { MarksSheetComponent } from './marks-sheet/marks-sheet.component';
     PageNotFoundComponent,
     MainNavComponent,
     SignInComponent,
-    InfoPageComponent,
     ProfileComponent,
     SnackBarComponent,
     ResultsComponent,
     MarksSheetComponent,
+    RaiseIssueFormComponent,
 
 
   ],
@@ -69,7 +69,7 @@ import { MarksSheetComponent } from './marks-sheet/marks-sheet.component';
     LayoutModule,
 
   ],
-  entryComponents: [InfoPageComponent, SnackBarComponent],
+  entryComponents: [SnackBarComponent,RaiseIssueFormComponent],
   providers: [
     AuthService,
     ApiService,

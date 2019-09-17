@@ -8,13 +8,17 @@ import { UploadAnswerSheetComponent } from './upload-answer-sheet/upload-answer-
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
-import { RaisedIssueComponent } from './raised-issue/raised-issue.component';
+import { ShowWritingComponent } from './show-writing/show-writing.component';
+import { ShowUploadWritingComponent } from './show-upload-writing/show-upload-writing.component';
+import { UploadWritingMarksComponent } from './upload-writing-marks/upload-writing-marks.component';
 
 @NgModule({
   declarations: [
     TeacherComponent,
     UploadAnswerSheetComponent,
-    RaisedIssueComponent,
+    ShowWritingComponent,
+    ShowUploadWritingComponent,
+    UploadWritingMarksComponent,
   ],
   imports: [
     SelectDropDownModule,

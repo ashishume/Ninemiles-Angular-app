@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <br>
+            <a routerLink='/admin-panel'>
+                <img class="icon" src="../../../assets/left-arrow.png">
+            </a>
+            <br>
+            <br>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Name</td>
+                        <td>Email</td>
+                        <td>Issue</td>
+                        <td>Status</td>
+                        <td>Complained on</td>
+                        <td>Change Status</td>
+                    </tr>
+
+                    <tr *ngFor="let list of issueDetails">
+                        <td>{{list.name}}</td>
+                        <td>{{list.email}}</td>
+                        <td>{{list.message}}</td>
+                        <td>
+                            <span class="unsolved" *ngIf="list.status=='false'">
+                                Not Solved
+                            </span>
+                            <span class="solved" *ngIf="list.status=='true'">
+                                Solved
+                            </span>
+
+                        </td>
+                        <td>
+                            {{list.createdAt | date}}
+                        </td>
+                        <td>
+
+                            <mat-form-field>
+                                <mat-select placeholder="choose status">
+                                    <mat-option (click)="updateIssues('true',list._id)" value="true">Solved</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>

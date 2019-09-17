@@ -14,11 +14,15 @@ export class MarksSheetComponent implements OnInit {
     const params = {
       email: localStorage.getItem('email')
     }
+    let tempArray = []
     this.apiService.displayMarksSheet(params).subscribe((data: any) => {
       if (data.status == 200) {
-        this.marksDetails = data.body
-        console.log(this.marksDetails);
-
+        data.body.forEach(function (value) {
+          if (value.testNumber == parseInt(localStorage.getItem('testNumber'))) {
+            tempArray.push(value)
+          }
+        })
+        this.marksDetails = tempArray;
       }
     })
 

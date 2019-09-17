@@ -2,37 +2,29 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <div class="table">
-
-        <tr>
-          <td>Name</td>
-          <td>Email</td>
-          <td>Test Number</td>
-          <td>Sheet Number</td>
-          <td>Marks Scored</td>
-          <td>User Type</td>
-          <td>Test Paper</td>
-          <td>Paper checked</td>
-        </tr>
-        <tr *ngFor="let list of StudentDetails">
-          <td>{{list.studentName}}</td>
-          <td>{{list.studentEmail}}</td>
-          <td>{{list.testNumber}}</td>
-          <td>{{list.sheetNumber}}</td>
-          <td>{{list.marksScored}}</td>
-          <td>{{list.userType}}</td>
-          <td style="text-align: center;"><img [src]="list.onlineAnswer" style="width:200px;height:300px;">
-            <br>
-            <br>
-            <a href="{{list.onlineAnswer}}" target="_blank"><button mat-raised-button>Download</button></a>
-          </td>
-          <td style="text-align: center;" *ngIf="list.answerIsChecked==false"><img src="../../assets/wrong.png"><br>Not
-            Checked</td>
-          <td style="text-align: center;" *ngIf="list.answerIsChecked==true"><img
-              src="../../assets/checked.png"><br>Checked</td>
-        </tr>
-
-      </div>
+      <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
+        <mat-tab class="mat-tab" label="Writing Answers">
+          <ng-template matTabContent>
+            <app-show-writing></app-show-writing>
+          </ng-template>
+        </mat-tab>
+        <mat-tab class="mat-tab" label="Uploaded Sheets">
+          <ng-template matTabContent>
+            <app-show-upload-writing></app-show-upload-writing>
+          </ng-template>
+        </mat-tab>
+        <mat-tab class="mat-tab" label="Upload Document MarkSheet">
+          <ng-template matTabContent>
+            <app-upload-answer-sheet></app-upload-answer-sheet>
+          </ng-template>
+        </mat-tab>
+        <mat-tab class="mat-tab" label="Submit Writing MarkSheet">
+          <ng-template matTabContent>
+            <app-upload-writing-marks></app-upload-writing-marks>
+          </ng-template>
+        </mat-tab>
+      
+      </mat-tab-group>
 
     </div>
   </div>

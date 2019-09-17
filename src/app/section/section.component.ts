@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ErrorServiceService } from '../shared/services/error-service/error-service.service';
+import { RaiseIssueFormComponent } from '../raise-issue-form/raise-issue-form.component';
 
 @Component({
   selector: 'app-section',
@@ -45,7 +46,8 @@ export class SectionComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: any) => {
 
       if (result == "upload") {
-        this.route.navigate(['section/upload-writing'])
+        this.apiService.passDataValues("upload")
+        this.route.navigate(['section/test-description'])
       } else if (result == "online") {
         this.apiService.passDataValues("writing")
         this.route.navigate(['section/test-description'])
@@ -70,5 +72,24 @@ export class SectionComponent implements OnInit {
     this.snack.showError("You have already attempted the test")
   }
 
+  showIssueForm() {
+    const dialogConfig = new MatDialogConfig();
+    const dialogRef = this.matDialog.open(RaiseIssueFormComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      const body = {
+        email: localStorage.getItem('email'),
+        name: localStorage.getItem('name'),
+        message: result.message
+      }
+
+      this.apiService.insertIssue(body).subscribe(result => {
+        if (result.status == 200) {
+          this.snack.showError("Your issues has been received")
+        }
+      })
+
+    })
+
+  }
 
 }

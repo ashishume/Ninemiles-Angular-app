@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/services/shared.module';
 import { RegisteredUsersComponent } from './registered-users/registered-users.component';
 import { QuillModule } from 'ngx-quill';
+import { UpdateTestStatusComponent } from './update-test-status/update-test-status.component';
+import { RaisedIssueComponent } from './raised-issue/raised-issue.component';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 @NgModule({
   declarations: [
@@ -16,14 +19,19 @@ import { QuillModule } from 'ngx-quill';
     AddQuestionsComponent,
     AdminPanelComponent,
     RegisteredUsersComponent,
-
+    UpdateTestStatusComponent,
+    RaisedIssueComponent
+    
   ],
   imports: [
+    SelectDropDownModule,
     QuillModule.forRoot(),
     CommonModule,
     SharedModule,
     AdminPanelRoutingModule
   ], exports: [
+    UpdateTestStatusComponent,
+    RaisedIssueComponent,
     AddFillBlankQuestionsComponent,
     AddParagraphComponent,
     AddQuestionsComponent,

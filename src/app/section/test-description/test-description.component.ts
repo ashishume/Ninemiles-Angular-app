@@ -55,6 +55,15 @@ export class TestDescriptionComponent implements OnInit {
         }
       })
     }
+    else if (this.data == "upload") {
+      this.updateBody.testStatusUpdate = "onlineWriting";
+      this.apiService.updateTestData(this.updateBody).subscribe((data: any) => {
+        if (data.status == 200) {
+          this.route.navigate(['section/upload-writing'])
+
+        }
+      })
+    }
 
   }
 

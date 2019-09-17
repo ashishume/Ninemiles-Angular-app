@@ -2,6 +2,12 @@
     <div class="row">
         <div class="col-sm-12">
             <br>
+            <a routerLink='/admin-panel'>
+                <img class="icon" src="../../../assets/left-arrow.png">
+            </a>
+            <br>
+            <br>
+
             <h3>
                 <span *ngIf="editObject">
                     Edit
@@ -16,8 +22,9 @@
 
                 <mat-form-field>
                     <mat-label>Add Question Number</mat-label>
-                    <input matInput name="questionNumber" type="number" min="1" formControlName="questionNumber" required [(ngModel)]="questionNumber">
-                  </mat-form-field>
+                    <input matInput name="questionNumber" type="number" min="1" formControlName="questionNumber"
+                        required [(ngModel)]="questionNumber">
+                </mat-form-field>
 
                 <quill-editor formControlName="questionTitle" required name="questionTitle" [(ngModel)]="questionTitle">
                 </quill-editor>

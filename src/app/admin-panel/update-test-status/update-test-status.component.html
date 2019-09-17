@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <br>
+      <a routerLink='/admin-panel'>
+        <img class="icon" src="../../../assets/left-arrow.png">
+      </a>
+      <br>
+      <br>
+      <form class="form" [formGroup]="TestFormGroup" autocomplete="off" novalidate #TestForm="ngForm"
+        (ngSubmit)="onSubmitOfTest(TestForm)">
+
+        <ngx-select-dropdown required formControlName="studentDetails" name="studentDetails" [multiple]="false"
+          [config]="config" [options]="dropdownOptions">
+        </ngx-select-dropdown>
+
+        <mat-form-field>
+          <mat-label>Test Number</mat-label>
+          <mat-select required formControlName="testNumber" name="testNumber">
+            <mat-option *ngFor="let item of countOfTests" [value]="item">{{item}}</mat-option>
+          </mat-select>
+        </mat-form-field>&nbsp;
+        <mat-form-field>
+          <mat-label>Section Category</mat-label>
+          <mat-select required formControlName="testStatusUpdate" name="testStatusUpdate">
+            <mat-option *ngFor="let item of sectionCategory" [value]="item">{{item}}</mat-option>
+            <mat-option></mat-option>
+          </mat-select>
+        </mat-form-field>&nbsp;
+
+
+        <button type="submit" mat-raised-button style="width: 100%" color="primary"
+          [disabled]="!TestFormGroup.valid">Submit</button>
+      </form>
+
+
+    </div>
+  </div>
+</div>

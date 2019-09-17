@@ -4,13 +4,14 @@ import { IfStmt } from '@angular/compiler';
 import { isEmpty } from 'rxjs/operators';
 import { empty } from 'rxjs';
 import { Router } from '@angular/router';
+import { ErrorServiceService } from '../error-service/error-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalculateMarksService {
 
-  constructor(private apiService: ApiService, private route: Router) { }
+  constructor(private apiService: ApiService, private route: Router, private snack: ErrorServiceService) { }
   countOfCorrectAnswers = 0;
   finalScore = 0;
   bandCalculation(marks, section) {
@@ -129,8 +130,6 @@ export class CalculateMarksService {
       userType: localStorage.getItem('userType')
     }
 
-    console.log(body);
-
     this.apiService.insertMarkSheet(body).subscribe((data: any) => {
       if (data.status == 200) {
         this.route.navigate(['results'])
@@ -157,9 +156,14 @@ export class CalculateMarksService {
         this.route.navigate(['results'])
       }
     })
+  }
 
-
-
+  calculateWritingSectionMarks(writingBody) {
+    this.apiService.insertMarkSheet(writingBody).subscribe((data: any) => {
+      if (data.status == 200) {
+        this.snack.showError("Result submitted successfully");
+      }
+    })
   }
 
 }

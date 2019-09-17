@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 import { Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
 
 @Component({
   selector: 'app-writing',
@@ -18,6 +19,7 @@ export class WritingComponent implements OnInit {
     private nav: NavbarService,
     private route: Router,
     private fb: FormBuilder,
+    private snack: ErrorServiceService
   ) {
     this.nav.testActive()
 
@@ -91,9 +93,9 @@ export class WritingComponent implements OnInit {
       userType: localStorage.getItem('userType'),
     }
 
-    console.log(body);
     this.apiService.submitWritingAnswer(body).subscribe((data: any) => {
       if (data.status == 200) {
+        this.snack.showError("Test submitted successfully")
         this.route.navigate(['dashboard'])
       }
     })

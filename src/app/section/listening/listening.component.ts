@@ -64,6 +64,7 @@ export class ListeningComponent implements OnInit {
   section2TypeQuestionsId = [];
   section3TypeQuestionsId = [];
   section4TypeQuestionsId = [];
+  userType;
   ngOnInit() {
 
 
@@ -85,6 +86,7 @@ export class ListeningComponent implements OnInit {
     let section4Questions = [];
 
     var userType = localStorage.getItem('userType');
+    this.userType = userType;
     var testNumber = localStorage.getItem('testNumber');
     this.apiService.getListOfQuestions().subscribe((response: any) => {
       if (response.status == 200) {
@@ -149,14 +151,15 @@ export class ListeningComponent implements OnInit {
       }
     })
 
+    let section1AudioDetails = []
+    let section2AudioDetails = []
+    let section3AudioDetails = []
+    let section4AudioDetails = []
     this.apiService.getListOfParagraph().subscribe((response: any) => {
       if (response.status == 200) {
-        let section1AudioDetails = []
-        let section2AudioDetails = []
-        let section3AudioDetails = []
-        let section4AudioDetails = []
 
         response.body.forEach(function (value) {
+
           if (value.section == '1' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
             section1AudioDetails.push(value);
           }
@@ -174,10 +177,7 @@ export class ListeningComponent implements OnInit {
         this.section2AudioDetails = section2AudioDetails;
         this.section3AudioDetails = section3AudioDetails;
         this.section4AudioDetails = section4AudioDetails;
-        console.log(this.section1AudioDetails);
-        console.log(this.section2AudioDetails);
-        console.log(this.section3AudioDetails);
-        console.log(this.section4AudioDetails);
+
 
       }
     })

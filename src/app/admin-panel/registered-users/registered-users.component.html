@@ -1,6 +1,13 @@
-<div id="container">
+<div class="container">
   <div class="row">
     <!-- <div class="col-sm-12"> -->
+    <br>
+    <br>
+    <a routerLink='/admin-panel'>
+      <img class="icon" src="../../../assets/left-arrow.png">
+    </a>
+    <br>
+    <br>
 
     <div class="table-responsive">
       <table class="table" style="text-align: center">
@@ -9,7 +16,8 @@
           <td></td>
           <td>Name</td>
           <td>Email</td>
-          <td>No.of tests given</td>
+          <td>User</td>
+          <td>Change User Type</td>
           <td>Payment Status</td>
           <td>Member since</td>
           <td>Payment Status</td>
@@ -19,14 +27,26 @@
           </td>
           <td>{{list.name}}</td>
           <td>{{list.email}}</td>
-          <td>{{list.countOfTestsGiven}}</td>
+          <td>{{list.userType}}</td>
+          <td>
+
+            <mat-form-field>
+              <mat-label>Select User Type</mat-label>
+              <mat-select>
+                <mat-option (click)="changeUserType(user,list.email)" *ngFor="let user of userTypes" [value]="user">
+                  {{user}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </td>
           <td *ngIf="list.paymentStatus">Premium User</td>
           <td *ngIf="!list.paymentStatus">Free User</td>
           <td>{{list.createdAt | date:'longDate'}}</td>
           <td>
             <mat-form-field>
               <mat-select placeholder="Set Payment Status">
-                <mat-option  *ngFor="let item of paymentStatus" (click)="setPaymentStatus(item,list)">{{item}}</mat-option>
+                <mat-option *ngFor="let item of paymentStatus" (click)="setPaymentStatus(item,list)">{{item}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
           </td>

@@ -38,7 +38,7 @@ export class UploadAnswerSheetComponent implements OnInit {
   }
 
   dropdownOptions = []
-
+  countOfTests = [];
   config = {
     displayKey: "name",
     search: true,
@@ -55,10 +55,17 @@ export class UploadAnswerSheetComponent implements OnInit {
 
 
   ngOnInit() {
+    this.countOfTests = this.apiService.numberOfTests()
+    let tempDropDown = []
     this.apiService.listAllUsers().subscribe((data: any) => {
       if (data.status == 200) {
         this.StudentDetails = data.body;
-        this.dropdownOptions = data.body;
+        this.StudentDetails.forEach(function (value) {
+          if (value.userType == "Academic Students" || value.userType == "General Students") {
+            tempDropDown.push(value);
+          }
+        })
+        this.dropdownOptions = tempDropDown;
       }
     })
   }
@@ -94,6 +101,7 @@ export class UploadAnswerSheetComponent implements OnInit {
               marksScored: studentData.marks,
             }
             this.loader.hide()
+
             this.apiService.updateOnlineTest(body).subscribe((data: any) => {
               if (data.status == 200) {
 

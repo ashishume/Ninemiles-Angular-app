@@ -6,65 +6,64 @@
             <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
 
                 <!-- <div class="col-sm-12"> -->
-                    <!-- SECTION 1 -->
-                    <div class="section1-content" *ngIf="section1paragraphDetails.length">
+                <!-- SECTION 1 -->
+                <div class="section1-content" *ngIf="section1paragraphDetails.length">
 
-                        <mat-tab class="mat-tab1" label="Task 1">
+                    <mat-tab class="mat-tab1" label="Task 1">
 
-                            <div class="row">
-                                <div class="col-sm-6" id="paragraph-section">
-                                    <span *ngFor="let list of section1paragraphDetails">
-                                        <span style="float: right" class="edit-question-icon"
-                                            (click)="editParagraph(list)">
-                                            <i class="material-icons">
-                                                edit
-                                            </i>
-                                        </span>
-                                        <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
-                                        <p [innerHTML]="list.paragraphTitle">
-                                        </p>
+                        <div class="row">
+                            <div class="col-sm-6" id="paragraph-section">
+                                <span *ngFor="let list of section1paragraphDetails">
+                                    <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                                        <i class="material-icons">
+                                            edit
+                                        </i>
                                     </span>
-                                </div>
-                                <div class="col-sm-6" id="question-section">
-                                    <quill-editor [(ngModel)]="section1answer" formControlName="section1answer"
-                                        name="section1answer"></quill-editor>
-                                </div>
+                                    <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                                    <p [innerHTML]="list.paragraphTitle">
+                                    </p>
+                                </span>
                             </div>
+                            <div class="col-sm-6" id="question-section">
+                                <textarea [(ngModel)]="section1answer" formControlName="section1answer"
+                                    name="section1answer" style="width:100%;height:100vh"></textarea>
+                            </div>
+                        </div>
 
-                        </mat-tab>
-                    </div>
+                    </mat-tab>
+                </div>
 
 
-                    <!-- SECTION 2 -->
-                    <div class="section2-content" *ngIf="section2paragraphDetails.length">
-                        <mat-tab label="Task 2">
-                            <div class="row">
-                                <div class="col-sm-6" id="paragraph-section">
-                                    <span *ngFor="let list of section2paragraphDetails">
-                                        <span style="float: right" class="edit-question-icon"
-                                            (click)="editParagraph(list)">
-                                            <i class="material-icons">
-                                                edit
-                                            </i>
-                                        </span>
-                                        <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
-                                        <p [innerHTML]="list.paragraphTitle"></p>
+                <!-- SECTION 2 -->
+                <div class="section2-content" *ngIf="section2paragraphDetails.length">
+                    <mat-tab label="Task 2">
+                        <div class="row">
+                            <div class="col-sm-6" id="paragraph-section">
+                                <span *ngFor="let list of section2paragraphDetails">
+                                    <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                                        <i class="material-icons">
+                                            edit
+                                        </i>
                                     </span>
-                                </div>
-                                <div class="col-sm-6" id="question-section">
-                                    <quill-editor [(ngModel)]="section2answer" formControlName="section2answer"
-                                        name="section2answer"></quill-editor>
-                                </div>
+                                    <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                                    <p [innerHTML]="list.paragraphTitle"></p>
+                                </span>
                             </div>
-                        </mat-tab>
-                    </div>
+                            <div class="col-sm-6" id="question-section">
+                                <textarea [(ngModel)]="section2answer" formControlName="section2answer"
+                                    name="section2answer" style="width:100%;height:100vh"></textarea>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </div>
 
-                    <br>
-                    <br>
-                    <br>
+                <br>
+                <br>
+                <br>
 
                 <!-- </div> -->
             </mat-tab-group>
+            <button mat-raised-button type="submit" color="primary" id="submit-button">Submit</button>
         </form>
 
 
@@ -75,4 +74,3 @@
 
 <countdown id="timer" (event)="checkTimerStatus($event)" [config]="{ leftTime: 3600,format: 'm:s' }">
     $!m!:$!s!</countdown>
-<button mat-raised-button type="submit" color="primary" id="submit-button">Submit</button>

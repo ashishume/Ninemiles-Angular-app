@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <form class="form" autocomplete="off" #IssueForm="ngForm" (ngSubmit)="onSubmitIssue(IssueForm)">
+
+        <textarea class="message" placeholder="Please type your issue...." style="height:200px;width:300px;"
+          name="message" [(ngModel)]="message"></textarea>
+        <br>
+        <br>
+        <button mat-raised-button style="width: 100%" color="primary">Submit</button>
+
+      </form>
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.solved {
+  background-color: lightgreen;
+  padding: 5px;
+  border-radius: 5px;
+}
+.unsolved {
+  background-color: lightcoral;
+  padding: 5px;
+  border-radius: 5px;
+}

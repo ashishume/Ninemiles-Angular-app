@@ -6,24 +6,29 @@
       <mat-divider></mat-divider>
       <br>
       <div class="row" *ngFor="let list of testDetails">
-        <div (click)="uploadEvent()" *ngIf="list.writing==false" id="upload-writing" class="col-sm-6">
+        <div (click)="uploadEvent()" *ngIf="list.onlineWriting==false" id="upload-writing" class="col-sm-6">
           <img class="writing" src="../../../../../assets/writing.png">
           <p>Upload Document</p>
         </div>
-        <div (click)="onlineEvent()" *ngIf="list.onlineWriting==false" class="col-sm-6" id="online-attempt">
+        <div (click)="onlineEvent()" *ngIf="list.writing==false" class="col-sm-6" id="online-attempt">
           <img class="writing" src="../../../../../assets/website.png">
           <p>Give online</p>
         </div>
+
+
+        <!-- DISBALED -->
         <div *ngIf="list.writing==true" class="col-sm-6" (click)="showAttemptMessage()">
           <img src="../../../../../assets/writing.png">
-          <p>Upload Document</p>
+          <p>Give online</p>
           <img src="../../../../../assets/lock.svg" class="icon">
         </div>
         <div *ngIf="list.onlineWriting==true" class="col-sm-6" (click)="showAttemptMessage()">
           <img src="../../../../../assets/website.png">
-          <p>Give online</p>
+          <p>Upload Document</p>
           <img src="../../../../../assets/lock.svg" class="icon">
         </div>
+
+
         <br>
         <br>
         <button style="margin: 0 auto;" mat-raised-button mat-dialog-close>Cancel</button>

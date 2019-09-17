@@ -61,6 +61,9 @@ export class ApiService {
   updateTestData(body) {
     return this.httpService.callApi('PUT', body, 'tests/updateTests', '');
   }
+  changeTestStatus(body) {
+    return this.httpService.callApi('PUT', body, 'tests/changeTestStatus', '');
+  }
 
   showTestData(query) {
     return this.httpService.callApi('GETBYPARAMS', '', 'tests/listTests', query);
@@ -77,10 +80,16 @@ export class ApiService {
 
 
   // ***********************************************************************
+  // WRITING SECTION
   submitWritingAnswer(body) {
     return this.httpService.callApi('POST', body, 'contents/writingAnswer', '');
   }
 
+  showWritingAnswers() {
+    return this.httpService.callApi('GET', '', 'contents/showAnswer', '');
+  }
+
+  // **************************************************************************
 
   //ONLINE UPLOAD TEST SECTION
   insertOnlineTest(body) {
@@ -110,7 +119,18 @@ export class ApiService {
   }
 
 
-
+  // ***********************************************************************
+  //ISSUES API
+  insertIssue(body) {
+    return this.httpService.callApi('POST', body, 'issue/addIssue', '')
+  }
+  displayIssue() {
+    return this.httpService.callApi('GET', '', 'issue/showIssues', '')
+  }
+  updateIssue(body) {
+    return this.httpService.callApi('PUT', body, 'issue/updateIssues', '')
+  }
+  // ***********************************************************************
 
 
 
@@ -126,6 +146,15 @@ export class ApiService {
       // "Admin"
     ]
     return paragraphUserType;
+  }
+  getUserTypes() {
+    let userType = [
+      "Academic Students",
+      "General Students",
+      "Teacher",
+      "Admin"
+    ]
+    return userType;
   }
   getSectionCategory() {
     let sectionCategory = [
@@ -155,6 +184,14 @@ export class ApiService {
   }
   returnDataValues() {
     return this.dataItemObject;
+  }
+
+  numberOfTests() {
+    let tempArray = []
+    for (let i = 1; i <= 30; i++) {
+      tempArray.push(i);
+    }
+    return tempArray;
   }
 
 }

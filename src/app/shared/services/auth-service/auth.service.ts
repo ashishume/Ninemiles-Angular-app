@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { auth } from 'firebase';
 import * as Rx from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { InfoPageComponent } from '../../components/info-page/info-page.component';
 import { ErrorServiceService } from '../error-service/error-service.service';
 
 
@@ -22,8 +21,8 @@ export class AuthService {
   public getEmail = new Rx.Subject();
   public getPhotoURL = new Rx.Subject();
   public userType = new Rx.Subject();
-  // private checkEmailStatus = localStorage.getItem('email');
   private checkEmailStatus = localStorage.getItem('email');
+  private typeOfUser = localStorage.getItem('userType');
 
 
   constructor(
@@ -40,6 +39,27 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     if (this.checkEmailStatus) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  get isAdmin(): boolean {
+    if (this.typeOfUser == "Admin") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  get isTeacher(): boolean {
+    if (this.typeOfUser == "Teacher") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  get isStudent(): boolean {
+    if (this.typeOfUser == "Academic Students" || this.typeOfUser == "General Students") {
       return true;
     } else {
       return false;

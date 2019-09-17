@@ -45,13 +45,6 @@
         </span>
       </mat-card>
 
-      <!-- <mat-card *ngIf="list.writing==true" id="mat-card" (click)="showAttemptMessage()" class="mat-card">
-        <img src="../../assets/writing.svg" class="icon">
-        Writing
-        <span id="float-item">
-          <img src="../../assets/lock.svg" class="icon">
-        </span>
-      </mat-card> -->
 
       <mat-card *ngIf="list.reading==true" id="mat-card" (click)="showAttemptMessage()" class="mat-card">
         <img src="../../assets/reading.svg" class="icon">
@@ -72,4 +65,4 @@
     </div>
   </div>
 </div>
-<a routerLink="/teacher/raised-issue" class="footer">Please raise any issue</a>
+<a (click)="showIssueForm()"class="footer">Please raise any issue</a>

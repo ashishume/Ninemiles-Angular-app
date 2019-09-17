@@ -12,16 +12,21 @@
             [config]="config" [options]="dropdownOptions">
           </ngx-select-dropdown>
           <mat-form-field>
-            <mat-label>Test Number</mat-label>
-            <input matInput type="number" min="1" formControlName="testNumber" required name="testNumber">
+            <mat-label>
+              Test Number
+            </mat-label>
+            <mat-select formControlName="testNumber" required name="testNumber">
+              <mat-option *ngFor="let item of countOfTests" [value]="item">{{item}}</mat-option>
+            </mat-select>
           </mat-form-field> &nbsp;
+
           <mat-form-field>
             <mat-label>Sheet Number</mat-label>
             <input matInput type="number" min="1" formControlName="sheetNumber" required name="sheetNumber">
           </mat-form-field> &nbsp;
           <mat-form-field>
             <mat-label>Marks</mat-label>
-            <input matInput  type="number" formControlName="marks" name="marks">
+            <input matInput type="number" formControlName="marks" name="marks">
           </mat-form-field>
           <br>
           <br>
