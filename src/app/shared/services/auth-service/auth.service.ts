@@ -58,13 +58,7 @@ export class AuthService {
       return false;
     }
   }
-  get isStudent(): boolean {
-    if (this.typeOfUser == "Academic Students" || this.typeOfUser == "General Students") {
-      return true;
-    } else {
-      return false;
-    }
-  }
+ 
 
   // Sign in with Googleuserlogin
   GoogleAuth() {

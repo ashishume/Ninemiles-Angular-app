@@ -1,0 +1,8 @@
+.mat-form-field {
+    z-index: 99999;
+    width: 100px;
+    position: relative;
+    top: 0;
+    left: 20px;
+  }
+  

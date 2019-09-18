@@ -11,6 +11,12 @@ import { QuillModule } from 'ngx-quill';
 import { UpdateTestStatusComponent } from './update-test-status/update-test-status.component';
 import { RaisedIssueComponent } from './raised-issue/raised-issue.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { ReadingAdminComponent } from './sections-admin/reading-admin/reading-admin.component';
+import { SectionsAdminComponent } from './sections-admin/sections-admin.component';
+import { SpeakingAdminComponent } from './sections-admin/speaking-admin/speaking-admin.component';
+import { ListeningAdminComponent } from './sections-admin/listening-admin/listening-admin.component';
+import { WritingAdminComponent } from './sections-admin/writing-admin/writing-admin.component';
+import { CountdownModule } from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -20,10 +26,16 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
     AdminPanelComponent,
     RegisteredUsersComponent,
     UpdateTestStatusComponent,
-    RaisedIssueComponent
-    
+    RaisedIssueComponent,
+    ReadingAdminComponent,
+    SectionsAdminComponent,
+    SpeakingAdminComponent,
+    ListeningAdminComponent,
+    WritingAdminComponent,
+
   ],
   imports: [
+    CountdownModule,
     SelectDropDownModule,
     QuillModule.forRoot(),
     CommonModule,

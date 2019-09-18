@@ -18,7 +18,7 @@ export class RaiseIssueFormComponent implements OnInit {
 
   }
   onSubmitIssue(IssueForm) {
-    if (IssueForm.value) {
+    if (IssueForm.value.message != null) {
       this.mat.close(IssueForm.value)
     }
 

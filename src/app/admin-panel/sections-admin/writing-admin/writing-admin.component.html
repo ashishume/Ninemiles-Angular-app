@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="row">
+
+
+    <mat-form-field class="mat-form-field">
+      <mat-label>User Type</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let list of type" (click)="changeUserType(list)" [value]="list">{{list}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field">
+      <mat-label>Test Number</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let test of countOfTests" (click)="changeTestNumber(test)" [value]="test">{{test}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <form class="form" [formGroup]="WritingSection" autocomplete="off" novalidate #WritingSectionForm="ngForm">
+
+      <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
+
+        <div class="section1-content" *ngIf="section1paragraphDetails.length">
+
+          <mat-tab class="mat-tab1" label="Task 1">
+            <span *ngFor="let list of section1paragraphDetails">
+              <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                <i class="material-icons">
+                  edit
+                </i>
+              </span>
+              <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+              <p [innerHTML]="list.paragraphTitle">
+              </p>
+            </span>
+          </mat-tab>
+        </div>
+
+
+        <!-- SECTION 2 -->
+        <div class="section2-content" *ngIf="section2paragraphDetails.length">
+          <mat-tab label="Task 2">
+            <span *ngFor="let list of section2paragraphDetails">
+              <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                <i class="material-icons">
+                  edit
+                </i>
+              </span>
+              <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+              <p [innerHTML]="list.paragraphTitle"></p>
+            </span>
+          </mat-tab>
+        </div>
+
+
+        <!-- SECTION 3 -->
+        <div class="section3-content" *ngIf="section3paragraphDetails.length">
+          <mat-tab label="Task 1(Upload Docs)">
+            <span *ngFor="let list of section3paragraphDetails">
+              <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                <i class="material-icons">
+                  edit
+                </i>
+              </span>
+              <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+              <p [innerHTML]="list.paragraphTitle"></p>
+            </span>
+          </mat-tab>
+        </div>
+
+
+        <!-- SECTION 4 -->
+        <div class="section4-content" *ngIf="section4paragraphDetails.length">
+          <mat-tab label="Task 2(Upload Docs)">
+            <span *ngFor="let list of section4paragraphDetails">
+              <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                <i class="material-icons">
+                  edit
+                </i>
+              </span>
+              <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+              <p [innerHTML]="list.paragraphTitle"></p>
+            </span>
+          </mat-tab>
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+
+      </mat-tab-group>
+    </form>
+
+  </div>
+</div>

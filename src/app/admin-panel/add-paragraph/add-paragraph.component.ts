@@ -80,8 +80,8 @@ export class AddParagraphComponent implements OnInit {
         paragraphUserType: formValue.paragraphUserType,
         section: formValue.section,
         testNumber: formValue.testDetails.testNumber,
-        paragraphSectionCategory:formValue.paragraphSectionCategory
-      } 
+        paragraphSectionCategory: formValue.paragraphSectionCategory
+      }
       this.apiService.insertParagraph(body).subscribe((data: any) => {
         if (data.status == 200) {
           this.snack.openFromComponent(SnackBarComponent, {
@@ -91,11 +91,12 @@ export class AddParagraphComponent implements OnInit {
         }
       })
     } else {
+
       var updateFormValue = AddParagraph.value;
       var section;
       var testNumber;
       var paragraphUserType;
-
+      var paragraphSectionCategory;
       if (!updateFormValue.section) {
         section = this.editObject.section;
       } else {
@@ -111,6 +112,11 @@ export class AddParagraphComponent implements OnInit {
       } else {
         paragraphUserType = updateFormValue.paragraphUserType;
       }
+      if (!updateFormValue.paragraphSectionCategory) {
+        paragraphSectionCategory = this.editObject.paragraphSectionCategory;
+      } else {
+        paragraphSectionCategory = updateFormValue.paragraphSectionCategory;
+      }
 
       const updateBody = {
         _id: this.editObject._id,
@@ -120,7 +126,7 @@ export class AddParagraphComponent implements OnInit {
         paragraphUserType: paragraphUserType,
         section: section,
         testNumber: testNumber,
-        paragraphSectionCategory:updateFormValue.paragraphSectionCategory
+        paragraphSectionCategory: paragraphSectionCategory
       }
       this.apiService.updateParagraph(updateBody).subscribe((data: any) => {
         if (data.status == 200) {

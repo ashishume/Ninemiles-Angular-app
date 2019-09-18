@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
-var FileSaver = require('file-saver');
+import FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-show-writing',

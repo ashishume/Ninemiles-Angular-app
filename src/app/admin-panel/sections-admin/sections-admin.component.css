@@ -1,0 +1,11 @@
+
+.footer {
+    position: fixed;
+    bottom: 10px;
+    left: 40%;
+    cursor: pointer;
+  }
+  
+  #mat-card{
+    margin: 20px 0;
+  }
