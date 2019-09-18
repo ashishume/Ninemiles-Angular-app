@@ -1,126 +1,130 @@
-<div id="container">
-  <div class="row">
-    <button mat-raised-button color="primary" id="submit-button">Submit</button>
+<div class="disable-text-selection">
+  <div id="container">
+    <div class="row">
+      <button mat-raised-button color="primary" id="submit-button">Submit</button>
 
-    <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
+      <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
 
-      <div class="col-sm-12">
-        <!-- SECTION 1 -->
-        <div class="section1-content" *ngIf="section1paragraphDetails.length">
-          <mat-tab class="mat-tab1" label="Section 1">
+        <div class="col-sm-12">
+          <!-- SECTION 1 -->
+          <div class="section1-content" *ngIf="section1paragraphDetails.length">
+            <mat-tab class="mat-tab1" label="Section 1">
 
-            <div class="row">
-              <div class="col-sm-6" id="paragraph-section">
-                <span *ngFor="let list of section1paragraphDetails">
-                  <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
-                    <i class="material-icons">
-                      edit
-                    </i>
-                  </span>
-                  <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
-                  <p [innerHTML]="list.paragraphTitle"></p>
-                </span>
-              </div>
-              <div class="col-sm-6" id="question-section">
-                <br>
-                <br>
-                <div style="text-align: center">
-
-
-
-                  <form class="form" [formGroup]="UploadForm" autocomplete="off" novalidate #UploadFormData="ngForm"
-                    (ngSubmit)="onSubmitUploadForm(UploadFormData)">
-
-                    <p style="text-align: center;" class="alert alert-warning">Note: If you have multiple sheets, please
-                      upload them in order</p>
-                    <mat-form-field>
-                      <mat-label>Sheet Number</mat-label>
-                      <input matInput formControlName="sheetNumber" required name="sheetNumber" type="number">
-                    </mat-form-field>&nbsp;
-
-                    <input type="file" formControlName="upload" name="upload" required accept="image/*"
-                      (change)="onFileSelected($event)">
-                    <br>
-                    <br>
-                    <span *ngIf="imageSource">
-                      <img [src]="imageSource" style="height: 300px;width:200px">
+              <div class="row">
+                <div class="col-sm-6" id="paragraph-section">
+                  <span *ngFor="let list of section1paragraphDetails">
+                    <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                      <i class="material-icons">
+                        edit
+                      </i>
                     </span>
-                    <br>
-                    <br>
+                    <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                    <p [innerHTML]="list.paragraphTitle"></p>
+                  </span>
+                </div>
+                <div class="col-sm-6" id="question-section">
+                  <br>
+                  <br>
+                  <div style="text-align: center">
 
-                    <button style="width:100%;" color="primary" mat-raised-button type="submit"
-                      [disabled]="!UploadForm.valid">Upload</button>
-                  </form>
+
+
+                    <form class="form" [formGroup]="UploadForm" autocomplete="off" novalidate #UploadFormData="ngForm"
+                      (ngSubmit)="onSubmitUploadForm(UploadFormData)">
+
+                      <p style="text-align: center;" class="alert alert-warning">Note: If you have multiple sheets,
+                        please
+                        upload them in order</p>
+                      <mat-form-field>
+                        <mat-label>Sheet Number</mat-label>
+                        <input matInput formControlName="sheetNumber" required name="sheetNumber" type="number">
+                      </mat-form-field>&nbsp;
+
+                      <input type="file" formControlName="upload" name="upload" required accept="image/*"
+                        (change)="onFileSelected($event)">
+                      <br>
+                      <br>
+                      <span *ngIf="imageSource">
+                        <img [src]="imageSource" style="height: 300px;width:200px">
+                      </span>
+                      <br>
+                      <br>
+
+                      <button style="width:100%;" color="primary" mat-raised-button type="submit"
+                        [disabled]="!UploadForm.valid">Upload</button>
+                    </form>
 
 
 
+                  </div>
                 </div>
               </div>
-            </div>
 
 
 
 
-          </mat-tab>
-        </div>
+            </mat-tab>
+          </div>
 
-        <!-- SECTION 2 -->
-        <div class="section2-content" *ngIf="section2paragraphDetails.length">
-          <mat-tab label="Section 2">
-            <div class="row">
-              <div class="col-sm-6" id="paragraph-section">
-                <span *ngFor="let list of section2paragraphDetails">
-                  <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
-                    <i class="material-icons">
-                      edit
-                    </i>
-                  </span>
-                  <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
-                  <p [innerHTML]="list.paragraphTitle"></p>
-                </span>
-              </div>
-              <div class="col-sm-6" id="question-section">
-                <br>
-                <br>
-                <div style="text-align: center">
-
-
-                  <form class="form" [formGroup]="UploadForm" autocomplete="off" novalidate #UploadFormData="ngForm"
-                    (ngSubmit)="onSubmitUploadForm(UploadFormData)">
-
-                    <p style="text-align: center;" class="alert alert-warning">Note: If you have multiple sheets, please
-                      upload them in order</p>
-                    <mat-form-field>
-                      <mat-label>Sheet Number</mat-label>
-                      <input matInput formControlName="sheetNumber" required name="sheetNumber" type="number">
-                    </mat-form-field>&nbsp;
-
-                    <input type="file" formControlName="upload" name="upload" required accept="image/*"
-                      (change)="onFileSelected($event)">
-                    <br>
-                    <br>
-                    <span *ngIf="imageSource">
-                      <img [src]="imageSource" style="height: 300px;width:200px">
+          <!-- SECTION 2 -->
+          <div class="section2-content" *ngIf="section2paragraphDetails.length">
+            <mat-tab label="Section 2">
+              <div class="row">
+                <div class="col-sm-6" id="paragraph-section">
+                  <span *ngFor="let list of section2paragraphDetails">
+                    <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                      <i class="material-icons">
+                        edit
+                      </i>
                     </span>
-                    <br>
-                    <br>
+                    <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                    <p [innerHTML]="list.paragraphTitle"></p>
+                  </span>
+                </div>
+                <div class="col-sm-6" id="question-section">
+                  <br>
+                  <br>
+                  <div style="text-align: center">
 
-                    <button style="width:100%;" color="primary" mat-raised-button type="submit"
-                      [disabled]="!UploadForm.valid">Upload</button>
-                  </form>
 
+                    <form class="form" [formGroup]="UploadForm" autocomplete="off" novalidate #UploadFormData="ngForm"
+                      (ngSubmit)="onSubmitUploadForm(UploadFormData)">
+
+                      <p style="text-align: center;" class="alert alert-warning">Note: If you have multiple sheets,
+                        please
+                        upload them in order</p>
+                      <mat-form-field>
+                        <mat-label>Sheet Number</mat-label>
+                        <input matInput formControlName="sheetNumber" required name="sheetNumber" type="number">
+                      </mat-form-field>&nbsp;
+
+                      <input type="file" formControlName="upload" name="upload" required accept="image/*"
+                        (change)="onFileSelected($event)">
+                      <br>
+                      <br>
+                      <span *ngIf="imageSource">
+                        <img [src]="imageSource" style="height: 300px;width:200px">
+                      </span>
+                      <br>
+                      <br>
+
+                      <button style="width:100%;" color="primary" mat-raised-button type="submit"
+                        [disabled]="!UploadForm.valid">Upload</button>
+                    </form>
+
+                  </div>
                 </div>
               </div>
-            </div>
-          </mat-tab>
+            </mat-tab>
+          </div>
+
+          <br>
+          <br>
+          <br>
         </div>
 
-        <br>
-        <br>
-        <br>
-      </div>
+      </mat-tab-group>
 
-    </mat-tab-group>
-
+    </div>
   </div>
 </div>

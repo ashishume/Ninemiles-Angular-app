@@ -17,6 +17,7 @@ import { SpeakingAdminComponent } from './sections-admin/speaking-admin/speaking
 import { ListeningAdminComponent } from './sections-admin/listening-admin/listening-admin.component';
 import { WritingAdminComponent } from './sections-admin/writing-admin/writing-admin.component';
 import { CountdownModule } from 'ngx-countdown';
+import { NoRightClickDirective } from '../no-right-click.directive';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { CountdownModule } from 'ngx-countdown';
     SpeakingAdminComponent,
     ListeningAdminComponent,
     WritingAdminComponent,
-
+    NoRightClickDirective
   ],
   imports: [
     CountdownModule,
@@ -41,7 +42,8 @@ import { CountdownModule } from 'ngx-countdown';
     CommonModule,
     SharedModule,
     AdminPanelRoutingModule
-  ], exports: [
+  ],
+  exports: [
     UpdateTestStatusComponent,
     RaisedIssueComponent,
     AddFillBlankQuestionsComponent,
@@ -49,6 +51,6 @@ import { CountdownModule } from 'ngx-countdown';
     AddQuestionsComponent,
     AdminPanelComponent,
     RegisteredUsersComponent
-  ]
+  ],
 })
 export class AdminPanelModule { }

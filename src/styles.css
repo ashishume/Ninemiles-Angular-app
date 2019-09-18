@@ -45,7 +45,7 @@ body {
   cursor: pointer;
 }
 
-.material-icons{
+.material-icons {
   cursor: pointer;
 }
 #float-item {
@@ -91,6 +91,14 @@ body {
   top: 5px;
   right: 10px;
   z-index: 9000;
+}
+
+.disable-text-selection {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 #timer {
