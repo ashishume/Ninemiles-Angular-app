@@ -24,10 +24,14 @@
               {{list.marksBand}}
             </td>
             <td>
-              <span *ngIf="list.section!='writing'">
+              <span *ngIf="list.section!='writing' && list.section!='speaking'">
                 {{list.countOfCorrectAnswers}}/40
               </span>
               <span *ngIf="list.section=='writing'">
+                NA
+              </span>
+
+              <span *ngIf="list.section=='speaking'">
                 NA
               </span>
             </td>

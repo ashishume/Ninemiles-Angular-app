@@ -165,5 +165,12 @@ export class CalculateMarksService {
       }
     })
   }
+  calculateSpeakingSectionMarks(speakingBody) {
+    this.apiService.insertMarkSheet(speakingBody).subscribe((data: any) => {
+      if (data.status == 200) {
+        this.snack.showError("Result submitted successfully");
+      }
+    })
+  }
 
 }

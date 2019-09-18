@@ -11,6 +11,7 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { ShowWritingComponent } from './show-writing/show-writing.component';
 import { ShowUploadWritingComponent } from './show-upload-writing/show-upload-writing.component';
 import { UploadWritingMarksComponent } from './upload-writing-marks/upload-writing-marks.component';
+import { UploadSpeakingMarksComponent } from './upload-speaking-marks/upload-speaking-marks.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { UploadWritingMarksComponent } from './upload-writing-marks/upload-writi
     ShowWritingComponent,
     ShowUploadWritingComponent,
     UploadWritingMarksComponent,
+    UploadSpeakingMarksComponent,
   ],
   imports: [
     SelectDropDownModule,

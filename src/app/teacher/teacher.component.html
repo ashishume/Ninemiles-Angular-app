@@ -3,27 +3,32 @@
     <div class="col-sm-12">
 
       <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
-        <mat-tab class="mat-tab" label="Writing Answers">
+        <mat-tab class="mat-tab" label="Computer Writing Answers">
           <ng-template matTabContent>
             <app-show-writing></app-show-writing>
           </ng-template>
         </mat-tab>
-        <mat-tab class="mat-tab" label="Uploaded Sheets">
+        <mat-tab class="mat-tab" label="Student Uploaded Sheets">
           <ng-template matTabContent>
             <app-show-upload-writing></app-show-upload-writing>
           </ng-template>
         </mat-tab>
-        <mat-tab class="mat-tab" label="Upload Document MarkSheet">
+        <mat-tab class="mat-tab" label="Upload Document Score">
           <ng-template matTabContent>
             <app-upload-answer-sheet></app-upload-answer-sheet>
           </ng-template>
         </mat-tab>
-        <mat-tab class="mat-tab" label="Submit Writing MarkSheet">
+        <mat-tab class="mat-tab" label="Submit Writing Score">
           <ng-template matTabContent>
             <app-upload-writing-marks></app-upload-writing-marks>
           </ng-template>
         </mat-tab>
-      
+        <mat-tab class="mat-tab" label="Submit Speaking Score">
+          <ng-template matTabContent>
+            <app-upload-speaking-marks></app-upload-speaking-marks>
+          </ng-template>
+        </mat-tab>
+
       </mat-tab-group>
 
     </div>

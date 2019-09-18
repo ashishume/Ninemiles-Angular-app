@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CalculateMarksService } from 'src/app/shared/services/calculate-marks/calculate-marks.service';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-upload-writing-marks',
-  templateUrl: './upload-writing-marks.component.html',
-  styleUrls: ['./upload-writing-marks.component.css']
+  selector: 'app-upload-speaking-marks',
+  templateUrl: './upload-speaking-marks.component.html',
+  styleUrls: ['./upload-speaking-marks.component.css']
 })
-export class UploadWritingMarksComponent implements OnInit {
+export class UploadSpeakingMarksComponent implements OnInit {
+
   public AnswerGroup: FormGroup;
   StudentDetails = [];
   listUserTypes = [];
@@ -27,6 +28,7 @@ export class UploadWritingMarksComponent implements OnInit {
     );
 
   }
+
 
   dropdownOptions = []
   countOfTests = [];
@@ -66,13 +68,14 @@ export class UploadWritingMarksComponent implements OnInit {
     const body = {
       email: formData.studentDetails.email,
       testNumber: formData.testNumber,
-      section: "writing",
+      section: "speaking",
       marksBand: formData.marksBand,
       countOfCorrectAnswers: 0,
       userType: formData.studentDetails.userType
     }
 
-    this.calculate.calculateWritingSectionMarks(body)
+    this.calculate.calculateSpeakingSectionMarks(body)
 
   }
+
 }
