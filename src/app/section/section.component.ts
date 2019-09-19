@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ErrorServiceService } from '../shared/services/error-service/error-service.service';
 import { RaiseIssueFormComponent } from '../raise-issue-form/raise-issue-form.component';
+import { EmailService } from '../shared/services/email/email.service';
 
 @Component({
   selector: 'app-section',
@@ -17,7 +18,8 @@ export class SectionComponent implements OnInit {
     public matDialog: MatDialog,
     private route: Router,
     private apiService: ApiService,
-    private snack: ErrorServiceService
+    private snack: ErrorServiceService,
+    private email: EmailService
   ) { }
   ngOnInit() {
     const query = {
@@ -76,15 +78,18 @@ export class SectionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     const dialogRef = this.matDialog.open(RaiseIssueFormComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
+
       const body = {
         email: localStorage.getItem('email'),
         name: localStorage.getItem('name'),
         message: result.message
       }
 
-      this.apiService.insertIssue(body).subscribe(result => {
-        if (result.status == 200) {
+
+      this.apiService.insertIssue(body).subscribe(data => {
+        if (data.status == 200) {
           this.snack.showError("Your issues has been received")
+          this.email.sendIssueMail(localStorage.getItem('name'), localStorage.getItem('email'), result.message)
         }
       })
 

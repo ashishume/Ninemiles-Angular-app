@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CalculateMarksService } from 'src/app/shared/services/calculate-marks/calculate-marks.service';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
+import { EmailService } from 'src/app/shared/services/email/email.service';
 
 @Component({
   selector: 'app-upload-speaking-marks',
@@ -17,6 +18,7 @@ export class UploadSpeakingMarksComponent implements OnInit {
     private calculate: CalculateMarksService,
     private apiService: ApiService,
     private fb: FormBuilder,
+    private emailService: EmailService
   ) {
 
     this.AnswerGroup = this.fb.group(
@@ -74,6 +76,11 @@ export class UploadSpeakingMarksComponent implements OnInit {
       userType: formData.studentDetails.userType
     }
 
+    const email = formData.studentDetails.email;
+    const name = formData.studentDetails.name;
+    const subject = "Answer sheet is checked,Please check your score";
+
+    this.emailService.sendSpeakingMail(name, email, subject);
     this.calculate.calculateSpeakingSectionMarks(body)
 
   }

@@ -110,7 +110,7 @@ export class UploadAnswerSheetComponent implements OnInit {
                 const subject = "Answer Sheet checked,Please check your score";
 
 
-                this.emailService.sendEMailToStudent(name, email, subject);
+                this.emailService.sendDocumentMail(name, email, subject);
                 this.showSnack.showError("Image Uploaded Successfully")
               }
             })

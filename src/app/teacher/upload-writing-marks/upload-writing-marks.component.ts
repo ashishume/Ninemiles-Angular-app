@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CalculateMarksService } from 'src/app/shared/services/calculate-marks/calculate-marks.service';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { EmailService } from 'src/app/shared/services/email/email.service';
 
 @Component({
   selector: 'app-upload-writing-marks',
@@ -16,6 +17,7 @@ export class UploadWritingMarksComponent implements OnInit {
     private calculate: CalculateMarksService,
     private apiService: ApiService,
     private fb: FormBuilder,
+    private email: EmailService
   ) {
 
     this.AnswerGroup = this.fb.group(
@@ -72,6 +74,12 @@ export class UploadWritingMarksComponent implements OnInit {
       userType: formData.studentDetails.userType
     }
 
+    const email = formData.studentDetails.email;
+    const name = formData.studentDetails.name;
+    const subject = "Answer sheet is checked,Please check your score";
+
+
+    this.email.sendWritingMarks(name, email, subject)
     this.calculate.calculateWritingSectionMarks(body)
 
   }
