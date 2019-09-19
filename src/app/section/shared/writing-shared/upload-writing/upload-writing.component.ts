@@ -10,6 +10,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
 
 @Component({
   selector: 'app-upload-writing',
@@ -33,19 +34,22 @@ export class UploadWritingComponent implements OnInit {
     private snack: MatSnackBar,
     private apiService: ApiService,
     private route: Router,
-    private loader: LoaderService
+    private loader: LoaderService,
+    private snackbar: ErrorServiceService
   ) {
     this.nav.testActive()
-
-
-
     this.UploadForm = this.fb.group(
       {
         upload: new FormControl('', [Validators.required]),
         sheetNumber: new FormControl('', [Validators.required]),
       },
     );
-
+    this.apiService.checkTestStatus().subscribe((data: any) => {
+      if (data.onlineWriting == true) {
+        this.route.navigate(['dashboard'])
+        this.snackbar.showError("You have already given the test")
+      }
+    })
 
   }
 
@@ -134,4 +138,8 @@ export class UploadWritingComponent implements OnInit {
   }
 
 
+  testCompleted() {
+    this.apiService.updateTestStatus("onlineWriting")
+    this.route.navigate(['dashboard'])
+  }
 }

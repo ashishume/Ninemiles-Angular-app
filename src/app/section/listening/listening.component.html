@@ -1,478 +1,440 @@
-<div class="disable-text-selection">
-<div id="container">
-    <div class="row">
-        <button mat-raised-button color="primary" id="submit-button" (click)="onSubmitOfListeningSection()">Submit</button>
-        <form class="form" [formGroup]="ListeningSection" autocomplete="off" novalidate #ListeningSectionForm="ngForm">
+<div class="disable-text-selection" appNoRightClick>
+    <div id="container">
+        <div class="row">
+            <button mat-raised-button color="primary" id="submit-button"
+                (click)="onSubmitOfListeningSection()">Submit</button>
+            <form class="form" [formGroup]="ListeningSection" autocomplete="off" novalidate
+                #ListeningSectionForm="ngForm">
 
-            <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
+                <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
 
-                <div class="col-sm-12">
-                    <!-- SECTION 1 -->
-                    <!-- <div class="section1-content" *ngIf="section1Questions.length"> -->
-                    <div class="section1-content">
+                    <div class="col-sm-12">
+                        <!-- SECTION 1 -->
+                        <!-- <div class="section1-content" *ngIf="section1Questions.length"> -->
+                        <div class="section1-content">
 
-                        <mat-tab class="mat-tab1" label="Section 1">
+                            <mat-tab class="mat-tab1" label="Section 1">
 
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <span *ngFor="let list of section1AudioDetails" >
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span *ngFor="let list of section1AudioDetails">
 
-                                        <h4 class="heading-title" [innerHTML]="list.paragraphTitle"></h4>
+                                            <h4 class="heading-title" [innerHTML]="list.paragraphTitle"></h4>
 
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <span style="float: right" class="edit-question-icon"
-                                            (click)="editParagraph(list)">
-                                            <i class="material-icons">
-                                                edit
-                                            </i>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+
+                                            <audio volume="1.0" (ended)="section1EndAudio()" preload="auto"
+                                                #section1Audio>
+                                                <source [src]="list.paragraphHeading" type="audio/mp3">
+                                            </audio>
+                                            <span *ngIf="!isAudioPlayed1">
+                                                <button (click)="section1AudioPlay()" mat-fab><i class="material-icons">
+                                                        play_arrow
+                                                    </i></button>
+                                            </span>
+                                            <span *ngIf="isAudioPlayed1">
+                                                <button disabled mat-fab><i class="material-icons">
+                                                        play_arrow
+                                                    </i></button>
+                                            </span>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <p class="alert alert-danger" style="text-align: center;">Please be careful
+                                                while playing the audio, Once
+                                                you start playing the audio
+                                                you won't be able to pause or stop</p>
+
+
                                         </span>
-                                        <audio volume="1.0" (ended)="section1EndAudio()" preload="auto" #section1Audio>
-                                            <source [src]="list.paragraphHeading" type="audio/mp3">
-                                        </audio>
-                                        <span *ngIf="!isAudioPlayed1">
-                                            <button (click)="section1AudioPlay()" mat-fab><i class="material-icons">
-                                                    play_arrow
-                                                </i></button>
-                                        </span>
-                                        <span *ngIf="isAudioPlayed1">
-                                            <button disabled mat-fab><i class="material-icons">
-                                                    play_arrow
-                                                </i></button>
-                                        </span>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <p class="alert alert-danger" style="text-align: center;">Please be careful
-                                            while playing the audio, Once
-                                            you start playing the audio
-                                            you won't be able to pause or stop</p>
+                                    </div>
+                                    <div class="col-sm-6" id="question-section">
+
+                                        <span *ngFor="let list of section1Questions;let questionIndex=index">
+
+                                            <!-- MCQ QUESTIONS  -->
+                                            <span *ngIf="list.questionType=='MCQ'">
+
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options">
+                                                    <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
+                                                        [value]="listOption.option"
+                                                        (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                        &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                                                </span>
+                                            </span>
 
 
-                                    </span>
+
+                                            <!-- SELECT IN THE BLANKS QUESTIONS  -->
+                                            <Span *ngIf="list.questionType=='Select in the blanks'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options;let i=index">
+                                                    <span>{{listOption.option}}</span>
+                                                    <mat-form-field class="options-list">
+                                                        <mat-select>
+                                                            <mat-option *ngFor="let items of list.optionsList"
+                                                                (click)="checkSelectOptionStatus1(listOption,items,list.section,list._id,i)"
+                                                                [value]="items">{{items}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <br>
+                                                </span>
+                                            </Span>
+
+                                            <!-- TYPE IN THE BLANKS QUESTIONS  -->
+                                            <Span *ngIf="list.questionType=='Type in the blanks'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options;let i=index">
+                                                    <span>{{listOption.option}}</span>&nbsp;
+                                                    <mat-form-field class="option-input">
+                                                        <input matInput
+                                                            (change)="checkTypeOptionStatus1(listOption,$event,list.section,list._id,i)">
+                                                    </mat-form-field>
+                                                    <br>
+                                                </span>
+                                            </Span>
+
+
+
+
+                                        </span>
+
+
+                                    </div>
                                 </div>
-                                <div class="col-sm-6" id="question-section">
 
-                                    <span *ngFor="let list of section1Questions;let questionIndex=index">
 
-                                        <!-- MCQ QUESTIONS  -->
-                                        <span *ngIf="list.questionType=='MCQ'">
 
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options">
-                                                <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
-                                                    [value]="listOption.option"
-                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
-                                                    &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+
+                            </mat-tab>
+                        </div>
+
+                        <!-- SECTION 2 -->
+                        <div class="section2-content" *ngIf="section2Questions.length">
+                            <mat-tab label="Section 2">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <!-- <div class="col-sm-6" > -->
+                                        <span *ngFor="let list of section2AudioDetails">
+
+                                            <h4 class="heading-title" [innerHTML]="list.paragraphTitle"></h4>
+
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+
+                                            <audio volume="1.0" (ended)="section2EndAudio()" preload="auto"
+                                                #section2Audio>
+                                                <source [src]="list.paragraphHeading" type="audio/mp3">
+                                            </audio>
+                                            <span *ngIf="!isAudioPlayed2">
+
+                                                <button (click)="section2AudioPlay()" mat-fab><i class="material-icons">
+                                                        play_arrow
+                                                    </i></button>
                                             </span>
+                                            <span *ngIf="isAudioPlayed2">
+
+                                                <button disabled mat-fab><i class="material-icons">
+                                                        play_arrow
+                                                    </i></button>
+                                            </span>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <p class="alert alert-danger" style="text-align: center;">Please be careful
+                                                while playing the audio, Once
+                                                you start playing the audio
+                                                you won't be able to pause or stop</p>
+
+
+
+
+
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-6" id="question-section">
+
+
+                                        <span *ngFor="let list of section2Questions;let questionIndex=index">
+
+                                            <!-- MCQ QUESTIONS  -->
+                                            <span *ngIf="list.questionType=='MCQ'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options">
+                                                    <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
+                                                        [value]="listOption.option"
+                                                        (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                        &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                                                </span>
+                                            </span>
+
+
+
+                                            <!-- SELECT IN THE BLANKS QUESTIONS  -->
+                                            <Span *ngIf="list.questionType=='Select in the blanks'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options;let i=index">
+                                                    <span>{{listOption.option}}</span>
+                                                    <mat-form-field class="options-list">
+                                                        <mat-select>
+                                                            <mat-option *ngFor="let items of list.optionsList"
+                                                                (click)="checkSelectOptionStatus2(listOption,items,list.section,list._id,i)"
+                                                                [value]="items">{{items}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <br>
+                                                </span>
+                                            </Span>
+
+
+
+                                            <!-- TYPE IN THE BLANKS QUESTIONS  -->
+                                            <Span *ngIf="list.questionType=='Type in the blanks'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options;let i=index">
+                                                    <span>{{listOption.option}}</span>&nbsp;
+                                                    <mat-form-field class="option-input">
+                                                        <!-- <input matInput (change)="changeData($event,i)"> -->
+                                                        <input matInput
+                                                            (change)="checkTypeOptionStatus2(listOption,$event,list.section,list._id,i)">
+                                                    </mat-form-field>
+                                                    <br>
+                                                </span>
+                                            </Span>
+
+
+
                                         </span>
 
 
 
-                                        <!-- SELECT IN THE BLANKS QUESTIONS  -->
-                                        <Span *ngIf="list.questionType=='Select in the blanks'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options;let i=index">
-                                                <span>{{listOption.option}}</span>
-                                                <mat-form-field class="options-list">
-                                                    <mat-select>
-                                                        <mat-option *ngFor="let items of list.optionsList"
-                                                            (click)="checkSelectOptionStatus1(listOption,items,list.section,list._id,i)"
-                                                            [value]="items">{{items}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                                <br>
-                                            </span>
-                                        </Span>
-
-                                        <!-- TYPE IN THE BLANKS QUESTIONS  -->
-                                        <Span *ngIf="list.questionType=='Type in the blanks'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options;let i=index">
-                                                <span>{{listOption.option}}</span>&nbsp;
-                                                <mat-form-field class="option-input">
-                                                    <input matInput
-                                                        (change)="checkTypeOptionStatus1(listOption,$event,list.section,list._id,i)">
-                                                </mat-form-field>
-                                                <br>
-                                            </span>
-                                        </Span>
-
-                                        <span style="float: left" class="edit-question-icon"
-                                            (click)="editQuestion(list)">
-                                            <i class="material-icons">
-                                                edit
-                                            </i>
-                                        </span>
 
 
-                                    </span>
-
-
+                                    </div>
                                 </div>
-                            </div>
+                            </mat-tab>
+                        </div>
+                        <!-- SECTION 3 -->
+                        <div class="section3-content" *ngIf="section3Questions.length">
+                            <mat-tab label="Section 3">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span *ngFor="let list of section3AudioDetails">
+
+
+                                            <h4 class="heading-title" [innerHTML]="list.paragraphTitle"></h4>
+
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+
+                                            <audio volume="1.0" (ended)="section3EndAudio()" preload="auto"
+                                                #section3Audio>
+                                                <source [src]="list.paragraphHeading" type="audio/mp3">
+                                            </audio>
+                                            <span *ngIf="!isAudioPlayed3">
+
+                                                <button (click)="section3AudioPlay()" mat-fab><i class="material-icons">
+                                                        play_arrow
+                                                    </i></button>
+                                            </span>
+                                            <span *ngIf="isAudioPlayed3">
+
+                                                <button disabled mat-fab><i class="material-icons">
+                                                        play_arrow
+                                                    </i></button>
+                                            </span>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <p class="alert alert-danger" style="text-align: center;">Please be careful
+                                                while playing the audio, Once
+                                                you start playing the audio
+                                                you won't be able to pause or stop</p>
+
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-6" id="question-section">
+
+
+
+                                        <span *ngFor="let list of section3Questions;let questionIndex=index">
+
+                                            <!-- MCQ QUESTIONS  -->
+                                            <span *ngIf="list.questionType=='MCQ'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options">
+                                                    <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
+                                                        [value]="listOption.option"
+                                                        (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                        &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                                                </span>
+                                            </span>
+
+
+
+                                            <!-- SELECT IN THE BLANKS QUESTIONS  -->
+                                            <Span *ngIf="list.questionType=='Select in the blanks'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options;let i=index">
+                                                    <span>{{listOption.option}}</span>
+                                                    <mat-form-field class="options-list">
+                                                        <mat-select>
+                                                            <mat-option *ngFor="let items of list.optionsList"
+                                                                (click)="checkSelectOptionStatus3(listOption,items,list.section,list._id,i)"
+                                                                [value]="items">{{items}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <br>
+                                                </span>
+                                            </Span>
+
+
+                                            <!-- TYPE IN THE BLANKS QUESTIONS  -->
+                                            <Span *ngIf="list.questionType=='Type in the blanks'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options;let i=index">
+                                                    <span>{{listOption.option}}</span>&nbsp;
+                                                    <mat-form-field class="option-input">
+                                                        <!-- <input matInput (change)="changeData($event,i)"> -->
+                                                        <input matInput
+                                                            (change)="checkTypeOptionStatus3(listOption,$event,list.section,list._id,i)">
+                                                    </mat-form-field>
+                                                    <br>
+                                                </span>
+                                            </Span>
+
+                                        </span>
 
 
 
 
-                        </mat-tab>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                        </div>
+                        <!-- SECTION 4 -->
+                        <div class="section4-content" *ngIf="section4Questions.length">
+                            <mat-tab label="Section 4">
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span *ngFor="let list of section4AudioDetails">
+
+                                            <h4 class="heading-title" [innerHTML]="list.paragraphTitle"></h4>
+
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+
+                                            <audio volume="1.0" (ended)="section4EndAudio()" preload="auto"
+                                                #section4Audio>
+                                                <source [src]="list.paragraphHeading" type="audio/mp3">
+                                            </audio>
+                                            <span *ngIf="!isAudioPlayed4">
+
+                                                <button (click)="section4AudioPlay()" mat-fab><i class="material-icons">
+                                                        play_arrow
+                                                    </i></button>
+                                            </span>
+                                            <span *ngIf="isAudioPlayed4">
+
+                                                <button disabled mat-fab><i class="material-icons">
+                                                        play_arrow
+                                                    </i></button>
+                                            </span>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <p class="alert alert-danger" style="text-align: center;">Please be careful
+                                                while playing the audio, Once
+                                                you start playing the audio
+                                                you won't be able to pause or stop</p>
+
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-6" id="question-section">
+
+
+
+                                        <span *ngFor="let list of section4Questions;let questionIndex=index">
+
+                                            <!-- MCQ QUESTIONS  -->
+                                            <span *ngIf="list.questionType=='MCQ'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options">
+                                                    <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
+                                                        [value]="listOption.option"
+                                                        (change)="checkOptionStatus(listOption,list.section,$event)">
+                                                        &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                                                </span>
+                                            </span>
+
+
+
+                                            <!-- SELECT IN THE BLANKS QUESTIONS  -->
+                                            <Span *ngIf="list.questionType=='Select in the blanks'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options;let i=index">
+                                                    <span>{{listOption.option}}</span>
+                                                    <mat-form-field class="options-list">
+                                                        <mat-select>
+                                                            <mat-option *ngFor="let items of list.optionsList"
+                                                                (click)="checkSelectOptionStatus4(listOption,items,list.section,list._id,i)"
+                                                                [value]="items">{{items}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <br>
+                                                </span>
+                                            </Span>
+
+
+                                            <!-- TYPE IN THE BLANKS QUESTIONS  -->
+                                            <Span *ngIf="list.questionType=='Type in the blanks'">
+                                                <div [innerHTML]="list.questionTitle"></div>
+                                                <span *ngFor="let listOption of list.options;let i=index">
+                                                    <span>{{listOption.option}}</span>&nbsp;
+                                                    <mat-form-field class="option-input">
+                                                        <input matInput
+                                                            (change)="checkTypeOptionStatus4(listOption,$event,list.section,list._id,i)">
+                                                    </mat-form-field>
+                                                    <br>
+                                                </span>
+                                            </Span>
+
+                                        </span>
+
+
+
+                                    </div>
+                                </div>
+                            </mat-tab>
+                        </div>
+
+                        <br>
+                        <br>
+                        <br>
                     </div>
 
-                    <!-- SECTION 2 -->
-                    <div class="section2-content" *ngIf="section2Questions.length">
-                        <mat-tab label="Section 2">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <!-- <div class="col-sm-6" > -->
-                                    <span *ngFor="let list of section2AudioDetails">
+                </mat-tab-group>
 
-                                        <h4 class="heading-title" [innerHTML]="list.paragraphTitle"></h4>
+            </form>
 
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <span style="float: right" class="edit-question-icon"
-                                            (click)="editParagraph(list)">
-                                            <i class="material-icons">
-                                                edit
-                                            </i>
-                                        </span>
-                                        <audio volume="1.0" (ended)="section2EndAudio()" preload="auto" #section2Audio>
-                                            <source [src]="list.paragraphHeading" type="audio/mp3">
-                                        </audio>
-                                        <span *ngIf="!isAudioPlayed2">
 
-                                            <button (click)="section2AudioPlay()" mat-fab><i class="material-icons">
-                                                    play_arrow
-                                                </i></button>
-                                        </span>
-                                        <span *ngIf="isAudioPlayed2">
-
-                                            <button disabled mat-fab><i class="material-icons">
-                                                    play_arrow
-                                                </i></button>
-                                        </span>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <p class="alert alert-danger" style="text-align: center;">Please be careful
-                                            while playing the audio, Once
-                                            you start playing the audio
-                                            you won't be able to pause or stop</p>
-
-
-
-
-
-                                    </span>
-                                </div>
-                                <div class="col-sm-6" id="question-section">
-
-
-                                    <span *ngFor="let list of section2Questions;let questionIndex=index">
-
-                                        <!-- MCQ QUESTIONS  -->
-                                        <span *ngIf="list.questionType=='MCQ'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options">
-                                                <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
-                                                    [value]="listOption.option"
-                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
-                                                    &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
-                                            </span>
-                                        </span>
-
-
-
-                                        <!-- SELECT IN THE BLANKS QUESTIONS  -->
-                                        <Span *ngIf="list.questionType=='Select in the blanks'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options;let i=index">
-                                                <span>{{listOption.option}}</span>
-                                                <mat-form-field class="options-list">
-                                                    <mat-select>
-                                                        <mat-option *ngFor="let items of list.optionsList"
-                                                            (click)="checkSelectOptionStatus2(listOption,items,list.section,list._id,i)"
-                                                            [value]="items">{{items}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                                <br>
-                                            </span>
-                                        </Span>
-
-
-
-                                        <!-- TYPE IN THE BLANKS QUESTIONS  -->
-                                        <Span *ngIf="list.questionType=='Type in the blanks'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options;let i=index">
-                                                <span>{{listOption.option}}</span>&nbsp;
-                                                <mat-form-field class="option-input">
-                                                    <!-- <input matInput (change)="changeData($event,i)"> -->
-                                                    <input matInput
-                                                        (change)="checkTypeOptionStatus2(listOption,$event,list.section,list._id,i)">
-                                                </mat-form-field>
-                                                <br>
-                                            </span>
-                                        </Span>
-
-                                        <span style="float: left" class="edit-question-icon"
-                                            (click)="editQuestion(list)">
-                                            <i class="material-icons">
-                                                edit
-                                            </i>
-                                        </span>
-
-                                    </span>
-
-
-
-
-
-                                </div>
-                            </div>
-                        </mat-tab>
-                    </div>
-                    <!-- SECTION 3 -->
-                    <div class="section3-content" *ngIf="section3Questions.length">
-                        <mat-tab label="Section 3">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <span *ngFor="let list of section3AudioDetails">
-
-
-                                        <h4 class="heading-title" [innerHTML]="list.paragraphTitle"></h4>
-
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <span style="float: right" class="edit-question-icon"
-                                            (click)="editParagraph(list)">
-                                            <i class="material-icons">
-                                                edit
-                                            </i>
-                                        </span>
-                                        <audio volume="1.0" (ended)="section3EndAudio()" preload="auto" #section3Audio>
-                                            <source [src]="list.paragraphHeading" type="audio/mp3">
-                                        </audio>
-                                        <span *ngIf="!isAudioPlayed3">
-
-                                            <button (click)="section3AudioPlay()" mat-fab><i class="material-icons">
-                                                    play_arrow
-                                                </i></button>
-                                        </span>
-                                        <span *ngIf="isAudioPlayed3">
-
-                                            <button disabled mat-fab><i class="material-icons">
-                                                    play_arrow
-                                                </i></button>
-                                        </span>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <p class="alert alert-danger" style="text-align: center;">Please be careful
-                                            while playing the audio, Once
-                                            you start playing the audio
-                                            you won't be able to pause or stop</p>
-
-                                    </span>
-                                </div>
-                                <div class="col-sm-6" id="question-section">
-
-
-
-                                    <span *ngFor="let list of section3Questions;let questionIndex=index">
-
-                                        <!-- MCQ QUESTIONS  -->
-                                        <span *ngIf="list.questionType=='MCQ'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options">
-                                                <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
-                                                    [value]="listOption.option"
-                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
-                                                    &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
-                                            </span>
-                                        </span>
-
-
-
-                                        <!-- SELECT IN THE BLANKS QUESTIONS  -->
-                                        <Span *ngIf="list.questionType=='Select in the blanks'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options;let i=index">
-                                                <span>{{listOption.option}}</span>
-                                                <mat-form-field class="options-list">
-                                                    <mat-select>
-                                                        <mat-option *ngFor="let items of list.optionsList"
-                                                            (click)="checkSelectOptionStatus3(listOption,items,list.section,list._id,i)"
-                                                            [value]="items">{{items}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                                <br>
-                                            </span>
-                                        </Span>
-
-
-                                        <!-- TYPE IN THE BLANKS QUESTIONS  -->
-                                        <Span *ngIf="list.questionType=='Type in the blanks'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options;let i=index">
-                                                <span>{{listOption.option}}</span>&nbsp;
-                                                <mat-form-field class="option-input">
-                                                    <!-- <input matInput (change)="changeData($event,i)"> -->
-                                                    <input matInput
-                                                        (change)="checkTypeOptionStatus3(listOption,$event,list.section,list._id,i)">
-                                                </mat-form-field>
-                                                <br>
-                                            </span>
-                                        </Span>
-
-
-                                        <span style="float: left" class="edit-question-icon"
-                                            (click)="editQuestion(list)">
-                                            <i class="material-icons">
-                                                edit
-                                            </i>
-                                        </span>
-                                    </span>
-
-
-
-
-                                </div>
-                            </div>
-                        </mat-tab>
-                    </div>
-                    <!-- SECTION 4 -->
-                    <div class="section4-content" *ngIf="section4Questions.length">
-                        <mat-tab label="Section 4">
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <span *ngFor="let list of section4AudioDetails">
-
-                                        <h4 class="heading-title" [innerHTML]="list.paragraphTitle"></h4>
-
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <span style="float: right" class="edit-question-icon"
-                                            (click)="editParagraph(list)">
-                                            <i class="material-icons">
-                                                edit
-                                            </i>
-                                        </span>
-                                        <audio volume="1.0" (ended)="section4EndAudio()" preload="auto" #section4Audio>
-                                            <source [src]="list.paragraphHeading" type="audio/mp3">
-                                        </audio>
-                                        <span *ngIf="!isAudioPlayed4">
-
-                                            <button (click)="section4AudioPlay()" mat-fab><i class="material-icons">
-                                                    play_arrow
-                                                </i></button>
-                                        </span>
-                                        <span *ngIf="isAudioPlayed4">
-
-                                            <button disabled mat-fab><i class="material-icons">
-                                                    play_arrow
-                                                </i></button>
-                                        </span>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <p class="alert alert-danger" style="text-align: center;">Please be careful
-                                            while playing the audio, Once
-                                            you start playing the audio
-                                            you won't be able to pause or stop</p>
-
-                                    </span>
-                                </div>
-                                <div class="col-sm-6" id="question-section">
-
-
-
-                                    <span *ngFor="let list of section4Questions;let questionIndex=index">
-
-                                        <!-- MCQ QUESTIONS  -->
-                                        <span *ngIf="list.questionType=='MCQ'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options">
-                                                <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
-                                                    [value]="listOption.option"
-                                                    (change)="checkOptionStatus(listOption,list.section,$event)">
-                                                    &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
-                                            </span>
-                                        </span>
-
-
-
-                                        <!-- SELECT IN THE BLANKS QUESTIONS  -->
-                                        <Span *ngIf="list.questionType=='Select in the blanks'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options;let i=index">
-                                                <span>{{listOption.option}}</span>
-                                                <mat-form-field class="options-list">
-                                                    <mat-select>
-                                                        <mat-option *ngFor="let items of list.optionsList"
-                                                            (click)="checkSelectOptionStatus4(listOption,items,list.section,list._id,i)"
-                                                            [value]="items">{{items}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                                <br>
-                                            </span>
-                                        </Span>
-
-
-                                        <!-- TYPE IN THE BLANKS QUESTIONS  -->
-                                        <Span *ngIf="list.questionType=='Type in the blanks'">
-                                            <div [innerHTML]="list.questionTitle"></div>
-                                            <span *ngFor="let listOption of list.options;let i=index">
-                                                <span>{{listOption.option}}</span>&nbsp;
-                                                <mat-form-field class="option-input">
-                                                    <input matInput
-                                                        (change)="checkTypeOptionStatus4(listOption,$event,list.section,list._id,i)">
-                                                </mat-form-field>
-                                                <br>
-                                            </span>
-                                        </Span>
-
-
-                                        <span style="float: left" class="edit-question-icon"
-                                            (click)="editQuestion(list)">
-                                            <i class="material-icons">
-                                                edit
-                                            </i>
-                                        </span>
-                                    </span>
-
-
-
-                                </div>
-                            </div>
-                        </mat-tab>
-                    </div>
-
-                    <br>
-                    <br>
-                    <br>
-                </div>
-
-            </mat-tab-group>
-
-        </form>
-
-
-        <countdown id="timer" (event)="checkTimerStatus($event)" [config]="{ leftTime: 3600,format: 'm:s' }">
-            $!m!:$!s!</countdown>
+            <countdown id="timer" (event)="checkTimerStatus($event)" [config]="{ leftTime: timeLeft,format: 'm:s' }">
+                $!m!:$!s!</countdown>
+        </div>
     </div>
-</div>
 </div>

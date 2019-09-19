@@ -36,7 +36,7 @@ export class SectionComponent implements OnInit {
   }
 
   handlingWriting() {
-    this.apiService.passDataValues("writing")
+    // this.apiService.passDataValues("writing")
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.width = '500px';

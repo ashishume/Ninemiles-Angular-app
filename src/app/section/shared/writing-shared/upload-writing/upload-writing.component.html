@@ -1,7 +1,7 @@
-<div class="disable-text-selection">
+<div class="disable-text-selection" appNoRightClick>
   <div id="container">
     <div class="row">
-      <button mat-raised-button color="primary" id="submit-button">Submit</button>
+      <button mat-raised-button color="primary" (click)="testCompleted()" id="submit-button">Submit</button>
 
       <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
 
@@ -13,11 +13,7 @@
               <div class="row">
                 <div class="col-sm-6" id="paragraph-section">
                   <span *ngFor="let list of section1paragraphDetails">
-                    <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
-                      <i class="material-icons">
-                        edit
-                      </i>
-                    </span>
+
                     <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
                     <p [innerHTML]="list.paragraphTitle"></p>
                   </span>
@@ -72,11 +68,7 @@
               <div class="row">
                 <div class="col-sm-6" id="paragraph-section">
                   <span *ngFor="let list of section2paragraphDetails">
-                    <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
-                      <i class="material-icons">
-                        edit
-                      </i>
-                    </span>
+
                     <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
                     <p [innerHTML]="list.paragraphTitle"></p>
                   </span>

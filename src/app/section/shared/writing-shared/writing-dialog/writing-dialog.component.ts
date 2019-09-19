@@ -13,7 +13,7 @@ export class WritingDialogComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     public dialogRef: MatDialogRef<WritingDialogComponent>,
-    private snack:ErrorServiceService
+    private snack: ErrorServiceService
   ) { }
   testDetails = [];
 
@@ -27,8 +27,6 @@ export class WritingDialogComponent implements OnInit {
         data.body.testDetails.forEach(value => {
           if (value.testNumber == testNumber) {
             this.testDetails.push(value);
-            console.log(this.testDetails);
-            
           }
         });
       }

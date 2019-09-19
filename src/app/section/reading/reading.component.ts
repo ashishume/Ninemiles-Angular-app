@@ -1,9 +1,10 @@
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 import { ReadingService } from '../shared/reading-shared/reading.service';
 import { Router } from '@angular/router';
+import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
 
 @Component({
   selector: 'app-reading',
@@ -31,7 +32,8 @@ export class ReadingComponent implements OnInit {
     private fb: FormBuilder,
     private readingService: ReadingService,
     private nav: NavbarService,
-    private route: Router
+    private route: Router,
+    private snack: ErrorServiceService
   ) {
     this.nav.testActive()
     this.ReadingSection = this.fb.group(
@@ -57,12 +59,38 @@ export class ReadingComponent implements OnInit {
   section2TypeQuestionsId = [];
   section3TypeQuestionsId = [];
   section4TypeQuestionsId = [];
+
+
+
+  timeLeft: number = 3600;
+  interval;
+  checkTimerStatus(event) {
+    if (event.left == 0) {
+      this.onSubmitOfReadingSection()
+    }
+  }
+
+  onSubmitOfReadingSection() {
+    this.apiService.updateTestStatus("reading")
+    this.readingService.calculateSelectReadingSectionMarks();
+
+  }
+
+  //ON REFRESH THE TEST WILL BE SUBMITTED
+  @HostListener('window:beforeunload')
+  onBeforeUnload() {
+    this.onSubmitOfReadingSection()
+    return false;
+  }
+
   ngOnInit() {
 
-    // @HostListener('window:beforeunload')
-    // onBeforeUnload() {
-    //   return false;
-    // }
+    this.apiService.checkTestStatus().subscribe((data: any) => {
+      if (data.reading == true) {
+        this.route.navigate(['dashboard'])
+        this.snack.showError("You have already given the test")
+      }
+    })
 
     this.presentTestNumber = parseInt(localStorage.getItem('testNumber'));
     let section1SelectQuestionsId = [];
@@ -181,11 +209,7 @@ export class ReadingComponent implements OnInit {
     this.readingService.checkOptionStatus(listOption, section, $event, questionNumber);
   }
 
-  onSubmitOfReadingSection() {
-    // console.log(value.value);
-    this.readingService.calculateSelectReadingSectionMarks();
 
-  }
 
   //********************************************************************************************
   //SELECT QUESTIONS
@@ -238,14 +262,6 @@ export class ReadingComponent implements OnInit {
   }
 
 
-  timeLeft: number = 60;
-  interval;
-  checkTimerStatus(event) {
-    // console.log(event);
-    if (event.left == 0) {
-      this.route.navigate(['dashboard'])
-    }
-  }
 
 
 

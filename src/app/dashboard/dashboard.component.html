@@ -19,8 +19,8 @@
           <mat-card id="mat-card">
             Test {{testItem.testNumber}}
             <span *ngIf="testItem.testAttemptStatus==false && testItem.testPricingStatus==false">
-              <button id="button" class="btn btn-outline-primary btn-sm" id="float-item"
-                (click)="navigateToSection(testItem.testNumber)">Take Test</button>
+              <button class="test-button" mat-raised-button (click)="navigateToSection(testItem.testNumber)">Take
+                Test <img src="../../assets/forward.png"></button>
             </span>
             <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
               (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
@@ -40,15 +40,15 @@
             Test {{testItem.testNumber}}
             <span *ngIf="paymentStatus=='true'">
               <span *ngIf="testItem.testAttemptStatus==false">
-                <button id="button" class="btn btn-outline-primary btn-sm" id="float-item"
-                  (click)="navigateToSection(testItem.testNumber)">Take Test</button>
+                <button class="test-button" mat-raised-button (click)="navigateToSection(testItem.testNumber)">Take Test
+                  <img src="../../assets/forward.png"></button>
               </span>
             </span>
             <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
               (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
                 class="btn btn-outline-info btn-sm">View Score</button>
             </span>
-            <span id="float-item" *ngIf="testItem.testPricingStatus===true && paymentStatus==='false'">
+            <span (click)="initiatePayment()" id="float-item" *ngIf="testItem.testPricingStatus===true && paymentStatus==='false'">
               <img src="../../assets/lock.svg" class="icon">
             </span>
 

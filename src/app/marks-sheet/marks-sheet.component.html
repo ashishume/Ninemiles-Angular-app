@@ -1,48 +1,117 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <div>
-        <h3 class="heading">Your MarksSheet</h3>
-      </div>
-      <div class="table-responsive" *ngIf="marksDetails.length">
 
-        <table class="table table-bordered">
-          <tr class="table-primary">
-            <td>Test Number</td>
-            <td>Section</td>
-            <td>Marks Scored</td>
-            <td>No. of Answers correct</td>
-          </tr>
-          <tr class="items" *ngFor="let list of marksDetails">
-            <td>
-              {{list.testNumber}}
-            </td>
-            <td>
-              {{list.section}}
-            </td>
-            <td>
-              {{list.marksBand}}
-            </td>
-            <td>
-              <span *ngIf="list.section!='writing' && list.section!='speaking'">
-                {{list.countOfCorrectAnswers}}/40
-              </span>
-              <span *ngIf="list.section=='writing'">
-                NA
-              </span>
+      <mat-tab-group class="mat-tab-groups" mat-align-tabs="center">
+        <mat-tab label="Scores">
+          <ng-template matTabContent>
 
-              <span *ngIf="list.section=='speaking'">
-                NA
-              </span>
-            </td>
-          </tr>
-        </table>
-      </div>
+            <div>
+              <h3 class="heading">Your MarksSheet</h3>
 
-      <div style="text-align: center;" *ngIf="!marksDetails.length">
-        <p class="alert alert-danger">No results found</p>
-        <a routerLink="/">Go Back</a>
-      </div>
+              <mat-form-field>
+                <mat-label>Select Test Number</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let item of countOfTests" [value]="item" (click)="showResult(item)">{{item}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+            </div>
+            <div class="table-responsive" *ngIf="marksDetails.length">
+              <table class="table table-bordered">
+                <tr class="table-primary">
+                  <td>Test Number</td>
+                  <td>Section</td>
+                  <td>Marks Scored</td>
+                  <td>No. of Answers correct</td>
+                </tr>
+                <tr class="items" *ngFor="let list of marksDetails">
+                  <td>
+                    {{list.testNumber}}
+                  </td>
+                  <td>
+                    {{list.section}}
+                  </td>
+                  <td>
+                    {{list.marksBand}}
+                  </td>
+                  <td>
+                    <span *ngIf="list.section!='writing' && list.section!='speaking'">
+                      {{list.countOfCorrectAnswers}}/40
+                    </span>
+                    <span *ngIf="list.section=='writing'">
+                      NA
+                    </span>
+
+                    <span *ngIf="list.section=='speaking'">
+                      NA
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <div style="text-align: center;" *ngIf="!marksDetails.length">
+              <p class="alert alert-danger">No results found</p>
+              <a routerLink="/">Go Back</a>
+            </div>
+
+
+          </ng-template>
+        </mat-tab>
+
+
+
+        <mat-tab label="Document Scores">
+          <ng-template matTabContent>
+            <h3>Your Uploaded answer sheet</h3>
+            <mat-form-field>
+              <mat-label>Select Test Number</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let item of countOfTests" [value]="item" (click)="showDocumentScores(item)">{{item}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <table class="table" *ngIf="UploadMarksDetails.length">
+              <tr>
+                <td>Test Number</td>
+                <td>Sheet Number</td>
+                <td>Marks Scored</td>
+
+                <td>Test Paper</td>
+                <td>Paper checked</td>
+              </tr>
+              <tr *ngFor="let list of UploadMarksDetails">
+
+                <td>{{list.testNumber}}</td>
+                <td>{{list.sheetNumber}}</td>
+                <td>{{list.marksScored}}</td>
+
+                <td style="text-align: center;"><img [src]="list.onlineAnswer" style="width:200px;height:300px;">
+                  <br>
+                  <br>
+                  <a href="{{list.onlineAnswer}}" target="_blank"><button mat-raised-button>Download</button></a>
+                </td>
+                <td style="text-align: center;" *ngIf="list.answerIsChecked==false"><img
+                    src="../../assets/wrong.png"><br>Not
+                  Checked</td>
+                <td style="text-align: center;" *ngIf="list.answerIsChecked==true"><img
+                    src="../../assets/checked.png"><br>Checked</td>
+              </tr>
+
+            </table>
+
+            <div style="text-align: center;" *ngIf="!UploadMarksDetails.length">
+              <br>
+              <p class="alert alert-danger"> No results found</p>
+            </div>
+
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
 
     </div>
   </div>

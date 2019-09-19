@@ -1,5 +1,5 @@
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 import { Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
@@ -11,34 +11,51 @@ import { ErrorServiceService } from 'src/app/shared/services/error-service/error
   styleUrls: ['./writing.component.css']
 })
 export class WritingComponent implements OnInit {
-  timeLeft: number = 60;
-  interval;
-  public WritingSection: FormGroup;
+
+  // public WritingSection: FormGroup;
   constructor(
     private apiService: ApiService,
     private nav: NavbarService,
     private route: Router,
-    private fb: FormBuilder,
+    // private fb: FormBuilder,
     private snack: ErrorServiceService
   ) {
     this.nav.testActive()
-
-    this.WritingSection = this.fb.group(
-      {
-        section1answer: new FormControl('', []),
-        section2answer: new FormControl('', []),
-      },
-    );
+    this.apiService.checkTestStatus().subscribe((data: any) => {
+      if (data.writing == true) {
+        this.route.navigate(['dashboard'])
+        this.snack.showError("You have already given the test")
+      }
+    })
   }
+
+  section1answer;
+  section2answer;
+
+
+
   section1paragraphDetails = [];
   section2paragraphDetails = [];
 
+
+  // ON REFRESH THE TEST WILL BE SUBMITTED
+  @HostListener('window:beforeunload')
+  onBeforeUnload() {
+    this.onSubmitOfWritingSection()
+    return false;
+  }
+
+
+  timeLeft: number = 3600;
+  interval;
+  checkTimerStatus(event) {
+    if (event.left == 0) {
+      this.onSubmitOfWritingSection()
+    }
+  }
+
   ngOnInit() {
 
-    // @HostListener('window:beforeunload')
-    // onBeforeUnload() {
-    //   return false;
-    // }
     var userType = localStorage.getItem('userType');
     var testNumber = localStorage.getItem('testNumber');
 
@@ -65,14 +82,6 @@ export class WritingComponent implements OnInit {
   }
 
 
-  checkTimerStatus(event) {
-    console.log(event);
-    if (event.left == 0) {
-      this.route.navigate(['dashboard'])
-    }
-  }
-
-
 
 
   editParagraph(list) {
@@ -80,10 +89,10 @@ export class WritingComponent implements OnInit {
     this.route.navigate(['admin-panel/add-paragraph'])
   }
 
-  onSubmitOfWritingSection(formValue) {
+  onSubmitOfWritingSection() {
     let answerArray = []
-    answerArray.push({ answer: formValue.value.section1answer, section: 1 })
-    answerArray.push({ answer: formValue.value.section2answer, section: 2 })
+    answerArray.push({ answer: this.section1answer, section: 1 })
+    answerArray.push({ answer: this.section2answer, section: 2 })
     const body = {
       submittedAnswer: answerArray,
       studentEmail: localStorage.getItem('email'),
@@ -95,7 +104,7 @@ export class WritingComponent implements OnInit {
 
     this.apiService.submitWritingAnswer(body).subscribe((data: any) => {
       if (data.status == 200) {
-        this.snack.showError("Test submitted successfully")
+        this.apiService.updateTestStatus("writing")
         this.route.navigate(['dashboard'])
       }
     })

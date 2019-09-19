@@ -12,7 +12,7 @@ export class ShowUploadWritingComponent implements OnInit {
 
 
   StudentDetails = [];
-
+ 
   ngOnInit() {
 
     this.apiService.displayOnlineTestDetails().subscribe((data: any) => {

@@ -1,9 +1,10 @@
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ErrorServiceService } from '../shared/services/error-service/error-service.service';
 import { NavbarService } from '../shared/services/navbar-service/navbar.service';
+import { InfoPageComponent } from '../shared/components/info-page/info-page.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,7 @@ export class DashboardComponent implements OnInit {
     public matDialog: MatDialog,
     private route: Router,
     private snack: ErrorServiceService,
-    // private navbar: NavbarService
+    private navbar: NavbarService
   ) { }
   paymentStatus;
   freeTestDetails;
@@ -28,7 +29,7 @@ export class DashboardComponent implements OnInit {
   userType;
   countOfGivenTests = 0;
   ngOnInit() {
-    // this.navbar.hide()
+    this.navbar.show()
     this.studentTypes = this.apiService.getStudentTypes()
     const query = {
       email: localStorage.getItem('email')
@@ -100,5 +101,17 @@ export class DashboardComponent implements OnInit {
         }
       })
     }
+  }
+
+  initiatePayment() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '500px';
+    dialogConfig.height = '400px';
+
+    const dialogRef = this.matDialog.open(InfoPageComponent, dialogConfig);
+    // dialogRef.afterClosed().subscribe((result: any) => {
+      
+    // })
+
   }
 }

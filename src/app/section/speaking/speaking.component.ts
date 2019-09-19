@@ -14,10 +14,7 @@ export class SpeakingComponent implements OnInit {
   }
   countOfTests;
   ngOnInit() {
-    // @HostListener('window:beforeunload')
-    // onBeforeUnload() {
-    //   return false;
-    // }
+
   }
 
 
@@ -29,7 +26,7 @@ export class SpeakingComponent implements OnInit {
     }
     this.apiService.updateTestData(body).subscribe((data: any) => {
       // console.log(data);
-
+                  
     })
   }
 

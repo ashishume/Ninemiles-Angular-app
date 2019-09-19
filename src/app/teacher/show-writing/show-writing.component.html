@@ -11,6 +11,7 @@
           <td>User Type</td>
           <td>Answers</td>
           <td></td>
+          <td>Submitted On</td>
         </tr>
         <tr *ngFor="let list of studentDetails">
           <td>{{list.studentName}}</td>
@@ -27,6 +28,7 @@
               </i>
             </a>
           </td>
+          <td>{{list.createdAt| date}}</td>
         </tr>
       </div>
     </div>

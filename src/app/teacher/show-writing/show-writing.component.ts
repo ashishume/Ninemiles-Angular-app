@@ -15,6 +15,8 @@ export class ShowWritingComponent implements OnInit {
     this.apiService.showWritingAnswers().subscribe((data: any) => {
       if (data.status == 200) {
         this.studentDetails = data.body;
+        console.log(data.body);
+
       }
     })
   }

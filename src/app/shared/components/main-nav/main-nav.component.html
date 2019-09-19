@@ -7,6 +7,9 @@
 
       <a routerLink="/dashboard" mat-list-item>Dashboard</a>
 
+      <span *ngIf="userType!='Admin' && userType!='Teacher'">
+        <a routerLink="/marks-sheet" mat-list-item>Marks Sheet</a>
+      </span>
       <span *ngIf="nav.visible">
         <span *ngIf="userType=='Admin'">
           <a routerLink="/admin-panel" mat-list-item>Admin Panel</a>

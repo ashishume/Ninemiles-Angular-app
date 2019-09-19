@@ -1,6 +1,8 @@
 import { HttpService } from '../http-service/http.service';
 import { Injectable } from '@angular/core';
-
+import * as Rx from 'rxjs';
+import { Router } from '@angular/router';
+import { ErrorServiceService } from '../error-service/error-service.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +11,9 @@ export class ApiService {
   testNumber = 0;
   paymentStatus;
   listOfTestDetails;
-  constructor(private httpService: HttpService) { }
+  constructor(
+    private httpService: HttpService,
+    private snack: ErrorServiceService) { }
 
   login(body) {
     return this.httpService.callApi('POST', body, 'user/signup', '');
@@ -134,6 +138,38 @@ export class ApiService {
 
 
 
+  ////TO CHECK WHETHER THE TEST IS ALREADY GIVEN OR NOT
+  checkTestStatus() {
+    const query = {
+      email: localStorage.getItem('email')
+    }
+    const object = new Rx.Observable(observer => {
+      this.showTestData(query).subscribe((data: any) => {
+        data.body.testDetails.forEach(element => {
+          if (element.testNumber == parseInt(localStorage.getItem('testNumber')))
+            observer.next(element);
+        });
+      });
+    });
+    return object;
+
+  }
+
+  //TO UPDATE TEST STATUS
+  updateTestStatus(section) {
+    let updateBody = {
+      email: localStorage.getItem('email'),
+      testNumber: parseInt(localStorage.getItem('testNumber')),
+      testStatusUpdate: ""
+    }
+    updateBody.testStatusUpdate = section;
+    this.updateTestData(updateBody).subscribe((data: any) => {
+      if (data.status == 200) {
+        this.snack.showError("Your test has been successfully submitted")
+        // this.route.navigate(['res'])
+      }
+    })
+  }
 
 
 

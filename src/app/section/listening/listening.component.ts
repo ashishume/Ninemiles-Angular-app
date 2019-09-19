@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild, ElementRef, HostListener, Injectable, OnD
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 import { Router } from '@angular/router';
+import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
 
 @Component({
   selector: 'app-listening',
@@ -35,10 +36,10 @@ export class ListeningComponent implements OnInit {
   public ListeningSection: FormGroup;
   constructor(private apiService: ApiService,
     private fb: FormBuilder,
-    // private listeningService: listeningService,
     private listeningService: ListeningService,
     private nav: NavbarService,
-    private route: Router
+    private route: Router,
+    private snack: ErrorServiceService
   ) {
     this.nav.testActive()
     this.ListeningSection = this.fb.group(
@@ -46,8 +47,35 @@ export class ListeningComponent implements OnInit {
         mcqAnswers: new FormControl('', []),
       },
     );
+
+
+    this.apiService.checkTestStatus().subscribe((data: any) => {
+      if (data.listening == true) {
+        this.route.navigate(['dashboard'])
+        this.snack.showError("You have already given the test")
+      }
+    })
   }
 
+  timeLeft: number = 3600;
+  interval;
+  checkTimerStatus(event) {
+    if (event.left == 0) {
+      this.onSubmitOfListeningSection()
+    }
+  }
+
+  onSubmitOfListeningSection() {
+    this.apiService.updateTestStatus("listening")
+    this.listeningService.calculateSelectListeningSectionMarks()
+  }
+
+  //ON REFRESH THE TEST WILL BE SUBMITTED
+  @HostListener('window:beforeunload')
+  onBeforeUnload() {
+    this.onSubmitOfListeningSection()
+    return false;
+  }
 
 
 
@@ -196,11 +224,6 @@ export class ListeningComponent implements OnInit {
     this.listeningService.checkOptionStatus(listOption, section, $event);
   }
 
-  onSubmitOfListeningSection() {
-    // console.log(value.value);
-    this.listeningService.calculateSelectListeningSectionMarks()
-
-  }
 
   //********************************************************************************************
   //SELECT QUESTIONS
@@ -303,17 +326,5 @@ export class ListeningComponent implements OnInit {
     console.log("ended");
     this.isAudioPlayed4 = true;
   }
-
-
-
-  timeLeft: number = 60;
-  interval;
-  checkTimerStatus(event) {
-    console.log(event);
-    if (event.left == 0) {
-      this.route.navigate(['dashboard'])
-    }
-  }
-
 
 }
