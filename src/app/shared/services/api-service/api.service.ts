@@ -135,6 +135,16 @@ export class ApiService {
     return this.httpService.callApi('PUT', body, 'issue/updateIssues', '')
   }
   // ***********************************************************************
+  //ANALYSIS DATA
+
+  getAnalysisData(query) {
+    return this.httpService.callApi('GETBYPARAMS', '', 'marks/average', query)
+  }
+
+
+  // ***********************************************************************
+
+
 
 
 

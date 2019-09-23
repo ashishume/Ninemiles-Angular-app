@@ -10,12 +10,14 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ResultsComponent } from './results/results.component';
 import { TeacherGuard } from './shared/guard/teacher/teacher.guard';
+import { ProgressComponent } from './progress/progress.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'results', component: ResultsComponent, canActivate: [AuthGuard] },
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
+  { path: 'progress', component: ProgressComponent, canActivate: [AuthGuard] },
   { path: 'marks-sheet', component: MarksSheetComponent, canActivate: [AuthGuard] },
   {
     path: 'section',

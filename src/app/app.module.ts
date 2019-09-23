@@ -36,6 +36,7 @@ import { MarksSheetComponent } from './marks-sheet/marks-sheet.component';
 import { RaiseIssueFormComponent } from './raise-issue-form/raise-issue-form.component';
 import { PaymentComponent } from './payment/payment.component';
 import { InfoPageComponent } from './shared/components/info-page/info-page.component';
+import { ProgressComponent } from './progress/progress.component';
 
 
 
@@ -53,6 +54,7 @@ import { InfoPageComponent } from './shared/components/info-page/info-page.compo
     RaiseIssueFormComponent,
     PaymentComponent,
     InfoPageComponent,
+    ProgressComponent,
 
 
   ],

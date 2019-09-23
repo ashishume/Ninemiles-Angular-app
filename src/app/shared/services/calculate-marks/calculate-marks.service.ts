@@ -172,5 +172,12 @@ export class CalculateMarksService {
       }
     })
   }
+  calculateUploadDocumentSectionMarks(uploadBody) {
+    this.apiService.insertMarkSheet(uploadBody).subscribe((data: any) => {
+      if (data.status == 200) {
+        this.snack.showError("Result submitted successfully");
+      }
+    })
+  }
 
 }

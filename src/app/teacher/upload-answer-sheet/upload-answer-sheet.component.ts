@@ -1,3 +1,4 @@
+import { CalculateMarksService } from 'src/app/shared/services/calculate-marks/calculate-marks.service';
 import { LoaderService } from './../../shared/services/loader-service/loader.service';
 import { ApiService } from './../../shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,7 +24,8 @@ export class UploadAnswerSheetComponent implements OnInit {
     private apiService: ApiService,
     private showSnack: ErrorServiceService,
     private loader: LoaderService,
-    private emailService: EmailService
+    private emailService: EmailService,
+    private calculate: CalculateMarksService
   ) {
 
     this.UploadForm = this.fb.group(
@@ -102,12 +104,22 @@ export class UploadAnswerSheetComponent implements OnInit {
             }
             this.loader.hide()
 
+            const uploadBody = {
+              email: studentData.studentDetails.email,
+              testNumber: studentData.testNumber,
+              section: "onlineWriting",
+              marksBand: studentData.marks,
+              countOfCorrectAnswers: 0,
+            }
+
+            this.calculate.calculateUploadDocumentSectionMarks(uploadBody)
             this.apiService.updateOnlineTest(body).subscribe((data: any) => {
               if (data.status == 200) {
 
                 const email = studentData.studentDetails.email;
                 const name = studentData.studentDetails.name;
                 const subject = "Answer Sheet checked,Please check your score";
+
 
 
                 this.emailService.sendDocumentMail(name, email, subject);
@@ -126,5 +138,6 @@ export class UploadAnswerSheetComponent implements OnInit {
   onSubmitUploadForm(UploadForm) {
     this.uploadImage(UploadForm.value)
   }
+
 
 }

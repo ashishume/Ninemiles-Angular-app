@@ -1,6 +1,6 @@
 import { ApiService } from './../shared/services/api-service/api.service';
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+// import jsPDF from 'jspdf';
 @Component({
   selector: 'app-marks-sheet',
   templateUrl: './marks-sheet.component.html',
@@ -9,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class MarksSheetComponent implements OnInit {
 
   constructor(private apiService: ApiService) { }
+
+  @ViewChild('content') content: ElementRef
   marksDetails = []
   UploadMarksDetails = [];
   countOfTests = [];
   testNumber;
+
   ngOnInit() {
     this.countOfTests = this.apiService.numberOfTests()
   }
@@ -63,6 +66,19 @@ export class MarksSheetComponent implements OnInit {
   }
 
 
-
+  // showPDF() {
+  //   let doc = new jsPDF()
+  //   let specialElementHeaders = {
+  //     '#editor': function (element, renderer) {
+  //       return true
+  //     }
+  //   };
+  //   let content = this.content.nativeElement;
+  //   doc.fromHTML(content.innerHTML, 15, 15, {
+  //     'width': 190,
+  //     'elementHandlers': specialElementHeaders
+  //   })
+  //   doc.save('test.pdf')
+  // }
 
 }

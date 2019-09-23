@@ -8,6 +8,9 @@
       <app-profile></app-profile>
       <hr>
     </div>
+    <div class="col-sm-12">
+      <app-progress></app-progress>
+    </div>
   </div>
 
 
@@ -48,7 +51,8 @@
               (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
                 class="btn btn-outline-info btn-sm">View Score</button>
             </span>
-            <span (click)="initiatePayment()" id="float-item" *ngIf="testItem.testPricingStatus===true && paymentStatus==='false'">
+            <span (click)="initiatePayment()" id="float-item"
+              *ngIf="testItem.testPricingStatus===true && paymentStatus==='false'">
               <img src="../../assets/lock.svg" class="icon">
             </span>
 
