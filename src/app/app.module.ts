@@ -37,6 +37,8 @@ import { RaiseIssueFormComponent } from './raise-issue-form/raise-issue-form.com
 import { PaymentComponent } from './payment/payment.component';
 import { InfoPageComponent } from './shared/components/info-page/info-page.component';
 import { ProgressComponent } from './progress/progress.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 
 
 
@@ -55,6 +57,8 @@ import { ProgressComponent } from './progress/progress.component';
     PaymentComponent,
     InfoPageComponent,
     ProgressComponent,
+    PaymentSuccessComponent,
+    PaymentDetailsComponent,
 
 
   ],

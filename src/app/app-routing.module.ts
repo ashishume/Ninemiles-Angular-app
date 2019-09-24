@@ -1,3 +1,4 @@
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { PaymentComponent } from './payment/payment.component';
 import { AdminGuard } from './shared/guard/admin/admin.guard';
 import { MarksSheetComponent } from './marks-sheet/marks-sheet.component';
@@ -11,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ResultsComponent } from './results/results.component';
 import { TeacherGuard } from './shared/guard/teacher/teacher.guard';
 import { ProgressComponent } from './progress/progress.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'results', component: ResultsComponent, canActivate: [AuthGuard] },
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
   { path: 'progress', component: ProgressComponent, canActivate: [AuthGuard] },
+  { path: 'payment-success/:id', component: PaymentSuccessComponent, canActivate: [AuthGuard] },
+  { path: 'payment-details', component: PaymentDetailsComponent, canActivate: [AuthGuard] },
   { path: 'marks-sheet', component: MarksSheetComponent, canActivate: [AuthGuard] },
   {
     path: 'section',

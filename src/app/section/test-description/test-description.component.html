@@ -4,20 +4,109 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <div class="inside-container">
-        <p>
-          Read the instructions carefully
-        </p>
-        <!-- <p> -->
+      <div *ngIf="section=='listening'" class="inside-container">
+
         <ul>
-          <li>Maximum time given for the test is 60 minutes</li>
+          <h3 style="text-align: center">Listening section test instructions</h3>
+
+          <h3>INSTRUCTIONS TO CANDIDATES</h3>
+          <li> Read the instructions for each part of the paper carefully.</li>
+          <li>You must complete within the time limit of 60 minutes.</li>
+          <li>At the end of the test, please click submit.</li>
+          <h3>INFORMATION FOR CANDIDATES</h3>
+          <li>There are 40 questions on this question paper.</li>
+          <li>Each question carries one mark.</li>
           <li>Once attempted you cannot re-attempt the exam</li>
           <li>Make sure you have a good internet connection</li>
-          <li>Don't refresh the page or else you wont be able to attend the test again</li>
+          <li>Don't refresh the page or else you would not be able to attend the test again</li>
+          <li>Listen to the instructions for each part of the paper carefully</li>
+          <li>Answer all the questions</li>
+          <li>While you are listening, write your answers on the question</li>
+          <li>You can play the audio once</li>
+          <li>Do not switch section until first audio ends</li>
+          <li>Do not play second audio until first audio is complete</li>
         </ul>
-        <!-- </p> -->
 
       </div>
+
+      <div *ngIf="section=='reading'" class="inside-container">
+
+        <ul>
+          <h3 style="text-align: center">Reading section test instructions</h3>
+
+          <h3>INSTRUCTIONS TO CANDIDATES</h3>
+          <li> Read the instructions for each part of the paper carefully.</li>
+          <li>You must complete within the time limit of 60 minutes.</li>
+          <li>At the end of the test, please click submit.</li>
+          <h3>INFORMATION FOR CANDIDATES</h3>
+          <li>There are 40 questions on this question paper.</li>
+          <li>Each question carries one mark.</li>
+          <li>Once attempted you cannot re-attempt the exam</li>
+          <li>Make sure you have a good internet connection</li>
+          <li>Don't refresh the page or else you would not be able to attend the test again</li>
+          <li>Answer all the questions</li>
+        </ul>
+
+      </div>
+      <div *ngIf="section=='writing'" class="inside-container">
+
+        <ul>
+          <h3 style="text-align: center">Writing section test instructions</h3>
+
+          <h3>INSTRUCTIONS TO CANDIDATES</h3>
+          <li> Read the instructions for each part of the paper carefully.</li>
+          <li>You must complete within the time limit of 60 minutes.</li>
+          <li>At the end of the test, please click submit.</li>
+          <h3>INFORMATION FOR CANDIDATES</h3>
+          <li>There are 2 tasks on this question paper.</li>
+          <li>You need to type your answer</li>
+          <li>Maximum word limit is 250</li>
+          <li>Once attempted you cannot re-attempt the exam</li>
+          <li>Make sure you have a good internet connection</li>
+          <li>Don't refresh the page or else you would not be able to attend the test again</li>
+          <li>Answer all the questions</li>
+        </ul>
+
+      </div>
+      <div *ngIf="section=='upload'" class="inside-container">
+
+        <ul>
+          <h3 style="text-align: center">Writing section test instructions</h3>
+
+          <h3>INSTRUCTIONS TO CANDIDATES</h3>
+          <li> Read the instructions for each part of the paper carefully.</li>
+          <li>Upload the documents in order</li>
+          <li>At the end of the test, please click submit.</li>
+          <h3>INFORMATION FOR CANDIDATES</h3>
+          <li>There are 2 tasks on this question paper.</li>
+          <li>You need to upload your answer in image format</li>
+          <li><b>
+              Even if your uploading your answer in task 2 make sure you continue your sheet Number from the
+              previous<br>
+              e.g. You uploaded sheet 1 and 2 in task 1, but in task 2 you will continue your sheet number from 3 and so
+              on
+            </b>
+          </li>
+
+          <li>Once attempted you cannot re-attempt the exam</li>
+          <li>Make sure you have a good internet connection</li>
+        </ul>
+
+      </div>
+
+      <div *ngIf="section=='speaking'" class="inside-container">
+
+        <ul>
+          <h3 style="text-align: center">Speaking section test instructions</h3>
+          <h3>INSTRUCTIONS TO CANDIDATES</h3>
+          <li> Read the instructions for each part of the paper carefully.</li>
+          <h3>INFORMATION FOR CANDIDATES</h3>
+        </ul>
+
+      </div>
+
+
+
       <div class="submit-button">
         <button mat-raised-button color="primary" (click)="continueToSection()">START TEST</button>
       </div>

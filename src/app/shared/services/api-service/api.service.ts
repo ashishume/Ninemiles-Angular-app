@@ -58,6 +58,9 @@ export class ApiService {
   getProfileDetails(query) {
     return this.httpService.callApi('GETBYPARAMS', '', 'user', query);
   }
+  getProfileDetailsOnUserId(query) {
+    return this.httpService.callApi('GETBYPARAMS', '', 'user/userId', query);
+  }
 
   addTestData(body) {
     return this.httpService.callApi('POST', body, 'tests/addTests', '');
@@ -143,6 +146,22 @@ export class ApiService {
 
 
   // ***********************************************************************
+  //MAKE PAYMENT
+  makePayment(body) {
+    return this.httpService.callApi('POST', body, 'payment/makePayment', '')
+  }
+
+  // //ADD PAYMENT DATA
+  // addPaymentData(body) {
+  //   return this.httpService.callApi('POST', body, 'payment/addPayment', '')
+  // }
+
+  // //DISPLAY PAYMENT DETAILS
+  // showPaymentDetails(query) {
+  //   return this.httpService.callApi('GETBYPARAMS', '', 'payment/showPayment', query)
+  // }
+
+
 
 
 

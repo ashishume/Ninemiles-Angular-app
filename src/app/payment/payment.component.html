@@ -5,7 +5,38 @@
       <h3>Pay to get access to the premium features</h3>
       <img src="../../assets/card.png">
 
-        
+      <form class="form" [formGroup]="PaymentFormGroup" autocomplete="off" #PaymentForm="ngForm"
+        (ngSubmit)="onSubmitPaymentForm(PaymentForm)">
+
+        <mat-form-field appearance="outline" class="mat-form-field">
+          <mat-label>Name</mat-label>
+          <input matInput name="name" formControlName="name" readonly [(ngModel)]="name">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline" class="mat-form-field">
+          <mat-label>Email</mat-label>
+          <input matInput name="email" readonly formControlName="email" [(ngModel)]="email">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline" required class="mat-form-field">
+          <mat-label>Mobile No.</mat-label>
+          <input matInput name="phone" formControlName="phone" [pattern]="pattern" [(ngModel)]="phone">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline" class="mat-form-field">
+          <mat-label>(₹) Amount to be paid</mat-label>
+          <input matInput readonly name="amount" [(ngModel)]="amount" formControlName="amount">
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" [disabled]="!PaymentFormGroup.valid" style="width: 100%"
+          color="primary">Pay <i class="material-icons">
+            credit_card
+          </i></button>
+
+      </form>
+
+
+
 
     </div>
   </div>

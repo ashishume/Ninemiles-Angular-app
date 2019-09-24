@@ -10,26 +10,26 @@ import { Router } from '@angular/router';
 export class TestDescriptionComponent implements OnInit {
 
   constructor(private apiService: ApiService, private route: Router) { }
-  data;
+  section;
   updateBody;
   ngOnInit() {
-    this.data = this.apiService.returnDataValues()
-    if (!this.data)
+    this.section = this.apiService.returnDataValues()
+    if (!this.section)
       this.route.navigate(['dashboard'])
   }
 
   continueToSection() {
-    if (this.data == "writing") {
+    if (this.section == "writing") {
       this.route.navigate(['section/writing'])
-    } else if (this.data == "reading") {
+    } else if (this.section == "reading") {
       this.route.navigate(['section/reading'])
-    } else if (this.data == "speaking") {
+    } else if (this.section == "speaking") {
       this.route.navigate(['section/speaking'])
 
-    } else if (this.data == "listening") {
+    } else if (this.section == "listening") {
       this.route.navigate(['section/listening'])
     }
-    else if (this.data == "upload") {
+    else if (this.section == "upload") {
       this.route.navigate(['section/upload-writing'])
     }
 

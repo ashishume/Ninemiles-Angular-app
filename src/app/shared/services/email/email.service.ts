@@ -11,39 +11,40 @@ export class EmailService {
     private apiService: ApiService,
     private showSnack: ErrorServiceService) { }
 
+
+  //upload document writing section
   sendDocumentMail(name, email, subject) {
-    var html = `<div class="container" style="font-family: 'Lexend Deca', sans-serif;">
-  <div class="row">
-      <div class="content" style=" max-width: 400px;
-      margin: 0 auto;
-      padding: 5px 10px;
-      border-radius: 15px;
-      border: solid 5px #20688F;">
-          <div class="image-container" style="text-align: center">
+    var html = `<div class="container"
+    style="@import url('https://fonts.googleapis.com/css?family=Manjari:700&display=swap');font-family: 'Manjari', sans-serif;font-size: 20px">
+    <div class="row">
+        <div class="content" style=" max-width: 400px;
+        margin: 0 auto;
+        padding: 5px 10px;
+        border-radius: 15px;
+        border: solid 5px #20688F;">
+            <div class="image-container" style="text-align: center">
 
-              <img class="image-logo" style="width: 200px;"
-                  src="https://firebasestorage.googleapis.com/v0/b/upwork-5d46d.appspot.com/o/Ninemiles%20Logo%2FNINEMILES.png?alt=media&token=075867a5-0b1e-4242-80a5-ba50e7f68e58" alt="Ninemiles Logo">
-              <hr>
-          </div>
-          <h4 class="heading" style=" text-align: center;
-          color: green;">Congratulations, your test has been checked</h4>
-          <p class="para" style=" background-color: #f4f4f4;
-          padding: 10px 15px;
-          border-radius: 15px;">
-              Hi ${name}, <br><br>
-              Your test has been checked by the Ninemiles professors,
-              Please check your score by visiting the Ninemiles Web App. <br> <br> Thanks <br> <br> Regards<br />Ninemiles Team
-          </p>
-          <hr>
-          <p class="footer" style=" text-align: center;
-          font-size: 10px;">
-              Bengaluru,Karnataka
-          </p>
-      </div>
+                <img class="image-logo" style="width: 120px;height:150px;"
+                    src="https://firebasestorage.googleapis.com/v0/b/upwork-5d46d.appspot.com/o/Ninemiles%20Logo%2Flogo.png?alt=media&token=dae82d92-adf2-47a0-9fac-58182c90b896"
+                    alt="Ninemiles Logo">
+                <hr>
+            </div>
+            <h4 class="heading" style=" text-align: center;
+            color: green;">Congratulations, your test has been checked</h4>
+            <p class="para" style=" background-color: #f4f4f4;
+            padding: 10px 15px;
+            border-radius: 15px;">
+                Hi ${name}, <br><br>
+                Your test has been checked by our team,
+                Please check your score by visiting <a href="www.ninemilesielts.com">www.ninemilesielts.com</a> <br>
+                <br> Thanks and Regards<br />TEAM NINEMILES
+            </p>
 
-  </div>
-</div>
-`
+        </div>
+
+    </div>
+</div>`;
+
 
     const body = {
       email: email,
@@ -59,38 +60,38 @@ export class EmailService {
     })
   }
   sendSpeakingMail(name, email, subject) {
-    var html = `<div class="container" style="font-family: 'Lexend Deca', sans-serif;">
-  <div class="row">
-      <div class="content" style=" max-width: 400px;
-      margin: 0 auto;
-      padding: 5px 10px;
-      border-radius: 15px;
-      border: solid 5px #20688F;">
-          <div class="image-container" style="text-align: center">
+    var html = `<div class="container"
+    style="@import url('https://fonts.googleapis.com/css?family=Manjari:700&display=swap');font-family: 'Manjari', sans-serif;font-size: 20px">
+    <div class="row">
+        <div class="content" style=" max-width: 400px;
+        margin: 0 auto;
+        padding: 5px 10px;
+        border-radius: 15px;
+        border: solid 5px #20688F;">
+            <div class="image-container" style="text-align: center">
 
-              <img class="image-logo" style="width: 200px;"
-                  src="https://firebasestorage.googleapis.com/v0/b/upwork-5d46d.appspot.com/o/Ninemiles%20Logo%2FNINEMILES.png?alt=media&token=075867a5-0b1e-4242-80a5-ba50e7f68e58" alt="Ninemiles Logo">
-              <hr>
-          </div>
-          <h4 class="heading" style=" text-align: center;
-          color: green;">Congratulations, your test has been checked</h4>
-          <p class="para" style=" background-color: #f4f4f4;
-          padding: 10px 15px;
-          border-radius: 15px;">
-              Hi ${name}, <br><br>
-              Your test has been checked by the Ninemiles professors,
-              Please check your score by visiting the Ninemiles Web App. <br> <br> Thanks <br> <br> Regards<br />Ninemiles Team
-          </p>
-          <hr>
-          <p class="footer" style=" text-align: center;
-          font-size: 10px;">
-              Bengaluru,Karnataka
-          </p>
-      </div>
+                <img class="image-logo" style="width: 120px;height:150px;"
+                    src="https://firebasestorage.googleapis.com/v0/b/upwork-5d46d.appspot.com/o/Ninemiles%20Logo%2Flogo.png?alt=media&token=dae82d92-adf2-47a0-9fac-58182c90b896"
+                    alt="Ninemiles Logo">
+                <hr>
+            </div>
+            <h4 class="heading" style=" text-align: center;
+            color: green;">Congratulations, your test has been checked</h4>
+            <p class="para" style=" background-color: #f4f4f4;
+            padding: 10px 15px;
+            border-radius: 15px;">
+                Hi ${name}, <br><br>
+                Your test has been checked by our team,
+                Please check your score by visiting <a href="www.ninemilesielts.com">www.ninemilesielts.com</a>. Log in
+                to your mock test profile to check results.
+                <br>
+                <br> Thanks and Regards<br />TEAM NINEMILES
+            </p>
 
-  </div>
-</div>
-`
+        </div>
+
+    </div>
+</div>`
 
     const body = {
       email: email,
@@ -106,38 +107,38 @@ export class EmailService {
     })
   }
   sendWritingMarks(name, email, subject) {
-    var html = `<div class="container" style="font-family: 'Lexend Deca', sans-serif;">
-  <div class="row">
-      <div class="content" style=" max-width: 400px;
-      margin: 0 auto;
-      padding: 5px 10px;
-      border-radius: 15px;
-      border: solid 5px #20688F;">
-          <div class="image-container" style="text-align: center">
+    var html = `<div class="container"
+    style="@import url('https://fonts.googleapis.com/css?family=Manjari:700&display=swap');font-family: 'Manjari', sans-serif;font-size: 20px">
+    <div class="row">
+        <div class="content" style=" max-width: 400px;
+        margin: 0 auto;
+        padding: 5px 10px;
+        border-radius: 15px;
+        border: solid 5px #20688F;">
+            <div class="image-container" style="text-align: center">
 
-              <img class="image-logo" style="width: 200px;"
-                  src="https://firebasestorage.googleapis.com/v0/b/upwork-5d46d.appspot.com/o/Ninemiles%20Logo%2FNINEMILES.png?alt=media&token=075867a5-0b1e-4242-80a5-ba50e7f68e58" alt="Ninemiles Logo">
-              <hr>
-          </div>
-          <h4 class="heading" style=" text-align: center;
-          color: green;">Congratulations, your test has been checked</h4>
-          <p class="para" style=" background-color: #f4f4f4;
-          padding: 10px 15px;
-          border-radius: 15px;">
-              Hi ${name}, <br><br>
-              Your test has been checked by the Ninemiles professors,
-              Please check your score by visiting the Ninemiles Web App. <br> <br> Thanks <br> <br> Regards<br />Ninemiles Team
-          </p>
-          <hr>
-          <p class="footer" style=" text-align: center;
-          font-size: 10px;">
-              Bengaluru,Karnataka
-          </p>
-      </div>
+                <img class="image-logo" style="width: 120px;height:150px;"
+                    src="https://firebasestorage.googleapis.com/v0/b/upwork-5d46d.appspot.com/o/Ninemiles%20Logo%2Flogo.png?alt=media&token=dae82d92-adf2-47a0-9fac-58182c90b896"
+                    alt="Ninemiles Logo">
+                <hr>
+            </div>
+            <h4 class="heading" style=" text-align: center;
+            color: green;">Congratulations, your test has been checked</h4>
+            <p class="para" style=" background-color: #f4f4f4;
+            padding: 10px 15px;
+            border-radius: 15px;">
+                Hi ${name}, <br><br>
+                Your test has been checked by our team,
+                Please check your score by visiting <a href="www.ninemilesielts.com">www.ninemilesielts.com</a>. Log in
+                to your mock test profile to check results.
+                <br>
+                <br> Thanks and Regards<br />TEAM NINEMILES
+            </p>
 
-  </div>
-</div>
-`
+        </div>
+
+    </div>
+</div>`
 
     const body = {
       email: email,
@@ -155,41 +156,35 @@ export class EmailService {
 
   sendIssueMail(name, email, message) {
 
-    var html = `<div class="container" style="font-family: 'Lexend Deca', sans-serif;">
-  <div class="row">
-      <div class="content" style=" max-width: 400px;
-      margin: 0 auto;
-      padding: 5px 10px;
-      border-radius: 15px;
-      border: solid 5px #20688F;">
-          <div class="image-container" style="text-align: center">
+    var html = `<div class="container"
+    style="@import url('https://fonts.googleapis.com/css?family=Manjari:700&display=swap');font-family: 'Manjari', sans-serif;font-size: 20px">
+    <div class="row">
+        <div class="content"
+            style=" max-width: 400px; margin: 0 auto;padding: 5px 10px;border-radius:15px;border: solid 5px #20688F;">
+            <div class="image-container" style="text-align:center">
 
-              <img class="image-logo" style="width: 200px;"
-                  src="https://firebasestorage.googleapis.com/v0/b/upwork-5d46d.appspot.com/o/Ninemiles%20Logo%2FNINEMILES.png?alt=media&token=075867a5-0b1e-4242-80a5-ba50e7f68e58" alt="Ninemiles Logo">
-              <hr>
-          </div>
-          <h4 class="heading" style=" text-align: center;
-          color: green;"><p class="para" style=" background-color: #f4f4f4;
-          padding: 10px 15px;
-          border-radius: 15px;">
+                <img class="image-logo" style="width: 200px;"
+                    src="https://firebasestorage.googleapis.com/v0/b/upwork-5d46d.appspot.com/o/Ninemiles%20Logo%2Flogo.png?alt=media&token=dae82d92-adf2-47a0-9fac-58182c90b896"
+                    alt="Ninemiles Logo">
+                <hr>
+            </div>
+            <h4 class="heading" style=" text-align: center;
+    color: green; ">
+                <p class="para" style=" background-color:#f4f4f4; padding:10px 15px;border-radius:15px;">
 
-              ${name}, has raised an issue please look into the matter.
-              <br>Issue raised:&nbsp;<b>${message}</b>
-              <br>
-              <br>
-              Please reply ${name} in his mail id ${email}, to further give him update about the issue.
-          
-              </p>
-          <hr>
-          <p class="footer" style=" text-align: center;
-          font-size: 10px;">
-              Bengaluru,Karnataka
-          </p>
-      </div>
+                    ${ name}, has raised an issue please look into the matter.
+                    <br>
+                    <br>
+                    Issue raised:& nbsp; <b>${ message} </b>
+                    <br>
+                    <br>
+                    Please reply ${ name} in his mail id ${email}, to further give him update about the issue.
 
-  </div>
-</div>
-`
+                </p>
+
+        </div>
+    </div>
+</div>`
     const body = {
       email: "ninemilesmocks@gmail.com",
       subject: `${name} has raised an issue`,
