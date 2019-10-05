@@ -29,8 +29,8 @@ export class PaymentComponent implements OnInit {
   userId;
   name = localStorage.getItem('name')
   email = localStorage.getItem('email')
-  amount = 10
-  phone = "8557098095"
+  amount = 3000
+  phone;
   ngOnInit() {
 
     const query = {

@@ -65,8 +65,13 @@ export class WritingAdminComponent implements OnInit {
     var userType = this.userType;
     var testNumber = this.testNumber;
 
+    const query = {
+      paragraphUserType: userType,
+      testNumber: testNumber,
+      paragraphSectionCategory: "Writing"
+    }
 
-    this.apiService.getListOfParagraph().subscribe((response: any) => {
+    this.apiService.getListOfParagraph(query).subscribe((response: any) => {
       if (response.status == 200) {
         let section1paragraphDetails = []
         let section2paragraphDetails = []
@@ -74,16 +79,16 @@ export class WritingAdminComponent implements OnInit {
         let section4paragraphDetails = []
 
         response.body.forEach(function (value) {
-          if (value.section == '1' && "Writing" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '1') {
             section1paragraphDetails.push(value);
           }
-          if (value.section == '2' && "Writing" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '2') {
             section2paragraphDetails.push(value);
           }
-          if (value.section == '3' && userType == value.paragraphUserType && testNumber == value.testNumber && value.paragraphSectionCategory == "Writing") {
+          if (value.section == '3') {
             section3paragraphDetails.push(value);
           }
-          if (value.section == '4' && userType == value.paragraphUserType && testNumber == value.testNumber && value.paragraphSectionCategory == "Writing") {
+          if (value.section == '4') {
             section4paragraphDetails.push(value);
           }
         })

@@ -116,12 +116,19 @@ export class ListeningComponent implements OnInit {
     var userType = localStorage.getItem('userType');
     this.userType = userType;
     var testNumber = localStorage.getItem('testNumber');
-    this.apiService.getListOfQuestions().subscribe((response: any) => {
+    const query = {
+      userType: userType,
+      sectionCategory: "Listening",
+      testNumber: testNumber
+    }
+
+    this.apiService.getListOfQuestions(query).subscribe((response: any) => {
       if (response.status == 200) {
+        console.log(response.body);
 
         response.body.forEach(function (value) {
 
-          if (value.section == "1" && userType == value.questionUserType && value.sectionCategory == "Listening" && testNumber == value.testNumber) {
+          if (value.section == "1") {
             section1Questions.push(value);
             if (value.questionType == "Select in the blanks") {
               section1SelectQuestionsId.push(value._id);
@@ -130,7 +137,7 @@ export class ListeningComponent implements OnInit {
               section1TypeQuestionsId.push(value._id)
             }
 
-          } else if (value.section == "2" && userType == value.questionUserType && value.sectionCategory == "Listening" && testNumber == value.testNumber) {
+          } else if (value.section == "2") {
             if (value.questionType == "Select in the blanks") {
               section2SelectQuestionsId.push(value._id);
             }
@@ -138,7 +145,7 @@ export class ListeningComponent implements OnInit {
               section2TypeQuestionsId.push(value._id)
             }
             section2Questions.push(value);
-          } else if (value.section == "3" && userType == value.questionUserType && value.sectionCategory == "Listening" && testNumber == value.testNumber) {
+          } else if (value.section == "3") {
             if (value.questionType == "Select in the blanks") {
               section3SelectQuestionsId.push(value._id);
             }
@@ -146,7 +153,7 @@ export class ListeningComponent implements OnInit {
               section3TypeQuestionsId.push(value._id)
             }
             section3Questions.push(value);
-          } else if (value.section == "4" && userType == value.questionUserType && value.sectionCategory == "Listening" && testNumber == value.testNumber) {
+          } else if (value.section == "4") {
             if (value.questionType == "Select in the blanks") {
               section4SelectQuestionsId.push(value._id);
             }
@@ -183,21 +190,27 @@ export class ListeningComponent implements OnInit {
     let section2AudioDetails = []
     let section3AudioDetails = []
     let section4AudioDetails = []
-    this.apiService.getListOfParagraph().subscribe((response: any) => {
+    const params = {
+      paragraphUserType: userType,
+      testNumber: testNumber,
+      paragraphSectionCategory: "Listening"
+    }
+
+    this.apiService.getListOfParagraph(params).subscribe((response: any) => {
       if (response.status == 200) {
 
         response.body.forEach(function (value) {
 
-          if (value.section == '1' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '1') {
             section1AudioDetails.push(value);
           }
-          if (value.section == '2' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '2') {
             section2AudioDetails.push(value);
           }
-          if (value.section == '3' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '3') {
             section3AudioDetails.push(value);
           }
-          if (value.section == '4' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '4') {
             section4AudioDetails.push(value);
           }
         })
@@ -243,19 +256,19 @@ export class ListeningComponent implements OnInit {
   // ******************************************************************************************
   //TYPE QUESTIONS
   checkTypeOptionStatus1(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim();
     this.listeningService.checkTypeOptionStatus1(fullOption, selectedOption, section, id, selectedIndex, this.section1TypeQuestionsId)
   }
   checkTypeOptionStatus2(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim();
     this.listeningService.checkTypeOptionStatus2(fullOption, selectedOption, section, id, selectedIndex, this.section2TypeQuestionsId)
   }
   checkTypeOptionStatus3(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim();
     this.listeningService.checkTypeOptionStatus3(fullOption, selectedOption, section, id, selectedIndex, this.section3TypeQuestionsId)
   }
   checkTypeOptionStatus4(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim();
     this.listeningService.checkTypeOptionStatus4(fullOption, selectedOption, section, id, selectedIndex, this.section4TypeQuestionsId)
   }
 

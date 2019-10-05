@@ -11,31 +11,6 @@
         </span>
       </mat-card>
 
-      <mat-card  id="mat-card" class="mat-card" (click)="handlingWriting()">
-        <img src="../../assets/writing.svg" class="icon">
-        Writing
-        <span id="float-item">
-          <img src="../../assets/arrow.svg" class="icon">
-        </span>
-      </mat-card>
-
-      <mat-card *ngIf="list.reading==false" id="mat-card" class="mat-card" (click)="handlingReading()">
-        <img src="../../assets/reading.svg" class="icon">
-        Reading
-        <span id="float-item">
-          <img src="../../assets/arrow.svg" class="icon">
-        </span>
-      </mat-card>
-
-      <mat-card *ngIf="list.speaking==false" id="mat-card" class="mat-card" (click)="handlingSpeaking()">
-        <img src="../../assets/speaking.svg" class="icon">
-        Speaking
-        <span id="float-item">
-          <img src="../../assets/arrow.svg" class="icon">
-        </span>
-      </mat-card>
-
-
       <!-- LOCKED DATA -->
       <mat-card *ngIf="list.listening==true" id="mat-card" (click)="showAttemptMessage()" class="mat-card">
         <img src="../../assets/headphone.svg" class="icon">
@@ -46,6 +21,39 @@
       </mat-card>
 
 
+
+      <mat-card id="mat-card" *ngIf="list.writing==false && list.onlineWriting==false" class="mat-card"
+        (click)="handlingWriting()">
+        <img src="../../assets/writing.svg" class="icon">
+        Writing
+        <span id="float-item">
+          <img src="../../assets/arrow.svg" class="icon">
+        </span>
+      </mat-card>
+
+
+      <!-- LOCKED DATA -->
+      <mat-card id="mat-card" *ngIf="list.writing==true || list.onlineWriting==true" class="mat-card"
+        (click)="showAttemptMessage()">
+        <img src="../../assets/writing.svg" class="icon">
+        Writing
+        <span id="float-item">
+          <img src="../../assets/lock.svg" class="icon">
+        </span>
+      </mat-card>
+
+
+
+
+      <mat-card *ngIf="list.reading==false" id="mat-card" class="mat-card" (click)="handlingReading()">
+        <img src="../../assets/reading.svg" class="icon">
+        Reading
+        <span id="float-item">
+          <img src="../../assets/arrow.svg" class="icon">
+        </span>
+      </mat-card>
+
+      <!-- LOCKED DATA -->
       <mat-card *ngIf="list.reading==true" id="mat-card" (click)="showAttemptMessage()" class="mat-card">
         <img src="../../assets/reading.svg" class="icon">
         Reading
@@ -54,6 +62,17 @@
         </span>
       </mat-card>
 
+
+
+      <mat-card *ngIf="list.speaking==false" id="mat-card" class="mat-card" (click)="handlingSpeaking()">
+        <img src="../../assets/speaking.svg" class="icon">
+        Speaking
+        <span id="float-item">
+          <img src="../../assets/arrow.svg" class="icon">
+        </span>
+      </mat-card>
+
+      <!-- LOCKED DATA -->
       <mat-card *ngIf="list.speaking==true" id="mat-card" (click)="showAttemptMessage()" class="mat-card">
         <img src="../../assets/speaking.svg" class="icon">
         Speaking
@@ -61,8 +80,8 @@
           <img src="../../assets/lock.svg" class="icon">
         </span>
       </mat-card>
-      <!-- LOCKED DATA -->
+
     </div>
   </div>
 </div>
-<a (click)="showIssueForm()"class="footer">Please raise any issue</a>
+  <a (click)="showIssueForm()" class="footer">Please raise any issue</a>

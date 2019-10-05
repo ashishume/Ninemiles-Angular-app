@@ -110,12 +110,20 @@ export class ReadingComponent implements OnInit {
 
     var userType = localStorage.getItem('userType');
     var testNumber = localStorage.getItem('testNumber');
-    this.apiService.getListOfQuestions().subscribe((response: any) => {
+    const query = {
+      userType: userType,
+      sectionCategory: "Reading",
+      testNumber: testNumber
+    }
+
+    this.apiService.getListOfQuestions(query).subscribe((response: any) => {
       if (response.status == 200) {
+
+        console.log(response.body);
 
         response.body.forEach(function (value) {
 
-          if (value.section == "1" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
+          if (value.section == "1") {
             section1Questions.push(value);
             if (value.questionType == "Select in the blanks") {
               section1SelectQuestionsId.push(value._id);
@@ -124,7 +132,7 @@ export class ReadingComponent implements OnInit {
               section1TypeQuestionsId.push(value._id)
             }
 
-          } else if (value.section == "2" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
+          } else if (value.section == "2") {
             if (value.questionType == "Select in the blanks") {
               section2SelectQuestionsId.push(value._id);
             }
@@ -132,7 +140,7 @@ export class ReadingComponent implements OnInit {
               section2TypeQuestionsId.push(value._id)
             }
             section2Questions.push(value);
-          } else if (value.section == "3" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
+          } else if (value.section == "3") {
             if (value.questionType == "Select in the blanks") {
               section3SelectQuestionsId.push(value._id);
             }
@@ -140,7 +148,7 @@ export class ReadingComponent implements OnInit {
               section3TypeQuestionsId.push(value._id)
             }
             section3Questions.push(value);
-          } else if (value.section == "4" && userType == value.questionUserType && value.sectionCategory == "Reading" && testNumber == value.testNumber) {
+          } else if (value.section == "4") {
             if (value.questionType == "Select in the blanks") {
               section4SelectQuestionsId.push(value._id);
             }
@@ -173,23 +181,29 @@ export class ReadingComponent implements OnInit {
       }
     })
 
-    this.apiService.getListOfParagraph().subscribe((response: any) => {
+    const params = {
+      paragraphUserType: userType,
+      testNumber: testNumber,
+      paragraphSectionCategory: "Reading"
+    }
+
+    this.apiService.getListOfParagraph(params).subscribe((response: any) => {
       if (response.status == 200) {
         let section1paragraphDetails = []
         let section2paragraphDetails = []
         let section3paragraphDetails = []
         let section4paragraphDetails = []
         response.body.forEach(function (value) {
-          if (value.section == '1' && "Reading" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '1') {
             section1paragraphDetails.push(value);
           }
-          if (value.section == '2' && "Reading" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '2') {
             section2paragraphDetails.push(value);
           }
-          if (value.section == '3' && "Reading" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '3') {
             section3paragraphDetails.push(value);
           }
-          if (value.section == '4' && "Reading" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '4') {
             section4paragraphDetails.push(value);
           }
         })
@@ -229,19 +243,19 @@ export class ReadingComponent implements OnInit {
   // ******************************************************************************************
   //TYPE QUESTIONS
   checkTypeOptionStatus1(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim();
     this.readingService.checkTypeOptionStatus1(fullOption, selectedOption, section, id, selectedIndex, this.section1TypeQuestionsId)
   }
   checkTypeOptionStatus2(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim();
     this.readingService.checkTypeOptionStatus2(fullOption, selectedOption, section, id, selectedIndex, this.section2TypeQuestionsId)
   }
   checkTypeOptionStatus3(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim();
     this.readingService.checkTypeOptionStatus3(fullOption, selectedOption, section, id, selectedIndex, this.section3TypeQuestionsId)
   }
   checkTypeOptionStatus4(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim();
     this.readingService.checkTypeOptionStatus4(fullOption, selectedOption, section, id, selectedIndex, this.section4TypeQuestionsId)
   }
 

@@ -45,7 +45,7 @@ export class UploadWritingComponent implements OnInit {
       },
     );
     this.apiService.checkTestStatus().subscribe((data: any) => {
-      if (data.onlineWriting == true) {
+      if (data.onlineWriting == true || data.writing == true) {
         this.route.navigate(['dashboard'])
         this.snackbar.showError("You have already given the test")
       }
@@ -60,17 +60,22 @@ export class UploadWritingComponent implements OnInit {
     var userType = localStorage.getItem('userType');
     var testNumber = localStorage.getItem('testNumber');
 
+    const query = {
+      paragraphUserType: userType,
+      testNumber: testNumber,
+      paragraphSectionCategory: "Writing"
+    }
 
-    this.apiService.getListOfParagraph().subscribe((response: any) => {
+    this.apiService.getListOfParagraph(query).subscribe((response: any) => {
       if (response.status == 200) {
         let section1paragraphDetails = []
         let section2paragraphDetails = []
 
         response.body.forEach(function (value) {
-          if (value.section == '3' && userType == value.paragraphUserType && testNumber == value.testNumber && value.paragraphSectionCategory == "Writing") {
+          if (value.section == '3') {
             section1paragraphDetails.push(value);
           }
-          if (value.section == '4' && userType == value.paragraphUserType && testNumber == value.testNumber && value.paragraphSectionCategory == "Writing") {
+          if (value.section == '4') {
             section2paragraphDetails.push(value);
           }
         })

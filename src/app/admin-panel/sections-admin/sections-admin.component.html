@@ -1,9 +1,8 @@
 <br>
-<div class="disable-text-selection">
   
-  <div class="container" appNoRightClick>
+  <div class="container" >
     <div class="row">
-      <div class="col-sm-12" *ngFor="let list of testDetails">
+      <div class="col-sm-12">
         <h4>Please choose the sections (Admin Panel)</h4>
         <mat-card id="mat-card" class="mat-card" (click)="handlingListening()">
           <img src="../../assets/headphone.svg" class="icon">
@@ -28,17 +27,16 @@
             <img src="../../assets/arrow.svg" class="icon">
           </span>
         </mat-card>
-
+<!-- 
         <mat-card id="mat-card" class="mat-card" (click)="handlingSpeaking()">
           <img src="../../assets/speaking.svg" class="icon">
           Speaking
           <span id="float-item">
             <img src="../../assets/arrow.svg" class="icon">
           </span>
-        </mat-card>
+        </mat-card> -->
 
 
       </div>
     </div>
   </div>
-</div>

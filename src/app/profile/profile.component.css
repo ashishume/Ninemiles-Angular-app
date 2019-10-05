@@ -17,3 +17,8 @@
 .test {
   font-size: 15px;
 }
+
+.mat-raised-button{
+  background-color: green;
+  border-radius: 20px;
+}

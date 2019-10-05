@@ -104,12 +104,18 @@ export class ListeningAdminComponent implements OnInit {
 
     var userType = this.userType;
     var testNumber = this.testNumber;
-    this.apiService.getListOfQuestions().subscribe((response: any) => {
+    const query = {
+      userType: userType,
+      sectionCategory: "Listening",
+      testNumber: testNumber
+    }
+
+    this.apiService.getListOfQuestions(query).subscribe((response: any) => {
       if (response.status == 200) {
 
         response.body.forEach(function (value) {
 
-          if (value.section == "1" && userType == value.questionUserType && value.sectionCategory == "Listening" && testNumber == value.testNumber) {
+          if (value.section == "1") {
             section1Questions.push(value);
             if (value.questionType == "Select in the blanks") {
               section1SelectQuestionsId.push(value._id);
@@ -118,7 +124,7 @@ export class ListeningAdminComponent implements OnInit {
               section1TypeQuestionsId.push(value._id)
             }
 
-          } else if (value.section == "2" && userType == value.questionUserType && value.sectionCategory == "Listening" && testNumber == value.testNumber) {
+          } else if (value.section == "2") {
             if (value.questionType == "Select in the blanks") {
               section2SelectQuestionsId.push(value._id);
             }
@@ -126,7 +132,7 @@ export class ListeningAdminComponent implements OnInit {
               section2TypeQuestionsId.push(value._id)
             }
             section2Questions.push(value);
-          } else if (value.section == "3" && userType == value.questionUserType && value.sectionCategory == "Listening" && testNumber == value.testNumber) {
+          } else if (value.section == "3") {
             if (value.questionType == "Select in the blanks") {
               section3SelectQuestionsId.push(value._id);
             }
@@ -134,7 +140,7 @@ export class ListeningAdminComponent implements OnInit {
               section3TypeQuestionsId.push(value._id)
             }
             section3Questions.push(value);
-          } else if (value.section == "4" && userType == value.questionUserType && value.sectionCategory == "Listening" && testNumber == value.testNumber) {
+          } else if (value.section == "4") {
             if (value.questionType == "Select in the blanks") {
               section4SelectQuestionsId.push(value._id);
             }
@@ -171,21 +177,28 @@ export class ListeningAdminComponent implements OnInit {
     let section2AudioDetails = []
     let section3AudioDetails = []
     let section4AudioDetails = []
-    this.apiService.getListOfParagraph().subscribe((response: any) => {
+
+    const params = {
+      paragraphUserType: userType,
+      testNumber: testNumber,
+      paragraphSectionCategory: "Listening"
+    }
+
+    this.apiService.getListOfParagraph(params).subscribe((response: any) => {
       if (response.status == 200) {
 
         response.body.forEach(function (value) {
 
-          if (value.section == '1' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '1') {
             section1AudioDetails.push(value);
           }
-          if (value.section == '2' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '2') {
             section2AudioDetails.push(value);
           }
-          if (value.section == '3' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '3') {
             section3AudioDetails.push(value);
           }
-          if (value.section == '4' && "Listening" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '4') {
             section4AudioDetails.push(value);
           }
         })
@@ -193,13 +206,6 @@ export class ListeningAdminComponent implements OnInit {
         this.section2AudioDetails = section2AudioDetails;
         this.section3AudioDetails = section3AudioDetails;
         this.section4AudioDetails = section4AudioDetails;
-
-        console.log(this.section1AudioDetails);
-        console.log(this.section2AudioDetails);
-        console.log(this.section3AudioDetails);
-        console.log(this.section4AudioDetails);
-
-
 
       }
     })
@@ -239,7 +245,6 @@ export class ListeningAdminComponent implements OnInit {
     this.isAudioPlayed1 = true;
   }
   section1EndAudio() {
-    console.log("ended");
     this.isAudioPlayed1 = true;
   }
 

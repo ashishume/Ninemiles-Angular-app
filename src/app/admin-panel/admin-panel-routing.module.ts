@@ -10,7 +10,6 @@ import { AddParagraphComponent } from './add-paragraph/add-paragraph.component';
 import { RegisteredUsersComponent } from './registered-users/registered-users.component';
 import { RaisedIssueComponent } from './raised-issue/raised-issue.component';
 import { SectionsAdminComponent } from './sections-admin/sections-admin.component';
-import { SpeakingAdminComponent } from './sections-admin/speaking-admin/speaking-admin.component';
 import { ReadingAdminComponent } from './sections-admin/reading-admin/reading-admin.component';
 
 const route: Routes = [
@@ -23,7 +22,6 @@ const route: Routes = [
   { path: 'raised-issue', component: RaisedIssueComponent },
   { path: 'sections-admin', component: SectionsAdminComponent },
   { path: 'listening-admin', component: ListeningAdminComponent },
-  { path: 'speaking-admin', component: SpeakingAdminComponent },
   { path: 'writing-admin', component: WritingAdminComponent },
   { path: 'reading-admin', component: ReadingAdminComponent },
 

@@ -24,8 +24,8 @@ export class ApiService {
   }
   // ******************************************
 
-  getListOfQuestions() {
-    return this.httpService.callApi('GET', '', 'questions/listQuestions', '');
+  getListOfQuestions(query) {
+    return this.httpService.callApi('GETBYPARAMS', '', 'questions/listQuestions', query);
   }
   insertQuestion(body) {
     return this.httpService.callApi('POST', body, 'questions/addQuestion', '');
@@ -43,8 +43,8 @@ export class ApiService {
   deleteQuestion(params) {
     return this.httpService.callApi('DELETEBYPARAMS', '', 'questions/deleteQuestion', params);
   }
-  getListOfParagraph() {
-    return this.httpService.callApi('GET', '', 'contents/listParagraph', '');
+  getListOfParagraph(query) {
+    return this.httpService.callApi('GETBYPARAMS', '', 'contents/listParagraph', query);
   }
   updateParagraph(body) {
     return this.httpService.callApi('PUT', body, 'contents/updateParagraph', '');

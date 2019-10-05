@@ -22,7 +22,7 @@ export class WritingComponent implements OnInit {
   ) {
     this.nav.testActive()
     this.apiService.checkTestStatus().subscribe((data: any) => {
-      if (data.writing == true) {
+      if (data.onlineWriting == true || data.writing == true) {
         this.route.navigate(['dashboard'])
         this.snack.showError("You have already given the test")
       }
@@ -59,17 +59,22 @@ export class WritingComponent implements OnInit {
     var userType = localStorage.getItem('userType');
     var testNumber = localStorage.getItem('testNumber');
 
+    const query = {
+      paragraphUserType: userType,
+      testNumber: testNumber,
+      paragraphSectionCategory: "Writing"
+    }
 
-    this.apiService.getListOfParagraph().subscribe((response: any) => {
+    this.apiService.getListOfParagraph(query).subscribe((response: any) => {
       if (response.status == 200) {
         let section1paragraphDetails = []
         let section2paragraphDetails = []
 
         response.body.forEach(function (value) {
-          if (value.section == '1' && "Writing" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '1') {
             section1paragraphDetails.push(value);
           }
-          if (value.section == '2' && "Writing" == value.paragraphSectionCategory && testNumber == value.testNumber && value.paragraphUserType == userType) {
+          if (value.section == '2') {
             section2paragraphDetails.push(value);
           }
         })

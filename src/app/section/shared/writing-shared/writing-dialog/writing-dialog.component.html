@@ -14,21 +14,6 @@
           <img class="writing" src="../../../../../assets/website.png">
           <p>Give online</p>
         </div>
-
-
-        <!-- DISBALED -->
-        <div *ngIf="list.writing==true" class="col-sm-6" (click)="showAttemptMessage()">
-          <img src="../../../../../assets/writing.png">
-          <p>Give online</p>
-          <img src="../../../../../assets/lock.svg" class="icon">
-        </div>
-        <div *ngIf="list.onlineWriting==true" class="col-sm-6" (click)="showAttemptMessage()">
-          <img src="../../../../../assets/website.png">
-          <p>Upload Document</p>
-          <img src="../../../../../assets/lock.svg" class="icon">
-        </div>
-
-
         <br>
         <br>
         <button style="margin: 0 auto;" mat-raised-button mat-dialog-close>Cancel</button>

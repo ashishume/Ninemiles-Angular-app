@@ -11,8 +11,12 @@
           <span class="email">{{list.email}}</span><br>
           <span class="test" *ngIf="list.paymentStatus==false">Free User</span>
           <span class="test" *ngIf="list.paymentStatus==true"><img src="../../assets/tick.png"> Premium User</span>
+          <br>
+          <br>
+
+          <button *ngIf="list.paymentStatus==false" (click)="initiatePayment()" mat-raised-button color="accent"> $ Ninemiles Premium</button>
         </div>
-        
+
       </div>
     </mat-card>
   </div>

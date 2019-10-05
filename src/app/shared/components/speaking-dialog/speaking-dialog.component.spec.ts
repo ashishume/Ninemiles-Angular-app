@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpeakingAdminComponent } from './speaking-admin.component';
+import { SpeakingDialogComponent } from './speaking-dialog.component';
 
-describe('SpeakingAdminComponent', () => {
-  let component: SpeakingAdminComponent;
-  let fixture: ComponentFixture<SpeakingAdminComponent>;
+describe('SpeakingDialogComponent', () => {
+  let component: SpeakingDialogComponent;
+  let fixture: ComponentFixture<SpeakingDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpeakingAdminComponent ]
+      declarations: [ SpeakingDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpeakingAdminComponent);
+    fixture = TestBed.createComponent(SpeakingDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

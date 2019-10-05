@@ -38,7 +38,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { InfoPageComponent } from './shared/components/info-page/info-page.component';
 import { ProgressComponent } from './progress/progress.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
-import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { SpeakingDialogComponent } from './shared/components/speaking-dialog/speaking-dialog.component';
 
 
 
@@ -58,7 +58,7 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
     InfoPageComponent,
     ProgressComponent,
     PaymentSuccessComponent,
-    PaymentDetailsComponent,
+    SpeakingDialogComponent,
 
 
   ],
@@ -77,7 +77,11 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
     LayoutModule,
 
   ],
-  entryComponents: [InfoPageComponent, SnackBarComponent, RaiseIssueFormComponent],
+  entryComponents: [
+    InfoPageComponent,
+    SpeakingDialogComponent,
+    SnackBarComponent,
+    RaiseIssueFormComponent],
   providers: [
     AuthService,
     ApiService,

@@ -1,6 +1,9 @@
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Injectable } from '@angular/core';
 import { ErrorServiceService } from '../error-service/error-service.service';
+import { Router } from '@angular/router';
+import { SpeakingDialogComponent } from '../../components/speaking-dialog/speaking-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +12,8 @@ export class EmailService {
 
   constructor(
     private apiService: ApiService,
+    private route: Router,
+    private matDialog: MatDialog,
     private showSnack: ErrorServiceService) { }
 
 
@@ -193,6 +198,66 @@ export class EmailService {
     this.apiService.sendEmail(body).subscribe((data: any) => {
       if (data.status == 200) {
         this.showSnack.showError("Mail has been successfully sent");
+      } else {
+        this.showSnack.showError("Something went wrong");
+      }
+    })
+
+  }
+
+
+  requestSpeakingTest(body) {
+    var html = `<div class="container"
+    style="@import url('https://fonts.googleapis.com/css?family=Manjari:700&display=swap');font-family: 'Manjari', sans-serif;font-size: 20px">
+    <div class="row">
+        <div class="content" style=" max-width: 400px;
+        margin: 0 auto;
+        padding: 5px 10px;
+        border-radius: 15px;
+        border: solid 5px #20688F;">
+            <div class="image-container" style="text-align: center">
+
+                <img class="image-logo" style="width: 120px;height:150px;"
+                    src="https://firebasestorage.googleapis.com/v0/b/upwork-5d46d.appspot.com/o/Ninemiles%20Logo%2Flogo.png?alt=media&token=dae82d92-adf2-47a0-9fac-58182c90b896"
+                    alt="Ninemiles Logo">
+                <hr>
+            </div>
+            <div>
+                ${body.name} has requested for speaking test
+                Please assign a teacher to take the test.
+
+            </div>
+            <p class="para" style=" background-color: #f4f4f4;
+            padding: 10px 15px;
+            border-radius: 15px;">
+                Test Details:<br>
+                Student Name: <b>${body.name}</b><br>
+                Student Email:<b> ${body.email}</b><br>
+                Test Number: <b>${body.testNumber}</b><br>
+                Phone Number: <b>${body.phone}</b><br>
+                Country: <b>${body.country}</b><br>
+                Time: <b>${body.time} </b><br>
+                Date: <b>${body.date}</b><br>
+
+            </p>
+
+        </div>
+
+    </div>
+</div>`
+    const updateBody = {
+      email: "ninemilesmocks@gmail.com",
+      subject: `${body.name} has requested for speaking test`,
+      htmlCode: html
+    }
+    this.apiService.sendEmail(updateBody).subscribe((data: any) => {
+      if (data.status == 200) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.width = '400px';
+        this.matDialog.open(SpeakingDialogComponent, dialogConfig);
+
+        this.apiService.updateTestStatus("speaking")
+        this.route.navigate([''])
       } else {
         this.showSnack.showError("Something went wrong");
       }

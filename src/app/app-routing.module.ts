@@ -1,4 +1,3 @@
-import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { PaymentComponent } from './payment/payment.component';
 import { AdminGuard } from './shared/guard/admin/admin.guard';
 import { MarksSheetComponent } from './marks-sheet/marks-sheet.component';
@@ -21,7 +20,6 @@ const routes: Routes = [
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
   { path: 'progress', component: ProgressComponent, canActivate: [AuthGuard] },
   { path: 'payment-success/:id', component: PaymentSuccessComponent, canActivate: [AuthGuard] },
-  { path: 'payment-details', component: PaymentDetailsComponent, canActivate: [AuthGuard] },
   { path: 'marks-sheet', component: MarksSheetComponent, canActivate: [AuthGuard] },
   {
     path: 'section',

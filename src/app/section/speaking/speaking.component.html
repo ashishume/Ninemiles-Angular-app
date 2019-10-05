@@ -1,5 +1,45 @@
 <div class="disable-text-selection" appNoRightClick>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 style="text-align: center">Speaking Test Form</h3>
+                <form class="form" matInputAutofocus [formGroup]="SpeakingFormGroup" autocomplete="off" #SpeakingForm="ngForm"
+                    (ngSubmit)="onSubmitSpeakingForm(SpeakingForm)">
 
 
-    <button (click)="onSubmitSpeaking()">Submit</button>
+                    <mat-form-field appearance="outline" required class="mat-form-field">
+                        <mat-label>Mobile No.</mat-label>
+                        <input matInput name="phone" formControlName="phone" [pattern]="pattern" [(ngModel)]="phone">
+                    </mat-form-field>
+                    <br>
+
+                    <mat-form-field appearance="outline" required class="mat-form-field">
+                        <mat-label>Country Name</mat-label>
+                        <input matInput name="countryName" formControlName="countryName" [(ngModel)]="countryName">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <input readonly (click)="picker.open()" matInput name="date" [min]="disablePastDates"
+                            formControlName="date" [(ngModel)]="date" [matDatepicker]="picker"
+                            placeholder="Choose a date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Please choose time</mat-label>
+                        <input readonly name="time" formControlName="time" ngModel matInput atp-time-picker />
+                    </mat-form-field>
+
+                    <button mat-raised-button type="submit" [disabled]="!SpeakingFormGroup.valid" style="width: 100%"
+                        color="primary">Request Speaking Test</button>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
 </div>

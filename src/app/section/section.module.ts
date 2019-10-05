@@ -12,6 +12,9 @@ import { CountdownModule } from 'ngx-countdown';
 import { WritingDialogComponent } from './shared/writing-shared/writing-dialog/writing-dialog.component';
 import { UploadWritingComponent } from './shared/writing-shared/upload-writing/upload-writing.component';
 import { TestDescriptionComponent } from './test-description/test-description.component';
+import { AmazingTimePickerModule } from 'amazing-time-picker';
+
+
 
 @NgModule({
   declarations: [
@@ -22,9 +25,10 @@ import { TestDescriptionComponent } from './test-description/test-description.co
     SectionComponent,
     WritingDialogComponent,
     UploadWritingComponent,
-    TestDescriptionComponent
+    TestDescriptionComponent,
   ],
   imports: [
+    AmazingTimePickerModule,
     QuillModule.forRoot(),
     CommonModule,
     SharedModule,

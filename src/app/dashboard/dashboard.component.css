@@ -4,3 +4,10 @@
   top: 11px;
   /* top: 0 */
 }
+.mat-raised-button{
+  border-radius: 20px;
+  background-color:lightblue;
+}
+.mat-card{
+  border-radius: 25px;
+}

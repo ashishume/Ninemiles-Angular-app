@@ -40,6 +40,8 @@ export class ReadingService {
       section: parseInt(section)
     }
 
+    console.log(checkOptionData);
+
     var uniqueId1 = UniqueIds[0];
     var uniqueId2 = UniqueIds[1];
     if (id == uniqueId1) {
@@ -66,7 +68,7 @@ export class ReadingService {
     console.log(this.selectQuestionsSection1Array1);
     console.log(this.selectQuestionsSection1Array2);
     console.log(this.selectQuestionsSection1Array3);
-    
+
   }
 
 
@@ -207,6 +209,8 @@ export class ReadingService {
       isCorrect: Boolean(correctAnswerStatus),
       section: parseInt(section)
     }
+
+    console.log(checkOptionData);
 
     var uniqueId1 = UniqueIds[0];
     var uniqueId2 = UniqueIds[1];
@@ -578,7 +582,7 @@ export class ReadingService {
         mcqScore += 1;
     })
     this.readingSectionScore += mcqScore;
-   
+
 
     this.calculateService.calculateReadingSectionMarks(this.readingSectionScore)
 
