@@ -10,10 +10,6 @@
               <h3 class="heading">Your MarksSheet</h3>
 
 
-              <div (click)="showPDF()">
-                Download pdf
-              </div>
-
               <mat-form-field>
                 <mat-label>Select Test Number</mat-label>
                 <mat-select>
@@ -55,7 +51,85 @@
                     </span>
                   </td>
                 </tr>
+
               </table>
+
+
+
+              <h3 style="margin:0 auto;">Download your test certificate</h3>
+
+              <div class="container" id="contentToConvert"
+                style="margin-top:40px;border: solid 1px black;width: 850px;">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h1 style="font-weight: bolder">IELTS</h1>
+                    <span style="float: right;border:solid 1px black;padding:5px;background-color: white;">Academic
+                      Student</span>
+                    <p>Test Report Form</p>
+                    <div class="row">
+                      <div class="col-sm-12">
+
+
+                        <p style="background-color:white;padding: 5px;border: solid 1px black;">Disclaimer: This
+                          mock
+                          test is just
+                          for
+                          reference only and do not have any reference with IDP and British
+                          Council IELTS results</p>
+
+                      </div>
+                    </div>
+
+                    <div style="padding: 5px;" class="row">
+                      <div class="col-sm-8">
+                        <p>Candidate Details:</p>
+                        <b>
+                          {{name}}<br>
+                          {{email}}
+                        </b>
+                      </div>
+                      <div class="col-sm-3">
+                        <img src="{{imageUrl}}" style="width: 120px;height:120px;border-radius:100px;">
+                      </div>
+
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12" style="text-align:center">
+                        <img src="../../assets/ninemilesLogo.png" style="height: 130px;">
+
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-8" style="text-align:center">
+                        Test Results:<br>
+                        <p style="margin-top: 20px;">
+                          Listening: <span class="marks">7.8</span>&nbsp;
+                          Reading: <span class="marks">5.5</span>&nbsp;
+                          Writing: <span class="marks">4.5</span>&nbsp;
+                          Speaking: <span class="marks">8.5</span>&nbsp;
+                        </p>
+                      </div>
+                      <div class="col-sm-4">
+                        <p style="margin-top: 20px;">
+                          Overall score: <span class="marks">8.5</span>
+                          <br>
+                          <br>
+                          Mock test number: <span class="marks">1</span>
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <br>
+              <br>
+              <button mat-raised-button>Download certificate</button>
+              <br>
+              <br>
+              <br>
+
+
             </div>
 
             <div style="text-align: center;" *ngIf="!marksDetails.length">
@@ -121,20 +195,3 @@
     </div>
   </div>
 </div>
-
-<!-- 
-<div id="content" #content>
-
-  <p>
-    <img src="../../assets/card.png">
-    It i s a long established fact that a reader will be distracted by the readable content of a page when looking at
-    its
-    layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-    using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web
-    page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web
-    sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on
-    purpose (injected humour and the like).
-  </p>
-
-
-</div> -->

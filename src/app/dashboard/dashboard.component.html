@@ -27,7 +27,7 @@
             </span>
             <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
               (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
-                class="btn btn-outline-info btn-sm">View Score</button>
+                class="btn btn-outline-primary btn-sm">View Score</button>
             </span>
             <span id="float-item" *ngIf="testItem.testPricingStatus==true && paymentStatus==false">
               <img src="../../assets/lock.svg" class="icon">
@@ -49,7 +49,7 @@
             </span>
             <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
               (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
-                class="btn btn-outline-info btn-sm">View Score</button>
+                class="btn btn-outline-primary btn-sm">View Score</button>
             </span>
             <span (click)="initiatePayment()" id="float-item"
               *ngIf="testItem.testPricingStatus===true && paymentStatus==='false'">

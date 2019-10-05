@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
           } else {
             paidTestArray.push(value);
           }
-          if (value.listening == true && value.speaking == true && value.reading == true && value.writing == true && value.onlineWriting == true) {
+          if (value.listening == true && value.speaking == true && value.reading == true && (value.writing == true || value.onlineWriting == true)) {
             countOfGivenTests += 1;
             value.testAttemptStatus = true;
           }

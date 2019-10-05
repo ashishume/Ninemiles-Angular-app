@@ -39,6 +39,7 @@ import { InfoPageComponent } from './shared/components/info-page/info-page.compo
 import { ProgressComponent } from './progress/progress.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { SpeakingDialogComponent } from './shared/components/speaking-dialog/speaking-dialog.component';
+import { TestComponent } from './test/test.component';
 
 
 
@@ -59,6 +60,7 @@ import { SpeakingDialogComponent } from './shared/components/speaking-dialog/spe
     ProgressComponent,
     PaymentSuccessComponent,
     SpeakingDialogComponent,
+    TestComponent,
 
 
   ],
