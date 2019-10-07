@@ -14,7 +14,6 @@ export class RaiseIssueFormComponent implements OnInit {
   }
 
   raisedIssue() {
-    console.log(this.message);
 
   }
   onSubmitIssue(IssueForm) {

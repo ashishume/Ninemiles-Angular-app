@@ -63,7 +63,6 @@ export class UploadWritingMarksComponent implements OnInit {
   }
 
   onSubmitAnswer(MarksForm) {
-    console.log(MarksForm.value);
     const formData = MarksForm.value;
     const body = {
       email: formData.studentDetails.email,

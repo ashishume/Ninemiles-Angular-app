@@ -150,7 +150,6 @@ export class CalculateMarksService {
       countOfCorrectAnswers: listeningMarks,
       userType: localStorage.getItem('userType')
     }
-    console.log(body);
     this.apiService.insertMarkSheet(body).subscribe((data: any) => {
       if (data.status == 200) {
         this.route.navigate(['results'])

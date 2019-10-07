@@ -119,8 +119,6 @@ export class ReadingComponent implements OnInit {
     this.apiService.getListOfQuestions(query).subscribe((response: any) => {
       if (response.status == 200) {
 
-        console.log(response.body);
-
         response.body.forEach(function (value) {
 
           if (value.section == "1") {

@@ -53,7 +53,6 @@ export class UpdateTestStatusComponent implements OnInit {
     this.countOfTests = this.apiService.numberOfTests();
     this.sectionCategory = this.apiService.getSectionCategory()
     this.sectionCategory.push("onlineWriting");
-    console.log(this.sectionCategory);
 
     let tempDropDown = []
     this.apiService.listAllUsers().subscribe((data: any) => {
@@ -70,7 +69,6 @@ export class UpdateTestStatusComponent implements OnInit {
   }
 
   onSubmitOfTest(TestForm) {
-    console.log(TestForm.value);
     var section;
     if (TestForm.value.testStatusUpdate != "onlineWriting") {
       section = TestForm.value.testStatusUpdate.toLowerCase()
@@ -83,7 +81,6 @@ export class UpdateTestStatusComponent implements OnInit {
       "testStatusUpdate": section
     }
 
-    console.log(body);
 
     this.apiService.changeTestStatus(body).subscribe((data: any) => {
       if (data.status == 200) {

@@ -49,9 +49,6 @@ export class ListeningService {
         this.selectQuestionsSection1Array3[i] = "Empty"
     }
 
-    console.log(this.selectQuestionsSection1Array1);
-    console.log(this.selectQuestionsSection1Array2);
-    console.log(this.selectQuestionsSection1Array3);
 
   }
 
@@ -94,10 +91,6 @@ export class ListeningService {
     }
 
 
-    console.log(this.selectQuestionsSection2Array1);
-    console.log(this.selectQuestionsSection2Array2);
-    console.log(this.selectQuestionsSection2Array3);
-
   }
   selectQuestionsSection3Array1 = [];
   selectQuestionsSection3Array2 = [];
@@ -136,9 +129,6 @@ export class ListeningService {
         this.selectQuestionsSection3Array3[i] = "Empty"
     }
 
-    console.log(this.selectQuestionsSection3Array1);
-    console.log(this.selectQuestionsSection3Array2);
-    console.log(this.selectQuestionsSection3Array3);
 
 
   }
@@ -179,9 +169,6 @@ export class ListeningService {
         this.selectQuestionsSection4Array3[i] = "Empty"
     }
 
-    console.log(this.selectQuestionsSection4Array1);
-    console.log(this.selectQuestionsSection4Array2);
-    console.log(this.selectQuestionsSection4Array3);
   }
 
   // ***************************************************************************************
@@ -227,9 +214,6 @@ export class ListeningService {
         this.typeQuestionsSection1Array3[i] = "Empty"
     }
 
-    console.log(this.typeQuestionsSection1Array1);
-    console.log(this.typeQuestionsSection1Array2);
-    console.log(this.typeQuestionsSection1Array3);
   }
 
 
@@ -271,9 +255,6 @@ export class ListeningService {
         this.typeQuestionsSection2Array3[i] = "Empty"
     }
 
-    console.log(this.typeQuestionsSection2Array1);
-    console.log(this.typeQuestionsSection2Array2);
-    console.log(this.typeQuestionsSection2Array3);
   }
 
 
@@ -314,9 +295,7 @@ export class ListeningService {
         this.typeQuestionsSection3Array3[i] = "Empty"
     }
 
-    console.log(this.typeQuestionsSection3Array1);
-    console.log(this.typeQuestionsSection3Array2);
-    console.log(this.typeQuestionsSection3Array3);
+
   }
 
 
@@ -357,9 +336,7 @@ export class ListeningService {
       if (this.typeQuestionsSection4Array3[i] == undefined)
         this.typeQuestionsSection4Array3[i] = "Empty"
     }
-    console.log(this.typeQuestionsSection4Array1);
-    console.log(this.typeQuestionsSection4Array2);
-    console.log(this.typeQuestionsSection4Array3);
+  
   }
 
 
@@ -384,7 +361,6 @@ export class ListeningService {
         }
       }
     }
-    console.log(this.arrayOfMCQQuestions);
 
   }
 

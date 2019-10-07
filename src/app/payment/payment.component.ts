@@ -52,7 +52,6 @@ export class PaymentComponent implements OnInit {
     this.apiService.makePayment(formData).subscribe((response: any) => {
 
       var object = JSON.parse(response.body.body)
-      console.log(object);
       if (object.success == true) {
         var url = object.payment_request.longurl
         window.location.href = url;

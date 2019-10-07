@@ -124,7 +124,6 @@ export class ListeningComponent implements OnInit {
 
     this.apiService.getListOfQuestions(query).subscribe((response: any) => {
       if (response.status == 200) {
-        console.log(response.body);
 
         response.body.forEach(function (value) {
 
@@ -306,7 +305,6 @@ export class ListeningComponent implements OnInit {
     this.isAudioPlayed1 = true;
   }
   section1EndAudio() {
-    console.log("ended");
     this.isAudioPlayed1 = true;
   }
 
@@ -316,7 +314,6 @@ export class ListeningComponent implements OnInit {
     this.isAudioPlayed2 = true;
   }
   section2EndAudio() {
-    console.log("ended");
     this.isAudioPlayed2 = true;
   }
 
@@ -326,7 +323,6 @@ export class ListeningComponent implements OnInit {
     this.isAudioPlayed3 = true;
   }
   section3EndAudio() {
-    console.log("ended");
     this.isAudioPlayed3 = true;
   }
 
@@ -336,7 +332,6 @@ export class ListeningComponent implements OnInit {
     this.isAudioPlayed4 = true;
   }
   section4EndAudio() {
-    console.log("ended");
     this.isAudioPlayed4 = true;
   }
 

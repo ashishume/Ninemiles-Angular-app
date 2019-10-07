@@ -254,7 +254,6 @@ export class ListeningAdminComponent implements OnInit {
     this.isAudioPlayed2 = true;
   }
   section2EndAudio() {
-    console.log("ended");
     this.isAudioPlayed2 = true;
   }
 
@@ -264,7 +263,6 @@ export class ListeningAdminComponent implements OnInit {
     this.isAudioPlayed3 = true;
   }
   section3EndAudio() {
-    console.log("ended");
     this.isAudioPlayed3 = true;
   }
 
@@ -274,7 +272,6 @@ export class ListeningAdminComponent implements OnInit {
     this.isAudioPlayed4 = true;
   }
   section4EndAudio() {
-    console.log("ended");
     this.isAudioPlayed4 = true;
   }
 

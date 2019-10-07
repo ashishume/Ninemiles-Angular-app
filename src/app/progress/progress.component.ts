@@ -39,9 +39,12 @@ export class ProgressComponent implements OnInit {
 
 
         });
-        this.chartData = chartData;
-        this.labels = labels;
-        this.showData()
+        if (chartData.length != 0) {
+          
+          this.chartData = chartData;
+          this.labels = labels;
+          this.showData()
+        }
       }
 
     })
