@@ -2,6 +2,7 @@ import { ApiService } from './../shared/services/api-service/api.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import * as Chart from 'chart.js';
 
 
 @Component({
@@ -21,19 +22,23 @@ export class MarksSheetComponent implements OnInit {
   imageUrl: string;
   name: string;
   email: string;
+  studentType: string;
   ngOnInit() {
+    this.imageUrl = localStorage.getItem('photoURL')
     this.name = localStorage.getItem('name')
     this.email = localStorage.getItem('email')
+    this.studentType = localStorage.getItem('userType')
 
+    if (localStorage.getItem('userType') == "Academic Students")
+      this.studentType = "Academic Student";
+    if (localStorage.getItem('userType') == "General Students")
+      this.studentType = "General Student";
 
     this.countOfTests = this.apiService.numberOfTests()
   }
 
 
   downloadPDF() {
-    this.imageUrl = localStorage.getItem('photoURL')
-
-
     var data = document.getElementById('contentToConvert');
     html2canvas(data).then(canvas => {
       var imgWidth = 208;
@@ -54,7 +59,7 @@ export class MarksSheetComponent implements OnInit {
   showResult(test) {
     this.testNumber = test;
     this.showTestResult()
-    this.downloadPDF()
+    // this.downloadPDF()
   }
 
   showDocumentScores(test) {
@@ -91,30 +96,11 @@ export class MarksSheetComponent implements OnInit {
           }
         })
         this.marksDetails = tempArray;
+        console.log(this.marksDetails);
+
       }
     })
   }
 
-
-  showPDF() {
-
-
-
-
-
-
-    // let doc = new jsPDF()
-    // let specialElementHeaders = {
-    //   '#editor': function (element, renderer) {
-    //     return true
-    //   }
-    // };
-    // let content = this.content.nativeElement;
-    // doc.fromHTML(content.innerHTML, 15, 15, {
-    //   'width': 190,
-    //   'elementHandlers': specialElementHeaders
-    // })
-    // doc.save('test.pdf')
-  }
 
 }

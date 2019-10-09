@@ -63,9 +63,9 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <h1 style="font-weight: bolder">IELTS</h1>
-                    <span style="float: right;border:solid 1px black;padding:5px;background-color: white;">Academic
-                      Student</span>
-                    <p>Test Report Form</p>
+                    <span
+                      style="float: right;border:solid 1px black;padding:5px;background-color: white;">{{studentType}}</span>
+                    <p style="text-align: center;">Test Report Form</p>
                     <div class="row">
                       <div class="col-sm-12">
 
@@ -101,13 +101,13 @@
                     </div>
                     <div class="row">
                       <div class="col-sm-8" style="text-align:center">
-                        Test Results:<br>
-                        <p style="margin-top: 20px;">
-                          Listening: <span class="marks">7.8</span>&nbsp;
-                          Reading: <span class="marks">5.5</span>&nbsp;
-                          Writing: <span class="marks">4.5</span>&nbsp;
-                          Speaking: <span class="marks">8.5</span>&nbsp;
-                        </p>
+                        Test Results:
+                        <br>
+                        <br>
+                        <span style="margin-top: 50px;" *ngFor="let list of marksDetails">
+                          {{list.section}}: <span class="marks">{{list.marksBand}}</span>&nbsp;
+
+                        </span>
                       </div>
                       <div class="col-sm-4">
                         <p style="margin-top: 20px;">
@@ -124,7 +124,7 @@
               </div>
               <br>
               <br>
-              <button mat-raised-button>Download certificate</button>
+              <button mat-raised-button (click)="downloadPDF()">Download certificate</button>
               <br>
               <br>
               <br>

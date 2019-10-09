@@ -40,6 +40,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { SpeakingDialogComponent } from './shared/components/speaking-dialog/speaking-dialog.component';
 import { TestComponent } from './test/test.component';
+import { TestProgressComponent } from './test-progress/test-progress.component';
 
 
 
@@ -61,6 +62,7 @@ import { TestComponent } from './test/test.component';
     PaymentSuccessComponent,
     SpeakingDialogComponent,
     TestComponent,
+    TestProgressComponent,
 
 
   ],

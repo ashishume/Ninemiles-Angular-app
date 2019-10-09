@@ -1,0 +1,19 @@
+<div class="container" style="margin: 0 auto;">
+  <br>
+  <a routerLink="/">
+    <img src="../../assets/left-arrow.png" class="icon">
+  </a>
+  <br>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Select test number</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let item of numberOfTest" (click)="showGraphData(item)" [value]="item">{{item}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <h2 *ngIf="show==false" style="text-align: center;">Your test analysis will show here</h2>
+  <h2 *ngIf="chartData.length==0 && show==true" style="text-align: center;">Your test data is not available</h2>
+  <div class="row">
+    <canvas id="canvas"></canvas>
+  </div>
+</div>
