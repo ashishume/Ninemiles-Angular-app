@@ -25,7 +25,8 @@
 
         <div class="col-sm-12">
           <!-- SECTION 1 -->
-          <div class="section1-content" *ngIf="section1Questions.length && section1paragraphDetails.length">
+          <div class="section1-content" *ngIf="section1Questions.length || section1paragraphDetails.length">
+          <!-- <div class="section1-content" > -->
 
             <mat-tab class="mat-tab1" label="Section 1">
 
@@ -43,6 +44,12 @@
                     </p>
 
                   </span>
+
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+
                 </div>
                 <div class="col-sm-6" id="question-section">
 
@@ -56,6 +63,8 @@
                         <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
                           [value]="listOption.option">
                           &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                       </span>
                     </span>
 
@@ -71,6 +80,7 @@
                             <mat-option *ngFor="let items of list.optionsList" [value]="items">{{items}}</mat-option>
                           </mat-select>
                         </mat-form-field>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                         <br>
                       </span>
                     </Span>
@@ -83,6 +93,7 @@
                         <mat-form-field class="option-input">
                           <input matInput>
                         </mat-form-field>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                         <br>
                       </span>
                     </Span>
@@ -110,7 +121,8 @@
           </div>
 
           <!-- SECTION 2 -->
-          <div class="section2-content" *ngIf="section2Questions.length && section2paragraphDetails.length">
+          <div class="section2-content" *ngIf="section2Questions.length || section2paragraphDetails.length">
+          <!-- <div class="section2-content"> -->
             <mat-tab label="Section 2">
               <div class="row">
                 <div class="col-sm-6" id="paragraph-section">
@@ -123,6 +135,12 @@
                     <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
                     <p [innerHTML]="list.paragraphTitle"></p>
                   </span>
+
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+
                 </div>
                 <div class="col-sm-6" id="question-section">
 
@@ -136,6 +154,7 @@
                         <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
                           [value]="listOption.option">
                           &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                       </span>
                     </span>
 
@@ -151,6 +170,7 @@
                             <mat-option *ngFor="let items of list.optionsList" [value]="items">{{items}}</mat-option>
                           </mat-select>
                         </mat-form-field>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                         <br>
                       </span>
                     </Span>
@@ -166,6 +186,7 @@
 
                           <input matInput>
                         </mat-form-field>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                         <br>
                       </span>
                     </Span>
@@ -190,7 +211,8 @@
             </mat-tab>
           </div>
           <!-- SECTION 3 -->
-          <div class="section3-content" *ngIf="section3Questions.length && section3paragraphDetails.length">
+          <div class="section3-content" *ngIf="section3Questions.length || section3paragraphDetails.length">
+          <!-- <div class="section3-content" > -->
             <mat-tab label="Section 3">
               <div class="row">
                 <div class="col-sm-6" id="paragraph-section">
@@ -206,6 +228,12 @@
                     <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
                     <p [innerHTML]="list.paragraphTitle"></p>
                   </span>
+
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+
                 </div>
                 <div class="col-sm-6" id="question-section">
 
@@ -220,6 +248,7 @@
                         <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
                           [value]="listOption.option">
                           &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                       </span>
                     </span>
 
@@ -235,6 +264,7 @@
                             <mat-option *ngFor="let items of list.optionsList" [value]="items">{{items}}</mat-option>
                           </mat-select>
                         </mat-form-field>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                         <br>
                       </span>
                     </Span>
@@ -249,6 +279,7 @@
 
                           <input matInput>
                         </mat-form-field>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                         <br>
                       </span>
                     </Span>
@@ -272,7 +303,8 @@
             </mat-tab>
           </div>
           <!-- SECTION 4 -->
-          <div class="section4-content" *ngIf="section4Questions.length && section4paragraphDetails.length">
+          <div class="section4-content" *ngIf="section4Questions.length || section4paragraphDetails.length">
+          <!-- <div class="section4-content" > -->
             <mat-tab label="Section 4">
 
               <div class="row">
@@ -288,6 +320,12 @@
                     <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
                     <p [innerHTML]="list.paragraphTitle"></p>
                   </span>
+
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+
                 </div>
                 <div class="col-sm-6" id="question-section">
 
@@ -302,6 +340,7 @@
                         <mat-checkbox name="mcqAnswers" formControlName="mcqAnswers" ngModel
                           [value]="listOption.option">
                           &nbsp;{{listOption.option}}&nbsp;</mat-checkbox>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                       </span>
                     </span>
 
@@ -317,6 +356,7 @@
                             <mat-option *ngFor="let items of list.optionsList" [value]="items">{{items}}</mat-option>
                           </mat-select>
                         </mat-form-field>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                         <br>
                       </span>
                     </Span>
@@ -330,6 +370,7 @@
                         <mat-form-field class="option-input">
                           <input matInput>
                         </mat-form-field>
+                        &nbsp;&nbsp;<span> ==>{{listOption.optionStatus}}</span>
                         <br>
                       </span>
                     </Span>

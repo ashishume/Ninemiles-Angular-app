@@ -4,7 +4,7 @@ import { LoaderService } from './shared/services/loader-service/loader.service';
 import { HttpService } from './shared/services/http-service/http.service';
 import { ApiService } from './shared/services/api-service/api.service';
 import { AuthService } from './shared/services/auth-service/auth.service';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule,Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,7 +39,6 @@ import { InfoPageComponent } from './shared/components/info-page/info-page.compo
 import { ProgressComponent } from './progress/progress.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { SpeakingDialogComponent } from './shared/components/speaking-dialog/speaking-dialog.component';
-import { TestComponent } from './test/test.component';
 import { TestProgressComponent } from './test-progress/test-progress.component';
 
 
@@ -61,7 +60,6 @@ import { TestProgressComponent } from './test-progress/test-progress.component';
     ProgressComponent,
     PaymentSuccessComponent,
     SpeakingDialogComponent,
-    TestComponent,
     TestProgressComponent,
 
 
@@ -95,6 +93,7 @@ import { TestProgressComponent } from './test-progress/test-progress.component';
     ListeningService,
     SpeakingService,
     WritingService,
+    Title,
     LoaderService,
     ErrorServiceService,
     CalculateMarksService,

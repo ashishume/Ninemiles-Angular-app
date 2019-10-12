@@ -1,6 +1,7 @@
 import { ApiService } from './../../shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-test-description',
@@ -9,7 +10,13 @@ import { Router } from '@angular/router';
 })
 export class TestDescriptionComponent implements OnInit {
 
-  constructor(private apiService: ApiService, private route: Router) { }
+  constructor(
+    private apiService: ApiService,
+    private route: Router,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Test Description')
+  }
   section;
   updateBody;
   ngOnInit() {

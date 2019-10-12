@@ -11,6 +11,7 @@ import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-upload-writing',
@@ -35,8 +36,10 @@ export class UploadWritingComponent implements OnInit {
     private apiService: ApiService,
     private route: Router,
     private loader: LoaderService,
-    private snackbar: ErrorServiceService
+    private snackbar: ErrorServiceService,
+    private titleService: Title
   ) {
+    this.titleService.setTitle('Upload Document Section')
     this.nav.testActive()
     this.UploadForm = this.fb.group(
       {

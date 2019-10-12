@@ -4,6 +4,7 @@ import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.ser
 import { Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-writing',
@@ -18,8 +19,10 @@ export class WritingComponent implements OnInit {
     private nav: NavbarService,
     private route: Router,
     // private fb: FormBuilder,
-    private snack: ErrorServiceService
+    private snack: ErrorServiceService,
+    private titleService: Title
   ) {
+    this.titleService.setTitle('Writing Section')
     this.nav.testActive()
     this.apiService.checkTestStatus().subscribe((data: any) => {
       if (data.onlineWriting == true || data.writing == true) {

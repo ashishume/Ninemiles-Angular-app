@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-update-test-status',
@@ -19,9 +20,10 @@ export class UpdateTestStatusComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
-    private snack: ErrorServiceService
+    private snack: ErrorServiceService,
+    private titleService: Title
   ) {
-
+    this.titleService.setTitle('Update Tests')
     this.TestFormGroup = this.fb.group(
       {
         studentDetails: new FormControl('', [Validators.required]),

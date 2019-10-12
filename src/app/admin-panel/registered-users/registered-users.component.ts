@@ -1,6 +1,7 @@
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-registered-users',
@@ -13,7 +14,12 @@ export class RegisteredUsersComponent implements OnInit {
     true,
     false
   ]
-  constructor(private apiService: ApiService, private snack: ErrorServiceService) { }
+  constructor(
+    private titleService:Title,
+    private apiService: ApiService,
+    private snack: ErrorServiceService) {
+    this.titleService.setTitle('Registered-Users')
+   }
   registeredUsers;
   ngOnInit() {
 

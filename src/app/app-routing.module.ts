@@ -12,7 +12,6 @@ import { ResultsComponent } from './results/results.component';
 import { TeacherGuard } from './shared/guard/teacher/teacher.guard';
 import { ProgressComponent } from './progress/progress.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
-import { TestComponent } from './test/test.component';
 import { TestProgressComponent } from './test-progress/test-progress.component';
 
 const routes: Routes = [
@@ -39,7 +38,6 @@ const routes: Routes = [
     canActivate: [TeacherGuard]
   },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  // { path: 'test', component: TestComponent },
   { path: 'test-progress', component: TestProgressComponent },
   { path: '**', component: PageNotFoundComponent },
 

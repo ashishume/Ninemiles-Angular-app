@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { ReadingService } from 'src/app/section/shared/reading-shared/reading.service';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-reading-admin',
@@ -30,8 +31,10 @@ export class ReadingAdminComponent implements OnInit {
   constructor(private apiService: ApiService,
     private fb: FormBuilder,
     private nav: NavbarService,
-    private route: Router
+    private route: Router,
+    private titleService: Title
   ) {
+    this.titleService.setTitle('Reading-Admin')
     // this.nav.testActive()
     this.ReadingSection = this.fb.group(
       {
@@ -104,6 +107,7 @@ export class ReadingAdminComponent implements OnInit {
       testNumber: testNumber
     }
 
+
     this.apiService.getListOfQuestions(query).subscribe((response: any) => {
       if (response.status == 200) {
 
@@ -166,6 +170,13 @@ export class ReadingAdminComponent implements OnInit {
         this.section4Questions = section4Questions;
 
 
+
+      }
+      else if (response.status == 204) {
+        this.section1Questions = [];
+        this.section2Questions = [];
+        this.section3Questions = [];
+        this.section4Questions = [];
       }
     })
 
@@ -200,6 +211,12 @@ export class ReadingAdminComponent implements OnInit {
         this.section4paragraphDetails = section4paragraphDetails;
 
 
+      }
+      else if (response.status == 204) {
+        this.section1paragraphDetails = [];
+        this.section2paragraphDetails = [];
+        this.section3paragraphDetails = [];
+        this.section4paragraphDetails = [];
       }
     })
   }

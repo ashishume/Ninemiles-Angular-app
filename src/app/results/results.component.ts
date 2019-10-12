@@ -2,6 +2,7 @@ import { CalculateMarksService } from './../shared/services/calculate-marks/calc
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavbarService } from '../shared/services/navbar-service/navbar.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-results',
@@ -12,9 +13,9 @@ export class ResultsComponent implements OnInit {
 
   constructor(
     private calculateService: CalculateMarksService,
-    private route: Router,
-    // private navbarService: NavbarService
+    private route: Router, private titleService: Title
   ) {
+    this.titleService.setTitle('Results')
     // this.navbarService.hide()
   }
   score=0;

@@ -2,6 +2,7 @@ import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-payment-success',
   templateUrl: './payment-success.component.html',
@@ -12,8 +13,9 @@ export class PaymentSuccessComponent implements OnInit {
   constructor(
     route: ActivatedRoute,
     private apiService: ApiService,
-    private router: ActivatedRoute,
+    private router: ActivatedRoute, private titleService: Title
   ) {
+    this.titleService.setTitle('Payment')
     this.id = route.params.pipe(map(p => p.id));
   }
   paymentStatus;

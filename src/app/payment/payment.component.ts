@@ -2,6 +2,7 @@ import { ApiService } from './../shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-payment',
@@ -14,8 +15,9 @@ export class PaymentComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
-    private route: Router
+    private route: Router, private titleService: Title
   ) {
+    this.titleService.setTitle('Payment')
     this.PaymentFormGroup = this.fb.group(
       {
         name: new FormControl('', [Validators.required]),

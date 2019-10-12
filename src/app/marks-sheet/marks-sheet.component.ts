@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import * as Chart from 'chart.js';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -12,7 +13,12 @@ import * as Chart from 'chart.js';
 })
 export class MarksSheetComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Marks Sheet')
+
+  }
 
   @ViewChild('content') content: ElementRef
   marksDetails = []
@@ -23,12 +29,17 @@ export class MarksSheetComponent implements OnInit {
   name: string;
   email: string;
   studentType: string;
+  averageScore: number;
+  params = {};
   ngOnInit() {
     this.imageUrl = localStorage.getItem('photoURL')
     this.name = localStorage.getItem('name')
     this.email = localStorage.getItem('email')
     this.studentType = localStorage.getItem('userType')
 
+    this.params = {
+      email: localStorage.getItem('email')
+    }
     if (localStorage.getItem('userType') == "Academic Students")
       this.studentType = "Academic Student";
     if (localStorage.getItem('userType') == "General Students")
@@ -84,23 +95,34 @@ export class MarksSheetComponent implements OnInit {
 
   showTestResult() {
     var testNumber = this.testNumber;
-    const params = {
-      email: localStorage.getItem('email')
-    }
+
     let tempArray = []
-    this.apiService.displayMarksSheet(params).subscribe((data: any) => {
+    this.apiService.displayMarksSheet(this.params).subscribe((data: any) => {
       if (data.status == 200) {
+        this.showOverallBand(testNumber)
         data.body.forEach(function (value) {
           if (value.testNumber == testNumber) {
             tempArray.push(value)
           }
         })
         this.marksDetails = tempArray;
-        console.log(this.marksDetails);
 
       }
     })
   }
 
+  showOverallBand(testNumber) {
+    var averageScore;
+    this.apiService.getAnalysisData(this.params).subscribe(data => {
+      data.body.forEach(element => {
+        if (element.testNumber == testNumber) {
+          averageScore = element.average;
+        }
+      });
+
+      this.averageScore = averageScore;
+
+    })
+  }
 
 }

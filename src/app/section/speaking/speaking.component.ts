@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { EmailService } from 'src/app/shared/services/email/email.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { SpeakingDialogComponent } from 'src/app/shared/components/speaking-dialog/speaking-dialog.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-speaking',
@@ -25,7 +26,10 @@ export class SpeakingComponent implements OnInit {
     private apiService: ApiService,
     private email: EmailService,
     private matDialog: MatDialog,
-    private nav: NavbarService) {
+    private nav: NavbarService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Speaking Section')
     this.nav.testActive()
 
     this.currentDate.setDate(this.currentDate.getDate() + 1);

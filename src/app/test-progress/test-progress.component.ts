@@ -1,6 +1,7 @@
 import { ApiService } from './../shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import * as Chart from 'chart.js';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-test-progress',
@@ -10,7 +11,10 @@ import * as Chart from 'chart.js';
 export class TestProgressComponent implements OnInit {
   numberOfTest = [];
   show = false;
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Payment')
     this.numberOfTest = Array.from({ length: 32 }, (v, k) => k + 1);
 
   }
@@ -30,7 +34,6 @@ export class TestProgressComponent implements OnInit {
           if (element.testNumber == testNumber) {
             labels.push(element.section)
             chartData.push(element.marksBand)
-            console.log(element);
 
           }
         });
@@ -39,8 +42,6 @@ export class TestProgressComponent implements OnInit {
           this.labels = labels;
           this.showData()
         } else {
-          console.log("coming");
-
           this.chartData = [];
           this.labels = [];
           this.showData()

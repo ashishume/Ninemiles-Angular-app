@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators, NgForm, FormArray, Val
 import { MatSnackBar } from '@angular/material';
 import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -39,9 +40,10 @@ export class AddQuestionsComponent implements OnInit {
     private apiService: ApiService,
     private fb: FormBuilder,
     private snack: MatSnackBar,
-    private route: Router
+    private route: Router,
+    private titleService:Title
   ) {
-
+    this.titleService.setTitle('Add Questions')
     if (this.apiService.returnDataValues()) {
 
       this.editObject = this.apiService.returnDataValues();

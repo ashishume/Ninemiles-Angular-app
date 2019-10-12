@@ -1,10 +1,11 @@
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ErrorServiceService } from '../shared/services/error-service/error-service.service';
 import { NavbarService } from '../shared/services/navbar-service/navbar.service';
 import { InfoPageComponent } from '../shared/components/info-page/info-page.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,9 +18,12 @@ export class DashboardComponent implements OnInit {
     private apiService: ApiService,
     public matDialog: MatDialog,
     private route: Router,
+    private titleService: Title,
     private snack: ErrorServiceService,
     private navbar: NavbarService
-  ) { }
+  ) {
+    this.titleService.setTitle('Dashboard')
+  }
   paymentStatus;
   freeTestDetails;
   paidTestDetails;
@@ -29,6 +33,10 @@ export class DashboardComponent implements OnInit {
   userType;
   countOfGivenTests = 0;
   ngOnInit() {
+
+
+
+
     this.navbar.show()
     this.studentTypes = this.apiService.getStudentTypes()
     const query = {
@@ -110,7 +118,7 @@ export class DashboardComponent implements OnInit {
 
     const dialogRef = this.matDialog.open(InfoPageComponent, dialogConfig);
     // dialogRef.afterClosed().subscribe((result: any) => {
-      
+
     // })
 
   }

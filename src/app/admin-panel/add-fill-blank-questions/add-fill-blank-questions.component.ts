@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { MatSnackBar } from '@angular/material';
 import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-add-fill-blank-questions',
@@ -29,9 +30,10 @@ export class AddFillBlankQuestionsComponent implements OnInit {
     private apiService: ApiService,
     private fb: FormBuilder,
     private snack: MatSnackBar,
-    private route: Router
+    private route: Router,
+    private titleService: Title
   ) {
-
+    this.titleService.setTitle('Add-fill-blank-questions')
     if (this.apiService.returnDataValues()) {
       this.editObject = this.apiService.returnDataValues()
       this.questionTitle = this.editObject.questionTitle;
@@ -68,7 +70,9 @@ export class AddFillBlankQuestionsComponent implements OnInit {
     (<FormArray>this.AddQuestion.get('options')).push(this.addOtherSkillFormGroup());
   }
   removeButtonClick(): void {
-    (<FormArray>this.AddQuestion.get('options')).removeAt(0);
+    var length = (<FormArray>this.AddQuestion.get('options')).length;
+    (<FormArray>this.AddQuestion.get('options')).removeAt(length - 1);
+
   }
 
 
@@ -202,7 +206,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
         questionUserType: questionUserType,
         testNumber: parseInt(testNumber),
         sectionCategory: sectionCategory,
-        questionNumber:questionNumber
+        questionNumber: questionNumber
       }
       this.apiService.updateQuestion(body).subscribe((data: any) => {
         if (data.status == 200) {

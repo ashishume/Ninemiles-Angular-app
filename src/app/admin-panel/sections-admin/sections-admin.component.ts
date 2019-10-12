@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sections-admin',
@@ -11,7 +12,10 @@ export class SectionsAdminComponent implements OnInit {
   testDetails = [];
   constructor(
     private route: Router,
-  ) { }
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Sections-Admin')
+   }
   ngOnInit() {
 
   }

@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 import { Router } from '@angular/router';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-listening',
@@ -39,8 +40,10 @@ export class ListeningComponent implements OnInit {
     private listeningService: ListeningService,
     private nav: NavbarService,
     private route: Router,
-    private snack: ErrorServiceService
+    private snack: ErrorServiceService,
+    private titleService: Title
   ) {
+    this.titleService.setTitle('Listening Section')
     this.nav.testActive()
     this.ListeningSection = this.fb.group(
       {

@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { MatSnackBar } from '@angular/material';
 import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-add-paragraph',
@@ -27,8 +28,10 @@ export class AddParagraphComponent implements OnInit {
     private apiService: ApiService,
     private fb: FormBuilder,
     private snack: MatSnackBar,
-    private route: Router
+    private route: Router,
+    private titleService: Title
   ) {
+    this.titleService.setTitle('Add Paragraph')
     if (this.apiService.returnDataValues()) {
       this.editObject = this.apiService.returnDataValues();
       this.paragraphHeading = this.editObject.paragraphHeading;

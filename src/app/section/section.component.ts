@@ -6,6 +6,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ErrorServiceService } from '../shared/services/error-service/error-service.service';
 import { RaiseIssueFormComponent } from '../raise-issue-form/raise-issue-form.component';
 import { EmailService } from '../shared/services/email/email.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-section',
@@ -19,8 +20,11 @@ export class SectionComponent implements OnInit {
     private route: Router,
     private apiService: ApiService,
     private snack: ErrorServiceService,
-    private email: EmailService
-  ) { }
+    private email: EmailService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Section')
+  }
   ngOnInit() {
     const query = {
       email: localStorage.getItem('email')

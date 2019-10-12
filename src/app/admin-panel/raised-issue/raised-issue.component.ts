@@ -1,6 +1,7 @@
 import { ApiService } from './../../shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-raised-issue',
@@ -9,7 +10,13 @@ import { ErrorServiceService } from 'src/app/shared/services/error-service/error
 })
 export class RaisedIssueComponent implements OnInit {
 
-  constructor(private apiService: ApiService, private snack: ErrorServiceService) { }
+  constructor(
+    private apiService: ApiService,
+    private snack: ErrorServiceService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Raised Issue')
+  }
   issueDetails = [];
   ngOnInit() {
     this.apiService.displayIssue().subscribe((data: any) => {

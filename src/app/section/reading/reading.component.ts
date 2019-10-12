@@ -5,6 +5,7 @@ import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.ser
 import { ReadingService } from '../shared/reading-shared/reading.service';
 import { Router } from '@angular/router';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-reading',
@@ -33,8 +34,10 @@ export class ReadingComponent implements OnInit {
     private readingService: ReadingService,
     private nav: NavbarService,
     private route: Router,
-    private snack: ErrorServiceService
+    private snack: ErrorServiceService,
+    private titleService: Title
   ) {
+    this.titleService.setTitle('Reading Section')
     this.nav.testActive()
     this.ReadingSection = this.fb.group(
       {

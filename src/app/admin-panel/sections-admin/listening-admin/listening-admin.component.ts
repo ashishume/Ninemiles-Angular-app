@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { ListeningService } from 'src/app/section/shared/listening-shared/listening.service';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-listening-admin',
@@ -37,8 +38,10 @@ export class ListeningAdminComponent implements OnInit {
     // private listeningService: listeningService,
     private listeningService: ListeningService,
     private nav: NavbarService,
-    private route: Router
+    private route: Router,
+    private titleService: Title
   ) {
+    this.titleService.setTitle('Listening-Admin')
     // this.nav.testActive()
     this.ListeningSection = this.fb.group(
       {
