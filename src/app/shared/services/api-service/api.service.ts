@@ -253,7 +253,7 @@ export class ApiService {
 
   numberOfTests() {
     let tempArray = []
-    for (let i = 1; i <= 30; i++) {
+    for (let i = 1; i <= 32; i++) {
       tempArray.push(i);
     }
     return tempArray;

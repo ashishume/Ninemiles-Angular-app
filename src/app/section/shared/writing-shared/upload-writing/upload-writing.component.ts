@@ -75,10 +75,10 @@ export class UploadWritingComponent implements OnInit {
         let section2paragraphDetails = []
 
         response.body.forEach(function (value) {
-          if (value.section == '3') {
+          if (value.section == '1') {
             section1paragraphDetails.push(value);
           }
-          if (value.section == '4') {
+          if (value.section == '2') {
             section2paragraphDetails.push(value);
           }
         })
