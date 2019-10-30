@@ -5,6 +5,7 @@ import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.ser
 import { Router } from '@angular/router';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
 import { Title } from '@angular/platform-browser';
+import * as Rx from 'rxjs';
 
 @Component({
   selector: 'app-writing-admin',
@@ -12,9 +13,11 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./writing-admin.component.css']
 })
 export class WritingAdminComponent implements OnInit {
-
   timeLeft: number = 60;
   interval;
+  textValue
+  public getWordCount = new Rx.Subject();
+  wordCount: number=0;
   public WritingSection: FormGroup;
   constructor(
     private apiService: ApiService,
@@ -53,9 +56,15 @@ export class WritingAdminComponent implements OnInit {
     this.ngOnInit()
   }
 
+  onChangeText(event) {
+    var value = event.target.value;
+    let array = value.split(" ")
+    this.getWordCount.next(array)
+    this.getWordCount.subscribe((data: any) => this.wordCount = data.length)
+  }
+
 
   ngOnInit() {
-
 
     this.type = [
       "Academic Students",

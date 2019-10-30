@@ -25,16 +25,32 @@
         <div class="section1-content" *ngIf="section1paragraphDetails.length">
 
           <mat-tab class="mat-tab1" label="Task 1">
-            <span *ngFor="let list of section1paragraphDetails">
-              <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
-                <i class="material-icons">
-                  edit
-                </i>
-              </span>
-              <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
-              <p [innerHTML]="list.paragraphTitle">
-              </p>
-            </span>
+            <div class="row">
+
+              <div class="col-sm-6">
+
+
+                <span *ngFor="let list of section1paragraphDetails">
+                  <span style="float: right" class="edit-question-icon" (click)="editParagraph(list)">
+                    <i class="material-icons">
+                      edit
+                    </i>
+                  </span>
+                  <h4 class="heading-title" [innerHTML]="list.paragraphHeading"></h4>
+                  <p [innerHTML]="list.paragraphTitle">
+                  </p>
+                </span>
+              </div>
+
+              <div class="col-sm-6">
+                <textarea placeholder="Type your answer here...." (change)="onChangeText($event)"
+                  [(ngModel)]="textValue" formControlName="section1answer"
+                  style="width:80%;height:70vh"></textarea>
+                <br>
+                Word count: {{wordCount}}
+              </div>
+            </div>
+
           </mat-tab>
         </div>
 

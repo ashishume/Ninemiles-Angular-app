@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
 import { Title } from '@angular/platform-browser';
+import * as Rx from 'rxjs';
 
 @Component({
   selector: 'app-writing',
@@ -12,7 +13,6 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./writing.component.css']
 })
 export class WritingComponent implements OnInit {
-
   // public WritingSection: FormGroup;
   constructor(
     private apiService: ApiService,
@@ -34,6 +34,10 @@ export class WritingComponent implements OnInit {
 
   section1answer;
   section2answer;
+  wordCount1=0;
+  public getWordCount1 = new Rx.Subject();
+  wordCount2=0;
+  public getWordCount2 = new Rx.Subject();
 
 
 
@@ -55,6 +59,19 @@ export class WritingComponent implements OnInit {
     if (event.left == 0) {
       this.onSubmitOfWritingSection()
     }
+  }
+
+  onChangeTextSection1(event) {
+    var value = event.target.value;
+    let array = value.split(" ")
+    this.getWordCount1.next(array)
+    this.getWordCount1.subscribe((data: any) => this.wordCount1 = data.length)
+  }
+  onChangeTextSection2(event) {
+    var value = event.target.value;
+    let array = value.split(" ")
+    this.getWordCount2.next(array)
+    this.getWordCount2.subscribe((data: any) => this.wordCount2 = data.length)
   }
 
   ngOnInit() {

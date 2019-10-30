@@ -30,6 +30,8 @@ export class TestProgressComponent implements OnInit {
     this.apiService.displayMarksSheet(query).subscribe(data => {
       if (data.status == 200) {
         this.show = true;
+        console.log(data.body);
+        
         data.body.forEach(element => {
           if (element.testNumber == testNumber) {
             labels.push(element.section)
