@@ -124,6 +124,10 @@ export class ApiService {
   displayMarksSheet(params) {
     return this.httpService.callApi('GETBYPARAMS', '', 'marks/showMarks', params)
   }
+  //DISPLAY SECTION STATISTICS
+  displaySectionMarks(params) {
+    return this.httpService.callApi('GETBYPARAMS', '', 'marks/showSectionDetails', params)
+  }
 
 
   // ***********************************************************************

@@ -15,37 +15,39 @@ export class TestProgressComponent implements OnInit {
     private titleService: Title
   ) {
     this.titleService.setTitle('Payment')
-    this.numberOfTest = Array.from({ length: 32 }, (v, k) => k + 1);
+    this.numberOfTest = [
+      "reading",
+      "speaking",
+      "listening",
+      "writing"
+    ]
 
   }
 
   ngOnInit() { }
 
-  showGraphData(testNumber) {
+  showGraphData(section) {
     let labels = []
     let chartData = []
     const query = {
-      email: localStorage.getItem('email')
+      email: localStorage.getItem('email'),
+      section: section
     }
-    this.apiService.displayMarksSheet(query).subscribe(data => {
+    this.apiService.displaySectionMarks(query).subscribe(data => {
       if (data.status == 200) {
-        this.show = true;
-        console.log(data.body);
-        
-        data.body.forEach(element => {
-          if (element.testNumber == testNumber) {
-            labels.push(element.section)
-            chartData.push(element.marksBand)
 
-          }
+        this.show = true;
+        data.body.forEach(element => {
+          labels.push("Test " + element.testNumber)
+          chartData.push(element.marksBand)
         });
         if (chartData.length != 0 && labels.length != 0) {
           this.chartData = chartData;
           this.labels = labels;
           this.showData()
         } else {
-          this.chartData = [];
-          this.labels = [];
+          this.chartData = null;
+          this.labels = null;
           this.showData()
         }
       }
