@@ -10,6 +10,7 @@
           <td>Test Number</td>
           <td>Sheet Number</td>
           <td>Marks Scored</td>
+          <td>Question</td>
           <td>User Type</td>
           <td>Test Paper</td>
           <td>Paper checked</td>
@@ -20,6 +21,9 @@
           <td>{{list.testNumber}}</td>
           <td>{{list.sheetNumber}}</td>
           <td>{{list.marksScored}}</td>
+          <td>
+            <button mat-raised-button (click)="showQuestion(list.question)">Q</button>
+          </td>
           <td>{{list.userType}}</td>
           <td style="text-align: center;"><img [src]="list.onlineAnswer" style="width:200px;height:300px;">
             <br>

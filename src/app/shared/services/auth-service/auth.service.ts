@@ -1,3 +1,4 @@
+import { NavbarService } from './../navbar-service/navbar.service';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Injectable, NgZone } from '@angular/core';
 import {
@@ -22,10 +23,10 @@ export class AuthService {
   public getPhotoURL = new Rx.Subject();
   public userType = new Rx.Subject();
   private checkEmailStatus = localStorage.getItem('email');
-  private typeOfUser = localStorage.getItem('userType');
 
 
   constructor(
+    private navService: NavbarService,
     private afs: AngularFirestore, // Inject Firestore service
     private afAuth: AngularFireAuth, // Inject Firebase auth service
     private router: Router,
@@ -36,7 +37,6 @@ export class AuthService {
   ) {
   }
 
-
   get isLoggedIn(): boolean {
     if (this.checkEmailStatus) {
       return true;
@@ -44,22 +44,6 @@ export class AuthService {
       return false;
     }
   }
-  get isAdmin(): boolean {
-    if (this.typeOfUser == "Admin") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  get isTeacher(): boolean {
-    if (this.typeOfUser == "Teacher") {
-      return true;
-    } else {
-      return false;
-    }
-  }
- 
-
   // Sign in with Googleuserlogin
   GoogleAuth() {
     const provider = new auth.GoogleAuthProvider();
@@ -74,10 +58,6 @@ export class AuthService {
         this.ngZone.run(() => {
 
           this.getEmail.next(result.user.email)
-          // this.getName.next(result.user.photoURL)
-          // this.getPhotoURL.next(result.user.displayName)
-
-
           const dialogConfig = new MatDialogConfig();
           dialogConfig.disableClose = true;
           dialogConfig.width = '500px';
@@ -91,7 +71,6 @@ export class AuthService {
 
           this.apiService.login(body).subscribe((data: any) => {
             if (data.status == 200) {
-
               localStorage.setItem('name', result.user.displayName)
               localStorage.setItem('email', result.user.email)
               localStorage.setItem('photoURL', result.user.photoURL)
@@ -101,6 +80,7 @@ export class AuthService {
               } else {
                 localStorage.setItem('userType', data.body.userDetails.userType)
                 this.userType.next(data.body.userDetails.userType)
+                this.navService.activateRouter()
                 this.router.navigate(['dashboard'])
               }
             }

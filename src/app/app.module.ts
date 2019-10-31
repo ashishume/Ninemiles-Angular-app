@@ -40,6 +40,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { SpeakingDialogComponent } from './shared/components/speaking-dialog/speaking-dialog.component';
 import { TestProgressComponent } from './test-progress/test-progress.component';
+import { ShowWritingQuestionComponent } from './shared/components/show-writing-question/show-writing-question.component';
 
 
 
@@ -61,6 +62,7 @@ import { TestProgressComponent } from './test-progress/test-progress.component';
     PaymentSuccessComponent,
     SpeakingDialogComponent,
     TestProgressComponent,
+    ShowWritingQuestionComponent,
 
 
   ],
@@ -83,6 +85,7 @@ import { TestProgressComponent } from './test-progress/test-progress.component';
     InfoPageComponent,
     SpeakingDialogComponent,
     SnackBarComponent,
+    ShowWritingQuestionComponent,
     RaiseIssueFormComponent],
   providers: [
     AuthService,

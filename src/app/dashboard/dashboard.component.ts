@@ -13,7 +13,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  typeOfUser;
   constructor(
     private apiService: ApiService,
     public matDialog: MatDialog,
@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
     private snack: ErrorServiceService,
     private navbar: NavbarService
   ) {
+    this.typeOfUser = localStorage.getItem('userType');
     this.titleService.setTitle('Dashboard')
   }
   paymentStatus;

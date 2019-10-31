@@ -2,13 +2,14 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <div class="table" style="margin: 0 auto;">
+      <table class="table" style="margin: 0 auto;" *ngIf="studentDetails.length">
 
         <tr class="table-primary">
           <td>Name</td>
           <td>Email</td>
           <td>Test Number</td>
           <td>User Type</td>
+          <td>Questions</td>
           <td>Answers</td>
           <td></td>
           <td>Submitted On</td>
@@ -18,7 +19,16 @@
           <td>{{list.studentEmail}}</td>
           <td>{{list.testNumber}}</td>
           <td>{{list.userType}}</td>
-
+          <td>
+            <div class="row">
+              <div class="col-sm-6">
+                <button (click)="showQuestion1(list.submittedAnswer[0].question)" mat-raised-button>Q1</button>
+              </div>
+              <div class="col-sm-6">
+                <button (click)="showQuestion2(list.submittedAnswer[1].question)" mat-raised-button>Q2</button>
+              </div>
+            </div>
+          </td>
           <td *ngFor="let item of list.submittedAnswer;let i=index">
             <div>
               Section {{item.section}}</div>
@@ -28,8 +38,13 @@
               </i>
             </a>
           </td>
+
           <td>{{list.createdAt| date}}</td>
         </tr>
+      </table>
+      <div style="text-align: center;" *ngIf="!studentDetails.length">
+        <br>
+        <p class="alert alert-danger"> No results found</p>
       </div>
     </div>
   </div>

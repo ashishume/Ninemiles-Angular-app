@@ -34,9 +34,9 @@ export class WritingComponent implements OnInit {
 
   section1answer;
   section2answer;
-  wordCount1=0;
+  wordCount1 = 0;
   public getWordCount1 = new Rx.Subject();
-  wordCount2=0;
+  wordCount2 = 0;
   public getWordCount2 = new Rx.Subject();
 
 
@@ -116,8 +116,8 @@ export class WritingComponent implements OnInit {
 
   onSubmitOfWritingSection() {
     let answerArray = []
-    answerArray.push({ answer: this.section1answer, section: 1 })
-    answerArray.push({ answer: this.section2answer, section: 2 })
+    answerArray.push({ answer: this.section1answer, section: 1, question: this.section1paragraphDetails[0].paragraphTitle })
+    answerArray.push({ answer: this.section2answer, section: 2, question: this.section2paragraphDetails[0].paragraphTitle })
     const body = {
       submittedAnswer: answerArray,
       studentEmail: localStorage.getItem('email'),

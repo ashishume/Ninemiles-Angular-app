@@ -83,6 +83,8 @@ export class UploadWritingComponent implements OnInit {
           }
         })
         this.section1paragraphDetails = section1paragraphDetails;
+        console.log(section1paragraphDetails);
+
         this.section2paragraphDetails = section2paragraphDetails;
 
       }
@@ -101,7 +103,7 @@ export class UploadWritingComponent implements OnInit {
   }
 
 
-  uploadImage(sheetNumber) {
+  uploadImage(sheetNumber, paragraph) {
     this.loader.show()
     const name = localStorage.getItem('name')
     const email = localStorage.getItem('email')
@@ -115,6 +117,7 @@ export class UploadWritingComponent implements OnInit {
             this.loader.hide()
             const body = {
               onlineAnswer: url,
+              question: paragraph,
               studentEmail: localStorage.getItem('email'),
               studentName: localStorage.getItem('name'),
               testNumber: parseInt(localStorage.getItem('testNumber')),
@@ -141,8 +144,11 @@ export class UploadWritingComponent implements OnInit {
     this.route.navigate(['admin-panel/add-paragraph'])
   }
 
-  onSubmitUploadForm(UploadFormData) {
-    this.uploadImage(UploadFormData.value.sheetNumber)
+  onSubmitUploadForm1(UploadFormData) {
+    this.uploadImage(UploadFormData.value.sheetNumber, this.section1paragraphDetails[0].paragraphTitle)
+  }
+  onSubmitUploadForm2(UploadFormData) {
+    this.uploadImage(UploadFormData.value.sheetNumber, this.section2paragraphDetails[0].paragraphTitle)
   }
 
 

@@ -11,61 +11,79 @@
     <div class="col-sm-12" style="text-align: center">
       <button mat-raised-button routerLink='/test-progress'>Test analysis</button>&nbsp;
       <button mat-raised-button routerLink='/marks-sheet'>Marks Sheet</button>
-      <app-progress></app-progress>
+      <div *ngIf="typeOfUser!=='Admin' && typeOfUser!=='Teacher'">
+        <app-progress></app-progress>
+      </div>
     </div>
   </div>
 
 
   <span *ngIf="userTypeDetails!='Student'">
-    <div class="row">
-      <div class="col-sm-12">
-        <h4>Free Mock Tests</h4>
-        <div *ngFor="let testItem of freeTestDetails">
-          <mat-card id="mat-card">
-            Test {{testItem.testNumber}}
-            <span *ngIf="testItem.testAttemptStatus==false && testItem.testPricingStatus==false">
-              <button class="test-button" mat-raised-button (click)="navigateToSection(testItem.testNumber)">Take
-                Test <img src="../../assets/forward.png"></button>
-            </span>
-            <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
-              (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
-                class="btn btn-outline-primary btn-sm">View Score</button>
-            </span>
-            <span id="float-item" *ngIf="testItem.testPricingStatus==true && paymentStatus==false">
-              <img src="../../assets/lock.svg" class="icon">
-            </span>
 
-          </mat-card>
-          <br>
-        </div>
+    <div *ngIf="typeOfUser!=='Admin' && typeOfUser!=='Teacher'">
 
-        <h4>Paid Mock Tests</h4>
-        <div *ngFor="let testItem of paidTestDetails">
-          <mat-card id="mat-card">
-            Test {{testItem.testNumber}}
-            <span *ngIf="paymentStatus=='true'">
-              <span *ngIf="testItem.testAttemptStatus==false">
-                <button class="test-button" mat-raised-button (click)="navigateToSection(testItem.testNumber)">Take Test
-                  <img src="../../assets/forward.png"></button>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h4>Free Mock Tests</h4>
+          <div *ngFor="let testItem of freeTestDetails">
+            <mat-card id="mat-card">
+              Test {{testItem.testNumber}}
+              <span *ngIf="testItem.testAttemptStatus==false && testItem.testPricingStatus==false">
+                <button class="test-button" mat-raised-button (click)="navigateToSection(testItem.testNumber)">Take
+                  Test <img src="../../assets/forward.png"></button>
               </span>
-            </span>
-            <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
-              (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
-                class="btn btn-outline-primary btn-sm">View Score</button>
-            </span>
-            <span (click)="initiatePayment()" id="float-item"
-              *ngIf="testItem.testPricingStatus===true && paymentStatus==='false'">
-              <img src="../../assets/lock.svg" class="icon">
-            </span>
+              <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
+                (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
+                  class="btn btn-outline-primary btn-sm">View Score</button>
+              </span>
+              <span id="float-item" *ngIf="testItem.testPricingStatus==true && paymentStatus==false">
+                <img src="../../assets/lock.svg" class="icon">
+              </span>
 
-          </mat-card>
-          <br>
+            </mat-card>
+            <br>
+          </div>
+
+          <h4>Paid Mock Tests</h4>
+          <div *ngFor="let testItem of paidTestDetails">
+            <mat-card id="mat-card">
+              Test {{testItem.testNumber}}
+              <span *ngIf="paymentStatus=='true'">
+                <span *ngIf="testItem.testAttemptStatus==false">
+                  <button class="test-button" mat-raised-button (click)="navigateToSection(testItem.testNumber)">Take
+                    Test
+                    <img src="../../assets/forward.png"></button>
+                </span>
+              </span>
+              <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
+                (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
+                  class="btn btn-outline-primary btn-sm">View Score</button>
+              </span>
+              <span (click)="initiatePayment()" id="float-item"
+                *ngIf="testItem.testPricingStatus===true && paymentStatus==='false'">
+                <img src="../../assets/lock.svg" class="icon">
+              </span>
+
+            </mat-card>
+            <br>
+          </div>
         </div>
       </div>
+
+
     </div>
 
-
   </span>
+
+  <div class="user" *ngIf="typeOfUser==='Admin'">
+    <h2>Admin User</h2>
+    <a routerLink="/admin-panel">Go to Admin Panel</a>
+  </div>
+  <div class="user" *ngIf="typeOfUser==='Teacher'">
+    <h2>Teacher</h2>
+    <a routerLink="/teacher">Go to Teacher Panel</a>
+  </div>
 
   <div *ngIf="userTypeDetails=='Student'" style="text-align: center;width: 70%;margin: 0 auto;">
 
