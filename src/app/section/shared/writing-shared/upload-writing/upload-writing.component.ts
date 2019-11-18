@@ -83,7 +83,6 @@ export class UploadWritingComponent implements OnInit {
           }
         })
         this.section1paragraphDetails = section1paragraphDetails;
-        console.log(section1paragraphDetails);
 
         this.section2paragraphDetails = section2paragraphDetails;
 

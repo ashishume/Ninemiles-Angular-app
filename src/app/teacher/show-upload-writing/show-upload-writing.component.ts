@@ -21,7 +21,6 @@ export class ShowUploadWritingComponent implements OnInit {
     this.apiService.displayOnlineTestDetails().subscribe((data: any) => {
       if (data.status == 200) {
         this.StudentDetails = data.body;
-        console.log(data.body);
 
       }
     })

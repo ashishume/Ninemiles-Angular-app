@@ -104,7 +104,6 @@ export class EmailService {
       htmlCode: html
     }
     this.apiService.sendEmail(body).subscribe((data: any) => {
-     console.log(data);
      
       if (data.status == 200) {
         this.showSnack.showError("Mail has been successfully sent");

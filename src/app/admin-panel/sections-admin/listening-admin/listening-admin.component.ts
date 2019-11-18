@@ -51,10 +51,10 @@ export class ListeningAdminComponent implements OnInit {
   }
 
 
-  changeUserType(list) {
-    this.userType = list;
-    this.ngOnInit()
-  }
+  // changeUserType(list) {
+  //   this.userType = list;
+  //   this.ngOnInit()
+  // }
   changeTestNumber(test) {
     this.testNumber = test;
     this.ngOnInit()
@@ -105,10 +105,10 @@ export class ListeningAdminComponent implements OnInit {
     let section3Questions = [];
     let section4Questions = [];
 
-    var userType = this.userType;
+    // var userType = this.userType;
     var testNumber = this.testNumber;
     const query = {
-      userType: userType,
+      userType: "Academic Students",
       sectionCategory: "Listening",
       testNumber: testNumber
     }
@@ -173,6 +173,15 @@ export class ListeningAdminComponent implements OnInit {
         this.section2Questions = section2Questions;
         this.section3Questions = section3Questions;
         this.section4Questions = section4Questions;
+        console.log(section3Questions);
+      
+
+      }
+      else if (response.status == 204) {
+        this.section1Questions = [];
+        this.section2Questions = [];
+        this.section3Questions = [];
+        this.section4Questions = [];
       }
     })
 
@@ -182,7 +191,7 @@ export class ListeningAdminComponent implements OnInit {
     let section4AudioDetails = []
 
     const params = {
-      paragraphUserType: userType,
+      paragraphUserType: "Academic Students",
       testNumber: testNumber,
       paragraphSectionCategory: "Listening"
     }
@@ -210,7 +219,13 @@ export class ListeningAdminComponent implements OnInit {
         this.section3AudioDetails = section3AudioDetails;
         this.section4AudioDetails = section4AudioDetails;
 
+      } else if (response.status == 204) {
+        this.section1AudioDetails = [];
+        this.section2AudioDetails = [];
+        this.section3AudioDetails = [];
+        this.section4AudioDetails = [];
       }
+
     })
 
   }

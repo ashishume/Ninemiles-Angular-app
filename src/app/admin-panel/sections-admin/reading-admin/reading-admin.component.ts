@@ -169,13 +169,6 @@ export class ReadingAdminComponent implements OnInit {
         this.section3Questions = section3Questions;
         this.section4Questions = section4Questions;
 
-        console.log(section1Questions);
-        console.log(section2Questions);
-        console.log(section3Questions);
-        console.log(section4Questions);
-        
-
-
       }
       else if (response.status == 204) {
         this.section1Questions = [];

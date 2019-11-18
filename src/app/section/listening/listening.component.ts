@@ -116,11 +116,11 @@ export class ListeningComponent implements OnInit {
     let section3Questions = [];
     let section4Questions = [];
 
-    var userType = localStorage.getItem('userType');
-    this.userType = userType;
+    // var userType = localStorage.getItem('userType');
+    // this.userType = userType;
     var testNumber = localStorage.getItem('testNumber');
     const query = {
-      userType: userType,
+      userType: "Academic Students",
       sectionCategory: "Listening",
       testNumber: testNumber
     }
@@ -193,7 +193,7 @@ export class ListeningComponent implements OnInit {
     let section3AudioDetails = []
     let section4AudioDetails = []
     const params = {
-      paragraphUserType: userType,
+      paragraphUserType: "Academic Students",
       testNumber: testNumber,
       paragraphSectionCategory: "Listening"
     }
