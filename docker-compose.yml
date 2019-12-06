@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  nginx-ninemiles-ui:
+    image: nginx-ninemiles-ui
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - 8085:80
+    restart: unless-stopped
+    init: true

@@ -40,6 +40,10 @@ export class ReadingService {
       section: parseInt(section)
     }
 
+
+    // console.log(checkOptionData);
+
+
     var uniqueId1 = UniqueIds[0];
     var uniqueId2 = UniqueIds[1];
     if (id == uniqueId1) {
@@ -203,6 +207,7 @@ export class ReadingService {
       isCorrect: Boolean(correctAnswerStatus),
       section: parseInt(section)
     }
+    // console.log(checkOptionData);
 
 
     var uniqueId1 = UniqueIds[0];
@@ -384,6 +389,9 @@ export class ReadingService {
 
   readingSectionScore = 0;
   calculateSelectReadingSectionMarks() {
+    console.log(this.selectQuestionsSection1Array1);
+    console.log(this.selectQuestionsSection1Array2);
+    console.log(this.selectQuestionsSection1Array3);
 
     //section 1
     if (this.selectQuestionsSection1Array1.length) {
@@ -573,6 +581,7 @@ export class ReadingService {
 
 
     this.calculateService.calculateReadingSectionMarks(this.readingSectionScore)
+    this.readingSectionScore = 0;
 
   }
 

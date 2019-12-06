@@ -15,6 +15,8 @@ export class CalculateMarksService {
   countOfCorrectAnswers = 0;
   finalScore = 0;
   bandCalculation(marks, section) {
+    console.log("marks",marks);
+    
     const userType = localStorage.getItem('userType');
     if (section == "reading") {
       if (userType == "Academic Students") {

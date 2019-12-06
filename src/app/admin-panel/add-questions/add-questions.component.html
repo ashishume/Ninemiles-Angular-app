@@ -22,8 +22,13 @@
 
                 <mat-form-field>
                     <mat-label>Add Question Number</mat-label>
-                    <input matInput name="questionNumber" type="number" min="1" formControlName="questionNumber"
-                        required [(ngModel)]="questionNumber">
+
+                    <mat-select formControlName="questionNumber" required name="questionNumber"
+                        [(ngModel)]="questionNumber">
+                        <mat-option *ngFor="let list of selectQuestionNumber" [value]="list">{{list}}
+                        </mat-option>
+                    </mat-select>
+
                 </mat-form-field>
 
                 <quill-editor formControlName="questionTitle" required name="questionTitle" [(ngModel)]="questionTitle">
@@ -36,7 +41,7 @@
                 <span formArrayName="options" *ngFor="let other of formData.controls; let i = index">
                     <span [formGroupName]="i">
                         &nbsp; <mat-form-field class="text-area">
-                            <textarea  matInput name="option" formControlName="option" ngModel
+                            <textarea matInput name="option" formControlName="option" ngModel
                                 placeholder="Enter Option"></textarea>
                         </mat-form-field>&nbsp;
                         <mat-checkbox formControlName="optionStatus" name="optionStatus" ngModel>

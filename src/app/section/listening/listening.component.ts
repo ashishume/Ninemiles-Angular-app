@@ -258,19 +258,19 @@ export class ListeningComponent implements OnInit {
   // ******************************************************************************************
   //TYPE QUESTIONS
   checkTypeOptionStatus1(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase().trim();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim().replace(/\s+/g, " ");
     this.listeningService.checkTypeOptionStatus1(fullOption, selectedOption, section, id, selectedIndex, this.section1TypeQuestionsId)
   }
   checkTypeOptionStatus2(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase().trim();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim().replace(/\s+/g, " ");
     this.listeningService.checkTypeOptionStatus2(fullOption, selectedOption, section, id, selectedIndex, this.section2TypeQuestionsId)
   }
   checkTypeOptionStatus3(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase().trim();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim().replace(/\s+/g, " ");
     this.listeningService.checkTypeOptionStatus3(fullOption, selectedOption, section, id, selectedIndex, this.section3TypeQuestionsId)
   }
   checkTypeOptionStatus4(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase().trim();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim().replace(/\s+/g, " ");
     this.listeningService.checkTypeOptionStatus4(fullOption, selectedOption, section, id, selectedIndex, this.section4TypeQuestionsId)
   }
 

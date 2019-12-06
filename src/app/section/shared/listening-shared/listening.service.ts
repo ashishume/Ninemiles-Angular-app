@@ -336,7 +336,7 @@ export class ListeningService {
       if (this.typeQuestionsSection4Array3[i] == undefined)
         this.typeQuestionsSection4Array3[i] = "Empty"
     }
-  
+
   }
 
 
@@ -370,6 +370,7 @@ export class ListeningService {
 
   listeningSectionMarks = 0;
   calculateSelectListeningSectionMarks() {
+
 
     //section 1
     if (this.selectQuestionsSection1Array1.length) {
@@ -559,8 +560,7 @@ export class ListeningService {
 
 
     this.calculateService.calculateListeningSectionMarks(this.listeningSectionMarks)
-
-    this.route.navigate(['results'])
+    this.listeningSectionMarks = 0;
   }
 
 

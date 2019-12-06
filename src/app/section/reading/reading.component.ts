@@ -244,37 +244,37 @@ export class ReadingComponent implements OnInit {
   // ******************************************************************************************
   //TYPE QUESTIONS
   checkTypeOptionStatus1(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase().trim();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim().replace(/\s+/g, " ");
     this.readingService.checkTypeOptionStatus1(fullOption, selectedOption, section, id, selectedIndex, this.section1TypeQuestionsId)
   }
   checkTypeOptionStatus2(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase().trim();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim().replace(/\s+/g, " ");
     this.readingService.checkTypeOptionStatus2(fullOption, selectedOption, section, id, selectedIndex, this.section2TypeQuestionsId)
   }
   checkTypeOptionStatus3(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase().trim();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim().replace(/\s+/g, " ");
     this.readingService.checkTypeOptionStatus3(fullOption, selectedOption, section, id, selectedIndex, this.section3TypeQuestionsId)
   }
   checkTypeOptionStatus4(fullOption, selectedItem, section, id, selectedIndex) {
-    var selectedOption = selectedItem.target.value.toUpperCase().trim();
+    var selectedOption = selectedItem.target.value.toUpperCase().trim().replace(/\s+/g, " ");
     this.readingService.checkTypeOptionStatus4(fullOption, selectedOption, section, id, selectedIndex, this.section4TypeQuestionsId)
   }
 
 
-  editParagraph(list) {
-    this.apiService.passDataValues(list);
-    this.route.navigate(['admin-panel/add-paragraph'])
-  }
+  // editParagraph(list) {
+  //   this.apiService.passDataValues(list);
+  //   this.route.navigate(['admin-panel/add-paragraph'])
+  // }
 
-  editQuestion(list) {
-    if (list.questionType == "MCQ") {
-      this.apiService.passDataValues(list);
-      this.route.navigate(['admin-panel/add-questions'])
-    } else {
-      this.apiService.passDataValues(list);
-      this.route.navigate(['admin-panel/add-fill-blank-questions'])
-    }
-  }
+  // editQuestion(list) {
+  //   if (list.questionType == "MCQ") {
+  //     this.apiService.passDataValues(list);
+  //     this.route.navigate(['admin-panel/add-questions'])
+  //   } else {
+  //     this.apiService.passDataValues(list);
+  //     this.route.navigate(['admin-panel/add-fill-blank-questions'])
+  //   }
+  // }
 
 
 

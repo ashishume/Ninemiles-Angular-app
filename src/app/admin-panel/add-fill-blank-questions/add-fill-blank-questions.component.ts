@@ -13,7 +13,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class AddFillBlankQuestionsComponent implements OnInit {
 
-
+  selectQuestionNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   listOfQuestionTypes = []
   section = []
   questionUserType = []
@@ -86,7 +86,7 @@ export class AddFillBlankQuestionsComponent implements OnInit {
 
 
   addOptionList(option) {
-    this.optionsListArray.push(option.toUpperCase())
+    this.optionsListArray.push(option.toUpperCase().trim())
   }
   removeOptionList() {
     this.optionsListArray.pop()
