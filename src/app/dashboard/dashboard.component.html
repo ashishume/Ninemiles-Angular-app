@@ -9,8 +9,8 @@
       <hr>
     </div>
     <div class="col-sm-12" style="text-align: center">
-      <button mat-raised-button routerLink='/test-progress'>Test analysis</button>&nbsp;
-      <button mat-raised-button routerLink='/marks-sheet'>Marks Sheet</button>
+      <button mat-raised-button routerLink='/test-progress'><img src="../../assets/analysis.png">&nbsp;&nbsp;Test analysis</button>&nbsp;
+      <button mat-raised-button routerLink='/marks-sheet'><img src="../../assets/document.png">&nbsp;&nbsp;Marks Sheet</button>
       <div *ngIf="typeOfUser!=='Admin' && typeOfUser!=='Teacher'">
         <app-progress></app-progress>
       </div>
@@ -28,10 +28,10 @@
           <h4>Free Mock Tests</h4>
           <div *ngFor="let testItem of freeTestDetails">
             <mat-card id="mat-card">
-              Test {{testItem.testNumber}}
+              <img src="../../assets/test.png">&nbsp;&nbsp;Test {{testItem.testNumber}}
               <span *ngIf="testItem.testAttemptStatus==false && testItem.testPricingStatus==false">
                 <button class="test-button" mat-raised-button (click)="navigateToSection(testItem.testNumber)">Take
-                  Test <img src="../../assets/forward.png"></button>
+                  Test <img src="../../assets/paper-plane.png"></button>
               </span>
               <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
                 (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
@@ -48,12 +48,12 @@
           <h4>Paid Mock Tests</h4>
           <div *ngFor="let testItem of paidTestDetails">
             <mat-card id="mat-card">
-              Test {{testItem.testNumber}}
+            <img src="../../assets/test.png">&nbsp;&nbsp; Test {{testItem.testNumber}}
               <span *ngIf="paymentStatus=='true'">
                 <span *ngIf="testItem.testAttemptStatus==false">
                   <button class="test-button" mat-raised-button (click)="navigateToSection(testItem.testNumber)">Take
                     Test
-                    <img src="../../assets/forward.png"></button>
+                    <img src="../../assets/paper-plane.png"></button>
                 </span>
               </span>
               <span id="float-item" *ngIf="testItem.testAttemptStatus==true">

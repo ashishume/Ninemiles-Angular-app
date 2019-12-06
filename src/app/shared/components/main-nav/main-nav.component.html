@@ -5,36 +5,15 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
 
-      <!-- <a routerLink="/dashboard" mat-list-item>Dashboard</a>
-
-      <span *ngIf="userType!='Admin' && userType!='Teacher'">
-        <a routerLink="/marks-sheet" mat-list-item>Marks Sheet</a>
-      </span>
-      <span *ngIf="nav.visible">
-        <span *ngIf="userType=='Admin'">
-          <a routerLink="/admin-panel" mat-list-item>Admin Panel</a>
-        </span>
-        <span *ngIf="userType=='Teacher'">
-          <a routerLink="/teacher" mat-list-item>Teacher</a>
-        </span>
-
-      </span> -->
-
-
       <span class="profile">
         <button mat-raised-button style="width: 100%" (click)="authService.SignOut()">Logout</button>
       </span>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="mat-sidenav-content">
-    <span *ngIf="nav.test">
+    <span *ngIf="nav.test && email">
 
       <mat-toolbar color="primary">
-        <span *ngIf="email">
-          <!-- <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-          </button> -->
-        </span>
         <span routerLink="/" style="cursor: pointer">Nine Miles</span>
         <span style="flex:1 1 auto;"></span>
 

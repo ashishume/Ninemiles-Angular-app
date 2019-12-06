@@ -1,15 +1,16 @@
 .test-button {
   position: absolute;
   right: 5px;
-  top: 11px;
+  top: 13px;
   /* top: 0 */
 }
 .mat-raised-button{
   border-radius: 20px;
-  background-color:lightblue;
+  background-color:white;
 }
 .mat-card{
   border-radius: 25px;
+  box-shadow: 1px 1px 5px 1px lightgray;
 }
 .user{
   margin-top: 10px;
