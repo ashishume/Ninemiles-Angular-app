@@ -40,7 +40,8 @@ export class PaymentComponent implements OnInit {
     }
     this.apiService.getProfileDetails(query).subscribe(data => {
       if (data.status == 200) {
-        this.userId = data.body._id
+        this.userId = data.body._id;
+
       }
 
     })
@@ -48,17 +49,15 @@ export class PaymentComponent implements OnInit {
   }
   onSubmitPaymentForm(form) {
     var formData = form.value
-    formData.purpose = "Ninemiles Premium Service";
-    formData.redirectUrl = `https://upwork-5d46d.firebaseapp.com/payment-success/${this.userId}`
-    formData.webhook = "https://upwork-5d46d.firebaseapp.com"
-    this.apiService.makePayment(formData).subscribe((response: any) => {
+    formData.returnUrl = `https://ninemiles-project.firebaseapp.com/payment-success/${this.userId}`;
 
-      var object = JSON.parse(response.body.body)
-      if (object.success == true) {
-        var url = object.payment_request.longurl
+    const orderId = "orderId_" + form.value.phone
+    formData.orderId = orderId;
+    this.apiService.makePayment(formData).subscribe((response: any) => {
+      if (response.body.status == 'OK') {
+        var url = response.body.paymentLink
         window.location.href = url;
       }
-
     })
 
   }

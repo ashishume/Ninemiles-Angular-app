@@ -11,39 +11,40 @@ import { Title } from '@angular/platform-browser';
 export class PaymentSuccessComponent implements OnInit {
   public id;
   constructor(
-    route: ActivatedRoute,
+    // route: ActivatedRoute,
     private apiService: ApiService,
-    private router: ActivatedRoute, private titleService: Title
+    private router: ActivatedRoute,
+    private titleService: Title
   ) {
     this.titleService.setTitle('Payment')
-    this.id = route.params.pipe(map(p => p.id));
+    this.id = router.params.pipe(map(p => p.id));
   }
   paymentStatus;
   ngOnInit() {
+
     this.router.queryParams.subscribe(params => {
-      this.paymentStatus = params.payment_status;
-      this.paymentUpdate()
-    })
+      this.paymentStatus = params['paymentStatus'];
+      if (this.paymentStatus == 'true')
+        this.paymentUpdate()
+    });
   }
   paymentUpdate() {
-    if (this.paymentStatus != "Failed") {
+    this.id.subscribe(data => {
+      const query = {
+        userId: data
+      }
+      this.apiService.getProfileDetailsOnUserId(query).subscribe((data: any) => {
 
-      this.id.subscribe(data => {
-        const query = {
-          userId: data
-        }
-        this.apiService.getProfileDetailsOnUserId(query).subscribe((data: any) => {
-          const res = data.body[0]
-          if (res.paymentStatus == false) {
-            const body = {
-              email: res.email,
-              paymentStatus: true
-            }
-            this.apiService.setPaymentStatus(body).subscribe()
+        const res = data.body[0]
+        if (res.paymentStatus == false) {
+          const body = {
+            email: res.email,
+            paymentStatus: true
           }
-        })
+          this.apiService.setPaymentStatus(body).subscribe()
+        }
       })
-    }
+    })
 
   }
 

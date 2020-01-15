@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="inside-container" *ngIf="paymentStatus!='Failed'">
+    <div class="inside-container" *ngIf="paymentStatus=='true'">
       <br>
       <h3>Your payment is successful</h3>
       <img class="image" src="../../assets/big_tick.png">
@@ -9,7 +9,7 @@
       <a routerLink="/">Dashboard</a>
 
     </div>
-    <div class="inside-container" *ngIf="paymentStatus=='Failed'">
+    <!-- <div class="inside-container" *ngIf="paymentStatus=='Failed'">
       <br>
       <h3>Oops!! your payment failed</h3>
       <img class="image" src="../../assets/big_error.png">
@@ -17,6 +17,6 @@
       <br>
       <a routerLink="/">Dashboard</a>
 
-    </div>
+    </div> -->
   </div>
 </div>

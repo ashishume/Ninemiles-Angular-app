@@ -154,6 +154,9 @@ export class ApiService {
   makePayment(body) {
     return this.httpService.callApi('POST', body, 'payment/makePayment', '')
   }
+  getPaymentData(body) {
+    return this.httpService.callApi('POST', body, 'payment/showPayment', '')
+  }
 
   // //ADD PAYMENT DATA
   // addPaymentData(body) {
