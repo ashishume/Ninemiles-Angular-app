@@ -31,7 +31,7 @@ export class PaymentComponent implements OnInit {
   userId;
   name = localStorage.getItem('name')
   email = localStorage.getItem('email')
-  amount = 3000
+  amount = 500
   phone;
   ngOnInit() {
 
