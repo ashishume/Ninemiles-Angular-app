@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
 import { Title } from '@angular/platform-browser';

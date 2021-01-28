@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarService } from 'src/app/shared/services/navbar-service/navbar.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { EmailService } from 'src/app/shared/services/email/email.service';
-import { MatDialogConfig, MatDialog } from '@angular/material';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { SpeakingDialogComponent } from 'src/app/shared/components/speaking-dialog/speaking-dialog.component';
 import { Title } from '@angular/platform-browser';
 

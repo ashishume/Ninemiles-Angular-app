@@ -1,6 +1,6 @@
 import { ApiService } from './../../shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { ShowWritingQuestionComponent } from 'src/app/shared/components/show-writing-question/show-writing-question.component';
 

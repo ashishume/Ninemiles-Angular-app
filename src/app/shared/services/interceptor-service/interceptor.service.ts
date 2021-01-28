@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as Rx from 'rxjs';
 import { LoaderService } from '../loader-service/loader.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {

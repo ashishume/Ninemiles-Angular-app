@@ -1,8 +1,7 @@
-import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { InfoPageComponent } from '../shared/components/info-page/info-page.component';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

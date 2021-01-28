@@ -1,4 +1,4 @@
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import { Injectable } from '@angular/core';
 import { ErrorServiceService } from '../error-service/error-service.service';

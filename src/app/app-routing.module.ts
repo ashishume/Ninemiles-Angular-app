@@ -16,35 +16,51 @@ import { TestProgressComponent } from './test-progress/test-progress.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'results', component: ResultsComponent, canActivate: [AuthGuard] },
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
   { path: 'progress', component: ProgressComponent, canActivate: [AuthGuard] },
-  { path: 'payment-success/:id', component: PaymentSuccessComponent, canActivate: [AuthGuard] },
-  { path: 'marks-sheet', component: MarksSheetComponent, canActivate: [AuthGuard] },
+  {
+    path: 'payment-success/:id',
+    component: PaymentSuccessComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'marks-sheet',
+    component: MarksSheetComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'section',
-    loadChildren: './section/section.module#SectionModule',
-    canActivate: [AuthGuard]
+    loadChildren: () =>
+      import('./section/section.module').then((m) => m.SectionModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin-panel',
-    loadChildren: './admin-panel/admin-panel.module#AdminPanelModule',
-    canActivate: [AdminGuard]
+    loadChildren: () =>
+      import('./admin-panel/admin-panel.module').then(
+        (m) => m.AdminPanelModule
+      ),
+    canActivate: [AdminGuard],
   },
   {
     path: 'teacher',
-    loadChildren: './teacher/teacher.module#TeacherModule',
-    canActivate: [TeacherGuard]
+    loadChildren: () =>
+      import('./teacher/teacher.module').then((m) => m.TeacherModule),
+    canActivate: [TeacherGuard],
   },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'test-progress', component: TestProgressComponent },
   { path: '**', component: PageNotFoundComponent },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

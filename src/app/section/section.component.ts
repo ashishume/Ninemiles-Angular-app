@@ -2,7 +2,7 @@ import { WritingDialogComponent } from './shared/writing-shared/writing-dialog/w
 import { ApiService } from '../shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialogConfig, MatDialog } from '@angular/material';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { ErrorServiceService } from '../shared/services/error-service/error-service.service';
 import { RaiseIssueFormComponent } from '../raise-issue-form/raise-issue-form.component';
 import { EmailService } from '../shared/services/email/email.service';

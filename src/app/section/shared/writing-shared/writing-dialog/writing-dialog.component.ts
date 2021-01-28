@@ -1,7 +1,7 @@
 import { ApiService } from './../../../../shared/services/api-service/api.service';
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
 import { ErrorServiceService } from 'src/app/shared/services/error-service/error-service.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-writing-dialog',

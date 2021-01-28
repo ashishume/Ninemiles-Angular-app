@@ -2,7 +2,7 @@ import { ShowWritingQuestionComponent } from './../../shared/components/show-wri
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/shared/services/api-service/api.service';
 import FileSaver from 'file-saver';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { InfoPageComponent } from 'src/app/shared/components/info-page/info-page.component';
 
 @Component({
