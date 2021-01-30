@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/NineMiles-Angular",
+    "public": "dist/ninemiles",
     "ignore": [
       "firebase.json",
       "**/.*",

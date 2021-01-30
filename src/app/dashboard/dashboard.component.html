@@ -1,107 +1,142 @@
-<br>
-<br>
+<br />
+<br />
 <div class="container">
-
-
   <div class="row">
     <div class="col-sm-12">
       <app-profile></app-profile>
-      <hr>
+      <hr />
     </div>
     <div class="col-sm-12" style="text-align: center">
-      <button mat-raised-button routerLink='/test-progress'><img src="../../assets/analysis.png">&nbsp;&nbsp;Test analysis</button>&nbsp;
-      <button mat-raised-button routerLink='/marks-sheet'><img src="../../assets/document.png">&nbsp;&nbsp;Marks Sheet</button>
-      <div *ngIf="typeOfUser!=='Admin' && typeOfUser!=='Teacher'">
+      <button mat-raised-button routerLink="/test-progress">
+        <img src="../../assets/analysis.png" />&nbsp;&nbsp;Test analysis</button
+      >&nbsp;
+      <button mat-raised-button routerLink="/marks-sheet">
+        <img src="../../assets/document.png" />&nbsp;&nbsp;Marks Sheet
+      </button>
+      <div *ngIf="typeOfUser !== 'Admin' && typeOfUser !== 'Teacher'">
         <app-progress></app-progress>
       </div>
     </div>
   </div>
 
-
-  <span *ngIf="userTypeDetails!='Student'">
-
-    <div *ngIf="typeOfUser!=='Admin' && typeOfUser!=='Teacher'">
-
-
+  <span *ngIf="userTypeDetails != 'Student'">
+    <div *ngIf="typeOfUser !== 'Admin' && typeOfUser !== 'Teacher'">
       <div class="row">
         <div class="col-sm-12">
-          <h4>Free Mock Tests</h4>
+          <!-- <h4>Free Mock Tests</h4>
           <div *ngFor="let testItem of freeTestDetails">
             <mat-card id="mat-card">
-              <img src="../../assets/test.png">&nbsp;&nbsp;Test {{testItem.testNumber}}
-              <span *ngIf="testItem.testAttemptStatus==false && testItem.testPricingStatus==false">
-                <button class="test-button" mat-raised-button (click)="navigateToSection(testItem.testNumber)">Take
-                  Test <img src="../../assets/paper-plane.png"></button>
+              <img src="../../assets/test.png" />&nbsp;&nbsp;Test
+              {{ testItem.testNumber }}
+              <span
+                *ngIf="
+                  testItem.testAttemptStatus == false &&
+                  testItem.testPricingStatus == false
+                "
+              >
+                <button
+                  class="test-button"
+                  mat-raised-button
+                  (click)="navigateToSection(testItem.testNumber)"
+                >
+                  Take Test <img src="../../assets/paper-plane.png" />
+                </button>
               </span>
-              <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
-                (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
-                  class="btn btn-outline-primary btn-sm">View Score</button>
+              <span id="float-item" *ngIf="testItem.testAttemptStatus == true">
+                (Attempted)
+                <button
+                  id="button"
+                  (click)="checkTestMarks(testItem.testNumber)"
+                  class="btn btn-outline-primary btn-sm"
+                >
+                  View Score
+                </button>
               </span>
-              <span id="float-item" *ngIf="testItem.testPricingStatus==true && paymentStatus==false">
-                <img src="../../assets/lock.svg" class="icon">
+              <span
+                id="float-item"
+                *ngIf="
+                  testItem.testPricingStatus == true && paymentStatus == false
+                "
+              >
+                <img src="../../assets/lock.svg" class="icon" />
               </span>
-
             </mat-card>
-            <br>
-          </div>
+            <br />
+          </div> -->
 
-          <h4>Paid Mock Tests</h4>
+          <h4>Mock Tests</h4>
           <div *ngFor="let testItem of paidTestDetails">
             <mat-card id="mat-card">
-            <img src="../../assets/test.png">&nbsp;&nbsp; Test {{testItem.testNumber}}
-              <span *ngIf="paymentStatus=='true'">
-                <span *ngIf="testItem.testAttemptStatus==false">
-                  <button class="test-button" mat-raised-button (click)="navigateToSection(testItem.testNumber)">Take
-                    Test
-                    <img src="../../assets/paper-plane.png"></button>
+              <img src="../../assets/test.png" />&nbsp;&nbsp; Test
+              {{ testItem.testNumber - 2 }}
+              <span *ngIf="paymentStatus == 'true'">
+                <span *ngIf="testItem.testAttemptStatus == false">
+                  <button
+                    class="test-button"
+                    mat-raised-button
+                    (click)="navigateToSection(testItem.testNumber)"
+                  >
+                    Take Test <img src="../../assets/paper-plane.png" />
+                  </button>
                 </span>
               </span>
-              <span id="float-item" *ngIf="testItem.testAttemptStatus==true">
-                (Attempted) <button id="button" (click)="checkTestMarks(testItem.testNumber)"
-                  class="btn btn-outline-primary btn-sm">View Score</button>
+              <span id="float-item" *ngIf="testItem.testAttemptStatus == true">
+                (Attempted)
+                <button
+                  id="button"
+                  (click)="checkTestMarks(testItem.testNumber)"
+                  class="btn btn-outline-primary btn-sm"
+                >
+                  View Score
+                </button>
               </span>
-              <span (click)="initiatePayment()" id="float-item"
-                *ngIf="testItem.testPricingStatus===true && paymentStatus==='false'">
-                <img src="../../assets/lock.svg" class="icon">
+              <span
+                (click)="initiatePayment()"
+                id="float-item"
+                *ngIf="
+                  testItem.testPricingStatus === true &&
+                  paymentStatus === 'false'
+                "
+              >
+                <img src="../../assets/lock.svg" class="icon" />
               </span>
-
             </mat-card>
-            <br>
+            <br />
           </div>
         </div>
       </div>
-
-
     </div>
-
   </span>
 
-  <div class="user" *ngIf="typeOfUser==='Admin'">
+  <div class="user" *ngIf="typeOfUser === 'Admin'">
     <h2>Admin User</h2>
     <a routerLink="/admin-panel">Go to Admin Panel</a>
   </div>
-  <div class="user" *ngIf="typeOfUser==='Teacher'">
+  <div class="user" *ngIf="typeOfUser === 'Teacher'">
     <h2>Teacher</h2>
     <a routerLink="/teacher">Go to Teacher Panel</a>
   </div>
 
-  <div *ngIf="userTypeDetails=='Student'" style="text-align: center;width: 70%;margin: 0 auto;">
-
-
+  <div
+    *ngIf="userTypeDetails == 'Student'"
+    style="text-align: center; width: 70%; margin: 0 auto"
+  >
     <h4>Please choose the type of user</h4>
     <mat-form-field style="width: 100%" appearance="outline">
       <mat-label>Please choose the option</mat-label>
       <mat-select [(ngModel)]="userType">
-        <mat-option *ngFor="let list of studentTypes" [value]="list">{{list}}</mat-option>
+        <mat-option *ngFor="let list of studentTypes" [value]="list">{{
+          list
+        }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <br>
-    <button style="width: 100%" (click)="submitUserType()" mat-raised-button>Done</button>
-    <br>
-    <br>
-    <br>
-    <br>
-
+    <br />
+    <button style="width: 100%" (click)="submitUserType()" mat-raised-button>
+      Done
+    </button>
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
-
 </div>
